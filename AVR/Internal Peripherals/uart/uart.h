@@ -100,4 +100,7 @@ void UART_Safe_String_Transmit(const char *string, uint16_t max_string_len);
 // a limit on the number of characters sent
 void UART_Safe_StringLn_Transmit(const char *string, uint16_t max_string_len);
 
+// macro for moving the cursor to a new line in the UART terminal
+#define UART_NEW_LINE UART_String_Transmit("\r\n");
+
 #endif
