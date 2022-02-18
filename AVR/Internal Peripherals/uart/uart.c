@@ -242,18 +242,7 @@ void UART_StringLn_Transmit(const char *string)
 	UART_String_Transmit("\r\n");
 }
 
-/*
-
 static int UART_Char_Transmit(char c, FILE *stream)
-{
-	while ( !(UCSRA & (1 << UDRE)) );
-	UDR = c;
-	return 0;
-}
-
-*/
-
-static char UART_Char_Transmit(char c)
 {
 	while ( !(UCSRA & (1 << UDRE)) );
 	UDR = c;
