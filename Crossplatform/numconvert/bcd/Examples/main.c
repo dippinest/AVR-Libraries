@@ -1,8 +1,8 @@
 #define  F_CPU 16000000UL
 #include <util/delay.h>
 
-#include "AVR/Internal Peripherals/uart/uart.h"
-#include "Crossplatform/numconvert/bcd/bcdcode.h"
+#include "uart.h"
+#include "bcdcode.h"
 
 int main(void)
 {
