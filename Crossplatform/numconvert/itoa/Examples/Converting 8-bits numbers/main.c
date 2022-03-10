@@ -1,8 +1,8 @@
 #define  F_CPU 16000000UL
 #include <util/delay.h>
 
-#include "uart.h"
-#include "itoa.h"
+#include "AVR/Internal Peripherals/uart/uart.h"
+#include "Crossplatform/numconvert/itoa/itoa.h"
 
 static char str_buf[32];
 
