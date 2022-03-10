@@ -3,7 +3,7 @@
 #define F_CPU 16000000UL
 #include <util/delay.h>
 
-#include "uart.h"
+#include "AVR/Internal Peripherals/uart/uart.h"
 
 static void fsm(uint8_t byte)
 {
