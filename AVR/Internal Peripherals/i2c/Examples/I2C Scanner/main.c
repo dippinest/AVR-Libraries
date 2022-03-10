@@ -1,7 +1,7 @@
 #define F_CPU 16000000UL
 
-#include "i2c.h"
-#include "uart.h"
+#include "AVR/Internal Peripherals/i2c/i2c.h"
+#include "AVR/Internal Peripherals/uart/uart.h"
 
 
 //  For the I2C bus test, 2 devices were connected: pcf8574 chip (address: 0x27) and
