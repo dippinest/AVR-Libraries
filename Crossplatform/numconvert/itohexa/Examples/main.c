@@ -1,8 +1,8 @@
 #define  F_CPU 16000000UL
 #include <util/delay.h>
 
-#include "uart.h"
-#include "itohexa.h"
+#include "AVR/Internal Peripherals/uart/uart.h"
+#include "Crossplatform/numconvert/itohexa/itohexa.h"
 
 static char str_buf[8];
 
