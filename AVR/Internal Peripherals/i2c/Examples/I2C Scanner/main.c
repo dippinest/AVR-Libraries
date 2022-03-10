@@ -2,7 +2,6 @@
 
 #include "i2c.h"
 #include "uart.h"
-#include "hd44780_i2c.h"
 
 
 //  For the I2C bus test, 2 devices were connected: pcf8574 chip (address: 0x27) and
