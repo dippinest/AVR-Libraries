@@ -1,6 +1,6 @@
-#include "uart.h"
-#include "itoa.h"
-#include "deftypes.h"
+#include "AVR/Internal Peripherals/uart/uart.h"
+#include "Crossplatform/numconvert/itoa/itoa.h"
+#include "Crossplatform/deftypes.h"
 
 static char str_buf[32];
 
