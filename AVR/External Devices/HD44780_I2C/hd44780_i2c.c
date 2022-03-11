@@ -80,7 +80,7 @@ HD44780_I2C HD44780_I2C_Get_Display_Object(uint8_t dev_addr, bool display_is_ena
 	data_buffer = 0b00000010 | _HD44780_I2C_E; _HD44780_I2C_Write(data_buffer); _delay_us(5);
 	data_buffer &= ~_HD44780_I2C_E; _HD44780_I2C_Write(data_buffer); _delay_us(120);
 
-	HD44780_I2C_HD44780_Set_Cursor_Home();
+	HD44780_I2C_Set_Cursor_Home();
 	HD44780_I2C_Set_Cursor_Enable(false);
 	HD44780_I2C_Clear();
 	HD44780_I2C_Set_Display_Enable(display_is_enable);
@@ -219,7 +219,7 @@ void HD44780_I2C_Fill_Char_Pattern(const char char_pattern, uint8_t num_pattern_
 	}
 }
 
-void HD44780_I2C_HD44780_Display_Shift(bool display_shift_is_right)
+void HD44780_I2C_Display_Shift(bool display_shift_is_right)
 {
 	if (display_shift_is_right)
 	{
@@ -235,12 +235,12 @@ void HD44780_I2C_HD44780_Display_Shift(bool display_shift_is_right)
 	_HD44780_I2C_Send_Byte(target_display->cursor_display_shift_mode, _HD44780_I2C_DISPLAY_SEND_DATA_MODE); _delay_us(40);
 }
 
-void HD44780_I2C_HD44780_Set_Cursor_Home()
+void HD44780_I2C_Set_Cursor_Home()
 {
 	_HD44780_I2C_Send_Byte(0b00000010, _HD44780_I2C_DISPLAY_SEND_COMMAND_MODE); _delay_us(1650);
 }
 
-void HD44780_I2C_HD44780_Clear_String_By_Pos(uint8_t string_pos, uint8_t first_char_pos, uint8_t end_char_pos)
+void HD44780_I2C_Clear_String_By_Pos(uint8_t string_pos, uint8_t first_char_pos, uint8_t end_char_pos)
 {
 	HD44780_I2C_Set_Cursor_Pos(string_pos, first_char_pos);
 	HD44780_I2C_Fill_Char_Pattern(' ', (end_char_pos - first_char_pos + 1));
