@@ -102,11 +102,11 @@ void HD44780_I2C_Print_String_To_Char_Terminator(const char* string_array, const
 
 void HD44780_I2C_Fill_Char_Pattern(const char char_pattern, uint8_t num_pattern_chars);
 
-void HD44780_I2C_HD44780_Display_Shift(bool display_shift_is_right);
+void HD44780_I2C_Display_Shift(bool display_shift_is_right);
 
-void HD44780_I2C_HD44780_Set_Cursor_Home();
+void HD44780_I2C_Set_Cursor_Home();
 
-void HD44780_I2C_HD44780_Clear_String_By_Pos(uint8_t string_pos, uint8_t first_char_pos, uint8_t end_char_pos);
+void HD44780_I2C_Clear_String_By_Pos(uint8_t string_pos, uint8_t first_char_pos, uint8_t end_char_pos);
 
 void HD44780_I2C_Clear();
 
