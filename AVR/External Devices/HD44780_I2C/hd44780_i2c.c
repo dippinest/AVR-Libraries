@@ -8,7 +8,7 @@
 
 #include "hd44780_i2c.h"
 
-static HD44780_I2C *target_display;
+static HD44780_I2C *target_display = NULL;
 
 static void _HD44780_I2C_Write(uint8_t data)
 {
