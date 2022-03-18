@@ -2,8 +2,8 @@
 //  Header              : hd44780.h                                                                     -
 //  Created             : 18.03.2022                                                                    -
 //  Author              : Denis Chicherov (dippinest)                                                   -
-//  Description         : Declarations of functions and macros for working with the LED display         -
-//                        on the Hitachi HD44780 controller in 4-bit mode                               -
+//  Description         : Declarations and defining of functions and macros for working with            -
+//                        the LED display on the Hitachi HD44780 controller in 4-bit mode               -
 // ======================================================================================================
 
 #ifndef HD44780_H_
