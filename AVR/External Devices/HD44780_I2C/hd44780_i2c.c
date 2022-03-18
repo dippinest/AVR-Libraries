@@ -1,6 +1,3 @@
-#include "hd44780_i2c.h"
-
-static HD44780_I2C *target_display;
 // ======================================================================================================
 //  Header              : hd44780_i2c.h                                                                 -
 //  Created             : 10.03.2022                                                                    -
@@ -8,6 +5,10 @@ static HD44780_I2C *target_display;
 //  Description         : Defining of functions and macros for working with the LED display             -
 //                        on the Hitachi HD44780 controller and the PCF8574 I2C port extender           -
 // ======================================================================================================
+
+#include "hd44780_i2c.h"
+
+static HD44780_I2C *target_display;
 
 static void _HD44780_I2C_Write(uint8_t data)
 {
