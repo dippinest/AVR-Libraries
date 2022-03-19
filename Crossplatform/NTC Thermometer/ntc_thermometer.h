@@ -24,7 +24,7 @@
 //	
 //	Switching scheme:
 //	
-//	+Vcc o----[serial resistor]---(ADC point)---[NTC thermistor]----o GND
+//	+Vcc o----[NTC thermistor]---(ADC point)---[serial resistor]----o GND
 //	
 //	At the ADC point, there is a measurement, the result of which is passed to the function.	
 //	
