@@ -8,7 +8,7 @@
 
 #include "hd44780_i2c.h"
 
-static HD44780_I2C *target_display = NULL;
+static HD44780_I2C_t *target_display = NULL;
 
 static void _HD44780_I2C_Write(uint8_t data)
 {
@@ -19,7 +19,7 @@ static void _HD44780_I2C_Write(uint8_t data)
 }
 
 static void _HD44780_I2C_Send_Byte(uint8_t b, uint8_t mode)
-{	
+{
 	uint8_t lcd_bufer = b & 0xF0;
 	
 	if (!mode)
@@ -57,9 +57,9 @@ static int _HD44780_I2C_Send_Char(char c, FILE *stream)
 	return 0;
 }
 
-HD44780_I2C HD44780_I2C_Get_Display_Object(uint8_t dev_addr, bool display_is_enable)
+HD44780_I2C_t HD44780_I2C_Get_Display_Object(uint8_t dev_addr, bool display_is_enable)
 {
-	HD44780_I2C display;
+	HD44780_I2C_t display;
 	
 	display.dev_addr = dev_addr;
 	display.entry_mode_display        = _HD44780_I2C_INITIAL_ENTRY_MODE_DISPLAY;
@@ -89,7 +89,7 @@ HD44780_I2C HD44780_I2C_Get_Display_Object(uint8_t dev_addr, bool display_is_ena
 	return display;
 }
 
-void HD44780_I2C_Set_Target_Display_Object(HD44780_I2C *display)
+void HD44780_I2C_Set_Target_Display_Object(HD44780_I2C_t *display)
 {
 	target_display = display;
 }
