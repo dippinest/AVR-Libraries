@@ -14,7 +14,6 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
-#include <stddef.h>
 
 #include "i2c.h"
 
@@ -73,11 +72,11 @@ typedef struct
 	uint8_t cursor_display_shift_mode;
 	uint8_t function_set_mode_display;
 	
-} HD44780_I2C;
+} HD44780_I2C_t;
 
-HD44780_I2C HD44780_I2C_Get_Display_Object(uint8_t dev_addr, bool display_is_enable);
+HD44780_I2C_t HD44780_I2C_Get_Display_Object(uint8_t dev_addr, bool display_is_enable);
 
-void HD44780_I2C_Set_Target_Display_Object(HD44780_I2C *display);
+void HD44780_I2C_Set_Target_Display_Object(HD44780_I2C_t *display);
 
 void HD44780_I2C_Set_Display_Enable(bool display_is_enable);
 
