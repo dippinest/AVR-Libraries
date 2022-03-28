@@ -125,9 +125,48 @@ void LM75_Set_OS_Polarity(bool os_pol_is_low)
 
 void LM75_Set_OS_Number_Of_Checks(uint8_t os_num_of_checks)
 {
-	target_thermometer->confuguration_register |= (os_num_of_checks << _LM75_CONFUGURATION_REGISTER_OS_F_QUE_BITS_POS);
+	target_thermometer->confuguration_register &= ~(0b00011000);
+	target_thermometer->confuguration_register |= ((os_num_of_checks & 0b11) << _LM75_CONFUGURATION_REGISTER_OS_F_QUE_BITS_POS);
 	
 	_LM75_Write_UINT8_Configuration_Register(target_thermometer->confuguration_register);
+}
+
+LM75_t *LM75_Get_Target_Thermometer_Object()
+{
+	return target_thermometer;
+}
+
+bool LM75_Get_Enable()
+{
+	return (~(target_thermometer->confuguration_register) & (1 << _LM75_CONFUGURATION_REGISTER_SHUTDOWN_BIT_POS));
+}
+
+bool LM75_Get_OS_Mode()
+{
+	return (~(target_thermometer->confuguration_register) & (1 << _LM75_CONFUGURATION_REGISTER_OS_COMP_INT_BIT_POS));
+}
+
+bool LM75_Get_OS_Polarity()
+{
+	return (~(target_thermometer->confuguration_register) & (1 << _LM75_CONFUGURATION_REGISTER_OS_POL_BIT_POS));
+}
+
+uint8_t LM75_Get_OS_Number_Of_Checks()
+{
+	switch((target_thermometer->confuguration_register & 0b00011000) >> _LM75_CONFUGURATION_REGISTER_OS_F_QUE_BITS_POS)
+	{
+	case 0:
+		return 1;
+	case 1:
+		return 2;
+	case 2:
+		return 4;
+	case 3:
+		return 6;
+	default:
+		return 1;
+	}
+	return ((target_thermometer->confuguration_register & 0b00011000) >> _LM75_CONFUGURATION_REGISTER_OS_F_QUE_BITS_POS);
 }
 
 void LM75_Set_Integer_Upper_And_Lower_Limits_OS_Hysteresis_Temperature(int16_t low_limit_temp, int16_t high_limit_temp)
