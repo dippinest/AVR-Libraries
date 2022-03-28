@@ -86,6 +86,16 @@ void LM75_Set_OS_Polarity(bool os_pol_is_low);
 
 void LM75_Set_OS_Number_Of_Checks(uint8_t os_num_of_checks);
 
+LM75_t *LM75_Get_Target_Thermometer_Object();
+
+bool LM75_Get_Enable();
+
+bool LM75_Get_OS_Mode();
+
+bool LM75_Get_OS_Polarity();
+
+uint8_t LM75_Get_OS_Number_Of_Checks();
+
 void LM75_Set_Integer_Upper_And_Lower_Limits_OS_Hysteresis_Temperature(int16_t low_limit_temp, int16_t high_limit_temp);
 
 int16_t LM75_Get_Integer_Temperature();
