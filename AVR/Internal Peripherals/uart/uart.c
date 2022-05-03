@@ -11,7 +11,7 @@ static volatile uint8_t  _UCSRC            = 0;
 static volatile uint32_t _baudrate_code    = 0;
 static volatile uint32_t _current_baudrate = 0;
 
-static void UART_Set_Baudrate(uint32_t baudrate)
+void UART_Set_Baudrate(uint32_t baudrate)
 {
 	_current_baudrate = baudrate;
 	_baudrate_code    = _UART_SET_CODE_BAUDRATE(_current_baudrate);
@@ -21,7 +21,7 @@ static void UART_Set_Baudrate(uint32_t baudrate)
 	UBRRL = (uint8_t)(_baudrate_code);
 }
 
-static void UART_Set_Transmission_Is_Allowed(bool transmission_is_allowed)
+void UART_Set_Transmission_Is_Allowed(bool transmission_is_allowed)
 {
 	if (transmission_is_allowed)
 	{
@@ -33,7 +33,7 @@ static void UART_Set_Transmission_Is_Allowed(bool transmission_is_allowed)
 	}
 }
 
-static void UART_Set_Reception_Is_Allowed(bool reception_is_allowed)
+void UART_Set_Reception_Is_Allowed(bool reception_is_allowed)
 {
 	if (reception_is_allowed)
 	{
@@ -45,7 +45,7 @@ static void UART_Set_Reception_Is_Allowed(bool reception_is_allowed)
 	}
 }
 
-static void UART_Set_Buffer_Emptying_Interrupt_Is_Allowed(bool buffer_emptying_interrupt_is_allowed)
+void UART_Set_Buffer_Emptying_Interrupt_Is_Allowed(bool buffer_emptying_interrupt_is_allowed)
 {
 	if (buffer_emptying_interrupt_is_allowed)
 	{
@@ -57,7 +57,7 @@ static void UART_Set_Buffer_Emptying_Interrupt_Is_Allowed(bool buffer_emptying_i
 	}
 }
 
-static void UART_Set_End_Of_Transmittion_Interrupt_Is_Allowed(bool end_of_transmittion_interrupt_is_allowed)
+void UART_Set_End_Of_Transmittion_Interrupt_Is_Allowed(bool end_of_transmittion_interrupt_is_allowed)
 {
 	if (end_of_transmittion_interrupt_is_allowed)
 	{
@@ -69,7 +69,7 @@ static void UART_Set_End_Of_Transmittion_Interrupt_Is_Allowed(bool end_of_transm
 	}
 }
 
-static void UART_Set_End_Of_Reception_Interrupt_Is_Allowed(bool end_of_reception_interrupt_is_allowed)
+void UART_Set_End_Of_Reception_Interrupt_Is_Allowed(bool end_of_reception_interrupt_is_allowed)
 {
 	if (end_of_reception_interrupt_is_allowed)
 	{
@@ -81,7 +81,7 @@ static void UART_Set_End_Of_Reception_Interrupt_Is_Allowed(bool end_of_reception
 	}
 }
 
-static void UART_Set_Num_Of_Data_Bits(uint8_t num_of_data_bits)
+void UART_Set_Num_Of_Data_Bits(uint8_t num_of_data_bits)
 {
 	_UCSRC &= ~((1 << UCSZ1) | (1 << UCSZ0));
 	
@@ -101,7 +101,7 @@ static void UART_Set_Num_Of_Data_Bits(uint8_t num_of_data_bits)
 	}
 }
 
-static void UART_Set_Num_Of_Stop_Bits(uint8_t num_of_stop_bits)
+void UART_Set_Num_Of_Stop_Bits(uint8_t num_of_stop_bits)
 {
 	_UCSRC &= ~(1 << USBS);
 	
@@ -116,7 +116,7 @@ static void UART_Set_Num_Of_Stop_Bits(uint8_t num_of_stop_bits)
 	}
 }
 
-static void UART_Set_Parity_Bit(uint8_t parity_bit)
+void UART_Set_Parity_Bit(uint8_t parity_bit)
 {
 	_UCSRC &= ~((1 << UPM1) | (1 << UPM0));
 	
