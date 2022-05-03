@@ -33,6 +33,33 @@
 // macro for UART speed conversion
 #define _UART_SET_CODE_BAUDRATE(_BAUDRATE_VALUE) (F_CPU / 8UL / _BAUDRATE_VALUE)
 
+// function for setting baudrate
+void UART_Set_Baudrate(uint32_t baudrate);
+
+// function for setting the data transfer resolution
+void UART_Set_Transmission_Is_Allowed(bool transmission_is_allowed);
+
+// function for setting the data receiving resolution
+void UART_Set_Reception_Is_Allowed(bool reception_is_allowed);
+
+// function for setting the interrupt resolution by emptying the buffer
+void UART_Set_Buffer_Emptying_Interrupt_Is_Allowed(bool buffer_emptying_interrupt_is_allowed);
+
+// function for setting the interrupt resolution at the end of byte transfer
+void UART_Set_End_Of_Transmittion_Interrupt_Is_Allowed(bool end_of_transmittion_interrupt_is_allowed);
+
+// function for setting the interrupt resolution at the end of byte receive
+void UART_Set_End_Of_Reception_Interrupt_Is_Allowed(bool end_of_reception_interrupt_is_allowed);
+
+// function for setting the num of data bits
+void UART_Set_Num_Of_Data_Bits(uint8_t num_of_data_bits);
+
+// function for setting the num of stop bits
+void UART_Set_Num_Of_Stop_Bits(uint8_t num_of_stop_bits);
+
+// function for setting of the parity bit
+void UART_Set_Parity_Bit(uint8_t parity_bit);
+
 // function for getting the current speed of the UART transceiver in baud per second
 uint32_t UART_Get_Baudrate();
 
