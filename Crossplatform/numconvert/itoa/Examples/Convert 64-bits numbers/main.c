@@ -1,6 +1,4 @@
 
-#include <stdbool.h>
-
 #include "uart.h"
 #include "itoa.h"
 #include "deftypes.h"
