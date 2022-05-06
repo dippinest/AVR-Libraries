@@ -1,15 +1,12 @@
-// ======================================================================================================
-//  Source              : uart.c                                                                        -
-//  Created             : 11.02.2022                                                                    -
-//  Author              : Denis Chicherov (dippinest)                                                   -
-//  Description         : Defining functions and macros for working with the UART module                -
-// ======================================================================================================
 
 #include "uart.h"
 
 static volatile uint8_t  _UCSRC            = 0;
 static volatile uint32_t _baudrate_code    = 0;
 static volatile uint32_t _current_baudrate = 0;
+
+
+// ===============================================================================
 
 void UART_Set_Baudrate(uint32_t baudrate)
 {
@@ -21,64 +18,9 @@ void UART_Set_Baudrate(uint32_t baudrate)
 	UBRRL = (uint8_t)(_baudrate_code);
 }
 
-void UART_Set_Transmission_Is_Allowed(bool transmission_is_allowed)
+uint32_t UART_Get_Baudrate()
 {
-	if (transmission_is_allowed)
-	{
-		UCSRB |=  (1 << TXEN);
-	}
-	else
-	{
-		UCSRB &= ~(1 << TXEN);
-	}
-}
-
-void UART_Set_Reception_Is_Allowed(bool reception_is_allowed)
-{
-	if (reception_is_allowed)
-	{
-		UCSRB |=  (1 << RXEN);
-	}
-	else
-	{
-		UCSRB &= ~(1 << RXEN);
-	}
-}
-
-void UART_Set_Buffer_Emptying_Interrupt_Is_Allowed(bool buffer_emptying_interrupt_is_allowed)
-{
-	if (buffer_emptying_interrupt_is_allowed)
-	{
-		UCSRB |=  (1 << UDRIE);
-	}
-	else
-	{
-		UCSRB &= ~(1 << UDRIE);
-	}
-}
-
-void UART_Set_End_Of_Transmittion_Interrupt_Is_Allowed(bool end_of_transmittion_interrupt_is_allowed)
-{
-	if (end_of_transmittion_interrupt_is_allowed)
-	{
-		UCSRB |=  (1 << TXCIE);
-	}
-	else
-	{
-		UCSRB &= ~(1 << TXCIE);
-	}
-}
-
-void UART_Set_End_Of_Reception_Interrupt_Is_Allowed(bool end_of_reception_interrupt_is_allowed)
-{
-	if (end_of_reception_interrupt_is_allowed)
-	{
-		UCSRB |=  (1 << RXCIE);
-	}
-	else
-	{
-		UCSRB &= ~(1 << RXCIE);
-	}
+	return _current_baudrate;
 }
 
 void UART_Set_Num_Of_Data_Bits(uint8_t num_of_data_bits)
@@ -99,6 +41,8 @@ void UART_Set_Num_Of_Data_Bits(uint8_t num_of_data_bits)
 		default:
 		_UCSRC |= (1 << UCSZ1) | (1 << UCSZ0) | (1 << URSEL);
 	}
+	
+	UCSRC = (1 << URSEL) | _UCSRC;
 }
 
 void UART_Set_Num_Of_Stop_Bits(uint8_t num_of_stop_bits)
@@ -114,6 +58,8 @@ void UART_Set_Num_Of_Stop_Bits(uint8_t num_of_stop_bits)
 		break;
 		default: break;
 	}
+	
+	UCSRC = (1 << URSEL) | _UCSRC;
 }
 
 void UART_Set_Parity_Bit(uint8_t parity_bit)
@@ -132,36 +78,8 @@ void UART_Set_Parity_Bit(uint8_t parity_bit)
 		break;
 		default: break;
 	}
-}
-
-uint32_t UART_Get_Baudrate()
-{
-	return _current_baudrate;
-}
-
-bool UART_Transmission_Is_Allowed()
-{
-	return (bool)(UCSRB & (1 << TXEN));
-}
-
-bool UART_Reception_Is_Allowed()
-{
-	return (bool)(UCSRB & (1 << RXEN));
-}
-
-bool UART_Buffer_Emptying_Interrupt_Is_Allowed()
-{
-	return (bool)(UCSRB & (1 << UDRIE));
-}
-
-bool UART_End_Of_Transmittion_Interrupt_Is_Allowed()
-{
-	return (bool)(UCSRB & (1 << TXCIE));
-}
-
-bool UART_End_Of_Reception_Interrupt_Is_Allowed()
-{
-	return (bool)(UCSRB & (1 << RXCIE));
+	
+	UCSRC = (1 << URSEL) | _UCSRC;
 }
 
 uint8_t UART_Get_Num_Of_Data_Bits()
@@ -186,33 +104,7 @@ uint8_t UART_Get_Parity_Bit()
 	return _UCSRC & ((1 << UPM1) | (1 << UPM0));
 }
 
-void UART_Initialize
-(
-uint32_t baudrate,
-bool transmission_is_allowed,
-bool reception_is_allowed,
-bool buffer_emptying_interrupt_is_allowed,
-bool end_of_transmittion_interrupt_is_allowed,
-bool end_of_reception_interrupt_is_allowed,
-uint8_t num_of_data_bits,
-uint8_t num_of_stop_bits,
-uint8_t parity_bit
-)
-{	
-	UART_Set_Baudrate(baudrate);
-	
-	UART_Set_Transmission_Is_Allowed(transmission_is_allowed);
-	UART_Set_Reception_Is_Allowed(reception_is_allowed);
-	UART_Set_Buffer_Emptying_Interrupt_Is_Allowed(buffer_emptying_interrupt_is_allowed);
-	UART_Set_End_Of_Transmittion_Interrupt_Is_Allowed(end_of_transmittion_interrupt_is_allowed);
-	UART_Set_End_Of_Reception_Interrupt_Is_Allowed(end_of_reception_interrupt_is_allowed);
-	
-	UART_Set_Num_Of_Data_Bits(num_of_data_bits);
-	UART_Set_Num_Of_Stop_Bits(num_of_stop_bits);
-	UART_Set_Parity_Bit(parity_bit);
-	
-	UCSRC = (1 << URSEL) | _UCSRC;
-}
+// ===============================================================================
 
 void UART_Byte_Transmit(uint8_t byte)
 {
@@ -271,4 +163,18 @@ void UART_Safe_StringLn_Transmit(const char *string, uint16_t max_string_len)
 {
 	UART_Safe_String_Transmit(string, max_string_len);
 	UART_Safe_String_Transmit("\r\n", 2);
+}
+
+// ===============================================================================
+
+void UART_Initialize(uint32_t baudrate, bool transmission_is_enable, bool reception_is_enable)
+{
+	UART_Set_Baudrate(baudrate);
+	
+	UART_Set_Num_Of_Data_Bits(UART_NUM_OF_DATA_BITS_8);
+	UART_Set_Num_Of_Stop_Bits(UART_NUM_OF_STOP_BITS_1);
+	UART_Set_Parity_Bit(UART_PARITY_BIT_NONE);
+	
+	UART_Set_Transmission_Enable(transmission_is_enable);
+	UART_Set_Reception_Enable(reception_is_enable);
 }
