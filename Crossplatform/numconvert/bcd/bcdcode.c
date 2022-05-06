@@ -1,10 +1,3 @@
-// =============================================================================================================
-//  Source              : bcdcode.c                                                                            -
-//  Created             : 20.02.2022                                                                           -
-//  Author              : Denis Chicherov (dippinest)                                                          -
-//  Description         : Defining of functions for converting integer types to BCD code and conversely        -
-// =============================================================================================================
-
 #include "bcdcode.h"
 
 uint8_t BCDCODE_UInt8_To_UInt8BCD(uint8_t num)
