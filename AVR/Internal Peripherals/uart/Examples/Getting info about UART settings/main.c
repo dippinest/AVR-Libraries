@@ -1,17 +1,21 @@
+
+#include <stdbool.h>
+
+#define  F_CPU 16000000UL
 #include "uart.h"
 
 int main(void)
 {
-	UART_Initialize(9600, true, true, false, false, false, UART_NUM_OF_DATA_BITS_8, UART_NUM_OF_STOP_BITS_1, UART_PARITY_BIT_NONE);
+	UART_Initialize(9600, true, false);
 	
 	UART_String_Transmit("This is a params configurations of UART:\r\n\r\n");
 	
 	UART_StringFmt_Transmit("Baudrate: ------------------------------- %lu\r\n", UART_Get_Baudrate());
-	UART_StringFmt_Transmit("Transmittion is allowed: ---------------- %s\r\n",  UART_Transmission_Is_Allowed()                  ? "true" : "false");
-	UART_StringFmt_Transmit("Reception is allowed: ------------------- %s\r\n",  UART_Reception_Is_Allowed()                     ? "true" : "false");
-	UART_StringFmt_Transmit("Buffer emptying interrupt is allowed: --- %s\r\n",  UART_Buffer_Emptying_Interrupt_Is_Allowed()     ? "true" : "false");
-	UART_StringFmt_Transmit("End of transmittion interrupt is allowed: %s\r\n",  UART_End_Of_Transmittion_Interrupt_Is_Allowed() ? "true" : "false");
-	UART_StringFmt_Transmit("End of reception interrupt is allowed: -- %s\r\n",  UART_End_Of_Reception_Interrupt_Is_Allowed()    ? "true" : "false");
+	UART_StringFmt_Transmit("Transmittion is enable: ----------------- %s\r\n",   UART_Transmission_Is_Enable()                  ? "true" : "false");
+	UART_StringFmt_Transmit("Reception is enable: -------------------- %s\r\n",   UART_Reception_Is_Enable()                     ? "true" : "false");
+	UART_StringFmt_Transmit("Buffer emptying interrupt is enable: ---- %s\r\n",   UART_Buffer_Emptying_Interrupt_Is_Enable()     ? "true" : "false");
+	UART_StringFmt_Transmit("End of transmittion interrupt is enable:  %s\r\n",   UART_End_Of_Transmittion_Interrupt_Is_Enable() ? "true" : "false");
+	UART_StringFmt_Transmit("End of reception interrupt is enable: --- %s\r\n",   UART_End_Of_Reception_Interrupt_Is_Enable()    ? "true" : "false");
 	UART_StringFmt_Transmit("Num of data bits: ----------------------- %d\r\n",  UART_Get_Num_Of_Data_Bits());
 	UART_StringFmt_Transmit("Num of stop bits: ----------------------- %d\r\n",  UART_Get_Num_Of_Stop_Bits());
 	
