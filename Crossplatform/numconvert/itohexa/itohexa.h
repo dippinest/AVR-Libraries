@@ -1,10 +1,3 @@
-// =============================================================================================================
-//  Header              : itohexa.h                                                                            -
-//  Created             : 20.02.2022                                                                           -
-//  Author              : Denis Chicherov (dippinest)                                                          -
-//  Description         : Declaration of functions for converting integer types to a HEX format C-type string  -
-// =============================================================================================================
-
 #ifndef ITOHEXA_H_
 #define ITOHEXA_H_
 
