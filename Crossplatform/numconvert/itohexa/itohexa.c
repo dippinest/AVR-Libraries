@@ -1,10 +1,3 @@
-// =============================================================================================================
-//  Source              : itohexa.c                                                                            -
-//  Created             : 20.02.2022                                                                           -
-//  Author              : Denis Chicherov (dippinest)                                                          -
-//  Description         : Defining of functions for converting integer types to a HEX format C-type string     -
-// =============================================================================================================
-
 #include "itohexa.h"
 
 static char *_nbyte_num_to_hex_string(uint64_t val, char *string_buf, bool is_lower_case, const uint8_t val_nbytes)
