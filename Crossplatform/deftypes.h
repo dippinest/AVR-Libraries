@@ -1,9 +1,3 @@
-// ======================================================================================================
-//  Header              : deftypes.h                                                                    -
-//  Created             : 18.02.2022                                                                    -
-//  Author              : Denis Chicherov (dippinest)                                                   -
-//  Description         : Data type overrides and macros                                                -
-// ======================================================================================================
 
 #ifndef DEFTYPES_H_
 #define DEFTYPES_H_
