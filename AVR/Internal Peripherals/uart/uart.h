@@ -1,9 +1,3 @@
-// ======================================================================================================
-//  Header              : uart.h                                                                        -
-//  Created             : 11.02.2022                                                                    -
-//  Author              : Denis Chicherov (dippinest)                                                   -
-//  Description         : Declarations of functions and macros for working with the UART module         -
-// ======================================================================================================
 
 #ifndef UART_H_
 #define UART_H_
@@ -33,99 +27,159 @@
 // macro for UART speed conversion
 #define _UART_SET_CODE_BAUDRATE(_BAUDRATE_VALUE) (F_CPU / 8UL / _BAUDRATE_VALUE)
 
-// function for setting baudrate
+
+// ===============================================================================
+
+inline void UART_Set_Transmission_Enable(bool transmission_is_enable)
+{
+	if (transmission_is_enable)
+	{
+		UCSRB |=  (1 << TXEN);
+	}
+	else
+	{
+		UCSRB &= ~(1 << TXEN);
+	}
+}
+
+inline void UART_Set_Reception_Enable(bool reception_is_enable)
+{
+	if (reception_is_enable)
+	{
+		UCSRB |=  (1 << RXEN);
+	}
+	else
+	{
+		UCSRB &= ~(1 << RXEN);
+	}
+}
+
+inline void UART_Set_Buffer_Emptying_Interrupt_Enable(bool buffer_emptying_interrupt_is_enable)
+{
+	if (buffer_emptying_interrupt_is_enable)
+	{
+		UCSRB |=  (1 << UDRIE);
+	}
+	else
+	{
+		UCSRB &= ~(1 << UDRIE);
+	}
+}
+
+inline void UART_Set_End_Of_Transmittion_Interrupt_Enable(bool end_of_transmittion_interrupt_is_enable)
+{
+	if (end_of_transmittion_interrupt_is_enable)
+	{
+		UCSRB |=  (1 << TXCIE);
+	}
+	else
+	{
+		UCSRB &= ~(1 << TXCIE);
+	}
+}
+
+inline void UART_Set_End_Of_Reception_Interrupt_Enable(bool end_of_reception_interrupt_is_enable)
+{
+	if (end_of_reception_interrupt_is_enable)
+	{
+		UCSRB |=  (1 << RXCIE);
+	}
+	else
+	{
+		UCSRB &= ~(1 << RXCIE);
+	}
+}
+
+inline bool UART_Transmission_Is_Enable()
+{
+	if (UCSRB & (1 << TXEN))
+	{
+		return true;
+	}
+	
+	return false;
+}
+
+inline bool UART_Reception_Is_Enable()
+{
+	if (UCSRB & (1 << RXEN))
+	{
+		return true;
+	}
+	
+	return false;
+}
+
+inline bool UART_Buffer_Emptying_Interrupt_Is_Enable()
+{
+	if (UCSRB & (1 << UDRIE))
+	{
+		return true;
+	}
+	
+	return false;
+}
+
+inline bool UART_End_Of_Transmittion_Interrupt_Is_Enable()
+{
+	if (UCSRB & (1 << TXCIE))
+	{
+		return true;
+	}
+	
+	return false;
+}
+
+inline bool UART_End_Of_Reception_Interrupt_Is_Enable()
+{
+	if (UCSRB & (1 << RXCIE))
+	{
+		return true;
+	}
+	
+	return false;
+}
+
+// ===============================================================================
+
 void UART_Set_Baudrate(uint32_t baudrate);
 
-// function for setting the data transfer resolution
-void UART_Set_Transmission_Is_Allowed(bool transmission_is_allowed);
-
-// function for setting the data receiving resolution
-void UART_Set_Reception_Is_Allowed(bool reception_is_allowed);
-
-// function for setting the interrupt resolution by emptying the buffer
-void UART_Set_Buffer_Emptying_Interrupt_Is_Allowed(bool buffer_emptying_interrupt_is_allowed);
-
-// function for setting the interrupt resolution at the end of byte transfer
-void UART_Set_End_Of_Transmittion_Interrupt_Is_Allowed(bool end_of_transmittion_interrupt_is_allowed);
-
-// function for setting the interrupt resolution at the end of byte receive
-void UART_Set_End_Of_Reception_Interrupt_Is_Allowed(bool end_of_reception_interrupt_is_allowed);
-
-// function for setting the num of data bits
-void UART_Set_Num_Of_Data_Bits(uint8_t num_of_data_bits);
-
-// function for setting the num of stop bits
-void UART_Set_Num_Of_Stop_Bits(uint8_t num_of_stop_bits);
-
-// function for setting of the parity bit
-void UART_Set_Parity_Bit(uint8_t parity_bit);
-
-// function for getting the current speed of the UART transceiver in baud per second
 uint32_t UART_Get_Baudrate();
 
-// function for determining whether the UART transmitter has a working permit
-bool UART_Transmission_Is_Allowed();
+void UART_Set_Num_Of_Data_Bits(uint8_t num_of_data_bits);
 
-// function for determining whether the UART receiver has a working permit
-bool UART_Reception_Is_Allowed();
+void UART_Set_Num_Of_Stop_Bits(uint8_t num_of_stop_bits);
 
-// function for determining whether an interrupt operation
-// is allowed to empty the receiving buffer
-bool UART_Buffer_Emptying_Interrupt_Is_Allowed();
+void UART_Set_Parity_Bit(uint8_t parity_bit);
 
-// function for determining whether there is a permission
-// for the operation of an interrupt upon completion of data transmission
-bool UART_End_Of_Transmittion_Interrupt_Is_Allowed();
-
-// function for determining whether there is a permission for the operation
-// of an interrupt upon completion of data reception
-bool UART_End_Of_Reception_Interrupt_Is_Allowed();
-
-// function for getting the number of data bits
 uint8_t UART_Get_Num_Of_Data_Bits();
 
-// function for getting the number of stop bits
 uint8_t UART_Get_Num_Of_Stop_Bits();
 
-// function to get the type of parity bit (use together with macros UART_PARITY_BIT_X)
 uint8_t UART_Get_Parity_Bit();
 
-// function for initializing UART
-void UART_Initialize
-(
-uint32_t baudrate,
-bool transmission_is_allowed,
-bool reception_is_allowed,
-bool buffer_emptying_interrupt_is_allowed,
-bool end_of_transmittion_interrupt_is_allowed,
-bool end_of_reception_interrupt_is_allowed,
-uint8_t num_of_data_bits,
-uint8_t num_of_stop_bits,
-uint8_t parity_bit
-);
+// ===============================================================================
 
-// function for sending a byte of data to the UART
 void UART_Byte_Transmit(uint8_t byte);
 
-// function for sending an array of data to UART
 void UART_Data_Transmit(const void *data, uint16_t data_size);
 
-// function for sending a C-type string to UART
 void UART_String_Transmit(const char *string);
 
-// function for sending a C-type string to UART followed by switching to a new line
 void UART_StringLn_Transmit(const char *string);
 
-// function for sending a C-type format string to UART
 void UART_StringFmt_Transmit(const char *string_fmt, ...);
 
-// a safe version of the "UART_String_Transmit" function with
-// a limit on the number of characters sent
 void UART_Safe_String_Transmit(const char *string, uint16_t max_string_len);
 
-// a safe version of the "UART_StringLn_Transmit" function with
-// a limit on the number of characters sent
 void UART_Safe_StringLn_Transmit(const char *string, uint16_t max_string_len);
+
+// ===============================================================================
+
+void UART_Initialize(uint32_t baudrate, bool transmission_is_allowed, bool reception_is_allowed);
+
+// ===============================================================================
+
 
 // macro for moving the cursor to a new line in the UART terminal
 #define UART_NEW_LINE UART_String_Transmit("\r\n");
