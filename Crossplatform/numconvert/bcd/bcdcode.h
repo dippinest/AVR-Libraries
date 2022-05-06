@@ -1,10 +1,3 @@
-// =============================================================================================================
-//  Header              : bcdcode.h                                                                            -
-//  Created             : 20.02.2022                                                                           -
-//  Author              : Denis Chicherov (dippinest)                                                          -
-//  Description         : Declaration of functions for converting integer types to BCD code and conversely     -
-// =============================================================================================================
-
 #ifndef BCDCODE_H_
 #define BCDCODE_H_
 
