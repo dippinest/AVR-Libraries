@@ -172,9 +172,9 @@ void UART_Flash_Byte_Transmit(const uint8_t *flash_byte)
 	UART_Byte_Transmit(pgm_read_byte(flash_byte));
 }
 
-void UART_Flash_Data_Transmit(const void *flash_data, uint16_t data_size)
+void UART_Flash_Data_Transmit(const void *flash_data, uint16_t flash_data_size)
 {
-	for (uint16_t i = 0; i < data_size; ++i)
+	for (uint16_t i = 0; i < flash_data_size; ++i)
 	{
 		UART_Byte_Transmit(pgm_read_byte(&((uint8_t*)flash_data)[i]) );
 	}
