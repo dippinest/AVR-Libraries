@@ -185,7 +185,7 @@ void UART_Flash_String_Transmit(const char *flash_string);
 
 void UART_Flash_StringLn_Transmit(const char *flash_string);
 
-void UART_Flash_StringFmt_Transmit(const char *flash_string_fmt, ...);
+void UART_Flash_StringFmt_Transmit(const char *flash_string_fmt, ...); // function not supported '%s' from flash!
 
 void UART_Flash_Safe_String_Transmit(const char *flash_string, uint16_t max_flash_string_len);
 
