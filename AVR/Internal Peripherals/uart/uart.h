@@ -179,7 +179,7 @@ void UART_Safe_StringLn_Transmit(const char *string, uint16_t max_string_len);
 
 void UART_Flash_Byte_Transmit(const uint8_t *flash_byte);
 
-void UART_Flash_Data_Transmit(const void *flash_data, uint16_t data_size);
+void UART_Flash_Data_Transmit(const void *flash_data, uint16_t flash_data_size);
 
 void UART_Flash_String_Transmit(const char *flash_string);
 
