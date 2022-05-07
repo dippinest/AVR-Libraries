@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <avr/io.h>
+#include <avr/pgmspace.h>
 
 // macros for determining the number of data bits
 #define UART_NUM_OF_DATA_BITS_5 5
@@ -175,6 +176,23 @@ void UART_Safe_String_Transmit(const char *string, uint16_t max_string_len);
 void UART_Safe_StringLn_Transmit(const char *string, uint16_t max_string_len);
 
 // ===============================================================================
+
+void UART_Flash_Byte_Transmit(const uint8_t *flash_byte);
+
+void UART_Flash_Data_Transmit(const void *flash_data, uint16_t data_size);
+
+void UART_Flash_String_Transmit(const char *flash_string);
+
+void UART_Flash_StringLn_Transmit(const char *flash_string);
+
+void UART_Flash_StringFmt_Transmit(const char *flash_string_fmt, ...);
+
+void UART_Flash_Safe_String_Transmit(const char *flash_string, uint16_t max_flash_string_len);
+
+void UART_Flash_Safe_StringLn_Transmit(const char *flash_string, uint16_t max_flash_string_len);
+
+// ===============================================================================
+
 
 void UART_Initialize(uint32_t baudrate, bool transmission_is_allowed, bool reception_is_allowed);
 
