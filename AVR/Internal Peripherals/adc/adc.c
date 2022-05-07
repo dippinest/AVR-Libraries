@@ -7,6 +7,11 @@ void ADC_Set_Max_Reference_Voltage_Value(float voltage)
 	_max_ref_voltage = voltage;
 }
 
+float ADC_Get_Max_Reference_Voltage_Value()
+{
+	return _max_ref_voltage;
+}
+
 uint16_t ADC_Get_Value_10bit()
 {
 	ADC_Start_Conversion();
