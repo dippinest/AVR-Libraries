@@ -1,9 +1,3 @@
-// =============================================================================================================
-//  Header              : i2c.h                                                                                -
-//  Created             : 20.02.2022                                                                           -
-//  Author              : Denis Chicherov (dippinest)                                                          -
-//  Description         : Declaring functions to work with the TWI Interface Module (I2C)                      -
-// =============================================================================================================
 
 #ifndef I2C_H_
 #define I2C_H_
