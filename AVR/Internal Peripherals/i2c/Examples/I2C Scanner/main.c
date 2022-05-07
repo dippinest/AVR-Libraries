@@ -1,8 +1,7 @@
-#define F_CPU 16000000UL
 
+#define F_CPU 16000000UL
 #include "i2c.h"
 #include "uart.h"
-
 
 //  For the I2C bus test, 2 devices were connected: pcf8574 chip (address: 0x27) and
 //  SSD1306 (OLED 126*64 display controller) chip (address: 0x3D)
@@ -11,7 +10,7 @@ int main(void)
 {
 	I2C_Initialize(100000);
 	
-	UART_Initialize(9600, true, true, false, false, false, UART_NUM_OF_DATA_BITS_8, UART_NUM_OF_STOP_BITS_1, UART_PARITY_BIT_NONE);
+	UART_Initialize(9600, true, false);
 	
 	uint8_t device_counter = 0;
 	
