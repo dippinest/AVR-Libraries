@@ -167,6 +167,84 @@ void UART_Safe_StringLn_Transmit(const char *string, uint16_t max_string_len)
 
 // ===============================================================================
 
+void UART_Flash_Byte_Transmit(const uint8_t *flash_byte)
+{
+	UART_Byte_Transmit(pgm_read_byte(flash_byte));
+}
+
+void UART_Flash_Data_Transmit(const void *flash_data, uint16_t data_size)
+{
+	for (uint16_t i = 0; i < data_size; ++i)
+	{
+		UART_Byte_Transmit(pgm_read_byte(&((uint8_t*)flash_data)[i]) );
+	}
+}
+
+void UART_Flash_String_Transmit(const char *flash_string)
+{
+	char c = pgm_read_byte(&((uint8_t*)flash_string)[0]);
+	uint16_t i = 0;
+	
+	while (c != '\0')
+	{
+		++i;
+		UART_Byte_Transmit(c);
+		c = pgm_read_byte(&((uint8_t*)flash_string)[i]);
+	}
+}
+
+void UART_Flash_StringLn_Transmit(const char *flash_string)
+{
+	char c = pgm_read_byte(&((uint8_t*)flash_string)[0]);
+	uint16_t i = 0;
+	
+	while (c != '\0')
+	{
+		++i;
+		UART_Byte_Transmit(c);
+		c = pgm_read_byte(&((uint8_t*)flash_string)[i]);
+	}
+	
+	UART_String_Transmit("\r\n");
+}
+
+void UART_Flash_StringFmt_Transmit(const char *flash_string_fmt, ...)
+{
+	const uint16_t flash_string_size = strlen_P(flash_string_fmt);
+	
+	char string_buffer[flash_string_size];
+	
+	strcpy_P(string_buffer, flash_string_fmt);
+	
+	va_list argptr;
+	va_start(argptr, flash_string_fmt);
+	static FILE uartstdout = FDEV_SETUP_STREAM(UART_Char_Transmit, NULL, _FDEV_SETUP_WRITE);
+	stdout = &uartstdout;
+	vfprintf(stdout, string_buffer, argptr);
+	va_end(argptr);
+}
+
+void UART_Flash_Safe_String_Transmit(const char *flash_string, uint16_t max_flash_string_len)
+{
+	char c = pgm_read_byte(&((uint8_t*)flash_string)[0]);
+	uint16_t i = 0;
+	
+	while (c != '\0' && i < max_flash_string_len)
+	{
+		++i;
+		UART_Byte_Transmit(c);
+		c = pgm_read_byte(&((uint8_t*)flash_string)[i]);
+	}
+}
+
+void UART_Flash_Safe_StringLn_Transmit(const char *flash_string, uint16_t max_flash_string_len)
+{
+	UART_Flash_Safe_String_Transmit(flash_string, max_flash_string_len);
+	UART_Safe_String_Transmit("\r\n", 2);
+}
+
+// ===============================================================================
+
 void UART_Initialize(uint32_t baudrate, bool transmission_is_enable, bool reception_is_enable)
 {
 	UART_Set_Baudrate(baudrate);
