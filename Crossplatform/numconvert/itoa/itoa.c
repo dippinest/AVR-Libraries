@@ -439,6 +439,8 @@ static uint32_t _divu10(uint32_t n, uint8_t* rem)
 
 char* ITOA_Float_To_String(float val, int8_t num_int_digits, int8_t num_fract_digits)
 {
+	--num_fract_digits;
+	
 	const uint32_t _pow10_u32_array[] = { 10, 100, 1000, 10000, 100000, 1000000, 10000000 };
 
 	typedef union
@@ -543,7 +545,7 @@ char* ITOA_Float_To_String(float val, int8_t num_int_digits, int8_t num_fract_di
 
 	_string_buffer[num_int_digits] = _decimal_char_separator;
 
-	for (int8_t i = (num_int_digits + num_fract_digits); i >= (num_int_digits + 1); --i)
+	for (int8_t i = (num_int_digits + num_fract_digits + 1); i >= (num_int_digits + 1); --i)
 	{
 		fract_part = _divu10(fract_part, &rem);
 		_string_buffer[i] = rem + 48;
