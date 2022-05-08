@@ -6,8 +6,6 @@ static char     *_string_buffer = NULL; // buffer for string
 static char    _empty_char              = ' '; // default
 static char    _decimal_char_separator  = '.'; // default
 
-static uint8_t _num_of_fract_part_chars = 3;   // default (for float type number)
-
 
 // ===============================================================================
 
@@ -46,11 +44,6 @@ void ITOA_Set_Decimal_Char_Separator(const char char_separator)
 	_decimal_char_separator = char_separator;
 }
 
-void ITOA_Set_Num_Of_Fract_Part_Chars(const uint8_t num_of_fract_part_chars)
-{
-	_num_of_fract_part_chars = num_of_fract_part_chars;
-}
-
 char *ITOA_Get_String_Buffer_Ptr()
 {
 	return _string_buffer;
@@ -64,11 +57,6 @@ char ITOA_Get_Empty_Char_Symbol()
 char ITOA_Get_Decimal_Char_Separator()
 {
 	return _decimal_char_separator;
-}
-
-uint8_t ITOA_Get_Num_Of_Fract_Part_Chars()
-{
-	return _num_of_fract_part_chars;
 }
 
 // ===============================================================================
