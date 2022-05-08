@@ -49,4 +49,8 @@ char *ITOA_Int64_To_String(int64_t val, int8_t num_of_chars);
 
 char *ITOA_UInt64_To_String(uint64_t val, int8_t num_of_chars);
 
+// ===============================================================================
+
+char* ITOA_Float_To_String(float val, int8_t num_int_digits, int8_t num_fract_digits);
+
 #endif
