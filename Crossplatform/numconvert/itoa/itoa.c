@@ -431,3 +431,135 @@ char *ITOA_UInt64_To_String(uint64_t val, int8_t num_of_chars)
 
 	return _string_buffer;
 }
+
+// ===============================================================================
+
+static uint32_t _divu10(uint32_t n, uint8_t* rem)
+{
+	uint32_t q, r;
+	q = (n >> 1) + (n >> 2);
+	q = q + (q >> 4);
+	q = q + (q >> 8);
+	q = q + (q >> 16);
+	q = q >> 3;
+	r = n - (((q << 2) + q) << 1);
+
+	*rem = r > 9 ? r - 10 : r;
+
+	return q + (r > 9);
+}
+
+char* ITOA_Float_To_String(float val, int8_t num_int_digits, int8_t num_fract_digits)
+{
+	const uint32_t _pow10_u32_array[] = { 10, 100, 1000, 10000, 100000, 1000000, 10000000 };
+
+	typedef union
+	{
+		float fv;
+		uint32_t dv;
+
+	} _Val;
+
+	_Val _v = { val };
+
+	if (_v.dv == 0x00000000 || _v.dv == 0x80000000)
+	{
+		int8_t i = 0;
+
+		for (; i < num_int_digits - 1; ++i)
+		{
+			_string_buffer[i] = _empty_char;
+		}
+
+		_string_buffer[i] = '0'; ++i;
+		_string_buffer[i] = _decimal_char_separator; ++i;
+
+		int8_t j = i;
+
+		for (; j < (i + num_fract_digits); ++j)
+		{
+			_string_buffer[j] = '0';
+		}
+
+		i = j;
+
+		_string_buffer[i] = '\0';
+
+		return _string_buffer;
+	}
+
+	if (_v.dv == 0x7f800000 || _v.dv == 0xff800000)
+	{
+		int8_t i = 0;
+
+		if (_v.dv == 0xff800000)
+		{
+			_string_buffer[i] = '-';
+			++i;
+		}
+
+		_string_buffer[0 + i] = 'i';
+		_string_buffer[1 + i] = 'n';
+		_string_buffer[2 + i] = 'f';
+		_string_buffer[3 + i] = '\0';
+
+		return _string_buffer;
+	}
+
+	if (isnan(val))
+	{
+		_string_buffer[0] = 'n';
+		_string_buffer[1] = 'a';
+		_string_buffer[2] = 'n';
+		_string_buffer[3] = '\0';
+
+		return _string_buffer;
+	}
+
+	_string_buffer[num_int_digits + num_fract_digits + 1] = '\0';
+
+	if (_v.dv & 0x80000000)
+	{
+		_v.dv &= ~(1UL << 31);
+		_string_buffer[0] = '-';
+	}
+	else
+	{
+		_string_buffer[0] = _empty_char;
+	}
+
+	uint32_t int_part   = (uint32_t)_v.fv;
+	uint32_t fract_part =
+	(_v.fv - int_part) *
+	_pow10_u32_array[num_fract_digits % (sizeof(_pow10_u32_array) / sizeof(uint32_t))];
+
+	uint8_t rem;
+
+	for (int8_t i = num_int_digits - 1; i >= 1; --i)
+	{
+		int_part = _divu10(int_part, &rem);
+		_string_buffer[i] = rem + 48;
+	}
+
+	for (int8_t i = 1; i < num_int_digits - 1; ++i)
+	{
+		if (_string_buffer[i] == '0')
+		{
+			_string_buffer[i] = _empty_char;
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	_string_buffer[num_int_digits] = _decimal_char_separator;
+
+	for (int8_t i = (num_int_digits + num_fract_digits + 1); i >= (num_int_digits + 1); --i)
+	{
+		fract_part = _divu10(fract_part, &rem);
+		_string_buffer[i] = rem + 48;
+	}
+
+	return _string_buffer;
+}
