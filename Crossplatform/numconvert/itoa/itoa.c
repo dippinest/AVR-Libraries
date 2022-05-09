@@ -492,11 +492,13 @@ char* ITOA_Float_To_String(float val, int8_t num_int_digits, int8_t num_fract_di
 	}
 
 	_string_buffer[num_int_digits + num_fract_digits + 1] = '\0';
+	
+	bool is_negative = false;
 
 	if (_v.dv & 0x80000000)
 	{
 		_v.dv &= ~(1UL << 31);
-		_string_buffer[0] = '-';
+		is_negative = true;
 	}
 	else
 	{
@@ -525,6 +527,11 @@ char* ITOA_Float_To_String(float val, int8_t num_int_digits, int8_t num_fract_di
 		}
 		else
 		{
+			if (is_negative)
+			{
+				_string_buffer[i - 1] = '-';
+			}
+			
 			break;
 		}
 	}
@@ -540,3 +547,4 @@ char* ITOA_Float_To_String(float val, int8_t num_int_digits, int8_t num_fract_di
 
 	return _string_buffer;
 }
+
