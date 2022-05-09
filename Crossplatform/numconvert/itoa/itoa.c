@@ -422,26 +422,11 @@ char *ITOA_UInt64_To_String(uint64_t val, int8_t num_of_chars)
 
 // ===============================================================================
 
-static uint32_t _divu10(uint32_t n, uint8_t* rem)
-{
-	uint32_t q, r;
-	q = (n >> 1) + (n >> 2);
-	q = q + (q >> 4);
-	q = q + (q >> 8);
-	q = q + (q >> 16);
-	q = q >> 3;
-	r = n - (((q << 2) + q) << 1);
-
-	*rem = r > 9 ? r - 10 : r;
-
-	return q + (r > 9);
-}
-
 char* ITOA_Float_To_String(float val, int8_t num_int_digits, int8_t num_fract_digits)
 {
 	--num_fract_digits;
 	
-	const uint32_t _pow10_u32_array[] = { 10, 100, 1000, 10000, 100000, 1000000, 10000000 };
+	static const uint32_t _pow10_u32_array[] = { 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000 };
 
 	typedef union
 	{
@@ -527,7 +512,8 @@ char* ITOA_Float_To_String(float val, int8_t num_int_digits, int8_t num_fract_di
 
 	for (int8_t i = num_int_digits - 1; i >= 1; --i)
 	{
-		int_part = _divu10(int_part, &rem);
+		rem = int_part % 10;
+		int_part /= 10;
 		_string_buffer[i] = rem + 48;
 	}
 
@@ -547,7 +533,8 @@ char* ITOA_Float_To_String(float val, int8_t num_int_digits, int8_t num_fract_di
 
 	for (int8_t i = (num_int_digits + num_fract_digits + 1); i >= (num_int_digits + 1); --i)
 	{
-		fract_part = _divu10(fract_part, &rem);
+		rem = fract_part % 10;
+		fract_part /= 10;
 		_string_buffer[i] = rem + 48;
 	}
 
