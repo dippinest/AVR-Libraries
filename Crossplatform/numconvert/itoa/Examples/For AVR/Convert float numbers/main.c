@@ -3,9 +3,9 @@
 // when using the "ITOA_Float_To_String" function instead
 // of "printf" ("sprintf") type functions. In the first case,
 // with the value of the optimization flag -Os (optimization
-// by code size, gcc-avr compiler), the code volume is 2118 bytes,
+// by code size, gcc-avr compiler), the code volume is 2170 bytes,
 // while the similar code with the "sprintf" function takes 3540 bytes.
-// Memory savings are (3540 - 2118) = 1422 bytes
+// Memory savings are (3540 - 2170) = 1370 bytes
 
 #define F_CPU 16000000UL
 #include <util/delay.h>
