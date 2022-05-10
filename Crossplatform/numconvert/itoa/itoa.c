@@ -437,30 +437,9 @@ char* ITOA_Float_To_String(float val, int8_t num_int_digits, int8_t num_fract_di
 
 	_Val _v = { val };
 
-	if (_v.dv == 0x00000000 || _v.dv == 0x80000000)
+	if (_v.dv == 0x80000000)
 	{
-		int8_t i = 0;
-
-		for (; i < num_int_digits - 1; ++i)
-		{
-			_string_buffer[i] = _empty_char;
-		}
-
-		_string_buffer[i] = '0'; ++i;
-		_string_buffer[i] = _decimal_char_separator; ++i;
-
-		int8_t j = i;
-
-		for (; j < (i + num_fract_digits); ++j)
-		{
-			_string_buffer[j] = '0';
-		}
-
-		i = j;
-
-		_string_buffer[i] = '\0';
-
-		return _string_buffer;
+		_v.dv = 0x00000000;
 	}
 
 	if (_v.dv == 0x7f800000 || _v.dv == 0xff800000)
