@@ -444,18 +444,19 @@ char* ITOA_Float_To_String(float val, int8_t num_int_digits, int8_t num_fract_di
 
 	if (_v.dv == 0x7f800000 || _v.dv == 0xff800000)
 	{
-		int8_t i = 0;
-
 		if (_v.dv == 0xff800000)
 		{
-			_string_buffer[i] = '-';
-			++i;
+			_string_buffer[0] = '-';
+		}
+		else
+		{
+			_string_buffer[0] = '+';
 		}
 
-		_string_buffer[0 + i] = 'i';
-		_string_buffer[1 + i] = 'n';
-		_string_buffer[2 + i] = 'f';
-		_string_buffer[3 + i] = '\0';
+		_string_buffer[1] = 'i';
+		_string_buffer[2] = 'n';
+		_string_buffer[3] = 'f';
+		_string_buffer[4] = '\0';
 
 		return _string_buffer;
 	}
