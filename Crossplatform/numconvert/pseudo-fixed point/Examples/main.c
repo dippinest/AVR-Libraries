@@ -105,7 +105,7 @@ int main(void)
 
 // an example of implementing a program with a float number
 // conversion using the standard sprintf function (library
-// functions of the HD44780_I2C_Print_String type are not
+// functions of the HD44780_I2C_Print_StringFmt type are not
 // used intentionally, because it consumes even more memory).
 //
 // the program in the memory of the ATmega8 microcontroller occupies 4980 bytes
