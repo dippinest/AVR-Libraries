@@ -480,51 +480,63 @@ char* ITOA_Float_To_String(float val, int8_t num_int_digits, int8_t num_fract_di
 		_v.dv &= ~(1UL << 31);
 		fv_is_negative = true;
 	}
-	
-	_string_buffer[0] = _empty_char;
 
-	uint32_t int_part   = (uint32_t)_v.fv;
-	uint32_t fract_part =
+	int32_t int_part   = (int32_t)_v.fv;
+	int32_t fract_part =
 	(_v.fv - int_part) *
-	_pow10_u32_array[num_fract_digits % (sizeof(_pow10_u32_array) / sizeof(uint32_t))];
-
+	_pow10_u32_array[num_fract_digits % (sizeof(_pow10_u32_array) / sizeof(int32_t))];
+	
+	
+	int8_t i = (num_int_digits + num_fract_digits + 1);
+	
 	uint8_t rem;
 
-	for (int8_t i = num_int_digits - 1; i >= 1; --i)
-	{
-		rem = int_part % 10;
-		int_part /= 10;
-		_string_buffer[i] = rem + 48;
-	}
-
-	for (int8_t i = 1; i < num_int_digits - 1; ++i)
-	{
-		if (_string_buffer[i] == '0')
-		{
-			_string_buffer[i] = _empty_char;
-		}
-		else
-		{
-			break;
-		}
-	}
-	
-	if (fv_is_negative)
-	{
-		int8_t i = 0;
-		
-		for (; _string_buffer[i] == _empty_char; ++i);
-		
-		_string_buffer[i - 1] = '-';
-	}
-
-	_string_buffer[num_int_digits] = _decimal_char_separator;
-
-	for (int8_t i = (num_int_digits + num_fract_digits + 1); i >= (num_int_digits + 1); --i)
+	for (; i >= (num_int_digits + 1); --i)
 	{
 		rem = fract_part % 10;
 		fract_part /= 10;
 		_string_buffer[i] = rem + 48;
+	}
+	
+	_string_buffer[i] = _decimal_char_separator;
+	--i;
+	
+	for (uint8_t j = 0; j < num_int_digits; ++j)
+	{
+		if (int_part != 0)
+		{
+			rem = int_part % 10;
+			int_part /= 10;
+			_string_buffer[i] = rem + 48;
+		}
+		else
+		{
+			if (fv_is_negative)
+			{
+				if (j == 0)
+				{
+					_string_buffer[i] = '0';
+				}
+				else
+				{
+					_string_buffer[i] = '-';
+					fv_is_negative = false;
+				}
+			}
+			else
+			{
+				if (j == 0)
+				{
+					_string_buffer[i] = '0';
+				}
+				else
+				{
+					_string_buffer[i] = ' ';
+				}
+			}
+		}
+
+		--i;
 	}
 
 	return _string_buffer;
