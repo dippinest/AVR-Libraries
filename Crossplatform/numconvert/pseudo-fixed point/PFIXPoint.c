@@ -15,16 +15,16 @@ void PFIXPoint_Set_String_Buffer(char* string_buffer_ptr)
 	_string_buffer = string_buffer_ptr;
 }
 
-int PFIXPoint_Set_String_Buffer_To_Dynamic_Memory(const uint8_t string_buffer_size)
+char *PFIXPoint_Set_String_Buffer_To_Dynamic_Memory(const uint8_t string_buffer_size)
 {
 	_string_buffer = (char*)calloc(string_buffer_size, sizeof(char));
 
 	if (_string_buffer == NULL)
 	{
-		return 1;
+		return NULL;
 	}
 
-	return 0;
+	return _string_buffer;
 }
 
 void PFIXPoint_Delete_String_Buffer_To_Dynamic_Memory()
