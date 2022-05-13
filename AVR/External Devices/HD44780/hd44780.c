@@ -162,6 +162,24 @@ void HD44780_Set_User_Symbol_To_CGRAM(const uint8_t *_8byte_simbol_bitmap_array,
 	_delay_us(40);
 }
 
+void HD44780_Set_Flash_User_Symbol_To_CGRAM(const uint8_t *_8byte_flash_simbol_bitmap_array, uint8_t flash_simbol_number)
+{
+	_HD44780_Send_Byte((0b01000000 | (flash_simbol_number * 8)), _HD44780_DISPLAY_SEND_COMMAND_MODE);
+	_delay_us(40);
+	
+	uint8_t c;
+	
+	for (uint8_t i = 0; i < 8; ++i)
+	{
+		c = pgm_read_byte(&_8byte_flash_simbol_bitmap_array[i]);
+		_HD44780_Send_Byte(c, _HD44780_DISPLAY_SEND_DATA_MODE);
+		_delay_us(40);
+	}
+	
+	_HD44780_Send_Byte(0b10000000, _HD44780_DISPLAY_SEND_COMMAND_MODE);
+	_delay_us(40);
+}
+
 // ===============================================================================
 
 void HD44780_Print_Char(char c)
