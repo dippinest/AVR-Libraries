@@ -18,11 +18,6 @@ char *ITOA_Set_String_Buffer_To_Dynamic_Memory(const uint8_t string_buffer_size)
 {
 	_string_buffer = (char*)calloc(string_buffer_size, sizeof(char));
 	
-	if (_string_buffer == NULL)
-	{
-		return NULL;
-	}
-	
 	return _string_buffer;
 }
 
