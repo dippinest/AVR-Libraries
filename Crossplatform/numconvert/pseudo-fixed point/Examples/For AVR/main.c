@@ -61,7 +61,7 @@ int main(void)
 // an example of implementing a program with the conversion of
 // a float type number using the ITOA_Float_To_String function
 //
-// the program in the memory of the ATmega8 microcontroller occupies 3038 bytes
+// the program in the memory of the ATmega8 microcontroller occupies 3076 bytes
 
 #define F_CPU 16000000UL
 #include <util/delay.h>
