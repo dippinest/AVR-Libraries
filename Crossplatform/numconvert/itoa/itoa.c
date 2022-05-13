@@ -493,6 +493,11 @@ char* ITOA_Float_To_String(float val, int8_t num_int_digits, int8_t num_fract_di
 
 	for (; i >= (num_int_digits + 1); --i)
 	{
+		if (fract_part != 0 && i == (num_int_digits + 1))
+		{
+			++fract_part;
+		}
+		
 		rem = fract_part % 10;
 		fract_part /= 10;
 		_string_buffer[i] = rem + 48;
