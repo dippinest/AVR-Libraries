@@ -82,6 +82,8 @@ void HD44780_I2C_Set_Cursor_Pos(uint8_t string_pos, uint8_t first_char_pos);
 
 void HD44780_I2C_Set_User_Symbol_To_CGRAM(const uint8_t *_8byte_simbol_bitmap_array, uint8_t simbol_number);
 
+void HD44780_I2C_Set_Flash_User_Symbol_To_CGRAM(const uint8_t *_8byte_flash_simbol_bitmap_array, uint8_t flash_simbol_number);
+
 // ===============================================================================
 
 void HD44780_I2C_Print_Char(char c);
