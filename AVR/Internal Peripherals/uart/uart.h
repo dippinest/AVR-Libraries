@@ -31,7 +31,7 @@
 
 // ===============================================================================
 
-inline void UART_Set_Transmission_Enable(bool transmission_is_enable)
+inline void UART_Set_Transmittion_Enable(bool transmission_is_enable)
 {
 	if (transmission_is_enable)
 	{
