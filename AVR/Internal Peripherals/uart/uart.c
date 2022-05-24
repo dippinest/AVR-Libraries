@@ -245,7 +245,7 @@ void UART_Flash_Safe_StringLn_Transmit(const char *flash_string, uint16_t max_fl
 
 // ===============================================================================
 
-void UART_Initialize(uint32_t baudrate, bool transmission_is_enable, bool reception_is_enable)
+void UART_Initialize(uint32_t baudrate, bool transmittion_is_enable, bool reception_is_enable)
 {
 	UART_Set_Baudrate(baudrate);
 	
@@ -253,6 +253,6 @@ void UART_Initialize(uint32_t baudrate, bool transmission_is_enable, bool recept
 	UART_Set_Num_Of_Stop_Bits(UART_NUM_OF_STOP_BITS_1);
 	UART_Set_Parity_Bit(UART_PARITY_BIT_NONE);
 	
-	UART_Set_Transmission_Enable(transmission_is_enable);
+	UART_Set_Transmittion_Enable(transmittion_is_enable);
 	UART_Set_Reception_Enable(reception_is_enable);
 }
