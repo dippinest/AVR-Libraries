@@ -8,7 +8,7 @@ int main(void)
 	UART_String_Transmit("This is a params configurations of UART:\r\n\r\n");
 	
 	UART_StringFmt_Transmit("Baudrate: ------------------------------- %lu\r\n", UART_Get_Baudrate());
-	UART_StringFmt_Transmit("Transmittion is enable: ----------------- %s\r\n",  UART_Transmission_Is_Enable()                  ? "true" : "false");
+	UART_StringFmt_Transmit("Transmittion is enable: ----------------- %s\r\n",  UART_Transmittion_Is_Enable()                  ? "true" : "false");
 	UART_StringFmt_Transmit("Reception is enable: -------------------- %s\r\n",  UART_Reception_Is_Enable()                     ? "true" : "false");
 	UART_StringFmt_Transmit("Buffer emptying interrupt is enable: ---- %s\r\n",  UART_Buffer_Emptying_Interrupt_Is_Enable()     ? "true" : "false");
 	UART_StringFmt_Transmit("End of transmittion interrupt is enable:  %s\r\n",  UART_End_Of_Transmittion_Interrupt_Is_Enable() ? "true" : "false");
