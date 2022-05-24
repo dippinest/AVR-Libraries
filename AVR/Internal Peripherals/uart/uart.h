@@ -91,7 +91,7 @@ inline void UART_Set_End_Of_Reception_Interrupt_Enable(bool end_of_reception_int
 	}
 }
 
-inline bool UART_Transmission_Is_Enable()
+inline bool UART_Transmittion_Is_Enable()
 {
 	if (UCSRB & (1 << TXEN))
 	{
