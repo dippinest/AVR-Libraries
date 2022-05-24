@@ -31,9 +31,9 @@
 
 // ===============================================================================
 
-inline void UART_Set_Transmittion_Enable(bool transmission_is_enable)
+inline void UART_Set_Transmittion_Enable(bool transmittion_is_enable)
 {
-	if (transmission_is_enable)
+	if (transmittion_is_enable)
 	{
 		UCSRB |=  (1 << TXEN);
 	}
@@ -194,7 +194,7 @@ void UART_Flash_Safe_StringLn_Transmit(const char *flash_string, uint16_t max_fl
 // ===============================================================================
 
 
-void UART_Initialize(uint32_t baudrate, bool transmission_is_allowed, bool reception_is_allowed);
+void UART_Initialize(uint32_t baudrate, bool transmittion_is_allowed, bool reception_is_allowed);
 
 // ===============================================================================
 
