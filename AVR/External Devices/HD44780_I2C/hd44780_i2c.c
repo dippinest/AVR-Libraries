@@ -234,7 +234,7 @@ void HD44780_I2C_Fill_Char_Pattern(const char char_pattern, uint8_t num_pattern_
 
 void HD44780_I2C_Print_Flash_Char(const char *flash_c)
 {
-	HD44780_I2C_Print_Char(pgm_read_byte(flash_c));
+	HD44780_I2C_Print_Char(pgm_read_byte(*flash_c));
 }
 
 void HD44780_I2C_Print_Flash_Data(const void *flash_data, uint8_t flash_data_size)
