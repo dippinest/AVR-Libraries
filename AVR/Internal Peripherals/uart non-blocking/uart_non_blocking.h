@@ -12,6 +12,7 @@
 #include <avr/interrupt.h>
 
 #include "uart.h"
+#include "uart_non_blocking_configuration.h"
 
 #define UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE          true
 #define UART_NON_BLOCKING_TRANSMITTION_IS_NOT_ACTIVE      false
@@ -58,9 +59,9 @@ inline bool UART_NB_Reception_Is_Enable()
 
 // ===============================================================================
 
-bool UART_NB_Get_Transmittion_Status();
+#ifdef UART_NON_BLOCKING_USE_RX
 
-// ===============================================================================
+bool UART_NB_Get_Transmittion_Status();
 
 void UART_NB_Set_Reception_Buffer_Ptr(const void *buffer);
 
@@ -79,6 +80,12 @@ uint16_t UART_NB_Get_Reception_Buffer_Size();
 void *UART_NB_Get_Reception_CallBack_Function();
 
 uint16_t UART_NB_Get_Current_Reception_Buffer_Fullness();
+
+#endif
+
+// ===============================================================================
+
+#ifdef UART_NON_BLOCKING_USE_TX
 
 // ===============================================================================
 
@@ -108,12 +115,18 @@ void UART_NB_Flash_Safe_String_Transmit(const char *flash_string, uint16_t max_f
 
 void UART_NB_Flash_Safe_StringLn_Transmit(const char *flash_string, uint16_t max_flash_string_len);
 
+#endif
+
 // ===============================================================================
+
+#ifdef UART_NON_BLOCKING_USE_RX
 
 void UART_NB_Start_Reception_Data_To_Buffer();
 
 void UART_NB_Stop_Reception_Data_To_Buffer();
 
 void UART_NB_Clear_Reception_Buffer();
+
+#endif
 
 #endif
