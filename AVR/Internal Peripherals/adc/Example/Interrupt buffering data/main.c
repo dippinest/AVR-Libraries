@@ -10,6 +10,10 @@
 #define ADC_BUF_SIZE 8
 static uint16_t adc_buffer[ADC_BUF_SIZE];
 
+// ATN! when working directly with the "ADC_vect"
+// interrupt, comment out #define ADC_USE_CALLBACK
+// in the adc_callback_configuration.h file!
+
 ISR(ADC_vect)
 {
 	static uint8_t i = 0;
