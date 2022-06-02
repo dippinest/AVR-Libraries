@@ -1,5 +1,8 @@
 
 #include "uart_non_blocking.h"
+#include "uart_non_blocking_configuration.h"
+
+#ifdef UART_NON_BLOCKING_USE_TX
 
 static volatile uint8_t   _transmittion_byte;
 static volatile uint8_t*  _transmittion_data;
@@ -8,6 +11,14 @@ static volatile uint16_t  _transmittion_counter    = 0;
 static volatile uint8_t   _transmittion_condition;
 static volatile bool      _transmittion_status     = UART_NON_BLOCKING_TRANSMITTION_IS_NOT_ACTIVE;
 
+bool UART_NB_Get_Transmittion_Status()
+{
+	return _transmittion_status;
+}
+
+#endif
+
+#ifdef UART_NON_BLOCKING_USE_RX
 
 static volatile uint8_t*  _reception_data_buffer       = NULL;
 static volatile uint16_t  _reception_data_buffer_size  = 0;
@@ -17,12 +28,11 @@ static volatile bool      _reception_status            = UART_NON_BLOCKING_RECEP
 
 static void (*_reception_callback)() = NULL;
 
-bool UART_NB_Get_Transmittion_Status()
-{
-	return _transmittion_status;
-}
+#endif
 
 // ===============================================================================
+
+#ifdef UART_NON_BLOCKING_USE_RX
 
 void UART_NB_Set_Reception_Buffer_Ptr(const void *buffer)
 {
@@ -69,7 +79,11 @@ uint16_t UART_NB_Get_Current_Reception_Buffer_Fullness()
 	return _reception_counter;
 }
 
+#endif
+
 // ===============================================================================
+
+#ifdef UART_NON_BLOCKING_USE_TX
 
 static void _UART_NB_Byte_Transmit()
 {
@@ -339,7 +353,11 @@ void UART_NB_Flash_Safe_StringLn_Transmit(const char *flash_string, uint16_t max
 	_UART_NB_Flash_Safe_StringLn_Transmit();
 }
 
+#endif
+
 // ===============================================================================
+
+#ifdef UART_NON_BLOCKING_USE_RX
 
 static void _UART_NB_Set_Reception_Data_To_Buffer(uint8_t byte)
 {
@@ -384,7 +402,11 @@ void UART_NB_Clear_Reception_Buffer()
 	_reception_buffer_is_filled = UART_NON_BLOCKING_RECEPTION_BUFFER_IS_NOT_FILLED;
 }
 
+#endif
+
 // ===============================================================================
+
+#ifdef UART_NON_BLOCKING_USE_TX
 
 ISR(USART_TXC_vect)
 {
@@ -429,7 +451,13 @@ ISR(USART_TXC_vect)
 	}
 }
 
+#endif
+
+#ifdef UART_NON_BLOCKING_USE_RX
+
 ISR(USART_RXC_vect)
 {
 	_UART_NB_Set_Reception_Data_To_Buffer(UDR);
 }
+
+#endif
