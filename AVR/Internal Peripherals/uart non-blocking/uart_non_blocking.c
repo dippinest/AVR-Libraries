@@ -1,6 +1,5 @@
 
 #include "uart_non_blocking.h"
-#include "uart_non_blocking_configuration.h"
 
 #ifdef UART_NON_BLOCKING_USE_TX
 
