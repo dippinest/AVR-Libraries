@@ -1,9 +1,14 @@
+
 #ifndef ADC_H_
 #define ADC_H_
 
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <stddef.h>
+
+#include "adc_callback_configuration.h"
 
 #define ADC_VREF_SOURCE_EXTERNAL_AREF 0b00
 #define ADC_VREF_SOURCE_EXTERNAL_AVCC 0b01
@@ -146,5 +151,29 @@ uint8_t ADC_Get_Random_Entropy_Value_8bit(uint8_t channel);
 uint16_t ADC_Get_Random_Entropy_Value_16bit(uint8_t channel);
 
 uint32_t ADC_Get_Random_Entropy_Value_32bit(uint8_t channel);
+
+// ===============================================================================
+
+#ifdef ADC_USE_CALLBACK
+
+void ADC_Set_Reception_Buffer_Ptr(const void *buffer);
+
+void ADC_Set_Reception_Buffer_Size(const uint16_t buffer_size);
+
+void ADC_Set_Reception_CallBack_Function(void (*callback_function)());
+
+bool ADC_Get_Reception_Status();
+
+bool ADC_Reception_Buffer_Is_Filled();
+
+void *ADC_Get_Reception_Buffer_Ptr();
+
+uint16_t ADC_Get_Reception_Buffer_Size();
+
+void *ADC_Get_Reception_CallBack_Function();
+
+uint16_t ADC_Get_Current_Reception_Buffer_Fullness();
+
+#endif
 
 #endif
