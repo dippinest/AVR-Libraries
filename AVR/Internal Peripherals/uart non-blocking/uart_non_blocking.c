@@ -5,7 +5,7 @@
 #ifdef UART_NON_BLOCKING_USE_TX
 
 static volatile uint8_t   _transmittion_byte;
-static volatile uint8_t*  _transmittion_data;
+static volatile uint8_t*  _transmittion_data = NULL;
 static volatile uint16_t  _transmittion_data_size;
 static volatile uint16_t  _transmittion_counter    = 0;
 static volatile uint8_t   _transmittion_condition;
