@@ -61,8 +61,6 @@ inline bool UART_NB_Reception_Is_Enable()
 
 #ifdef UART_NON_BLOCKING_USE_RX
 
-bool UART_NB_Get_Transmittion_Status();
-
 void UART_NB_Set_Reception_Buffer_Ptr(const void *buffer);
 
 void UART_NB_Set_Reception_Buffer_Size(const uint16_t buffer_size);
@@ -86,6 +84,8 @@ uint16_t UART_NB_Get_Current_Reception_Buffer_Fullness();
 // ===============================================================================
 
 #ifdef UART_NON_BLOCKING_USE_TX
+
+bool UART_NB_Get_Transmittion_Status();
 
 // ===============================================================================
 
