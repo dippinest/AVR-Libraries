@@ -1,3 +1,4 @@
+
 #include "adc.h"
 
 static float _max_ref_voltage = 5.0f; // default value
@@ -88,3 +89,78 @@ uint32_t ADC_Get_Random_Entropy_Value_32bit(uint8_t channel)
 	
 	return random_entropy;
 }
+
+// ===============================================================================
+
+#ifdef ADC_USE_CALLBACK
+
+static uint16_t*  _reception_buffer = NULL;
+static volatile uint16_t  _reception_buffer_size;
+static volatile uint16_t  _reception_counter            = 0;
+static volatile bool      _reception_buffer_is_filled   = false;
+
+static void (*_reception_callback)() = NULL;
+
+void ADC_Set_Reception_Buffer_Ptr(const void *buffer)
+{
+	_reception_buffer = (uint16_t*)buffer;
+}
+
+void ADC_Set_Reception_Buffer_Size(const uint16_t buffer_size)
+{
+	_reception_buffer_size = buffer_size;
+}
+
+void ADC_Set_Reception_CallBack_Function(void (*callback_function)())
+{
+	_reception_callback = callback_function;
+}
+
+bool ADC_Reception_Buffer_Is_Filled()
+{
+	return _reception_buffer_is_filled;
+}
+
+void *ADC_Get_Reception_Buffer_Ptr()
+{
+	return _reception_buffer;
+}
+
+uint16_t ADC_Get_Reception_Buffer_Size()
+{
+	return _reception_buffer_size;
+}
+
+void *ADC_Get_Reception_CallBack_Function()
+{
+	return _reception_callback;
+}
+
+uint16_t ADC_Get_Current_Reception_Buffer_Fullness()
+{
+	return _reception_counter;
+}
+
+ISR(ADC_vect)
+{
+	if (_reception_buffer != NULL)
+	{
+		_reception_buffer[_reception_counter] = ADC;
+		
+		++_reception_counter;
+		
+		if (_reception_counter >= _reception_buffer_size)
+		{
+			_reception_buffer_is_filled = true;
+			
+			_reception_callback();
+			
+			_reception_counter = 0;
+			_reception_buffer_is_filled = false;
+		}
+	}
+	
+	ADC_Start_Conversion();
+}
+
+#endif
