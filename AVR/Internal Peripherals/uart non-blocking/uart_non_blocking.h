@@ -24,19 +24,6 @@
 #define UART_NON_BLOCKING_RECEPTION_BUFFER_IS_FILLED      true
 #define UART_NON_BLOCKING_RECEPTION_BUFFER_IS_NOT_FILLED  false
 
-#define UART_NON_BLOCKING_BYTE_TRANSMIT                 0
-#define UART_NON_BLOCKING_DATA_TRANSMIT                 1
-#define UART_NON_BLOCKING_STRING_TRANSMIT               2
-#define UART_NON_BLOCKING_STRINGLN_TRANSMIT             3
-#define UART_NON_BLOCKING_SAFE_STRING_TRANSMIT          4
-#define UART_NON_BLOCKING_SAFE_STRINGLN_TRANSMIT        5
-
-#define UART_NON_BLOCKING_FLASH_DATA_TRANSMIT           6
-#define UART_NON_BLOCKING_FLASH_STRING_TRANSMIT         7
-#define UART_NON_BLOCKING_FLASH_STRINGLN_TRANSMIT       8
-#define UART_NON_BLOCKING_FLASH_SAFE_STRING_TRANSMIT    9
-#define UART_NON_BLOCKING_FLASH_SAFE_STRINGLN_TRANSMIT  10
-
 inline void UART_NB_Set_Transmittion_Enable(bool is_enable)
 {
 	UART_Set_End_Of_Transmittion_Interrupt_Enable(is_enable);
@@ -126,6 +113,24 @@ void UART_NB_Start_Reception_Data_To_Buffer();
 void UART_NB_Stop_Reception_Data_To_Buffer();
 
 void UART_NB_Clear_Reception_Buffer();
+
+#endif
+
+#ifdef UART_NON_BLOCKING_USE_TX
+
+inline void UART_NB_TX_Wait()
+{
+	while (UART_NB_Get_Transmittion_Status() == UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE);
+}
+
+#endif
+
+#ifdef UART_NON_BLOCKING_USE_RX
+
+inline UART_NB_RX_Wait()
+{
+	while (UART_NB_Get_Transmittion_Status() == UART_NON_BLOCKING_RECEPTION_IS_ACTIVE);
+}
 
 #endif
 
