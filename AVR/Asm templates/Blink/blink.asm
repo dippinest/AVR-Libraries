@@ -266,9 +266,9 @@ Main:
 	LDI  R16,   255 - 250
 	OUT  TCNT0, R16
 
-	; разрешаем прерывания по переполнению счетчика T0
+	; Разрешаем прерывания по переполнению счетчика T0
 	; -------------------------------------------------------------------------------
-	; we allow interrupts on the overflow of the counter T0
+	; Allow interrupts on the overflow of the counter T0
 	LDI  R16,   (1 << TOIE0)
 	OUT  TIMSK, R16
 
