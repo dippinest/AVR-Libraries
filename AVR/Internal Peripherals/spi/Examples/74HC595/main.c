@@ -6,12 +6,12 @@
 
 // macro enabling latches that transmit data to the storage register
 #define HC595_LATCHES \
-PORTD |=  (1 << 7);  \
-PORTD &= ~(1 << 7);
+PORTD |=  (1 << PORTD7);  \
+PORTD &= ~(1 << PORTD7);
 
 int main(void)
 {
-	DDRD |= (1 << 7);
+	DDRD |= (1 << PORTD7);
 	
 	SPI_Initialize(true, SPI_DEV_IS_MASTER, SPI_MODE_0, SPI_SPEED_FCPU_DIV_8);
 	
