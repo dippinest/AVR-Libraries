@@ -12,9 +12,9 @@
 // macro for setting and resetting the
 // Chip Select (CS) line when transmitting data over SPI
 #define CS_ONOFF_MAX7219(SPI_FUNCTION)  \
-PORTD &= ~(1 << 7);                 \
-SPI_FUNCTION;                       \
-PORTD |=  (1 << 7);
+    PORTD &= ~(1 << 7);                 \
+    SPI_FUNCTION;                       \
+    PORTD |=  (1 << 7);
 
 static char str_buf[16];
 
