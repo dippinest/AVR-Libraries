@@ -7,6 +7,7 @@ ___
 &nbsp;
 
 <img src="/resources/logo.png" alt="My cool logo"/>
+
 ___
 
 The set of libraries includes tools for working with the microcontroller itself, its internal peripherals, external sensors, as well as the most popular cross-platform data processing algorithms optimized for small computing resources. This set is updated periodically.
@@ -18,4 +19,3 @@ ___
 If you want to contact me, write to the following email:\
 Если вы хотите связаться со мной, пишите на электронную почту:
 > <chicherov.workmail@yandex.ru>
-___
