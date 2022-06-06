@@ -61,4 +61,4 @@
 // macro for resetting a dot in a character
 #define MAX7219_CHAR_SIGN_WITHOUT_POINT(MAX7219_CHAR) (MAX7219_CHAR & 0b01111111)
 
-#endif /* MAX7219_SYMBOLS_H_ */
+#endif
