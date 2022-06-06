@@ -127,7 +127,7 @@ inline void UART_NB_TX_Wait()
 
 #ifdef UART_NON_BLOCKING_USE_RX
 
-inline UART_NB_RX_Wait()
+inline void UART_NB_RX_Wait()
 {
 	while (UART_NB_Get_Transmittion_Status() == UART_NON_BLOCKING_RECEPTION_IS_ACTIVE);
 }
