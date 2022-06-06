@@ -6,6 +6,7 @@
 #include <avr/interrupt.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 #include "spi_configuration.h"
 
@@ -238,5 +239,11 @@ void SPI_Send_Data(void* data, uint16_t data_size);
 uint8_t SPI_Get_Byte_With_Sending(uint8_t data);
 
 // ===============================================================================
+
+void SPI_Set_CS_CallBacks_Function(void (*cs_on_callback)(), void (*cs_off_callback)());
+
+void SPI_Call_CS_ON();
+
+void SPI_Call_CS_OFF();
 
 #endif
