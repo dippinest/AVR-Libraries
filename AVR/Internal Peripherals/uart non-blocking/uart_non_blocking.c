@@ -7,13 +7,14 @@ static volatile uint8_t   _transmittion_byte;
 static volatile uint8_t*  _transmittion_data = NULL;
 static volatile uint16_t  _transmittion_data_size;
 static volatile uint16_t  _transmittion_counter    = 0;
-static volatile uint8_t   _transmittion_condition;
 static volatile bool      _transmittion_status     = UART_NON_BLOCKING_TRANSMITTION_IS_NOT_ACTIVE;
 
 bool UART_NB_Get_Transmittion_Status()
 {
 	return _transmittion_status;
 }
+
+static void (*_transmittion_callback)() = NULL;
 
 #endif
 
@@ -86,12 +87,14 @@ uint16_t UART_NB_Get_Current_Reception_Buffer_Fullness()
 
 static void _UART_NB_Byte_Transmit()
 {
+	_transmittion_callback = _UART_NB_Byte_Transmit;
 	UDR = _transmittion_byte;
 	_transmittion_status = UART_NON_BLOCKING_TRANSMITTION_IS_NOT_ACTIVE;
 }
 
 static void _UART_NB_Data_Transmit()
 {
+	_transmittion_callback = _UART_NB_Data_Transmit;
 	UDR = _transmittion_data[_transmittion_counter];
 	++_transmittion_counter;
 	
@@ -105,6 +108,7 @@ static void _UART_NB_Data_Transmit()
 
 static void _UART_NB_String_Transmit()
 {
+	_transmittion_callback = _UART_NB_String_Transmit;
 	if (_transmittion_data[_transmittion_counter] != '\0')
 	{
 		UDR = _transmittion_data[_transmittion_counter];
@@ -120,6 +124,7 @@ static void _UART_NB_String_Transmit()
 
 static void _UART_NB_StringLn_Transmit()
 {
+	_transmittion_callback = _UART_NB_StringLn_Transmit;
 	if (_transmittion_data[_transmittion_counter] != '\0')
 	{
 		UDR = _transmittion_data[_transmittion_counter];
@@ -138,6 +143,7 @@ static void _UART_NB_StringLn_Transmit()
 
 static void _UART_NB_Safe_String_Transmit()
 {
+	_transmittion_callback = _UART_NB_Safe_String_Transmit;
 	if (_transmittion_data[_transmittion_counter] != '\0' && _transmittion_counter < _transmittion_data_size)
 	{
 		UDR = _transmittion_data[_transmittion_counter];
@@ -153,6 +159,7 @@ static void _UART_NB_Safe_String_Transmit()
 
 static void _UART_NB_Safe_StringLn_Transmit()
 {
+	_transmittion_callback = _UART_NB_Safe_StringLn_Transmit;
 	if (_transmittion_data[_transmittion_counter] != '\0' && _transmittion_counter < _transmittion_data_size)
 	{
 		UDR = _transmittion_data[_transmittion_counter];
@@ -170,7 +177,9 @@ static void _UART_NB_Safe_StringLn_Transmit()
 // ===============================================================================
 
 static void _UART_NB_Flash_Data_Transmit()
-{	
+{
+	_transmittion_callback = _UART_NB_Flash_Data_Transmit;
+	
 	UDR = pgm_read_byte(&((uint8_t*)_transmittion_data)[_transmittion_counter]);
 	++_transmittion_counter;
 	
@@ -184,6 +193,8 @@ static void _UART_NB_Flash_Data_Transmit()
 
 static void _UART_NB_Flash_String_Transmit()
 {
+	_transmittion_callback = _UART_NB_Flash_String_Transmit;
+	
 	char c = pgm_read_byte(&((uint8_t*)_transmittion_data)[_transmittion_counter]);
 	
 	if (c == '\0')
@@ -200,6 +211,8 @@ static void _UART_NB_Flash_String_Transmit()
 
 static void _UART_NB_Flash_StringLn_Transmit()
 {
+	_transmittion_callback = _UART_NB_Flash_StringLn_Transmit;
+	
 	char c = pgm_read_byte(&((uint8_t*)_transmittion_data)[_transmittion_counter]);
 	
 	if (c == '\0')
@@ -216,6 +229,8 @@ static void _UART_NB_Flash_StringLn_Transmit()
 
 static void _UART_NB_Flash_Safe_String_Transmit()
 {
+	_transmittion_callback = _UART_NB_Flash_Safe_String_Transmit;
+	
 	char c = pgm_read_byte(&((uint8_t*)_transmittion_data)[_transmittion_counter]);
 	
 	if (c == '\0' || _transmittion_counter >= _transmittion_data_size)
@@ -232,6 +247,8 @@ static void _UART_NB_Flash_Safe_String_Transmit()
 
 static void _UART_NB_Flash_Safe_StringLn_Transmit()
 {
+	_transmittion_callback = _UART_NB_Flash_Safe_StringLn_Transmit;
+	
 	char c = pgm_read_byte(&((uint8_t*)_transmittion_data)[_transmittion_counter]);
 	
 	if (c == '\0' || _transmittion_counter >= _transmittion_data_size)
@@ -251,7 +268,6 @@ static void _UART_NB_Flash_Safe_StringLn_Transmit()
 void UART_NB_Byte_Transmit(uint8_t byte)
 {
 	_transmittion_byte = byte;
-	_transmittion_condition = UART_NON_BLOCKING_BYTE_TRANSMIT;
 	_transmittion_status = UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE;
 	_UART_NB_Byte_Transmit();
 }
@@ -260,7 +276,6 @@ void UART_NB_Data_Transmit(const void *data, uint16_t data_size)
 {
 	_transmittion_data = (uint8_t*)data;
 	_transmittion_data_size = data_size;
-	_transmittion_condition = UART_NON_BLOCKING_DATA_TRANSMIT;
 	_transmittion_status = UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE;
 	_UART_NB_Data_Transmit();
 }
@@ -268,7 +283,6 @@ void UART_NB_Data_Transmit(const void *data, uint16_t data_size)
 void UART_NB_String_Transmit(const char *string)
 {
 	_transmittion_data = (uint8_t*)string;
-	_transmittion_condition = UART_NON_BLOCKING_STRING_TRANSMIT;
 	_transmittion_status = UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE;
 	_UART_NB_String_Transmit();
 }
@@ -276,7 +290,6 @@ void UART_NB_String_Transmit(const char *string)
 void UART_NB_StringLn_Transmit(const char *string)
 {
 	_transmittion_data = (uint8_t*)string;
-	_transmittion_condition = UART_NON_BLOCKING_STRINGLN_TRANSMIT;
 	_transmittion_status = UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE;
 	_UART_NB_StringLn_Transmit();
 }
@@ -285,7 +298,6 @@ void UART_NB_Safe_String_Transmit(const char *string, uint16_t max_string_len)
 {
 	_transmittion_data = (uint8_t*)string;
 	_transmittion_data_size = max_string_len;
-	_transmittion_condition = UART_NON_BLOCKING_SAFE_STRING_TRANSMIT;
 	_transmittion_status = UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE;
 	_UART_NB_Safe_String_Transmit();
 }
@@ -294,7 +306,6 @@ void UART_NB_Safe_StringLn_Transmit(const char *string, uint16_t max_string_len)
 {
 	_transmittion_data = (uint8_t*)string;
 	_transmittion_data_size = max_string_len;
-	_transmittion_condition = UART_NON_BLOCKING_SAFE_STRINGLN_TRANSMIT;
 	_transmittion_status = UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE;
 	_UART_NB_Safe_StringLn_Transmit();
 }
@@ -304,7 +315,6 @@ void UART_NB_Safe_StringLn_Transmit(const char *string, uint16_t max_string_len)
 void UART_NB_Flash_Byte_Transmit(const uint8_t *flash_byte)
 {
 	_transmittion_byte = pgm_read_byte(flash_byte);
-	_transmittion_condition = UART_NON_BLOCKING_BYTE_TRANSMIT;
 	_transmittion_status = UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE;
 	_UART_NB_Byte_Transmit();
 }
@@ -313,7 +323,6 @@ void UART_NB_Flash_Data_Transmit(const void *flash_data, uint16_t flash_data_siz
 {
 	_transmittion_data = (uint8_t*)flash_data;
 	_transmittion_data_size = flash_data_size;
-	_transmittion_condition = UART_NON_BLOCKING_FLASH_DATA_TRANSMIT;
 	_transmittion_status = UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE;
 	_UART_NB_Flash_Data_Transmit();
 }
@@ -321,7 +330,6 @@ void UART_NB_Flash_Data_Transmit(const void *flash_data, uint16_t flash_data_siz
 void UART_NB_Flash_String_Transmit(const char *flash_string)
 {
 	_transmittion_data = (uint8_t*)flash_string;
-	_transmittion_condition = UART_NON_BLOCKING_FLASH_STRING_TRANSMIT;
 	_transmittion_status = UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE;
 	_UART_NB_Flash_String_Transmit();
 }
@@ -329,7 +337,6 @@ void UART_NB_Flash_String_Transmit(const char *flash_string)
 void UART_NB_Flash_StringLn_Transmit(const char *flash_string)
 {
 	_transmittion_data = (uint8_t*)flash_string;
-	_transmittion_condition = UART_NON_BLOCKING_FLASH_STRINGLN_TRANSMIT;
 	_transmittion_status = UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE;
 	_UART_NB_Flash_StringLn_Transmit();
 }
@@ -338,7 +345,6 @@ void UART_NB_Flash_Safe_String_Transmit(const char *flash_string, uint16_t max_f
 {
 	_transmittion_data = (uint8_t*)flash_string;
 	_transmittion_data_size = max_flash_string_len;
-	_transmittion_condition = UART_NON_BLOCKING_FLASH_SAFE_STRING_TRANSMIT;
 	_transmittion_status = UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE;
 	_UART_NB_Flash_Safe_String_Transmit();
 }
@@ -347,7 +353,6 @@ void UART_NB_Flash_Safe_StringLn_Transmit(const char *flash_string, uint16_t max
 {
 	_transmittion_data = (uint8_t*)flash_string;
 	_transmittion_data_size = max_flash_string_len;
-	_transmittion_condition = UART_NON_BLOCKING_FLASH_SAFE_STRINGLN_TRANSMIT;
 	_transmittion_status = UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE;
 	_UART_NB_Flash_Safe_StringLn_Transmit();
 }
@@ -409,44 +414,9 @@ void UART_NB_Clear_Reception_Buffer()
 
 ISR(USART_TXC_vect)
 {
-	if (_transmittion_status == UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE)
+	if (_transmittion_status == UART_NON_BLOCKING_TRANSMITTION_IS_ACTIVE && _transmittion_callback != NULL)
 	{
-		switch(_transmittion_condition)
-		{
-			case UART_NON_BLOCKING_BYTE_TRANSMIT:
-			_UART_NB_Byte_Transmit();
-			break;
-			case UART_NON_BLOCKING_DATA_TRANSMIT:
-			_UART_NB_Data_Transmit();
-			break;
-			case UART_NON_BLOCKING_STRING_TRANSMIT:
-			_UART_NB_String_Transmit();
-			break;
-			case UART_NON_BLOCKING_STRINGLN_TRANSMIT:
-			_UART_NB_StringLn_Transmit();
-			break;
-			case UART_NON_BLOCKING_SAFE_STRING_TRANSMIT:
-			_UART_NB_Safe_String_Transmit();
-			break;
-			case UART_NON_BLOCKING_SAFE_STRINGLN_TRANSMIT:
-			_UART_NB_Safe_StringLn_Transmit();
-			break;
-			case UART_NON_BLOCKING_FLASH_DATA_TRANSMIT:
-			_UART_NB_Flash_Data_Transmit();
-			break;
-			case UART_NON_BLOCKING_FLASH_STRING_TRANSMIT:
-			_UART_NB_Flash_String_Transmit();
-			break;
-			case UART_NON_BLOCKING_FLASH_STRINGLN_TRANSMIT:
-			_UART_NB_Flash_StringLn_Transmit();
-			break;
-			case UART_NON_BLOCKING_FLASH_SAFE_STRING_TRANSMIT:
-			_UART_NB_Flash_Safe_String_Transmit();
-			break;
-			case UART_NON_BLOCKING_FLASH_SAFE_STRINGLN_TRANSMIT:
-			_UART_NB_Flash_Safe_StringLn_Transmit();
-			break;
-		}
+		_transmittion_callback();
 	}
 }
 
