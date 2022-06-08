@@ -59,6 +59,8 @@ typedef struct
 	
 } LM75_t;
 
+// ===============================================================================
+
 LM75_t LM75_Get_Thermometer_Object(uint8_t dev_addr, bool thermometer_is_enable);
 
 void LM75_Set_Target_Thermometer_Object(LM75_t *thermometer);
