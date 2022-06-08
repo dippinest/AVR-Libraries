@@ -3,6 +3,8 @@
 
 static LM75_t *target_thermometer = NULL;
 
+// ===============================================================================
+
 static void _LM75_Set_Register_Pointer(uint8_t addr_reg)
 {
 	I2C_Start();
