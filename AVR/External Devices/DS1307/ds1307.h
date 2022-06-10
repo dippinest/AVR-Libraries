@@ -103,8 +103,8 @@ void DS1307_Write_Byte_To_User_RAM(uint8_t mem_addr, uint8_t byte);
 
 uint8_t DS1307_Read_Byte_From_User_RAM(uint8_t mem_addr);
 
-void DS1307_Write_Page_To_User_RAM(uint8_t mem_addr, void *page, uint8_t page_size);
+void DS1307_Write_Data_To_User_RAM(uint8_t mem_addr, void *data, uint8_t data_size);
 
-void *DS1307_Read_Page_From_User_RAM(uint8_t mem_addr, void *page, uint8_t page_size);
+void *DS1307_Read_Data_From_User_RAM(uint8_t mem_addr, void *data, uint8_t data_size);
 
 #endif
