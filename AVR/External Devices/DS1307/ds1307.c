@@ -259,7 +259,7 @@ uint8_t DS1307_Read_Byte_From_User_RAM(uint8_t mem_addr)
 	return _DS1307_Get_Byte((mem_addr + _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER));
 }
 
-void DS1307_Write_Page_To_User_RAM(uint8_t mem_addr, void *page, uint8_t page_size)
+void DS1307_Write_Data_To_User_RAM(uint8_t mem_addr, void *data, uint8_t data_size)
 {
 	_DS1307_Set_Memory_Pointer(mem_addr + _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER);
 	
@@ -268,15 +268,15 @@ void DS1307_Write_Page_To_User_RAM(uint8_t mem_addr, void *page, uint8_t page_si
 	I2C_Send_Byte(_DS1307_ADDRESS_DEVICE << 1);
 	I2C_Send_Byte(mem_addr + _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER);
 	
-	for (uint8_t i = 0; i < page_size; i++)
+	for (uint8_t i = 0; i < data_size; i++)
 	{
-		I2C_Send_Byte(((uint8_t*)page)[i]);
+		I2C_Send_Byte(((uint8_t*)data)[i]);
 	}
 	
 	I2C_Stop();
 }
 
-void *DS1307_Read_Page_From_User_RAM(uint8_t mem_addr, void *page, uint8_t page_size)
+void *DS1307_Read_Data_From_User_RAM(uint8_t mem_addr, void *data, uint8_t data_size)
 {
 	_DS1307_Set_Memory_Pointer(mem_addr + _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER);
 	
@@ -284,14 +284,14 @@ void *DS1307_Read_Page_From_User_RAM(uint8_t mem_addr, void *page, uint8_t page_
 	
 	I2C_Send_Byte((_DS1307_ADDRESS_DEVICE << 1) | 1);
 	
-	for (uint8_t i = 0; i < page_size - 1; i++)
+	for (uint8_t i = 0; i < data_size - 1; i++)
 	{
-		I2C_Read_Byte_With_Confirmation(&((uint8_t*)page)[i]);
+		I2C_Read_Byte_With_Confirmation(&((uint8_t*)data)[i]);
 	}
 	
-	I2C_Read_Byte_Without_Confirmation(&((uint8_t*)page)[page_size - 1]);
+	I2C_Read_Byte_Without_Confirmation(&((uint8_t*)data)[data_size - 1]);
 	
 	I2C_Stop();
 	
-	return page;
+	return data;
 }
