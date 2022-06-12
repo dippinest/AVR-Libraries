@@ -32,7 +32,7 @@
 
 ; С помощью директивы .DEF задаём регистру R16 псевдоним T0_OVF_Counter
 ; -------------------------------------------------------------------------------
-; With the help of a directive .DEF we set the case R16 alias ABC
+; With the help of a directive .DEF we set the case R16 alias T0_OVF_Counter
 .DEF T0_OVF_Counter = R17
 
 ; Директива DSEG определяет начало сегмента данных. Исходный файл
