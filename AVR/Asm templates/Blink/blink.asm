@@ -191,9 +191,9 @@ TIMER0_OVF:
 ; The macros used are described here
 
 
-; Макрос для инициализации вершины стека
+; Макрос для инициализации стека
 ; -------------------------------------------------------------------------------
-; Macro for initializing the top of the stack
+; Macro for stack initializing
 .MACRO STACK_POINTER_INITIALIZE
 	
 	LDI R16, HIGH(RAMEND)
