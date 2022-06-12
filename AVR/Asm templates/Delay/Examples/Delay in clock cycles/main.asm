@@ -9,14 +9,6 @@
 
 Main:
 	
-	; Инициализация стека
-	; -------------------------------------------------------------------------------
-	; Stack Initialization
-	LDI  R16, Low(RAMEND)
-	OUT  SPL, R16
-	LDI  R16, High(RAMEND)
-	OUT  SPH, R16
-
 	SEI
 
 	LDI  R16,  (1 << 7)
