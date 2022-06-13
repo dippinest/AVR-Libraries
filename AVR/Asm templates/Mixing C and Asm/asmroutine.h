@@ -20,8 +20,8 @@
 
 #else
 
-extern void Set_BitMask(volatile void* port, uint8_t bit_pos);
-extern void Reset_BitMask(volatile void* port, uint8_t bit_pos);
+extern void Set_BitMask(volatile void *port, uint8_t bit_pos);
+extern void Reset_BitMask(volatile void *port, uint8_t bit_pos);
 
 #endif
 
