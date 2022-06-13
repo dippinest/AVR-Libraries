@@ -77,17 +77,6 @@ const PROGMEM uint8_t customChar_CyrillicI[8] =
 	0b10001,
 	0b00000
 };
-const PROGMEM uint8_t customChar_SignoDeExclamacion[8] =
-{
-	0b00100,
-	0b00000,
-	0b00000,
-	0b00100,
-	0b00100,
-	0b00100,
-	0b00100,
-	0b00000
-};
 
 int main(void)
 {
