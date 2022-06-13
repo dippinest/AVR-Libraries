@@ -52,7 +52,6 @@ int main(void)
 #define F_CPU 16000000UL
 
 #include <avr/pgmspace.h>
-#include "i2c.h"
 #include "hd44780.h"
 
 const PROGMEM uint8_t customChar_CyrillicP[8] =
