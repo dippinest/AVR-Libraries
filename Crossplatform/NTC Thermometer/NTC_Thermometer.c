@@ -12,13 +12,3 @@ float NTC_Thermometer_Get_Temperature_To_Kelvin(uint16_t adc_value)
 	
 	return 1.0 / (A_COEF + (B_COEF * lnR) + (C_COEF * (lnR * lnR * lnR)));
 }
-
-float NTC_Thermometer_Convert_Temperature_Kelvin_To_Celsius(float temp_to_kelvin)
-{
-	return temp_to_kelvin - 273.15f;
-}
-
-float NTC_Thermometer_Convert_Temperature_Kelvin_To_Fahrenheit(float temp_to_kelvin)
-{
-	return (1.8f * (temp_to_kelvin - 273.15f)) + 32.0f;
-}
