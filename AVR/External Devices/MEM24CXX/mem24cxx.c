@@ -8,7 +8,7 @@ static int16_t _eeprom_24cxx_waiting_timeout_ms = 10;
 
 static void _MEM24CXX_Waiting_Timeout_Ms(int16_t ms)
 {
-	while (0 < ms)
+	while (ms)
 	{
 		_delay_ms(1);
 		--ms;
