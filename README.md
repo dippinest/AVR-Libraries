@@ -4,7 +4,6 @@ ___
 #### A set of libraries for AVR series microcontrollers that I use in my work and hobbies)
 
 ##### Или же по-русски: набор библиотек для микроконтроллеров серии AVR, частенько используемые мною в работе и хобби)
-&nbsp;
 
 <img src="/resources/logo.png" alt="AVR logo"/>
 
