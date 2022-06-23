@@ -101,7 +101,7 @@ float Filters_RMA_Float(float *accumulator, const uint16_t filter_order, float v
 
 // ===============================================================================
 
-// exponentially weighted moving average (IIR filter) - here the coefficient adapts to the difference between the current and the previous value
+// adaptive exponentially weighted moving average (IIR filter) - here the coefficient adapts to the difference between the current and the previous value
 
 int8_t Filters_Adaptive_EMA_Int8(int8_t *accumulator, int8_t min_value, int8_t max_value, uint8_t noise_max_amp, float coef, int8_t value);
 
