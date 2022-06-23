@@ -15,7 +15,7 @@
 // "initial"    is a CRC value at the beginning
 // "refin"      indicates the beginning and direction of the calculations
 // "refout"     determines whether the order of the register bits is inverted when entering the XOR element
-// "xor_out"    the value with which the resulting result is added modulo 2
+// "xor_out"    the value with which the resulting result is added modulo 2 (XOR op)
 uint8_t CRC8_Get(void *data, uint16_t data_size, uint8_t polynomial, uint8_t initial, bool refin, bool refout, uint8_t xor_out);
 
 uint16_t CRC16_Get(void *data, uint16_t data_size, uint16_t polynomial, uint16_t initial, bool refin, bool refout, uint16_t xor_out);
