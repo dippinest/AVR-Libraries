@@ -1,16 +1,11 @@
 
 #define  F_CPU 16000000UL
+
+#include <avr/interrupt.h>
 #include "uart.h"
 
 #define BUF_SIZE 6
 static char string_buffer[BUF_SIZE];
-
-#include <avr/interrupt.h>
-
-#define F_CPU 16000000UL
-#include <util/delay.h>
-
-#include "uart.h"
 
 static void fsm(uint8_t byte)
 {
