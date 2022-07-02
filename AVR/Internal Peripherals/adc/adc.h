@@ -8,6 +8,10 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#ifndef ADCSRA
+#define ADCSRA ADCSR
+#endif
+
 #include "adc_callback_configuration.h"
 
 #define ADC_VREF_SOURCE_EXTERNAL_AREF 0b00
