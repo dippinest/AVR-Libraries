@@ -240,10 +240,14 @@ uint8_t SPI_Get_Byte_With_Sending(uint8_t data);
 
 // ===============================================================================
 
+#ifdef SPI_USE_CS_FUNCTION_CALLBACK
+
 void SPI_Set_CS_CallBack_Functions(void (*cs_on_callback)(), void (*cs_off_callback)());
 
 void SPI_Call_CS_ON();
 
 void SPI_Call_CS_OFF();
+
+#endif
 
 #endif
