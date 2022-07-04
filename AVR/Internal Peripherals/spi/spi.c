@@ -16,11 +16,9 @@ void SPI_Send_Data(void* data, uint16_t data_size)
 	}
 }
 
-uint8_t SPI_Get_Byte_With_Sending(uint8_t data)
+uint8_t SPI_Get_Byte()
 {
-	SPDR = data;
 	while(!(SPSR & (1 << SPIF)));
-	
 	return SPDR;
 }
 
