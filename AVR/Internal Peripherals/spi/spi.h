@@ -227,7 +227,7 @@ inline void SPI_Initialize(bool spi_is_enable, bool is_master, uint8_t spi_dev_m
 	SPI_Set_MCU_Mode(is_master);
 	SPI_Set_Speed(speed_macros);
 	SPI_Set_Enable(spi_is_enable);
-	SPI_Set_Dev_Mode(spi_dev_mode);
+	SPI_Set_Mode(spi_dev_mode);
 }
 
 // ===============================================================================
