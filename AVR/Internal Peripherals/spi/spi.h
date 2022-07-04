@@ -114,7 +114,7 @@ inline void SPI_Set_MCU_Mode(bool is_master)
 	}
 }
 
-inline void SPI_Set_Dev_Mode(uint8_t spi_dev_mode)
+inline void SPI_Set_Mode(uint8_t spi_dev_mode)
 {
 	if (spi_dev_mode & 0b10)
 	{
@@ -199,7 +199,7 @@ inline bool SPI_Get_MCU_Mode()
 	return SPI_DEV_IS_SLAVE;
 }
 
-inline uint8_t SPI_Get_Dev_Mode()
+inline uint8_t SPI_Get_Mode()
 {
 	uint8_t spi_dev_mode = 0;
 	
@@ -236,7 +236,7 @@ void SPI_Send_Byte(uint8_t byte);
 
 void SPI_Send_Data(void* data, uint16_t data_size);
 
-uint8_t SPI_Get_Byte_With_Sending(uint8_t data);
+uint8_t SPI_Get_Byte();
 
 // ===============================================================================
 
