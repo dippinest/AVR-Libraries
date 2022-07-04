@@ -7,15 +7,15 @@ static uint16_t _MAX6675_Get_Data()
 	
 	#ifdef MAX6675_USE_SPI_CS_CALLBACKS
 	SPI_Call_CS_ON();
-	data = SPI_Get_Byte_With_Sending(0x00);
+	data = SPI_Get_Byte();
 	data <<= 8;
-	data |= SPI_Get_Byte_With_Sending(0x00);
+	data |= SPI_Get_Byte();
 	SPI_Call_CS_OFF();
 	
 	#else
-	data = SPI_Get_Byte_With_Sending(0x00);
+	data = SPI_Get_Byte();
 	data <<= 8;
-	data |= SPI_Get_Byte_With_Sending(0x00);
+	data |= SPI_Get_Byte();
 	#endif
 	
 	return data;
