@@ -26,6 +26,8 @@ uint8_t SPI_Get_Byte_With_Sending(uint8_t data)
 
 // ===============================================================================
 
+#ifdef SPI_USE_CS_FUNCTION_CALLBACK
+
 static void (*_cs_set_on)()  = NULL;
 static void (*_cs_set_off)() = NULL;
 
@@ -44,3 +46,5 @@ void SPI_Call_CS_OFF()
 {
 	_cs_set_off();
 }
+
+#endif
