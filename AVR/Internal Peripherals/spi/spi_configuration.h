@@ -19,6 +19,10 @@
 #define SPI_SS_DDR     DDRB
 #define SPI_SS_PIN     2
 
+// macro for enabling the callback
+// function of installing and resetting CS
+// if you don't want to use the built-in
+// callback, comment out #define
 #define SPI_USE_CS_FUNCTION_CALLBACK
 
 #endif
