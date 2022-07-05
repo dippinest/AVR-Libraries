@@ -30,8 +30,6 @@
 
 inline void _SOFTSPI_Mode0_Set_Bit(bool bit)
 {
-	_SOFTSPI_CLK_SET_HIGH;
-	
 	if (bit)
 	{
 		_SOFTSPI_MOSI_SET_HIGH;
@@ -41,11 +39,14 @@ inline void _SOFTSPI_Mode0_Set_Bit(bool bit)
 		_SOFTSPI_MOSI_SET_LOW;
 	}
 	
+	_SOFTSPI_CLK_SET_HIGH;
 	_SOFTSPI_CLK_SET_LOW;
 }
 
 inline void _SOFTSPI_Mode1_Set_Bit(bool bit)
 {
+	_SOFTSPI_CLK_SET_HIGH;
+	
 	if (bit)
 	{
 		_SOFTSPI_MOSI_SET_HIGH;
@@ -55,14 +56,11 @@ inline void _SOFTSPI_Mode1_Set_Bit(bool bit)
 		_SOFTSPI_MOSI_SET_LOW;
 	}
 	
-	_SOFTSPI_CLK_SET_HIGH;
 	_SOFTSPI_CLK_SET_LOW;
 }
 
 inline void _SOFTSPI_Mode2_Set_Bit(bool bit)
 {
-	_SOFTSPI_CLK_SET_LOW;
-	
 	if (bit)
 	{
 		_SOFTSPI_MOSI_SET_HIGH;
@@ -72,11 +70,14 @@ inline void _SOFTSPI_Mode2_Set_Bit(bool bit)
 		_SOFTSPI_MOSI_SET_LOW;
 	}
 	
+	_SOFTSPI_CLK_SET_LOW;
 	_SOFTSPI_CLK_SET_HIGH;
 }
 
 inline void _SOFTSPI_Mode3_Set_Bit(bool bit)
 {
+	_SOFTSPI_CLK_SET_LOW;
+	
 	if (bit)
 	{
 		_SOFTSPI_MOSI_SET_HIGH;
@@ -86,7 +87,6 @@ inline void _SOFTSPI_Mode3_Set_Bit(bool bit)
 		_SOFTSPI_MOSI_SET_LOW;
 	}
 	
-	_SOFTSPI_CLK_SET_LOW;
 	_SOFTSPI_CLK_SET_HIGH;
 }
 
@@ -96,8 +96,6 @@ inline bool _SOFTSPI_Mode0_Get_Bit()
 {
 	bool bit;
 	
-	_SOFTSPI_CLK_SET_HIGH;
-	
 	if (_SOFTSPI_MISO_GET)
 	{
 		bit = true;
@@ -107,6 +105,7 @@ inline bool _SOFTSPI_Mode0_Get_Bit()
 		bit = false;
 	}
 	
+	_SOFTSPI_CLK_SET_HIGH;
 	_SOFTSPI_CLK_SET_LOW;
 	
 	return bit;
@@ -116,6 +115,8 @@ inline bool _SOFTSPI_Mode1_Get_Bit()
 {
 	bool bit;
 	
+	_SOFTSPI_CLK_SET_HIGH;
+	
 	if (_SOFTSPI_MISO_GET)
 	{
 		bit = true;
@@ -125,7 +126,6 @@ inline bool _SOFTSPI_Mode1_Get_Bit()
 		bit = false;
 	}
 	
-	_SOFTSPI_CLK_SET_HIGH;
 	_SOFTSPI_CLK_SET_LOW;
 	
 	return bit;
@@ -135,8 +135,6 @@ inline bool _SOFTSPI_Mode2_Get_Bit()
 {
 	bool bit;
 	
-	_SOFTSPI_CLK_SET_LOW;
-	
 	if (_SOFTSPI_MISO_GET)
 	{
 		bit = true;
@@ -146,6 +144,7 @@ inline bool _SOFTSPI_Mode2_Get_Bit()
 		bit = false;
 	}
 	
+	_SOFTSPI_CLK_SET_LOW;
 	_SOFTSPI_CLK_SET_HIGH;
 	
 	return bit;
@@ -155,6 +154,8 @@ inline bool _SOFTSPI_Mode3_Get_Bit()
 {
 	bool bit;
 	
+	_SOFTSPI_CLK_SET_LOW;
+	
 	if (_SOFTSPI_MISO_GET)
 	{
 		bit = true;
@@ -164,7 +165,6 @@ inline bool _SOFTSPI_Mode3_Get_Bit()
 		bit = false;
 	}
 	
-	_SOFTSPI_CLK_SET_LOW;
 	_SOFTSPI_CLK_SET_HIGH;
 	
 	return bit;
