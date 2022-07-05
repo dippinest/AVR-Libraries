@@ -220,14 +220,26 @@ inline uint8_t SPI_Get_Mode()
 
 inline void SPI_Initialize(bool spi_is_enable, bool is_master, uint8_t spi_dev_mode, uint8_t speed_macros)
 {
-	SPI_MOSI_DDR |= (1 << SPI_MOSI_PIN);
-	SPI_MISO_DDR |= (1 << SPI_MISO_PIN);
-	SPI_SCK_DDR  |= (1 << SPI_SCK_PIN);
+	SPI_MOSI_DDR  |=  (1 << SPI_MOSI_PIN);
+	SPI_MISO_DDR  |=  (1 << SPI_MISO_PIN);
+	SPI_SCK_DDR   |=  (1 << SPI_SCK_PIN);
+	
+	SPI_MOSI_PORT &= ~(1 << SPI_MOSI_PIN);
+	SPI_MISO_PORT &= ~(1 << SPI_MISO_PIN);
 	
 	SPI_Set_MCU_Mode(is_master);
 	SPI_Set_Speed(speed_macros);
 	SPI_Set_Enable(spi_is_enable);
 	SPI_Set_Mode(spi_dev_mode);
+	
+	if (spi_dev_mode == SPI_MODE_0 || spi_dev_mode == SPI_MODE_1)
+	{
+		SPI_SCK_PORT &= ~(1 << SPI_SCK_PIN);
+	}
+	else
+	{
+		SPI_SCK_PORT |=  (1 << SPI_SCK_PIN);
+	}
 }
 
 // ===============================================================================
@@ -236,18 +248,14 @@ void SPI_Send_Byte(uint8_t byte);
 
 void SPI_Send_Data(void* data, uint16_t data_size);
 
-uint8_t SPI_Get_Byte();
+uint8_t SPI_Get_Byte(uint8_t data);
 
 // ===============================================================================
-
-#ifdef SPI_USE_CS_FUNCTION_CALLBACK
 
 void SPI_Set_CS_CallBack_Functions(void (*cs_on_callback)(), void (*cs_off_callback)());
 
 void SPI_Call_CS_ON();
 
 void SPI_Call_CS_OFF();
-
-#endif
 
 #endif
