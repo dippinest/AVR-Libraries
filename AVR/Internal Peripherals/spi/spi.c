@@ -16,15 +16,14 @@ void SPI_Send_Data(void* data, uint16_t data_size)
 	}
 }
 
-uint8_t SPI_Get_Byte()
+uint8_t SPI_Get_Byte(uint8_t data)
 {
+	SPDR = data;
 	while(!(SPSR & (1 << SPIF)));
 	return SPDR;
 }
 
 // ===============================================================================
-
-#ifdef SPI_USE_CS_FUNCTION_CALLBACK
 
 static void (*_cs_set_on)()  = NULL;
 static void (*_cs_set_off)() = NULL;
@@ -44,5 +43,3 @@ void SPI_Call_CS_OFF()
 {
 	_cs_set_off();
 }
-
-#endif
