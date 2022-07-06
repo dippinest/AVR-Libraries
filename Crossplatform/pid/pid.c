@@ -49,7 +49,8 @@ float PID_Get(float current_value)
 	PID = target_pid->p * error;
 	
 	// integral
-	target_pid->integral += (error + target_pid->last_error) / 2;
+	target_pid->integral += error;
+	target_pid->integral /= 2;
 	
 	if (target_pid->integral > target_pid->in_max_value)
 	{
