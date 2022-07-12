@@ -88,7 +88,7 @@ void MAX7219_Display_Test()
 
 void MAX7219_Set_Data(void *data, uint8_t data_size, bool output_direction)
 {
-	if (output_direction == true)
+	if (output_direction == MAX7219_DATA_DIRECTION_NORMAL)
 	{
 		for (uint8_t i = 0; i < data_size; ++i)
 		{
