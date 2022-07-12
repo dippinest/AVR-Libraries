@@ -178,7 +178,7 @@ void SOFTSPI_Initialize();
 
 void SOFTSPI_Send_Byte(uint8_t byte);
 
-void SOFTSPI_Send_Data(void* data, uint16_t data_size);
+void SOFTSPI_Send_Data(void* data, uint8_t data_size);
 
 uint8_t SOFTSPI_Get_Byte();
 
