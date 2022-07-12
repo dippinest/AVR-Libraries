@@ -246,7 +246,7 @@ inline void SPI_Initialize(bool spi_is_enable, bool is_master, uint8_t spi_dev_m
 
 void SPI_Send_Byte(uint8_t byte);
 
-void SPI_Send_Data(void* data, uint16_t data_size);
+void SPI_Send_Data(void* data, uint8_t data_size);
 
 uint8_t SPI_Get_Byte(uint8_t data);
 
