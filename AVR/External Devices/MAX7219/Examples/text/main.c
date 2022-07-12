@@ -25,16 +25,28 @@ int main(void)
 	
 	MAX7219_Initialize(true, MAX7219_DECODE_MODE_NO_DECODE, MAX7219_8_DIGIT, MAX7219_BRIGHTNESS_COEFFICIENT_4);
 	
-	MAX7219_Set_Digit(7, MAX7219_CHAR_L_BIG);    // "L"
-	MAX7219_Set_Digit(6, MAX7219_CHAR_E_BIG);    // "E"
-	MAX7219_Set_Digit(5, MAX7219_CHAR_D_SMALL);  // "d"
 	
-	MAX7219_Set_Digit(4, MAX7219_CHAR_SPACE);    // " "
+	// data output by character
 	
-	MAX7219_Set_Digit(3, MAX7219_CHAR_T_SMALL);  // "t"
-	MAX7219_Set_Digit(2, MAX7219_CHAR_E_BIG);    // "E"
-	MAX7219_Set_Digit(1, MAX7219_CHAR_S_BIG);    // "S"
-	MAX7219_Set_Digit(0, MAX7219_CHAR_T_SMALL);  // "t"
+	//MAX7219_Set_Digit(7, MAX7219_CHAR_L_BIG);    // "L"
+	//MAX7219_Set_Digit(6, MAX7219_CHAR_E_BIG);    // "E"
+	//MAX7219_Set_Digit(5, MAX7219_CHAR_D_SMALL);  // "d"
+	//MAX7219_Set_Digit(4, MAX7219_CHAR_SPACE);    // " "
+	//MAX7219_Set_Digit(3, MAX7219_CHAR_T_SMALL);  // "t"
+	//MAX7219_Set_Digit(2, MAX7219_CHAR_E_BIG);    // "E"
+	//MAX7219_Set_Digit(1, MAX7219_CHAR_S_BIG);    // "S"
+	//MAX7219_Set_Digit(0, MAX7219_CHAR_T_SMALL);  // "t"
+	
+	uint8_t max7219_data[] =
+	{
+		MAX7219_CHAR_L_BIG, MAX7219_CHAR_E_BIG, MAX7219_CHAR_D_SMALL,
+		
+		MAX7219_CHAR_SPACE,
+		
+		MAX7219_CHAR_T_SMALL, MAX7219_CHAR_E_BIG, MAX7219_CHAR_S_BIG, MAX7219_CHAR_T_SMALL
+	};
+	
+	MAX7219_Set_Data(max7219_data, 8, true);
 	
 	while (1)
 	{
