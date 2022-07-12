@@ -1,25 +1,63 @@
 
 #include "max6675.h"
 
+#if defined (MAX6675_USE_SOFTSPI) && defined (MAX6675_USE_CS_CALLBACKS)
+
 static uint16_t _MAX6675_Get_Data()
 {
 	uint16_t data = 0;
 	
-	#ifdef MAX6675_USE_SPI_CS_CALLBACKS
-	SPI_Call_CS_ON();
-	data = SPI_Get_Byte();
+	SOFTSPI_Call_CS_ON();
+	data = SOFTSPI_Get_Byte();
 	data <<= 8;
-	data |= SPI_Get_Byte();
-	SPI_Call_CS_OFF();
-	
-	#else
-	data = SPI_Get_Byte();
-	data <<= 8;
-	data |= SPI_Get_Byte();
-	#endif
+	data |= SOFTSPI_Get_Byte();
+	SOFTSPI_Call_CS_OFF();
 	
 	return data;
 }
+
+#elif defined (MAX6675_USE_SOFTSPI) && !defined (MAX6675_USE_CS_CALLBACKS)
+
+static uint16_t _MAX6675_Get_Data()
+{
+	uint16_t data = 0;
+
+	data = SOFTSPI_Get_Byte();
+	data <<= 8;
+	data |= SOFTSPI_Get_Byte();
+	
+	return data;
+}
+
+#elif !defined (MAX6675_USE_SOFTSPI) && defined (MAX6675_USE_CS_CALLBACKS)
+
+static uint16_t _MAX6675_Get_Data()
+{
+	uint16_t data = 0;
+	
+	SPI_Call_CS_ON();
+	data = SPI_Get_Byte(0x00);
+	data <<= 8;
+	data |= SPI_Get_Byte(0x00);
+	SPI_Call_CS_OFF();
+	
+	return data;
+}
+
+#elif !defined (MAX6675_USE_SOFTSPI) && !defined (MAX6675_USE_CS_CALLBACKS)
+
+static uint16_t _MAX6675_Get_Data()
+{
+	uint16_t data = 0;
+	
+	data = SPI_Get_Byte(0x00);
+	data <<= 8;
+	data |= SPI_Get_Byte(0x00);
+	
+	return data;
+}
+
+#endif
 
 float MAX6675_Get_Temperature_In_Celsius_Float()
 {
