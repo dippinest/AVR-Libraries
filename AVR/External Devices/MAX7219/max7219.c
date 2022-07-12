@@ -90,14 +90,14 @@ void MAX7219_Set_Data(void *data, uint8_t data_size, bool output_direction)
 {
 	if (output_direction == true)
 	{
-		for (uint8_t i = 0; i < data_size; i++)
+		for (uint8_t i = 0; i < data_size; ++i)
 		{
 			MAX7219_Set_Digit(i, ((uint8_t*)data)[data_size - 1 - i]);
 		}
 	}
 	else
 	{
-		for (uint8_t i = 0; i < data_size; i++)
+		for (uint8_t i = 0; i < data_size; ++i)
 		{
 			MAX7219_Set_Digit(i, ((uint8_t*)data)[i]);
 		}
@@ -106,7 +106,7 @@ void MAX7219_Set_Data(void *data, uint8_t data_size, bool output_direction)
 
 void MAX7219_Set_Char_Digits(char *data, uint8_t data_size, const uint8_t max_num_digits)
 {
-	for (uint8_t i = 0; i < data_size; i++)
+	for (uint8_t i = 0; i < data_size; ++i)
 	{
 		if (data[i] == ' ')
 		{
