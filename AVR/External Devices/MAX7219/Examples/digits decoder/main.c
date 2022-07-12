@@ -36,20 +36,6 @@ int main(void)
 	
 	while (1)
 	{
-		ITOA_UInt16_To_String(number++, 8);
-		
-		for (uint8_t i = 0; i < 8; i++)
-		{
-			if (str_buf[i] == ' ')
-			{
-				MAX7219_Set_Digit(7 - i, 15);
-			}
-			else
-			{
-				MAX7219_Set_Digit(7 - i, str_buf[i] - 48);
-			}
-		}
-		
-		_delay_ms(50);
+		MAX7219_Set_Char_Digits(ITOA_UInt16_To_String(number++, 8), 8, 8); _delay_ms(50);
 	}
 }
