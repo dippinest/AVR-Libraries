@@ -78,6 +78,8 @@ inline void MAX7219_Initialize(bool is_enable, uint8_t decode_mode, uint8_t num_
 	MAX7219_Decode_Mode_Clear_All(num_of_involved_digits);
 }
 
+void MAX7219_Set_Char_Digits(char *data, uint8_t data_size, const uint8_t max_num_digits);
+
 #endif
 
 #endif
