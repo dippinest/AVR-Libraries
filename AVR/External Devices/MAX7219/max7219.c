@@ -56,6 +56,8 @@ void MAX7219_Clear_Single_Digit(uint8_t single_digit_pos)
 
 void MAX7219_Clear_All(uint8_t num_of_involved_digits)
 {
+	++num_of_involved_digits;
+	
 	while (num_of_involved_digits--)
 	{
 		_MAX7219_Send_Command(num_of_involved_digits, 0x00);
