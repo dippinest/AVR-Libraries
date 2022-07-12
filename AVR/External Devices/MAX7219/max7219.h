@@ -78,6 +78,13 @@ inline void MAX7219_Initialize(bool is_enable, uint8_t decode_mode, uint8_t num_
 	MAX7219_Decode_Mode_Clear_All(num_of_involved_digits);
 }
 
+// macros for determining the direction of data output
+#define MAX7219_DATA_DIRECTION_NORMAL   true
+#define MAX7219_DATA_DIRECTION_REVERSE  false
+
+void MAX7219_Set_Data(void *data, uint8_t data_size, bool output_direction);
+
+
 // use this function only with data decoding mode!
 void MAX7219_Set_Char_Digits(char *data, uint8_t data_size, const uint8_t max_num_digits);
 
