@@ -79,3 +79,24 @@ void MAX7219_Display_Test()
 {
 	_MAX7219_Send_Command(0x0F, 0x0F);
 }
+
+// ===============================================================================
+
+#ifdef MAX7219_USE_CS_CALLBACKS
+
+void MAX7219_Set_Char_Digits(char *data, uint8_t data_size, const uint8_t max_num_digits)
+{
+	for (uint8_t i = 0; i < data_size; i++)
+	{
+		if (data[i] == ' ')
+		{
+			MAX7219_Set_Digit(max_num_digits - i - 1, 15);
+		}
+		else
+		{
+			MAX7219_Set_Digit(max_num_digits - i - 1, data[i] - 48);
+		}
+	}
+}
+
+#endif
