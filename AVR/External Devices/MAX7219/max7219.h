@@ -66,7 +66,7 @@ void MAX7219_Display_Test();
 
 // ===============================================================================
 
-#ifdef MAX7219_USE_SPI_CS_CALLBACKS
+#ifdef MAX7219_USE_CS_CALLBACKS
 
 inline void MAX7219_Initialize(bool is_enable, uint8_t decode_mode, uint8_t num_of_involved_digits, uint8_t brightness_coef)
 {
