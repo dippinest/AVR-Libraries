@@ -93,9 +93,9 @@ void SOFTSPI_Send_Byte(uint8_t byte)
 
 #endif
 
-void SOFTSPI_Send_Data(void* data, uint8_t data_size)
+void SOFTSPI_Send_Data(void* data, uint16_t data_size)
 {
-	for (uint8_t i = 0; i < data_size; ++i)
+	for (uint16_t i = 0; i < data_size; ++i)
 	{
 		SOFTSPI_Send_Byte(((uint8_t*)data)[i]);
 	}
