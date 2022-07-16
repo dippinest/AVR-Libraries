@@ -4,6 +4,6 @@
 
 // macro for allowing work with analog comparator interrupt callback.
 // if you don't want use it, comment out this macro
-//#define ANACOMP_USE_CALLBACK
+#define ANACOMP_USE_CALLBACK
 
 #endif
