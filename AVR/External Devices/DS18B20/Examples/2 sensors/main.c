@@ -21,7 +21,7 @@ int main(void)
 	UART_Initialize(9600, true, false);
 	ITOA_Set_String_Buffer(buf);
 	
-	DS18B20_Set_Resolution(DS18B20_12BIT_RESOLUTION);
+	DS18B20_Set_Resolution_With_Skip_ROM(DS18B20_12BIT_RESOLUTION);
 	
 	float ds18b20_1_thermometer_data, ds18b20_2_thermometer_data;
 	
