@@ -173,4 +173,22 @@ typedef _Bool      logical;
 // macro of the base 10 logarithm value of the Euler number
 #define MATH_LOG_10_E   0.434294f
 
+// -------------------- defining macros for manipulating bits --------------------
+
+/* macros for setting a single bit */
+#define SETBIT_HIGH(val, pos) (val |=  (1 << pos))
+#define SETBIT_LOW(val, pos)  (val &= ~(1 << pos))
+
+/* macro for getting a single bit */
+#define GETBIT(val, pos) (val & (1 << pos))
+
+/* macros for exchanging variable values */
+#define TSWAP(A, B, val_type) val_type tmp = A; A = B; B = tmp;
+#define XORSWAP(A, B) (B ^= (A ^= B)); A ^= B;
+#define FXORSWAP(A, B) (*((uint32_t*)&B) ^= (*((uint32_t*)&A) ^= *((uint32_t*)&B))); *((uint32_t*)&A) ^= *((uint32_t*)&B);
+
+/* macros for cyclic bit shifting */
+#define ROTL(val, pos, val_type) (val << pos) | (val >> (sizeof(val_type) * 8 - pos))
+#define ROTR(val, pos, val_type) (val >> pos) | (val << (sizeof(val_type) * 8 - pos))
+
 #endif
