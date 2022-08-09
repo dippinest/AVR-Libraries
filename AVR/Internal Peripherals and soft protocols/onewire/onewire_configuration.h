@@ -2,6 +2,8 @@
 #ifndef ONEWIRE_CONFIGURATION_H_
 #define ONEWIRE_CONFIGURATION_H_
 
+#include <avr/io.h>
+
 #define ONEWIRE_DDR   DDRB
 #define ONEWIRE_PORT  PORTB
 #define ONEWIRE_PINX  PINB
