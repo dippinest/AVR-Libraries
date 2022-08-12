@@ -29,6 +29,20 @@ char ITOA_Get_Decimal_Char_Separator();
 
 // ===============================================================================
 
+// only for positive numbers!
+char *ITOA_UInt8_To_String_Without_Alignment(uint8_t val, int8_t num_of_chars);
+
+// only for positive numbers!
+char *ITOA_UInt16_To_String_Without_Alignment(uint16_t val, int8_t num_of_chars);
+
+// only for positive numbers!
+char *ITOA_UInt32_To_String_Without_Alignment(uint32_t val, int8_t num_of_chars);
+
+// only for positive numbers!
+char *ITOA_UInt64_To_String_Without_Alignment(uint64_t val, int8_t num_of_chars);
+
+// ===============================================================================
+
 char *ITOA_Int8_To_String(int8_t val, int8_t num_of_chars);
 
 char *ITOA_UInt8_To_String(uint8_t val, int8_t num_of_chars);
