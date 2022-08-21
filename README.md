@@ -1,4 +1,4 @@
-# MCUs HAL Libraries Collection
+# MCUs HAL Libraries
 ___
 
 #### A set of libraries for AVR series microcontrollers that I use in my work and hobbies)
