@@ -3,10 +3,8 @@
 
 float NTC_Thermometer_Get_Temperature_To_Kelvin(uint16_t adc_value)
 {
-	float U2 = ((float)adc_value / ADC_MAX_VAL) * U_REF;
-	float U1 = U_GEN - U2;
-	float I  = U2 / SERIAL_R;
-	float R  = U1 / I;
+	float U  = ((float)adc_value / ADC_MAX_VAL) * U_REF;
+	float R  = SERIAL_R * (U / (U_GEN - U));
 	
 	float lnR = log(R);
 	
