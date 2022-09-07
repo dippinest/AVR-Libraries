@@ -10,7 +10,10 @@ ___
 ___
 
 Attention! A set of libraries is implemented for the avr-gcc compiler!
+
 Внимание! Набор библиотек реализован для компилятора avr-gcc!
+
+
 
 The set of libraries includes tools for working with the microcontroller itself, its internal peripherals, external sensors, as well as the most popular cross-platform data processing algorithms optimized for small computing resources. This set is updated periodically.
 
