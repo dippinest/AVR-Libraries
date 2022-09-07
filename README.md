@@ -8,13 +8,12 @@ ___
 <img src="/resources/logo.png" alt="AVR logo"/>
 
 ___
-
-Attention! A set of libraries is implemented for the avr-gcc compiler!  
+    
+The set of libraries includes tools for working with the microcontroller itself, its internal peripherals, external sensors, as well as the most popular cross-platform data processing algorithms optimized for small computing resources. This set is updated periodically.  
+Attention! A set of libraries is implemented for the avr-gcc compiler!
+<br>
+<br>
+Набор библиотек включает в себя инструменты для работы с самим микроконтроллером, его внутренней периферией, внешними датчиками а также наиболее востребованными кроссплатформенными алгоритмами обработки данных, оптимизированных под небольшие вычислительные ресурсы. Этот набор периодически обновляется.  
 Внимание! Набор библиотек реализован для компилятора avr-gcc!
-  
-  
-The set of libraries includes tools for working with the microcontroller itself, its internal peripherals, external sensors, as well as the most popular cross-platform data processing algorithms optimized for small computing resources. This set is updated periodically.
-
-Набор библиотек включает в себя инструменты для работы с самим микроконтроллером, его внутренней периферией, внешними датчиками а также наиболее востребованными кроссплатформенными алгоритмами обработки данных, оптимизированных под небольшие вычислительные ресурсы. Этот набор периодически обновляется.
 
 ___
