@@ -155,7 +155,7 @@ uint16_t MEM24CXX_Write_Page(uint32_t memory_addr, void *page, uint16_t page_siz
 	
 	uint16_t i = 0;
 	
-	while(i < page_size && i < target_memory_chip->page_size)
+	while(i < page_size && i < target_memory_chip->page_size && (i + (memory_addr % target_memory_chip->page_size)) < target_memory_chip->page_size)
 	{
 		I2C_Send_Byte(((uint8_t*)page)[i]);
 		++i;
