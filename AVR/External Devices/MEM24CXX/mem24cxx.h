@@ -78,11 +78,11 @@ void MEM24CXX_Write_Byte(uint32_t memory_addr, uint8_t byte);
 
 uint8_t MEM24CXX_Read_Byte(uint32_t memory_addr);
 
-uint16_t MEM24CXX_Write_Page(uint32_t memory_addr, void *page, uint8_t page_size);
+uint16_t MEM24CXX_Write_Page(uint32_t memory_addr, void *page, uint16_t page_size);
 
 uint16_t MEM24CXX_Fill_Page(uint32_t memory_addr, uint8_t val, uint16_t num);
 
-uint16_t MEM24CXX_Read_Page(uint32_t memory_addr, void *page, uint8_t page_size);
+uint16_t MEM24CXX_Read_Page(uint32_t memory_addr, void *page, uint16_t page_size);
 
 uint16_t MEM24CXX_Write_Data(uint32_t memory_addr, void *data, uint16_t data_size);
 
