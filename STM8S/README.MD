@@ -5,7 +5,7 @@ ___
 
 ##### Или же по-русски: набор библиотек для микроконтроллеров серии STM8S, частенько используемые мною в работе и хобби)
 
-<img src="STM8S/resources/logo.png" alt="STM8S logo"/>
+<img src="resources/logo.png" alt="STM8S logo"/>
 
 ___
     
