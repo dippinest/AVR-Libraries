@@ -30,9 +30,9 @@
 ; NOLIST directive to obtain listings of individual parts of the source files
 .LIST
 
-; С помощью директивы .DEF задаём регистру R16 псевдоним T0_OVF_Counter
+; С помощью директивы .DEF задаём регистру R17 псевдоним T0_OVF_Counter
 ; -------------------------------------------------------------------------------
-; With the help of a directive .DEF we set the case R16 alias T0_OVF_Counter
+; With the help of a directive .DEF we set the case R17 alias T0_OVF_Counter
 .DEF T0_OVF_Counter = R17
 
 ; Директива DSEG определяет начало сегмента данных. Исходный файл
