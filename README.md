@@ -3,8 +3,6 @@ ___
 
 #### A set of libraries for AVR series microcontrollers.
 
-##### Или же по-русски: набор библиотек для микроконтроллеров серии AVR.
-
 ___
 
 <img src="/resources/logo.png" alt="AVR logo"/>
