@@ -1,9 +1,9 @@
 # AVR Libraries
 ___
 
-#### A set of libraries for AVR series microcontrollers that I use in my work and hobbies)
+#### A set of libraries for AVR series microcontrollers.
 
-##### Или же по-русски: набор библиотек для микроконтроллеров серии AVR, частенько используемые мною в работе и хобби)
+##### Или же по-русски: набор библиотек для микроконтроллеров серии AVR.
 
 ___
 
