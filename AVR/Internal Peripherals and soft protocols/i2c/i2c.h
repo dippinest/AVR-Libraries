@@ -7,6 +7,14 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#ifndef ACK
+#define ACK true
+#endif
+
+#ifndef NACK
+#define NACK false
+#endif
+
 #define I2C_STATUS_ERROR    true
 #define I2C_STATUS_NOERROR  false
 
@@ -16,30 +24,27 @@ typedef bool I2C_STATUS;
 
 void I2C_Initialize(uint32_t i2c_freq_hz_speed);
 
-I2C_STATUS I2C_Start();
+void I2C_Start();
 
-I2C_STATUS I2C_Stop();
+void I2C_Stop();
 
-I2C_STATUS I2C_Restart();
+void I2C_Restart();
 
-I2C_STATUS I2C_Send_Byte(uint8_t byte);
+void I2C_Send_Byte(uint8_t byte);
 
-I2C_STATUS I2C_Read_Byte_With_Confirmation(uint8_t *byte);
+void I2C_Read_Byte(uint8_t *byte, bool ack);
 
-I2C_STATUS I2C_Read_Byte_Without_Confirmation(uint8_t *byte);
+I2C_STATUS I2C_Start_With_I2CStatus_Control();
 
-void I2C_Start_Without_I2CStatus_Control();
+I2C_STATUS I2C_Stop_With_I2CStatus_Control();
 
-void I2C_Stop_Without_I2CStatus_Control();
+I2C_STATUS I2C_Restart_With_I2CStatus_Control();
 
-void I2C_Restart_Without_I2CStatus_Control();
+I2C_STATUS I2C_Send_Byte_With_I2CStatus_Control(uint8_t byte);
 
-void I2C_Send_Byte_Without_I2CStatus_Control(uint8_t byte);
-
-uint8_t I2C_Read_Byte_With_Confirmation_Without_I2CStatus_Control();
-
-uint8_t I2C_Read_Byte_Without_Confirmation_Without_I2CStatus_Control();
+I2C_STATUS I2C_Read_Byte_With_I2CStatus_Control(uint8_t *byte, bool ack);
 
 bool I2C_Check_Device_By_Address(uint8_t dev_addr);
 
 #endif
+
