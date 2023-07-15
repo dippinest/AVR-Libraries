@@ -13,7 +13,50 @@ void I2C_Initialize(uint32_t i2c_freq_hz_speed)
 	TWBR = i2c_freq_hz_speed;
 }
 
-I2C_STATUS I2C_Start()
+void I2C_Start()
+{
+	TWCR = (1 << TWINT) | (1 << TWSTA) | (1 << TWEN);
+
+	while (!(TWCR & (1 << TWINT)));
+}
+
+void I2C_Stop()
+{
+	TWCR = (1 << TWINT) | (1 << TWSTO) | (1 << TWEN);
+	
+	while(TWCR & (1 << TWSTO));
+}
+
+void I2C_Restart()
+{
+	I2C_Start();
+}
+
+void I2C_Send_Byte(uint8_t byte)
+{
+	TWDR = byte;
+	TWCR = (1 << TWINT) | (1 << TWEN);
+	
+	while (!(TWCR & (1 << TWINT)));
+}
+
+void I2C_Read_Byte(uint8_t *byte, bool ack)
+{
+	if (ack == ACK)
+	{
+		TWCR = (1 << TWINT) | (1 << TWEA) | (1 << TWEN);
+	}
+	else
+	{
+		TWCR = (1 << TWINT) | (1 << TWEN);
+	}
+	
+	while (!(TWCR & (1 << TWINT)));
+	
+	*byte = TWDR;
+}
+
+I2C_STATUS I2C_Start_With_I2CStatus_Control()
 {
 	TWCR = (1 << TWINT) | (1 << TWSTA) | (1 << TWEN);
 	
@@ -36,12 +79,12 @@ I2C_STATUS I2C_Start()
 	return I2C_STATUS_NOERROR;
 }
 
-I2C_STATUS I2C_Stop()
+I2C_STATUS I2C_Stop_With_I2CStatus_Control()
 {
 	TWCR = (1 << TWINT) | (1 << TWSTO) | (1 << TWEN);
 	
 	uint32_t timeout_counter = 0;
-		
+	
 	while(TWCR & (1 << TWSTO))
 	{
 		if (timeout_counter > __i2c_control_timeout__)
@@ -54,7 +97,7 @@ I2C_STATUS I2C_Stop()
 	return I2C_STATUS_NOERROR;
 }
 
-I2C_STATUS I2C_Restart()
+I2C_STATUS I2C_Restart_With_I2CStatus_Control()
 {
 	I2C_Start();
 	
@@ -66,7 +109,7 @@ I2C_STATUS I2C_Restart()
 	return I2C_STATUS_NOERROR;
 }
 
-I2C_STATUS I2C_Send_Byte(uint8_t byte)
+I2C_STATUS I2C_Send_Byte_With_I2CStatus_Control(uint8_t byte)
 {
 	TWDR = byte;
 	TWCR = (1 << TWINT) | (1 << TWEN);
@@ -85,9 +128,16 @@ I2C_STATUS I2C_Send_Byte(uint8_t byte)
 	return I2C_STATUS_NOERROR;
 }
 
-I2C_STATUS I2C_Read_Byte_With_Confirmation(uint8_t *byte)
+I2C_STATUS I2C_Read_Byte_With_Confirmation_With_I2CStatus_Control(uint8_t *byte, bool ack)
 {
-	TWCR = (1 << TWINT) | (1 << TWEA) | (1 << TWEN);
+	if (ack == ACK)
+	{
+		TWCR = (1 << TWINT) | (1 << TWEA) | (1 << TWEN);
+	}
+	else
+	{
+		TWCR = (1 << TWINT) | (1 << TWEN);
+	}
 	
 	uint32_t timeout_counter = 0;
 	
@@ -110,79 +160,9 @@ I2C_STATUS I2C_Read_Byte_With_Confirmation(uint8_t *byte)
 	return I2C_STATUS_NOERROR;
 }
 
-I2C_STATUS I2C_Read_Byte_Without_Confirmation(uint8_t *byte)
-{
-	TWCR = (1 << TWINT) | (1 << TWEN);
-	
-	uint32_t timeout_counter = 0;
-	
-	while (!(TWCR & (1 << TWINT)))
-	{
-		if (timeout_counter > __i2c_control_timeout__)
-		{
-			return I2C_STATUS_ERROR;
-		}
-		timeout_counter++;
-	}
-	
-	if ((TWSR & TW_NO_INFO) != TW_MR_DATA_NACK)
-	{
-		return I2C_STATUS_ERROR;
-	}
-	
-	*byte = TWDR;
-	
-	return I2C_STATUS_NOERROR;
-}
-
-void I2C_Start_Without_I2CStatus_Control()
-{
-	TWCR = (1 << TWINT) | (1 << TWSTA) | (1 << TWEN);
-	
-	while (!(TWCR & (1 << TWINT)));
-}
-
-void I2C_Stop_Without_I2CStatus_Control()
-{
-	TWCR = (1 << TWINT) | (1 << TWSTO) | (1 << TWEN);
-	
-	while(TWCR & (1 << TWSTO));
-}
-
-void I2C_Restart_Without_I2CStatus_Control()
-{
-	I2C_Start();
-}
-
-void I2C_Send_Byte_Without_I2CStatus_Control(uint8_t byte)
-{
-	TWDR = byte;
-	TWCR = (1 << TWINT) | (1 << TWEN);
-	
-	while (!(TWCR & (1 << TWINT)));
-}
-
-uint8_t I2C_Read_Byte_With_Confirmation_Without_I2CStatus_Control()
-{
-	TWCR = (1 << TWINT) | (1 << TWEA) | (1 << TWEN);
-	
-	while (!(TWCR & (1 << TWINT)));
-	
-	return TWDR;
-}
-
-uint8_t I2C_Read_Byte_Without_Confirmation_Without_I2CStatus_Control()
-{
-	TWCR = (1 << TWINT) | (1 << TWEN);
-	
-	while (!(TWCR & (1 << TWINT)));
-	
-	return TWDR;
-}
-
 bool I2C_Check_Device_By_Address(uint8_t dev_addr)
 {
-	if (I2C_Start() == I2C_STATUS_ERROR)
+	if (I2C_Start_With_I2CStatus_Control() == I2C_STATUS_ERROR)
 	{
 		I2C_Stop();
 		return false;
@@ -197,5 +177,7 @@ bool I2C_Check_Device_By_Address(uint8_t dev_addr)
 	}
 		
 	I2C_Stop();
+	
 	return true;
 }
+
