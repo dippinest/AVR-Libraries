@@ -311,20 +311,18 @@ void HD44780_Print_Flash_String_To_Char_Terminator(const char* flash_string, con
 
 void HD44780_Display_Shift(bool display_shift_is_right)
 {
+	_cursor_display_shift_mode |= (1 << _HD44780_CURSOR_DISPLAY_SHIFT_MODE_SC_SHIFT_DISPLAY_BIT);
+	
 	if (display_shift_is_right)
 	{
-		_cursor_display_shift_mode |= (1 << _HD44780_CURSOR_DISPLAY_SHIFT_MODE_SC_SHIFT_DISPLAY_BIT);
-		_cursor_display_shift_mode &= ~(1 << _HD44780_CURSOR_DISPLAY_SHIFT_MODE_RL_SHIFT_CURSOR_BIT);
+		_cursor_display_shift_mode |=  (1 << _HD44780_CURSOR_DISPLAY_SHIFT_MODE_RL_SHIFT_CURSOR_BIT);
 	}
 	else
 	{
-		_cursor_display_shift_mode |= (1 << _HD44780_CURSOR_DISPLAY_SHIFT_MODE_SC_SHIFT_DISPLAY_BIT);
-		_cursor_display_shift_mode |= (1 << _HD44780_CURSOR_DISPLAY_SHIFT_MODE_RL_SHIFT_CURSOR_BIT);
+		_cursor_display_shift_mode &= ~(1 << _HD44780_CURSOR_DISPLAY_SHIFT_MODE_RL_SHIFT_CURSOR_BIT);
 	}
 	
-	_HD44780_Send_Byte(_cursor_display_shift_mode, _HD44780_DISPLAY_SEND_COMMAND_MODE);
-	
-	_delay_us(40);
+	_HD44780_Send_Byte(_cursor_display_shift_mode, _HD44780_DISPLAY_SEND_COMMAND_MODE); _delay_us(40);
 }
 
 void HD44780_Set_Cursor_Home()
