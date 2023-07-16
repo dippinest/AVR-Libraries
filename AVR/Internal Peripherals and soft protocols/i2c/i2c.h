@@ -34,6 +34,8 @@ void I2C_Send_Byte(uint8_t byte);
 
 void I2C_Read_Byte(uint8_t *byte, bool ack);
 
+// ===============================================================================
+
 I2C_STATUS I2C_Start_With_I2CStatus_Control();
 
 I2C_STATUS I2C_Stop_With_I2CStatus_Control();
