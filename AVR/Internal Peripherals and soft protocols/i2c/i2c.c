@@ -56,6 +56,8 @@ void I2C_Read_Byte(uint8_t *byte, bool ack)
 	*byte = TWDR;
 }
 
+// ===============================================================================
+
 I2C_STATUS I2C_Start_With_I2CStatus_Control()
 {
 	TWCR = (1 << TWINT) | (1 << TWSTA) | (1 << TWEN);
