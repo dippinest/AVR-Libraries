@@ -16,7 +16,7 @@ int main(void)
 	
 	UART_StringLn_Transmit("I2C Scanner...");; UART_NEW_LINE;
 	
-	for (uint8_t i = 8; i < 127; ++i)
+	for (uint8_t i = 1; i < 127; ++i)
 	{
 		if (I2C_Check_Device_By_Address(i))
 		{
