@@ -37,7 +37,7 @@ int main(void)
 	sei();
 	
 	ADC_Initialize(0, ADC_PRESCALER_128, ADC_VREF_SOURCE_EXTERNAL_AVCC, true);
-	ADC_Set_Interrupt_Is_Enable(true);
+	ADC_Set_Interrupt_Enable();
 	
 	ADC_Start_Conversion();
 	
