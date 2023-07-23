@@ -116,7 +116,7 @@ void ADC_Set_Reception_CallBack_Function(void (*callback_function)())
 	_reception_callback = callback_function;
 }
 
-bool ADC_Reception_Buffer_Is_Filled()
+bool ADC_Is_Reception_Buffer_Filled()
 {
 	return _reception_buffer_is_filled;
 }
