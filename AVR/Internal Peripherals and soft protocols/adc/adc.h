@@ -26,28 +26,24 @@
 #define ADC_PRESCALER_64   0b110
 #define ADC_PRESCALER_128  0b111
 
-inline void ADC_Set_Enable(bool is_enable)
+inline void ADC_Set_Enable()
 {
-	if (is_enable)
-	{
-		ADCSRA |=  (1 << ADEN);
-	}
-	else
-	{
-		ADCSRA &= ~(1 << ADEN);
-	}
+	ADCSRA |=  (1 << ADEN);
 }
 
-inline void ADC_Set_Interrupt_Is_Enable(bool is_enable)
+inline void ADC_Set_Disable()
 {
-	if (is_enable)
-	{
-		ADCSRA |=  (1 << ADIE);
-	}
-	else
-	{
-		ADCSRA &= ~(1 << ADIE);
-	}
+	ADCSRA &= ~(1 << ADEN);
+}
+
+inline void ADC_Set_Interrupt_Enable()
+{
+	ADCSRA |=  (1 << ADIE);
+}
+
+inline void ADC_Set_Interrupt_Disable()
+{
+	ADCSRA &= ~(1 << ADIE);
 }
 
 inline void ADC_Set_Channel(uint8_t channel)
@@ -93,7 +89,7 @@ inline bool ADC_Is_Enable()
 	return false;
 }
 
-inline bool ADC_Interrupt_Is_Enable()
+inline bool ADC_Is_Interrupt_Enable()
 {
 	if (ADCSRA & (1 << ADIE))
 	{
@@ -130,7 +126,15 @@ inline void ADC_Initialize(uint8_t channel, uint8_t prescaler, uint8_t vref_sour
 	ADC_Set_Channel(channel);
 	ADC_Set_Prescaler(prescaler);
 	ADC_Set_VREF_Source(vref_source);
-	ADC_Set_Enable(is_enable);
+	
+	if (is_enable)
+	{
+		ADC_Set_Enable();
+	}
+	else
+	{
+		ADC_Set_Disable();
+	}
 }
 
 // ===============================================================================
@@ -168,7 +172,7 @@ void ADC_Set_Reception_CallBack_Function(void (*callback_function)());
 
 bool ADC_Get_Reception_Status();
 
-bool ADC_Reception_Buffer_Is_Filled();
+bool ADC_Is_Reception_Buffer_Filled();
 
 void *ADC_Get_Reception_Buffer_Ptr();
 
