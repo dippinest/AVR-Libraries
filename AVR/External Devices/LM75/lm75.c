@@ -7,6 +7,8 @@ static LM75_t *target_thermometer = NULL;
 
 #ifdef HD44780_I2C_USE_SOFTI2C
 
+#include "softi2c.h"
+
 static void _LM75_Set_Register_Pointer(uint8_t addr_reg)
 {
 	SOFTI2C_Start();
@@ -50,6 +52,8 @@ static uint16_t _LM75_Read_UINT16_Register(uint8_t addr_reg)
 }
 
 #else
+
+#include "i2c.h"
 
 static void _LM75_Set_Register_Pointer(uint8_t addr_reg)
 {
