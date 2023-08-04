@@ -9,12 +9,6 @@
 
 #include "lm75_configuration.h"
 
-#ifdef HD44780_I2C_USE_SOFTI2C
-#include "softi2c.h"
-#else
-#include "i2c.h"
-#endif
-
 // macros different I2C addresses for LM75
 #define LM75_I2C_DEV_ADDR_A2F_A1F_A0F  0x48
 #define LM75_I2C_DEV_ADDR_A2F_A1F_A0T  0x49
