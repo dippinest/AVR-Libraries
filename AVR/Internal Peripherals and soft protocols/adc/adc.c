@@ -116,7 +116,7 @@ void ADC_Set_Reception_CallBack_Function(void (*callback_function)())
 	_reception_callback = callback_function;
 }
 
-bool ADC_Reception_Buffer_Is_Filled()
+bool ADC_Is_Reception_Buffer_Filled()
 {
 	return _reception_buffer_is_filled;
 }
@@ -157,10 +157,14 @@ ISR(ADC_vect)
 			
 			_reception_counter = 0;
 			_reception_buffer_is_filled = false;
+			
+			ADC_Set_Interrupt_Enable(false);
+		}
+		else
+		{
+			ADC_Start_Conversion();
 		}
 	}
-	
-	ADC_Start_Conversion();
 }
 
 #endif
