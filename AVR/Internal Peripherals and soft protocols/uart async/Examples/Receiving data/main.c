@@ -9,8 +9,6 @@ void send_buffer()
 {
 	UART_Async_Data_Transmit(rx_buffer, RX_BUFFER_SIZE);
 	
-	while(UART_Async_Get_Transmittion_Status() == UART_ASYNC_TRANSMITTION_IS_ACTIVE);
-	
 	UART_Async_Start_Reception_Data_To_Buffer();
 }
 
