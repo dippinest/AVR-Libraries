@@ -38,7 +38,7 @@ inline void ADC_Set_Enable(bool is_enable)
 	}
 }
 
-inline void ADC_Set_Interrupt_Is_Enable(bool is_enable)
+inline void ADC_Set_Interrupt_Enable(bool is_enable)
 {
 	if (is_enable)
 	{
@@ -93,7 +93,7 @@ inline bool ADC_Is_Enable()
 	return false;
 }
 
-inline bool ADC_Interrupt_Is_Enable()
+inline bool ADC_Is_Interrupt_Enable()
 {
 	if (ADCSRA & (1 << ADIE))
 	{
@@ -168,7 +168,7 @@ void ADC_Set_Reception_CallBack_Function(void (*callback_function)());
 
 bool ADC_Get_Reception_Status();
 
-bool ADC_Reception_Buffer_Is_Filled();
+bool ADC_Is_Reception_Buffer_Filled();
 
 void *ADC_Get_Reception_Buffer_Ptr();
 
@@ -181,3 +181,5 @@ uint16_t ADC_Get_Current_Reception_Buffer_Fullness();
 #endif
 
 #endif
+
+
