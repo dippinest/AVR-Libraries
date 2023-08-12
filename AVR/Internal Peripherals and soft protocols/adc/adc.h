@@ -12,7 +12,7 @@
 #define ADCSRA ADCSR
 #endif
 
-#include "adc_callback_configuration.h"
+#include "adc_configuration.h"
 
 #define ADC_VREF_SOURCE_EXTERNAL_AREF 0b00
 #define ADC_VREF_SOURCE_EXTERNAL_AVCC 0b01
