@@ -378,7 +378,6 @@ static void _UART_Async_Set_Reception_Data_To_Buffer(uint8_t byte)
 			
 			if (_reception_callback != NULL)
 			{
-				sei();
 				_reception_callback();
 				_reception_buffer_is_filled = UART_ASYNC_RECEPTION_BUFFER_IS_NOT_FILLED;
 			}
