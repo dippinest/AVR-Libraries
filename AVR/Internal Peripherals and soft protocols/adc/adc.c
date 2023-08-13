@@ -151,8 +151,6 @@ ISR(ADC_vect)
 		
 		if (_reception_counter >= _reception_buffer_size)
 		{
-			ADC_Set_Interrupt_Enable(false);
-			
 			_reception_buffer_is_filled = true;
 			
 			_reception_callback();
