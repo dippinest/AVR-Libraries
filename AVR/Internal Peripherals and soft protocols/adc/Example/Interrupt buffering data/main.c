@@ -3,6 +3,7 @@
 
 #include <util/delay.h>
 #include <avr/interrupt.h>
+#include <avr/io.h>
 
 #include "uart.h"
 #include "adc.h"
@@ -27,7 +28,7 @@ ISR(ADC_vect)
 		i = 0;
 	}
 	
-	ADC_Start_Conversion();
+	
 }
 
 int main(void)
@@ -37,7 +38,7 @@ int main(void)
 	sei();
 	
 	ADC_Initialize(0, ADC_PRESCALER_128, ADC_VREF_SOURCE_EXTERNAL_AVCC, true);
-	ADC_Set_Interrupt_Is_Enable(true);
+	ADC_Set_Interrupt_Enable(true);
 	
 	ADC_Start_Conversion();
 	
@@ -57,3 +58,4 @@ int main(void)
 		_delay_ms(1000);
 	}
 }
+
