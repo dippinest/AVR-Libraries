@@ -11,7 +11,6 @@ static uint16_t adc_buffer[ADC_BUF_SIZE];
 
 void send_buffer()
 {
-	ADC_Set_Interrupt_Is_Enable(false);
 	UART_String_Transmit("ADC DATA: ");
 	
 	uint32_t adc_mean = 0;
@@ -26,7 +25,7 @@ void send_buffer()
 	
 	_delay_ms(500);
 	
-	ADC_Set_Interrupt_Is_Enable(true);
+	ADC_Start_Conversion();
 }
 
 int main(void)
@@ -42,12 +41,11 @@ int main(void)
 	
 	ADC_Set_Reception_CallBack_Function(send_buffer);
 	
-	
-	ADC_Set_Interrupt_Is_Enable(true);
-	
+	ADC_Set_Interrupt_Enable(true);
 	ADC_Start_Conversion();
 	
 	while (1)
 	{
 	}
 }
+
