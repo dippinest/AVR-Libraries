@@ -255,7 +255,7 @@ Main:
 	; We will switch the LED 1 time in 500 ms. To do this, we organize the delay using the counter T0 (8 bit) and its overflow interrupts.
 	;
 	; The timer is configured as follows:
-	; Preddelitel = 255
+	; Prescaler = 255
 	; The value of the loaded value in the counting register = (255 - 250) = 500
 	;
 	; F_CPU (16 MHz) / Prescaler (255) / 250 = 250
