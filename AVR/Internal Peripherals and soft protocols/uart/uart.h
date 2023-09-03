@@ -60,9 +60,7 @@
 #define _UART_SET_CODE_BAUDRATE(_BAUDRATE_VALUE) (F_CPU / 8UL / _BAUDRATE_VALUE)
 
 
-
 // ===============================================================================
-
 
 
 // функция для активации (деактивации) передачи данных
@@ -227,9 +225,7 @@ inline bool UART_End_Of_Reception_Interrupt_Is_Enable()
 }
 
 
-
 // ===============================================================================
-
 
 
 // функция для установки скорости передачи данных
@@ -280,9 +276,7 @@ uint8_t UART_Get_Num_Of_Stop_Bits();
 uint8_t UART_Get_Parity_Bit();
 
 
-
 // ===============================================================================
-
 
 
 // функция для отправки байта
@@ -331,9 +325,7 @@ void UART_Safe_String_Transmit(const char *string, uint16_t max_string_len);
 void UART_Safe_StringLn_Transmit(const char *string, uint16_t max_string_len);
 
 
-
 // ===============================================================================
-
 
 
 // функция для отправки байта из flash памяти
@@ -382,9 +374,7 @@ void UART_Flash_Safe_String_Transmit(const char *flash_string, uint16_t max_flas
 void UART_Flash_Safe_StringLn_Transmit(const char *flash_string, uint16_t max_flash_string_len);
 
 
-
 // ===============================================================================
-
 
 
 // функция для начальной инициализации модуля UART
@@ -393,9 +383,7 @@ void UART_Flash_Safe_StringLn_Transmit(const char *flash_string, uint16_t max_fl
 void UART_Initialize(uint32_t baudrate, bool transmittion_is_allowed, bool reception_is_allowed);
 
 
-
 // ===============================================================================
-
 
 
 // макрос для перехода на следующую строку в UART терминале
