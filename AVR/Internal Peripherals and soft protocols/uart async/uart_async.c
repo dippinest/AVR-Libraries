@@ -9,14 +9,19 @@ static volatile uint16_t  _transmittion_data_size;
 static volatile uint16_t  _transmittion_counter    = 0;
 static volatile bool      _transmittion_status     = UART_ASYNC_TRANSMITTION_IS_NOT_ACTIVE;
 
+
 bool UART_Async_Get_Transmittion_Status()
 {
 	return _transmittion_status;
 }
 
+
 static void (*_transmittion_callback)() = NULL;
+static void (*_user_transmittion_callback)() = NULL;
+
 
 #endif
+
 
 #ifdef UART_ASYNC_USE_RX
 
@@ -26,11 +31,17 @@ static volatile uint16_t  _reception_counter           = 0;
 static volatile bool      _reception_buffer_is_filled  = UART_ASYNC_RECEPTION_BUFFER_IS_NOT_FILLED;
 static volatile bool      _reception_status            = UART_ASYNC_RECEPTION_IS_NOT_ACTIVE;
 
+
 static void (*_reception_callback)() = NULL;
+
 
 #endif
 
+
+
 // ===============================================================================
+
+
 
 #ifdef UART_ASYNC_USE_RX
 
@@ -39,58 +50,105 @@ void UART_Async_Set_Reception_Buffer_Ptr(const void *buffer)
 	_reception_data_buffer = (uint8_t*)buffer;
 }
 
+
 void UART_Async_Set_Reception_Buffer_Size(const uint16_t buffer_size)
 {
 	_reception_data_buffer_size = buffer_size;
 }
+
 
 void UART_Async_Set_Reception_CallBack_Function(void (*callback_function)())
 {
 	_reception_callback = (void*)callback_function;
 }
 
+
 bool UART_Async_Get_Reception_Status()
 {
 	return _reception_status;
 }
+
 
 bool UART_Async_Reception_Buffer_Is_Filled()
 {
 	return _reception_buffer_is_filled;
 }
 
+
 void *UART_Async_Get_Reception_Buffer_Ptr()
 {
 	return (void*)_reception_data_buffer;
 }
+
 
 uint16_t UART_Async_Get_Reception_Buffer_Size()
 {
 	return _reception_data_buffer_size;
 }
 
+
 void *UART_Async_Get_Reception_CallBack_Function()
 {
 	return _reception_callback;
 }
+
 
 uint16_t UART_Async_Get_Current_Reception_Buffer_Fullness()
 {
 	return _reception_counter;
 }
 
+
 #endif
+
+
 
 // ===============================================================================
 
+
+
 #ifdef UART_ASYNC_USE_TX
+
+
+void UART_Async_Set_Transmittion_CallBack_Function(void (*callback_function)())
+{
+	_user_transmittion_callback = (void*)callback_function;
+}
+
+
+void *UART_Async_Get_Transmittion_CallBack_Function()
+{
+	return _user_transmittion_callback;
+}
+
+
+
+// ===============================================================================
+
+
 
 static void _UART_Async_Byte_Transmit()
 {
 	_transmittion_callback = _UART_Async_Byte_Transmit;
 	UDR = _transmittion_byte;
-	_transmittion_status = UART_ASYNC_TRANSMITTION_IS_NOT_ACTIVE;
+	
+	if (_transmittion_counter)
+	{
+		_transmittion_counter = 0;
+		
+		if (_user_transmittion_callback != NULL)
+		{
+			_user_transmittion_callback();
+		}
+		
+		_transmittion_status = UART_ASYNC_TRANSMITTION_IS_NOT_ACTIVE;
+		
+		return;	
+	}
+	
+	++_transmittion_counter;
 }
+
 
 static void _UART_Async_Data_Transmit()
 {
@@ -101,10 +159,18 @@ static void _UART_Async_Data_Transmit()
 	if (_transmittion_counter >= _transmittion_data_size)
 	{
 		_transmittion_counter = 0;
+		
+		if (_user_transmittion_callback != NULL)
+		{
+			_user_transmittion_callback();
+		}
+		
 		_transmittion_status = UART_ASYNC_TRANSMITTION_IS_NOT_ACTIVE;
+		
 		return;
 	}
 }
+
 
 static void _UART_Async_String_Transmit()
 {
@@ -117,10 +183,18 @@ static void _UART_Async_String_Transmit()
 	else
 	{
 		_transmittion_counter = 0;
+		
+		if (_user_transmittion_callback != NULL)
+		{
+			_user_transmittion_callback();
+		}
+		
 		_transmittion_status = UART_ASYNC_TRANSMITTION_IS_NOT_ACTIVE;
+		
 		return;
 	}
 }
+
 
 static void _UART_Async_StringLn_Transmit()
 {
@@ -141,6 +215,7 @@ static void _UART_Async_StringLn_Transmit()
 	}
 }
 
+
 static void _UART_Async_Safe_String_Transmit()
 {
 	_transmittion_callback = _UART_Async_Safe_String_Transmit;
@@ -152,10 +227,18 @@ static void _UART_Async_Safe_String_Transmit()
 	else
 	{
 		_transmittion_counter = 0;
+		
+		if (_user_transmittion_callback != NULL)
+		{
+			_user_transmittion_callback();
+		}
+		
 		_transmittion_status = UART_ASYNC_TRANSMITTION_IS_NOT_ACTIVE;
+		
 		return;
 	}
 }
+
 
 static void _UART_Async_Safe_StringLn_Transmit()
 {
@@ -174,7 +257,11 @@ static void _UART_Async_Safe_StringLn_Transmit()
 	}
 }
 
+
+
 // ===============================================================================
+
+
 
 static void _UART_Async_Flash_Data_Transmit()
 {
@@ -186,10 +273,18 @@ static void _UART_Async_Flash_Data_Transmit()
 	if (_transmittion_counter >= _transmittion_data_size)
 	{
 		_transmittion_counter = 0;
+		
+		if (_user_transmittion_callback != NULL)
+		{
+			_user_transmittion_callback();
+		}
+		
 		_transmittion_status = UART_ASYNC_TRANSMITTION_IS_NOT_ACTIVE;
+		
 		return;
 	}
 }
+
 
 static void _UART_Async_Flash_String_Transmit()
 {
@@ -200,7 +295,14 @@ static void _UART_Async_Flash_String_Transmit()
 	if (c == '\0')
 	{
 		_transmittion_counter = 0;
+		
+		if (_user_transmittion_callback != NULL)
+		{
+			_user_transmittion_callback();
+		}
+		
 		_transmittion_status = UART_ASYNC_TRANSMITTION_IS_NOT_ACTIVE;
+		
 		return;
 	}
 	
@@ -208,6 +310,7 @@ static void _UART_Async_Flash_String_Transmit()
 	
 	++_transmittion_counter;
 }
+
 
 static void _UART_Async_Flash_StringLn_Transmit()
 {
@@ -227,6 +330,7 @@ static void _UART_Async_Flash_StringLn_Transmit()
 	++_transmittion_counter;
 }
 
+
 static void _UART_Async_Flash_Safe_String_Transmit()
 {
 	_transmittion_callback = _UART_Async_Flash_Safe_String_Transmit;
@@ -236,7 +340,14 @@ static void _UART_Async_Flash_Safe_String_Transmit()
 	if (c == '\0' || _transmittion_counter >= _transmittion_data_size)
 	{
 		_transmittion_counter = 0;
+		
+		if (_user_transmittion_callback != NULL)
+		{
+			_user_transmittion_callback();
+		}
+		
 		_transmittion_status = UART_ASYNC_TRANSMITTION_IS_NOT_ACTIVE;
+		
 		return;
 	}
 	
@@ -244,6 +355,7 @@ static void _UART_Async_Flash_Safe_String_Transmit()
 	
 	++_transmittion_counter;
 }
+
 
 static void _UART_Async_Flash_Safe_StringLn_Transmit()
 {
@@ -263,7 +375,11 @@ static void _UART_Async_Flash_Safe_StringLn_Transmit()
 	++_transmittion_counter;
 }
 
+
+
 // ===============================================================================
+
+
 
 void UART_Async_Byte_Transmit(uint8_t byte)
 {
@@ -271,6 +387,7 @@ void UART_Async_Byte_Transmit(uint8_t byte)
 	_transmittion_status = UART_ASYNC_TRANSMITTION_IS_ACTIVE;
 	_UART_Async_Byte_Transmit();
 }
+
 
 void UART_Async_Data_Transmit(const void *data, uint16_t data_size)
 {
@@ -280,6 +397,7 @@ void UART_Async_Data_Transmit(const void *data, uint16_t data_size)
 	_UART_Async_Data_Transmit();
 }
 
+
 void UART_Async_String_Transmit(const char *string)
 {
 	_transmittion_data = (uint8_t*)string;
@@ -287,12 +405,14 @@ void UART_Async_String_Transmit(const char *string)
 	_UART_Async_String_Transmit();
 }
 
+
 void UART_Async_StringLn_Transmit(const char *string)
 {
 	_transmittion_data = (uint8_t*)string;
 	_transmittion_status = UART_ASYNC_TRANSMITTION_IS_ACTIVE;
 	_UART_Async_StringLn_Transmit();
 }
+
 
 void UART_Async_Safe_String_Transmit(const char *string, uint16_t max_string_len)
 {
@@ -302,6 +422,7 @@ void UART_Async_Safe_String_Transmit(const char *string, uint16_t max_string_len
 	_UART_Async_Safe_String_Transmit();
 }
 
+
 void UART_Async_Safe_StringLn_Transmit(const char *string, uint16_t max_string_len)
 {
 	_transmittion_data = (uint8_t*)string;
@@ -310,7 +431,11 @@ void UART_Async_Safe_StringLn_Transmit(const char *string, uint16_t max_string_l
 	_UART_Async_Safe_StringLn_Transmit();
 }
 
+
+
 // ===============================================================================
+
+
 
 void UART_Async_Flash_Byte_Transmit(const uint8_t *flash_byte)
 {
@@ -318,6 +443,7 @@ void UART_Async_Flash_Byte_Transmit(const uint8_t *flash_byte)
 	_transmittion_status = UART_ASYNC_TRANSMITTION_IS_ACTIVE;
 	_UART_Async_Byte_Transmit();
 }
+
 
 void UART_Async_Flash_Data_Transmit(const void *flash_data, uint16_t flash_data_size)
 {
@@ -327,6 +453,7 @@ void UART_Async_Flash_Data_Transmit(const void *flash_data, uint16_t flash_data_
 	_UART_Async_Flash_Data_Transmit();
 }
 
+
 void UART_Async_Flash_String_Transmit(const char *flash_string)
 {
 	_transmittion_data = (uint8_t*)flash_string;
@@ -334,12 +461,14 @@ void UART_Async_Flash_String_Transmit(const char *flash_string)
 	_UART_Async_Flash_String_Transmit();
 }
 
+
 void UART_Async_Flash_StringLn_Transmit(const char *flash_string)
 {
 	_transmittion_data = (uint8_t*)flash_string;
 	_transmittion_status = UART_ASYNC_TRANSMITTION_IS_ACTIVE;
 	_UART_Async_Flash_StringLn_Transmit();
 }
+
 
 void UART_Async_Flash_Safe_String_Transmit(const char *flash_string, uint16_t max_flash_string_len)
 {
@@ -349,6 +478,7 @@ void UART_Async_Flash_Safe_String_Transmit(const char *flash_string, uint16_t ma
 	_UART_Async_Flash_Safe_String_Transmit();
 }
 
+
 void UART_Async_Flash_Safe_StringLn_Transmit(const char *flash_string, uint16_t max_flash_string_len)
 {
 	_transmittion_data = (uint8_t*)flash_string;
@@ -357,11 +487,17 @@ void UART_Async_Flash_Safe_StringLn_Transmit(const char *flash_string, uint16_t 
 	_UART_Async_Flash_Safe_StringLn_Transmit();
 }
 
+
 #endif
+
+
 
 // ===============================================================================
 
+
+
 #ifdef UART_ASYNC_USE_RX
+
 
 static void _UART_Async_Set_Reception_Data_To_Buffer(uint8_t byte)
 {
@@ -385,7 +521,11 @@ static void _UART_Async_Set_Reception_Data_To_Buffer(uint8_t byte)
 	}
 }
 
+
+
 // ===============================================================================
+
+
 
 void UART_Async_Start_Reception_Data_To_Buffer()
 {
@@ -393,11 +533,13 @@ void UART_Async_Start_Reception_Data_To_Buffer()
 	UART_Async_Set_Reception_Enable(true);
 }
 
+
 void UART_Async_Stop_Reception_Data_To_Buffer()
 {
 	_reception_status = UART_ASYNC_RECEPTION_IS_NOT_ACTIVE;
 	UART_Async_Set_Reception_Enable(false);
 }
+
 
 void UART_Async_Clear_Reception_Buffer()
 {
@@ -405,13 +547,36 @@ void UART_Async_Clear_Reception_Buffer()
 	_reception_buffer_is_filled = UART_ASYNC_RECEPTION_BUFFER_IS_NOT_FILLED;
 }
 
+
 #endif
+
+
 
 // ===============================================================================
 
+
+
 #ifdef UART_ASYNC_USE_TX
 
-ISR(USART_TXC_vect)
+
+#ifdef  USART_TXC_vect
+#define USART_TX_VECTOR USART_TXC_vect
+#endif
+
+#ifdef  UART_TX_vect
+#define USART_TX_VECTOR UART_TX_vect
+#endif
+
+#ifdef  USART0_TX_vect
+#define USART_TX_VECTOR USART0_TX_vect
+#endif
+
+#ifdef  USART0_TXC_vect
+#define USART_TX_VECTOR USART0_TXC_vect
+#endif
+
+
+ISR(USART_TX_VECTOR)
 {
 	if (_transmittion_status == UART_ASYNC_TRANSMITTION_IS_ACTIVE && _transmittion_callback != NULL)
 	{
@@ -419,11 +584,31 @@ ISR(USART_TXC_vect)
 	}
 }
 
+
 #endif
+
 
 #ifdef UART_ASYNC_USE_RX
 
-ISR(USART_RXC_vect)
+
+#ifdef  USART_RXC_vect
+#define USART_RX_VECTOR USART_RXC_vect
+#endif
+
+#ifdef  UART_RX_vect
+#define USART_RX_VECTOR UART_RX_vect
+#endif
+
+#ifdef  USART0_RX_vect
+#define USART_RX_VECTOR USART0_RX_vect
+#endif
+
+#ifdef  USART0_RXC_vect
+#define USART_RX_VECTOR USART0_RXC_vect
+#endif
+
+
+ISR(USART_RX_VECTOR)
 {
 	_UART_Async_Set_Reception_Data_To_Buffer(UDR);
 }
