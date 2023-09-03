@@ -523,24 +523,7 @@ void UART_Async_Clear_Reception_Buffer()
 #ifdef UART_ASYNC_USE_TX
 
 
-#ifdef  USART_TXC_vect
-#define USART_TX_VECTOR USART_TXC_vect
-#endif
-
-#ifdef  UART_TX_vect
-#define USART_TX_VECTOR UART_TX_vect
-#endif
-
-#ifdef  USART0_TX_vect
-#define USART_TX_VECTOR USART0_TX_vect
-#endif
-
-#ifdef  USART0_TXC_vect
-#define USART_TX_VECTOR USART0_TXC_vect
-#endif
-
-
-ISR(USART_TX_VECTOR)
+ISR(USART_TXC_vect)
 {
 	if (_transmittion_status == UART_ASYNC_TRANSMITTION_IS_ACTIVE && _transmittion_callback != NULL)
 	{
@@ -555,24 +538,7 @@ ISR(USART_TX_VECTOR)
 #ifdef UART_ASYNC_USE_RX
 
 
-#ifdef  USART_RXC_vect
-#define USART_RX_VECTOR USART_RXC_vect
-#endif
-
-#ifdef  UART_RX_vect
-#define USART_RX_VECTOR UART_RX_vect
-#endif
-
-#ifdef  USART0_RX_vect
-#define USART_RX_VECTOR USART0_RX_vect
-#endif
-
-#ifdef  USART0_RXC_vect
-#define USART_RX_VECTOR USART0_RXC_vect
-#endif
-
-
-ISR(USART_RX_VECTOR)
+ISR(USART_RXC_vect)
 {
 	_UART_Async_Set_Reception_Data_To_Buffer(UDR);
 }
