@@ -5,11 +5,7 @@ static volatile uint8_t  _UCSRC            = 0;
 static volatile uint32_t _baudrate_code    = 0;
 static volatile uint32_t _current_baudrate = 0;
 
-
-
 // ===============================================================================
-
-
 
 void UART_Set_Baudrate(uint32_t baudrate)
 {
@@ -112,11 +108,7 @@ uint8_t UART_Get_Parity_Bit()
 	return _UCSRC & ((1 << UPM1) | (1 << UPM0));
 }
 
-
-
 // ===============================================================================
-
-
 
 void UART_Byte_Transmit(uint8_t byte)
 {
@@ -184,11 +176,7 @@ void UART_Safe_StringLn_Transmit(const char *string, uint16_t max_string_len)
 	UART_Safe_String_Transmit("\r\n", 2);
 }
 
-
-
 // ===============================================================================
-
-
 
 void UART_Flash_Byte_Transmit(const uint8_t *flash_byte)
 {
@@ -272,11 +260,7 @@ void UART_Flash_Safe_StringLn_Transmit(const char *flash_string, uint16_t max_fl
 	UART_Safe_String_Transmit("\r\n", 2);
 }
 
-
-
 // ===============================================================================
-
-
 
 void UART_Initialize(uint32_t baudrate, bool transmittion_is_enable, bool reception_is_enable)
 {
