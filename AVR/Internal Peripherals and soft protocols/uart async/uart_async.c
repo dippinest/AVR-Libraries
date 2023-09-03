@@ -37,11 +37,7 @@ static void (*_reception_callback)() = NULL;
 
 #endif
 
-
-
 // ===============================================================================
-
-
 
 #ifdef UART_ASYNC_USE_RX
 
@@ -101,11 +97,7 @@ uint16_t UART_Async_Get_Current_Reception_Buffer_Fullness()
 
 #endif
 
-
-
 // ===============================================================================
-
-
 
 #ifdef UART_ASYNC_USE_TX
 
@@ -121,11 +113,7 @@ void *UART_Async_Get_Transmittion_CallBack_Function()
 	return _user_transmittion_callback;
 }
 
-
-
 // ===============================================================================
-
-
 
 static void _UART_Async_Byte_Transmit()
 {
@@ -257,11 +245,7 @@ static void _UART_Async_Safe_StringLn_Transmit()
 	}
 }
 
-
-
 // ===============================================================================
-
-
 
 static void _UART_Async_Flash_Data_Transmit()
 {
@@ -375,11 +359,7 @@ static void _UART_Async_Flash_Safe_StringLn_Transmit()
 	++_transmittion_counter;
 }
 
-
-
 // ===============================================================================
-
-
 
 void UART_Async_Byte_Transmit(uint8_t byte)
 {
@@ -431,11 +411,7 @@ void UART_Async_Safe_StringLn_Transmit(const char *string, uint16_t max_string_l
 	_UART_Async_Safe_StringLn_Transmit();
 }
 
-
-
 // ===============================================================================
-
-
 
 void UART_Async_Flash_Byte_Transmit(const uint8_t *flash_byte)
 {
@@ -490,11 +466,7 @@ void UART_Async_Flash_Safe_StringLn_Transmit(const char *flash_string, uint16_t 
 
 #endif
 
-
-
 // ===============================================================================
-
-
 
 #ifdef UART_ASYNC_USE_RX
 
@@ -521,11 +493,7 @@ static void _UART_Async_Set_Reception_Data_To_Buffer(uint8_t byte)
 	}
 }
 
-
-
 // ===============================================================================
-
-
 
 void UART_Async_Start_Reception_Data_To_Buffer()
 {
@@ -550,11 +518,7 @@ void UART_Async_Clear_Reception_Buffer()
 
 #endif
 
-
-
 // ===============================================================================
-
-
 
 #ifdef UART_ASYNC_USE_TX
 
