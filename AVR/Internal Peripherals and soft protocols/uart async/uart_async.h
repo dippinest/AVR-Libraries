@@ -17,17 +17,15 @@
 #ifndef UART_ASYNC_H_
 #define UART_ASYNC_H_
 
+#include "uart.h"
+#include "uart_async_configuration.h"
+
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include <stdio.h>
 #include <stdarg.h>
-#include <avr/io.h>
 #include <avr/pgmspace.h>
 #include <avr/interrupt.h>
-
-#include "uart.h"
-#include "uart_async_configuration.h"
 
 
 // макросы для определения статуса активности асинхронной передачи данных
