@@ -32,17 +32,38 @@ void UART_Set_Num_Of_Data_Bits(uint8_t num_of_data_bits)
 		case UART_NUM_OF_DATA_BITS_5:
 		break;
 		case UART_NUM_OF_DATA_BITS_6:
+		
+		#ifdef URSEL
 		_UCSRC |= (1 << UCSZ0) | (1 << URSEL);
+		#else
+		_UCSRC |= (1 << UCSZ0);
+		#endif
+		
 		break;
 		case UART_NUM_OF_DATA_BITS_7:
+		
+		#ifdef URSEL
 		_UCSRC |= (1 << UCSZ1) | (1 << URSEL);
+		#else
+		_UCSRC |= (1 << UCSZ1);
+		#endif
+		
 		break;
 		case UART_NUM_OF_DATA_BITS_8:
 		default:
+		
+		#ifdef URSEL
 		_UCSRC |= (1 << UCSZ1) | (1 << UCSZ0) | (1 << URSEL);
+		#else
+		_UCSRC |= (1 << UCSZ1) | (1 << UCSZ0);
+		#endif
 	}
 	
+	#ifdef URSEL
 	UCSRC = (1 << URSEL) | _UCSRC;
+	#else
+	UCSRC = _UCSRC;
+	#endif
 }
 
 
@@ -60,7 +81,12 @@ void UART_Set_Num_Of_Stop_Bits(uint8_t num_of_stop_bits)
 		default: break;
 	}
 	
+	#ifdef URSEL
 	UCSRC = (1 << URSEL) | _UCSRC;
+	#else
+	UCSRC = _UCSRC;
+	#endif
+	
 }
 
 
@@ -81,7 +107,11 @@ void UART_Set_Parity_Bit(uint8_t parity_bit)
 		default: break;
 	}
 	
+	#ifdef URSEL
 	UCSRC = (1 << URSEL) | _UCSRC;
+	#else
+	UCSRC = _UCSRC;
+	#endif
 }
 
 
