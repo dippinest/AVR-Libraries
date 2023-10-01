@@ -82,8 +82,8 @@
 (__AVR_ATmega128__) ||\
 (__AVR_ATmega128A__)
 
-#define USART_TXC_vect UART_TX_vect
-#define USART_RXC_vect UART_RX_vect
+#define USART_TXC_vect USART0_TX_vect
+#define USART_RXC_vect USART0_RX_vect
 
 #endif
 
