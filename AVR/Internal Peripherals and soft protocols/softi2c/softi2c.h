@@ -1,4 +1,20 @@
 
+
+// ===============================================================================
+//
+// Библиотека для работы с программным I2C. Библиотека позволяет работать
+// как с одиночным программным модулем I2C, так и с их множеством (это настраивается
+// в файле softi2c_configuration.h)
+//
+// -------------------------------------------------------------------------------
+//
+// Library for working with software I2C. The library allows you to work with
+// a single I2C software module, as well as with many of them (this is configured
+// in the softi2c_configuration.h file)
+//
+// ===============================================================================
+
+
 #ifndef SOFTI2C_H_
 #define SOFTI2C_H_
 
@@ -25,7 +41,9 @@
 #define SOTFI2C_SCL_SET_LOW	  SOTFI2C_SCL_PIN_DDR |=  (1 << SOTFI2C_SCL_PIN)
 #define SOTFI2C_SCL_SET_HIGH  SOTFI2C_SCL_PIN_DDR &= ~(1 << SOTFI2C_SCL_PIN)
 
+
 // ===============================================================================
+
 
 void SOFTI2C_Initialize();
 
@@ -39,13 +57,16 @@ uint8_t SOFTI2C_Send_Byte(uint8_t data);
 
 void SOFTI2C_Read_Byte(uint8_t *data, bool ack);
 
+
 #else // ===============================================================================
+
 
 #ifndef _T
 
 #define _T(P) ((uint8_t*)&P)
 
 #endif
+
 
 typedef struct
 {
@@ -63,7 +84,9 @@ typedef struct
 	
 } SOFTI2C_t;
 
+
 // ===============================================================================
+
 
 SOFTI2C_t SOFTI2C_Get_Interface_Object(
 
@@ -94,7 +117,10 @@ uint8_t SOFTI2C_Send_Byte(uint8_t data);
 
 void SOFTI2C_Read_Byte(uint8_t *data, bool ack);
 
+
 #endif
 
 
 #endif
+
+
