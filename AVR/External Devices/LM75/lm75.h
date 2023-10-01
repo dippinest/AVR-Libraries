@@ -1,4 +1,20 @@
 
+
+// ===============================================================================
+//
+// Библиотека для работы с I2C термометром LM75 (LM75A). I2C можно использовать
+// как аппаратный, так и программный - это можно настроить в файле
+// конфигурации lm75_configuration.h
+//
+// -------------------------------------------------------------------------------
+//
+// Library for working with the I2C thermometer LM75 (LM75A). I2C can be
+// used both hardware and software - this can be configured in the
+// configuration file lm75_configuration.h
+//
+// ===============================================================================
+
+
 #ifndef LM75_H_
 #define LM75_H_
 
@@ -49,6 +65,7 @@
 #define _LM75_CONFUGURATION_REGISTER_OS_POL_BIT_POS       2
 #define _LM75_CONFUGURATION_REGISTER_OS_F_QUE_BITS_POS    4
 
+
 // structure with data about the LM75 sensor
 typedef struct
 {
@@ -59,7 +76,9 @@ typedef struct
 	
 } LM75_t;
 
+
 // ===============================================================================
+
 
 LM75_t LM75_Get_Thermometer_Object(uint8_t dev_addr, bool thermometer_is_enable);
 
@@ -88,3 +107,5 @@ int32_t LM75_Get_PFIXPoint_2digits_Temperature();
 int32_t LM75_Get_PFIXPoint_3digits_Temperature();
 
 #endif
+
+
