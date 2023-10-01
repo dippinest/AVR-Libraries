@@ -131,7 +131,7 @@ static void _UART_Async_Byte_Transmit()
 		
 		_transmittion_status = UART_ASYNC_TRANSMITTION_IS_NOT_ACTIVE;
 		
-		return;	
+		return;
 	}
 	
 	++_transmittion_counter;
@@ -544,3 +544,5 @@ ISR(USART_RXC_vect)
 }
 
 #endif
+
+
