@@ -45,7 +45,7 @@
 // macros for determining the reference voltage source
 #define ADC_VREF_SOURCE_EXTERNAL_AREF 0b00
 #define ADC_VREF_SOURCE_EXTERNAL_AVCC 0b01
-#define ADC_VREF_SOURCE_INTERNAL      0b11 // internal VREF 2.56 Volts
+#define ADC_VREF_SOURCE_INTERNAL      0b11
 
 
 
