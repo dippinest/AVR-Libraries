@@ -5,7 +5,7 @@
 #include <util/delay.h>
 
 #include "softspi.h"
-#include "led_7seg_74hc595_indicator.h"
+#include "hc595_led_indicator.h"
 #include "itoa.h"
 
 void CS_ON()
@@ -26,7 +26,7 @@ static char buf[8];
 ISR(TIMER0_OVF_vect)
 {
 	static uint8_t led_digits_counter = 0;
-	LED_7Seg_74HC595_Indicator_Put_Num_String(ITOA_Int16_To_String(data, 4), 4, &led_digits_counter);
+	HC595_LED_Indicator_Put_Num_String(ITOA_Int16_To_String(data, 4), 4, &led_digits_counter);
 }
 
 int main(void)
@@ -51,3 +51,5 @@ int main(void)
 		_delay_ms(100);
 	}
 }
+
+
