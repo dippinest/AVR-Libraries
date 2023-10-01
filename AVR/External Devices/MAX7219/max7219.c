@@ -1,19 +1,45 @@
 
 #include "max7219.h"
 
+
+#if defined (MAX7219_USE_SOFTSPI) && defined (MAX7219_USE_CS_CALLBACKS)
+
 static void _MAX7219_Send_Command(uint8_t reg, uint8_t data)
 {
-	#ifdef MAX7219_USE_SPI_CS_CALLBACKS
-		SPI_Call_CS_ON();
-		SPI_Send_Byte(reg);
-		SPI_Send_Byte(data);
-		SPI_Call_CS_OFF();
-	
-	#else
-		SPI_Send_Byte(reg);
-		SPI_Send_Byte(data);
-	#endif
+	SOFTSPI_Call_CS_ON();
+	SOFTSPI_Send_Byte(reg);
+	SOFTSPI_Send_Byte(data);
+	SOFTSPI_Call_CS_OFF();
 }
+
+#elif defined (MAX7219_USE_SOFTSPI) && !defined (MAX7219_USE_CS_CALLBACKS)
+
+static void _MAX7219_Send_Command(uint8_t reg, uint8_t data)
+{
+	SOFTSPI_Send_Byte(reg);
+	SOFTSPI_Send_Byte(data);
+}
+
+#elif !defined (MAX7219_USE_SOFTSPI) && defined (MAX7219_USE_CS_CALLBACKS)
+
+static void _MAX7219_Send_Command(uint8_t reg, uint8_t data)
+{
+	SPI_Call_CS_ON();
+	SPI_Send_Byte(reg);
+	SPI_Send_Byte(data);
+	SPI_Call_CS_OFF();
+}
+
+#elif !defined (MAX7219_USE_SOFTSPI) && !defined (MAX7219_USE_CS_CALLBACKS)
+
+static void _MAX7219_Send_Command(uint8_t reg, uint8_t data)
+{
+	SPI_Send_Byte(reg);
+	SPI_Send_Byte(data);
+}
+
+#endif
+
 
 void MAX7219_Set_Enable(bool is_enable)
 {
