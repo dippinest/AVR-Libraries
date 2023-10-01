@@ -146,3 +146,5 @@ void MAX7219_Set_Char_Digits(char *data, uint8_t data_size, const uint8_t max_nu
 }
 
 #endif
+
+
