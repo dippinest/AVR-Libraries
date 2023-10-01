@@ -8,6 +8,16 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#if defined\
+(__AVR_ATmega64__)   ||\
+(__AVR_ATmega64A__)  ||\
+(__AVR_ATmega128__)  ||\
+(__AVR_ATmega128A__)
+
+#define ANA_COMP_vect ANALOG_COMP_vect
+
+#endif
+
 #include "anacomp_callback_configuration.h"
 
 // input AIN0 is connected to an internal 1.22 volt source
