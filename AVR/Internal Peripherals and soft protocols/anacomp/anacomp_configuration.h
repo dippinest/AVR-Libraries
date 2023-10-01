@@ -2,8 +2,12 @@
 #ifndef ANACOMP_CALLBACK_CONFIGURATION_H_
 #define ANACOMP_CALLBACK_CONFIGURATION_H_
 
-// macro for allowing work with analog comparator interrupt callback.
-// if you don't want use it, comment out this macro
-#define ANACOMP_USE_CALLBACK
+// если вы хотите работать с аналоговым компаратором через функцию-колбэк,
+// раскомментируйте этот дефайн (иначе закомментируйте его)
+// -------------------------------------------------------------------------------
+// if you want to work with an analog comparator via a callback function,
+// uncomment this define (otherwise comment it out)
+
+//#define ANACOMP_USE_CALLBACK
 
 #endif
