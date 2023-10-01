@@ -303,3 +303,5 @@ void UART_Initialize(uint32_t baudrate, bool transmittion_is_enable, bool recept
 	UART_Set_Transmittion_Enable(transmittion_is_enable);
 	UART_Set_Reception_Enable(reception_is_enable);
 }
+
+
