@@ -1,4 +1,24 @@
 
+
+// ===============================================================================
+//
+// Библиотека для работы с LCD дисплеем на контроллере HD44780 посредством I2C
+// расширителя портов ввода-вывода PCF8574 (переходник). Библиотека позволяет
+// работать с дисплеем как с I2C устройством. I2C можно использовать как
+// аппаратный, так и программный - это можно настроить в
+// файле конфигурации hd44780_configuration.h
+//
+// -------------------------------------------------------------------------------
+//
+// Library for working with the LCD display on the HD44780 controller via
+// the I2C I/O port extender PCF8574 (adapter). The library allows you to
+// work with the display as an I2C device. I2C can be used both hardware
+// and software - this can be configured in the configuration
+// file hd44780_configuration.h
+//
+// ===============================================================================
+
+
 #ifndef HD44780_I2C_H_
 #define HD44780_I2C_H_
 
@@ -58,6 +78,7 @@
 #define _HD44780_I2C_INITIAL_CURSOR_DISPLAY_SHIFT_MODE  0b00010000
 #define _HD44780_I2C_INITIAL_FUNCTION_SET_MODE_DISPLAY  0b00101000
 
+
 typedef struct
 {
 	uint8_t dev_addr;
@@ -67,6 +88,7 @@ typedef struct
 	uint8_t function_set_mode_display;
 	
 } HD44780_I2C_t;
+
 
 HD44780_I2C_t HD44780_I2C_Get_Display_Object(uint8_t dev_addr, bool display_is_enable);
 
@@ -84,7 +106,9 @@ void HD44780_I2C_Set_User_Symbol_To_CGRAM(const uint8_t *_8byte_simbol_bitmap_ar
 
 void HD44780_I2C_Set_Flash_User_Symbol_To_CGRAM(const uint8_t *_8byte_flash_simbol_bitmap_array, uint8_t flash_simbol_number);
 
+
 // ===============================================================================
+
 
 void HD44780_I2C_Print_Char(char c);
 
@@ -100,7 +124,9 @@ void HD44780_I2C_Print_String_To_Char_Terminator(const char* string, const char 
 
 void HD44780_I2C_Fill_Char_Pattern(const char char_pattern, uint8_t num_pattern_chars);
 
+
 // ===============================================================================
+
 
 void HD44780_I2C_Print_Flash_Char(const char *flash_c);
 
@@ -114,7 +140,9 @@ void HD44780_I2C_Print_Flash_StringFmt(const char *flash_string_fmt, ...);
 
 void HD44780_I2C_Print_Flash_String_To_Char_Terminator(const char* flash_string, const char terminator);
 
+
 // ===============================================================================
+
 
 void HD44780_I2C_Display_Shift(bool display_shift_is_right);
 
@@ -125,3 +153,5 @@ void HD44780_I2C_Clear_String_By_Pos(uint8_t string_pos, uint8_t first_char_pos,
 void HD44780_I2C_Clear();
 
 #endif
+
+
