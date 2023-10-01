@@ -1,4 +1,23 @@
 
+
+// ===============================================================================
+//
+// Библиотека для работы с внутренним модулем аналогового компаратора.
+// Большинство функций данной библиотеки являются блокирующими, однако
+// есть возможность использовать неблокирующий режим работы, используя
+// чистые прерывания или же коллбэк-функции (это можно настроить в файле
+// конфигурации anacomp_configuration.h)
+//
+// -------------------------------------------------------------------------------
+//
+// Library for working with the internal module of the analog comparator.
+// Most of the functions of this library are blocking, but it is possible
+// to use a non-blocking mode of operation using pure interrupts or callback
+// functions (this can be configured in the configuration file anacomp_configuration.h)
+//
+// ===============================================================================
+
+
 #ifndef ANACOMP_H_
 #define ANACOMP_H_
 
@@ -7,6 +26,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <stddef.h>
+
 
 #if defined\
 (__AVR_ATmega64__)   ||\
@@ -18,12 +38,11 @@
 
 #endif
 
-#include "anacomp_callback_configuration.h"
 
-// input AIN0 is connected to an internal 1.22 volt source
+#include "anacomp_configuration.h"
+
+
 #define ANACOMP_DIRECT_INPUT_IS_CONNECTED_TO_INTERNAL_VOLTAGE_SOURCE  true
-
-// input AIN0 is not connected anywhere
 #define ANACOMP_DIRECT_INPUT_IS_NOT_CONNECTED                         false
 
 #define ANACOMP_INTERRUPT_TYPE_ANY_CHANGE              0b00
@@ -33,7 +52,9 @@
 #define ANACOMP_STATE_IS_HIGH  true
 #define ANACOMP_STATE_IS_LOW   false
 
+
 // ===============================================================================
+
 
 inline void ANACOMP_Set_Enable(bool is_enable)
 {
@@ -49,8 +70,7 @@ inline void ANACOMP_Set_Enable(bool is_enable)
 
 inline void ANACOMP_Direct_Input_Set_Connect(bool direct_input_is_connect)
 {
-	if (direct_input_is_connect)
-	{
+	if (direct_input_is_connect)	{
 		ACSR |=  (1 << ACBG);
 	}
 	else
@@ -68,18 +88,6 @@ inline void ANACOMP_Set_Interrupt_Enable(bool is_enable)
 	else
 	{
 		ACSR &= ~(1 << ACIE);
-	}
-}
-
-inline void ANACOMP_Set_Connect_To_Timer1_Capture(bool is_connect)
-{
-	if (is_connect)
-	{
-		ACSR |=  (1 << ACIC);
-	}
-	else
-	{
-		ACSR &= ~(1 << ACIC);
 	}
 }
 
@@ -103,8 +111,6 @@ inline void ANACOMP_Set_Interrupt_Type(uint8_t interrupt_type)
 		ACSR &= ~(1 << ACIS0);
 	}
 }
-
-// ===============================================================================
 
 inline bool ANACOMP_Is_Enable()
 {
@@ -136,16 +142,6 @@ inline bool ANACOMP_Interrupt_Is_Enable()
 	return false;
 }
 
-inline bool ANACOMP_To_Timer1_Capture_Is_Connect()
-{
-	if (ACSR & (1 << ACIC))
-	{
-		return true;
-	}
-	
-	return false;
-}
-
 inline uint8_t ANACOMP_Get_Interrupt_Type()
 {
 	uint8_t interrupt_type = 0;
@@ -161,8 +157,6 @@ inline uint8_t ANACOMP_Get_Interrupt_Type()
 	return interrupt_type;
 }
 
-// ===============================================================================
-
 inline bool ANACOMP_Get_State()
 {
 	if (ACSR & (1 << ACO))
@@ -173,7 +167,9 @@ inline bool ANACOMP_Get_State()
 	return ANACOMP_STATE_IS_LOW;
 }
 
+
 // ===============================================================================
+
 
 #ifdef ANACOMP_USE_CALLBACK
 
@@ -183,4 +179,7 @@ void *ANACOMP_Get_CallBack_Function();
 
 #endif
 
+
 #endif
+
+
