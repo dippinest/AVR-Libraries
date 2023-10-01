@@ -1,4 +1,22 @@
 
+
+// ===============================================================================
+//
+// Библиотека для работы с LCD дисплеем на контроллере HD44780. Библиотека
+// позволяет работать с дисплеем в 4-х битном режиме. Выводы микроконтроллера,
+// через которые подключается дисплей можно настроить в файле
+// конфигурации hd44780_configuration.h
+//
+// -------------------------------------------------------------------------------
+//
+// Library for working with the LCD display on the HD44780 controller.
+// The library allows you to work with the display in 4-bit mode.
+// The microcontroller pins through which the display is connected can
+// be configured in the configuration file hd44780_configuration.h
+//
+// ===============================================================================
+
+
 #ifndef HD44780_H_
 #define HD44780_H_
 
@@ -37,6 +55,7 @@
 #define HD44780_SHIFT_TO_RIGHT  true
 #define HD44780_SHIFT_TO_LEFT   false
 
+
 void HD44780_Initialize(bool display_is_enable);
 
 void HD44780_Set_Display_Enable(bool display_is_enable);
@@ -51,7 +70,9 @@ void HD44780_Set_User_Symbol_To_CGRAM(const uint8_t *_8byte_simbol_bitmap_array,
 
 void HD44780_Set_Flash_User_Symbol_To_CGRAM(const uint8_t *_8byte_flash_simbol_bitmap_array, uint8_t flash_simbol_number);
 
+
 // ===============================================================================
+
 
 void HD44780_Print_Char(char c);
 
@@ -67,7 +88,9 @@ void HD44780_Set_Print_To_Char_Terminator(const char* string_array, const char t
 
 void HD44780_Fill_Char_Pattern(const char char_pattern, uint8_t num_pattern_chars);
 
+
 // ===============================================================================
+
 
 void HD44780_Print_Flash_Char(const char *flash_c);
 
@@ -81,7 +104,9 @@ void HD44780_Print_Flash_StringFmt(const char *flash_string_fmt, ...);
 
 void HD44780_Print_Flash_String_To_Char_Terminator(const char* flash_string, const char terminator);
 
+
 // ===============================================================================
+
 
 void HD44780_Display_Shift(bool display_shift_is_right);
 
@@ -91,4 +116,7 @@ void HD44780_Clear_String_By_Pos(uint8_t string_pos, uint8_t first_char_pos, uin
 
 void HD44780_Clear();
 
+
 #endif
+
+
