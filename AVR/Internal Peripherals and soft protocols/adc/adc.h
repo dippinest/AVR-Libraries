@@ -38,7 +38,6 @@
 #define ADC_VREF_SOURCE_EXTERNAL_AVCC 0b01
 #define ADC_VREF_SOURCE_INTERNAL      0b11
 
-
 #define ADC_PRESCALER_2    0b001
 #define ADC_PRESCALER_4    0b010
 #define ADC_PRESCALER_8    0b011
@@ -63,7 +62,6 @@ inline void ADC_Set_Enable(bool is_enable)
 	}
 }
 
-
 inline void ADC_Set_Interrupt_Enable(bool is_enable)
 {
 	if (is_enable)
@@ -76,13 +74,11 @@ inline void ADC_Set_Interrupt_Enable(bool is_enable)
 	}
 }
 
-
 inline void ADC_Set_Channel(uint8_t channel)
 {
 	ADMUX &= 0b11110000;
 	ADMUX |= channel;
 }
-
 
 inline void ADC_Set_Prescaler(uint8_t prescaler)
 {
@@ -90,19 +86,16 @@ inline void ADC_Set_Prescaler(uint8_t prescaler)
 	ADCSRA |= prescaler;
 }
 
-
 inline void ADC_Set_VREF_Source(const uint8_t vref)
 {
 	ADMUX &= 0b00111111;
 	ADMUX |= (vref << 6);
 }
 
-
 inline void ADC_Start_Conversion()
 {
 	ADCSRA |= (1 << ADSC);
 }
-
 
 inline bool ADC_Is_Enable()
 {
@@ -114,7 +107,6 @@ inline bool ADC_Is_Enable()
 	return false;
 }
 
-
 inline bool ADC_Is_Interrupt_Enable()
 {
 	if (ADCSRA & (1 << ADIE))
@@ -125,12 +117,10 @@ inline bool ADC_Is_Interrupt_Enable()
 	return false;
 }
 
-
 inline uint8_t ADC_Get_Channel()
 {
 	return ADMUX;
 }
-
 
 inline uint8_t ADC_Get_Prescaler()
 {
@@ -144,12 +134,10 @@ inline uint8_t ADC_Get_Prescaler()
 	return prescaler;
 }
 
-
 inline uint8_t ADC_Get_VREF_Source()
 {
 	return ADMUX >> 6;
 }
-
 
 inline void ADC_Initialize(uint8_t channel, uint8_t prescaler, uint8_t vref_source, bool is_enable)
 {
@@ -160,22 +148,16 @@ inline void ADC_Initialize(uint8_t channel, uint8_t prescaler, uint8_t vref_sour
 }
 
 
-
 // ===============================================================================
-
 
 
 void ADC_Set_Max_Reference_Voltage_Value(float voltage);
 
-
-float ADC_Get_Max_Reference_Voltage_Value();
-
+float ADC_Get_Max_Reference_Voltage_Value()
 
 uint16_t ADC_Get_Value_10bit();
 
-
 float ADC_Get_Voltage_Value();
-
 
 
 // ===============================================================================
@@ -213,36 +195,27 @@ uint16_t ADC_Get_Random_Entropy_Value_16bit(uint8_t channel);
 uint32_t ADC_Get_Random_Entropy_Value_32bit(uint8_t channel);
 
 
-
-
 // ===============================================================================
 
 
 #ifdef ADC_USE_CALLBACK
 
-
 void ADC_Set_Reception_Buffer_Ptr(const void *buffer);
-
 
 void ADC_Set_Reception_Buffer_Size(const uint16_t buffer_size);
 
-
 void ADC_Set_Reception_CallBack_Function(void (*callback_function)());
-
 
 bool ADC_Is_Reception_Buffer_Filled();
 
-
 void *ADC_Get_Reception_Buffer_Ptr();
-
 
 uint16_t ADC_Get_Reception_Buffer_Size();
 
-
 void *ADC_Get_Reception_CallBack_Function();
 
-
 uint16_t ADC_Get_Current_Reception_Buffer_Fullness();
+
 
 #endif
 
