@@ -29,7 +29,9 @@
 
 #define _SOFTSPI_MISO_GET (SOFTSPI_MISO_PINX & (1 << SOFTSPI_MISO_PIN))
 
+
 // ===============================================================================
+
 
 void _SOFTSPI_Mode0_Set_Bit(bool bit);
 
@@ -39,7 +41,9 @@ void _SOFTSPI_Mode2_Set_Bit(bool bit);
 
 void _SOFTSPI_Mode3_Set_Bit(bool bit);
 
+
 // ===============================================================================
+
 
 bool _SOFTSPI_Mode0_Get_Bit();
 
@@ -58,14 +62,15 @@ void SOFTSPI_Send_Data(void* data, uint16_t data_size);
 uint8_t SOFTSPI_Get_Byte();
 
 
-
 #else // ===============================================================================
+
 
 #ifndef _T
 
 #define _T(P) ((uint8_t*)&P)
 
 #endif
+
 
 typedef struct
 {
@@ -86,7 +91,9 @@ typedef struct
 	
 } SOFTSPI_t;
 
+
 // ===============================================================================
+
 
 SOFTSPI_t SOFTSPI_Get_Interface_Object(
 
@@ -106,6 +113,7 @@ SOFTSPI_t SOFTSPI_Get_Interface_Object(
 	bool     data_order
 );
 
+
 void SOFTSPI_Set_Target_Interface_Object(SOFTSPI_t *spi_interface);
 
 SOFTSPI_t *SOFTSPI_Get_Target_Interface_Object();
@@ -118,7 +126,9 @@ uint8_t SOFTSPI_Get_Byte();
 
 #endif
 
+
 // ===============================================================================
+
 
 void SOFTSPI_Set_CS_CallBack_Functions(void (*cs_on_callback)(), void (*cs_off_callback)());
 
@@ -128,3 +138,5 @@ void SOFTSPI_Call_CS_OFF();
 
 
 #endif
+
+
