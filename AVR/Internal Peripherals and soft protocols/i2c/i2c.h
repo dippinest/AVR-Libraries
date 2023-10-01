@@ -1,4 +1,20 @@
 
+
+// ===============================================================================
+//
+// Библиотека для работы с внутренним модулем I2C (который компания Atmel в своих
+// микроконтроллерах AVR назвала TWI). Вы можете использовать функции с подтверждением
+// статуса шины I2C (функции, возвращающие тип I2C_STATUS) или же без подтверждения
+//
+// -------------------------------------------------------------------------------
+//
+// Library for working with the internal I2C module (which Atmel called TWI in
+// its AVR microcontrollers). You can use functions with I2C bus status confirmation
+// (functions that return type I2C_STATUS) or without confirmation
+//
+// ===============================================================================
+
+
 #ifndef I2C_H_
 #define I2C_H_
 
@@ -6,6 +22,7 @@
 #include <util/twi.h>
 #include <stdbool.h>
 #include <stdint.h>
+
 
 #ifndef ACK
 #define ACK true
@@ -18,9 +35,12 @@
 #define I2C_STATUS_ERROR    true
 #define I2C_STATUS_NOERROR  false
 
+
 #define _I2C_GET_HEX_CODE_SPEED_TWPS00(I2C_FREQ_HZ) (((F_CPU / I2C_FREQ_HZ) - 16UL) / 2UL)
 
+
 typedef bool I2C_STATUS;
+
 
 void I2C_Initialize(uint32_t i2c_freq_hz_speed);
 
@@ -34,7 +54,9 @@ void I2C_Send_Byte(uint8_t byte);
 
 void I2C_Read_Byte(uint8_t *byte, bool ack);
 
+
 // ===============================================================================
+
 
 I2C_STATUS I2C_Start_With_I2CStatus_Control();
 
@@ -48,4 +70,7 @@ I2C_STATUS I2C_Read_Byte_With_I2CStatus_Control(uint8_t *byte, bool ack);
 
 bool I2C_Check_Device_By_Address(uint8_t dev_addr);
 
+
 #endif
+
+
