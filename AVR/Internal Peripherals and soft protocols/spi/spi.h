@@ -1,4 +1,16 @@
 
+
+// ===============================================================================
+//
+// Библиотека для работы с внутренним модулем SPI
+//
+// -------------------------------------------------------------------------------
+//
+// Library for working with the internal SPI module
+//
+// ===============================================================================
+
+
 #ifndef SPI_H_
 #define SPI_H_
 
@@ -32,7 +44,9 @@
 #define SPI_MODE_2  2 // CPOL = 1; CPHA = 0
 #define SPI_MODE_3  3 // CPOL = 1; CPHA = 1
 
+
 // ===============================================================================
+
 
 inline void SPI_Set_Enable(bool is_enable)
 {
@@ -135,7 +149,9 @@ inline void SPI_Set_Mode(uint8_t spi_dev_mode)
 	}
 }
 
+
 // ===============================================================================
+
 
 inline bool SPI_Is_Enable()
 {
@@ -216,7 +232,9 @@ inline uint8_t SPI_Get_Mode()
 	return spi_dev_mode;
 }
 
+
 // ===============================================================================
+
 
 inline void SPI_Initialize(bool spi_is_enable, bool is_master, uint8_t spi_dev_mode, uint8_t speed_macros)
 {
@@ -242,7 +260,9 @@ inline void SPI_Initialize(bool spi_is_enable, bool is_master, uint8_t spi_dev_m
 	}
 }
 
+
 // ===============================================================================
+
 
 void SPI_Send_Byte(uint8_t byte);
 
@@ -250,7 +270,9 @@ void SPI_Send_Data(void* data, uint16_t data_size);
 
 uint8_t SPI_Get_Byte(uint8_t data);
 
+
 // ===============================================================================
+
 
 void SPI_Set_CS_CallBack_Functions(void (*cs_on_callback)(), void (*cs_off_callback)());
 
@@ -259,3 +281,5 @@ void SPI_Call_CS_ON();
 void SPI_Call_CS_OFF();
 
 #endif
+
+
