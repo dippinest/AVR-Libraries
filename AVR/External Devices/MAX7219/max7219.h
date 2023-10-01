@@ -5,8 +5,14 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "spi.h"
 #include "max7219_configuration.h"
+
+#ifdef MAX7219_USE_SOFTSPI
+#include "softspi.h"
+#else
+#include "spi.h"
+#endif
+
 
 // macros for the luminance values of segments
 #define MAX7219_BRIGHTNESS_COEFFICIENT_1   0x00
@@ -26,6 +32,7 @@
 #define MAX7219_BRIGHTNESS_COEFFICIENT_15  0x0E
 #define MAX7219_BRIGHTNESS_COEFFICIENT_16  0x0F
 
+
 // macros for segment addresses
 #define MAX7219_1_DIGIT                           0x00
 #define MAX7219_2_DIGIT                           0x01
@@ -36,11 +43,13 @@
 #define MAX7219_7_DIGIT                           0x06
 #define MAX7219_8_DIGIT                           0x07
 
+
 // macros of decoding modes
 #define MAX7219_DECODE_MODE_NO_DECODE             0x00
 #define MAX7219_DECODE_MODE_0_DIGIT_DECODE_ONLY   0x01
 #define MAX7219_DECODE_MODE_3_0_DIGITS_DECODE     0x0F
 #define MAX7219_DECODE_MODE_DECODE_ALL_DIGITS     0xFF
+
 
 void MAX7219_Set_Enable(bool is_enable);
 
@@ -50,7 +59,9 @@ void MAX7219_Set_Num_Of_Involved_Digits(uint8_t num_of_involved_digits);
 
 void MAX7219_Set_Brightness(uint8_t brightness_coef);
 
+
 // ===============================================================================
+
 
 void MAX7219_Set_Digit(uint8_t single_digit_pos, uint8_t digit_value);
 
@@ -64,7 +75,9 @@ void MAX7219_Decode_Mode_Clear_All(uint8_t num_of_involved_digits);
 
 void MAX7219_Display_Test();
 
+
 // ===============================================================================
+
 
 #ifdef MAX7219_USE_CS_CALLBACKS
 
@@ -90,3 +103,5 @@ void MAX7219_Set_Char_Digits(char *data, uint8_t data_size, const uint8_t max_nu
 #endif
 
 #endif
+
+
