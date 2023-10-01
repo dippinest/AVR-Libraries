@@ -1,4 +1,20 @@
 
+
+// ===============================================================================
+//
+// Библиотека для работы с драйвером семисегментных светодиодных индикаторов
+// MAX7219 по интерфейсу SPI. SPI можно использовать как аппаратный, так и
+// программный - это можно настроить в файле конфигурации max7219_configuration.h
+//
+// -------------------------------------------------------------------------------
+//
+// Library for working with the driver of seven-segment LED indicators MAX7219
+// via the SPI interface. SPI can be used both hardware and software - this can
+// be configured in the configuration file max7219_configuration.h
+//
+// ===============================================================================
+
+
 #ifndef MAX7219_H_
 #define MAX7219_H_
 
