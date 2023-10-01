@@ -1,4 +1,20 @@
 
+
+// ===============================================================================
+//
+// Библиотека для работы с I2C часами реального времени DS1307. I2C можно
+// использовать как аппаратный, так и программный - это можно настроить в
+// файле конфигурации ds1307_configuration.h
+//
+// -------------------------------------------------------------------------------
+//
+// Library for working with the I2C real-time clock DS1307. I2C can be
+// used both hardware and software - this can be configured in the
+// configuration file ds1307_configuration.h
+//
+// ===============================================================================
+
+
 #ifndef DS1307_H_
 #define DS1307_H_
 
@@ -12,25 +28,25 @@
 #define _DS1307_ADDRESS_DEVICE 0x68
 
 // addresses of internal DS1307 registers (time data is stored in them)
-#define _DS1307_ADDR_REGISTER_SECOND                0x00
-#define _DS1307_ADDR_REGISTER_MINUTES               0x01
-#define _DS1307_ADDR_REGISTER_HOURS                 0x02
-#define _DS1307_ADDR_REGISTER_CURRENT_WEEKDAY       0x03
-#define _DS1307_ADDR_REGISTER_CURRENT_DAY_OF_MONTH  0x04
-#define _DS1307_ADDR_REGISTER_CURRENT_MONTH         0x05
-#define _DS1307_ADDR_REGISTER_CURRENT_YEAR          0x06
-#define _DS1307_ADDR_CONTROL_REGISTER               0x07
-#define _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER    0x08
+#define _DS1307_ADDR_REGISTER_SECOND                    0x00
+#define _DS1307_ADDR_REGISTER_MINUTES                   0x01
+#define _DS1307_ADDR_REGISTER_HOURS                     0x02
+#define _DS1307_ADDR_REGISTER_CURRENT_WEEKDAY           0x03
+#define _DS1307_ADDR_REGISTER_CURRENT_DAY_OF_MONTH      0x04
+#define _DS1307_ADDR_REGISTER_CURRENT_MONTH             0x05
+#define _DS1307_ADDR_REGISTER_CURRENT_YEAR              0x06
+#define _DS1307_ADDR_CONTROL_REGISTER                   0x07
+#define _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER        0x08
 
-#define _DS1307_HOUR_MODE_BIT                           6
-#define _DS1307_IS_HOUR_AM_BIT                          5
-#define _DS1307_WORK_PERMISSION_BIT_CH                  7
-#define _DS1307_SQUARE_WAVE_OUTPUT_PERMISSION_BIT_SQW   4
+#define _DS1307_HOUR_MODE_BIT                              6
+#define _DS1307_IS_HOUR_AM_BIT                             5
+#define _DS1307_WORK_PERMISSION_BIT_CH                     7
+#define _DS1307_SQUARE_WAVE_OUTPUT_PERMISSION_BIT_SQW      4
 
-#define DS1307_SQWE_FREQUENCY_1_HZ                      0x0
-#define DS1307_SQWE_FREQUENCY_4096_HZ                   0x1
-#define DS1307_SQWE_FREQUENCY_8192_HZ                   0x2
-#define DS1307_SQWE_FREQUENCY_32768_HZ                  0x3
+#define DS1307_SQWE_FREQUENCY_1_HZ                       0x0
+#define DS1307_SQWE_FREQUENCY_4096_HZ                    0x1
+#define DS1307_SQWE_FREQUENCY_8192_HZ                    0x2
+#define DS1307_SQWE_FREQUENCY_32768_HZ                   0x3
 
 
 enum DS1307_Enum_Days
@@ -42,6 +58,7 @@ enum DS1307_Enum_Month
 {
 	JANUARY = 1, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
 };
+
 
 // structure for storing time data
 typedef struct
@@ -55,6 +72,7 @@ typedef struct
 	uint8_t year;          // year (add the current two-digit year to the 2000th)
 	
 } DS1307_Data_t;
+
 
 void DS1307_Set_Seconds(uint8_t seconds);
 
@@ -108,4 +126,7 @@ void DS1307_Write_Data_To_User_RAM(uint8_t mem_addr, void *data, uint8_t data_si
 
 void *DS1307_Read_Data_From_User_RAM(uint8_t mem_addr, void *data, uint8_t data_size);
 
+
 #endif
+
+
