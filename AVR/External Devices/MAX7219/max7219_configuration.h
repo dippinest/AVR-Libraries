@@ -9,7 +9,7 @@
 // if you want to work with the device via software SPI,
 // uncomment this define (otherwise comment it out)
 
-//#define MAX7219_USE_SOFTSPI
+#define MAX7219_USE_SOFTSPI
 
 
 // если вы хотите использовать колбэк-функции для изменения вывода
