@@ -36,8 +36,7 @@
 (__AVR_ATmega64__)   ||\
 (__AVR_ATmega64A__)  ||\
 (__AVR_ATmega128__)  ||\
-(__AVR_ATmega128A__) ||\
-(__AVR_ATmega162__)
+(__AVR_ATmega128A__)
 
 #define UDR   UDR0
 #define UCSRA UCSR0A
