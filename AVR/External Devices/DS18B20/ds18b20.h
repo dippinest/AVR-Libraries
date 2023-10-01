@@ -1,4 +1,20 @@
 
+
+// ===============================================================================
+//
+// Библиотека для работы датчиками температуры DS18B20 по программной шине 1-Wire.
+// Вы можете работать как с одним датчиком, так и с несколькими - это можно
+// настроить в файле конфигурации ds18b20_configuration.h
+//
+// -------------------------------------------------------------------------------
+//
+// Library for working with DS18B20 temperature sensors over the 1-Wire
+// software bus. You can work with either one sensor or several - this can be
+// configured in the ds18b20_configuration.h configuration file
+//
+// ===============================================================================
+
+
 #ifndef DS18B20_H_
 #define DS18B20_H_
 
@@ -10,7 +26,9 @@
 #include "onewire.h"
 #include "ds18b20_configuration.h"
 
+
 // ===============================================================================
+
 
 #define DS18B20_12BIT_RESOLUTION_CONVERT_TIMEOUT_MS  750
 #define DS18B20_11BIT_RESOLUTION_CONVERT_TIMEOUT_MS  375
@@ -25,7 +43,9 @@
 #define DS18B20_IS_USING_EXTERNAL_POWER_SUPPLY_MODE true
 #define DS18B20_IS_USING_PARASITE_POWER_SUPPLY_MODE false
 
+
 // ===============================================================================
+
 
 inline uint8_t DS18B20_Test()
 {
@@ -37,13 +57,17 @@ inline uint8_t DS18B20_Test()
 	return 1;
 }
 
+
 #ifdef DS18B20_USE_MULTIPLE_SENSORS
+
 
 void DS18B20_Set_Target_DS18B20_Address(uint8_t *ds18b20_address);
 
 uint8_t *DS18B20_Get_Target_DS18B20_Address();
 
+
 // ===============================================================================
+
 
 void DS18B20_Set_Resolution(uint8_t resolution);
 
@@ -63,7 +87,9 @@ float DS18B20_Get_Float_Temperature_With_Increased_Accuracy();
 
 bool DS18B20_Get_Power_Supply();
 
+
 #else // ===============================================================================
+
 
 void DS18B20_Set_Resolution(uint8_t resolution);
 
@@ -77,6 +103,10 @@ float DS18B20_Get_Float_Temperature();
 
 bool DS18B20_Get_Power_Supply();
 
-#endif
 
 #endif
+
+
+#endif
+
+
