@@ -5,9 +5,6 @@
 // -------------------------------------------------------------------------------
 // Example of measuring the execution time of a section of code using a system timer
 
-
-#include <util/delay.h>
-
 #include "uart.h"
 #include "systimer.h"
 
