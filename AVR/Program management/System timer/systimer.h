@@ -2,7 +2,7 @@
 
 // ===============================================================================
 //
-// Библиотека для реализации системного таймера и работы с ним. Поскольку
+// Библиотека с реализацией системного таймера и работы с ним. Поскольку
 // системный таймер можно реализовать с помощью любого аппаратного таймера
 // микроконтроллера, то его реализация вынесена в отдельный файл
 // конфигурации systimer_configuration.h
@@ -13,7 +13,7 @@
 //
 // -------------------------------------------------------------------------------
 //
-// A library for implementing a system timer and working with it.
+// Library with the implementation of the system timer and working with it.
 // Since the system timer can be implemented using any MCU
 // hardware timer, its implementation is placed in a separate
 // configuration file, systimer_configuration.h
