@@ -15,8 +15,7 @@
 //
 
 #include <avr/sleep.h>
-
-#include "uart.h"
+
 #include "systimer.h"
 
 
