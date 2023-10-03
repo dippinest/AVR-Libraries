@@ -62,22 +62,22 @@ int main(void)
 	
 	
 	
-	// переменные для хранения времени выполнения каждой задачи
+	// переменные для хранения параметров выполнения каждой задачи
 	//
 	// -------------------------------------------------------------------------------
-	// variables for storing the execution time of each task
+	// variables for storing the execution params of each task
 	//
-	SYSTIMER_t timer0 = 0;
-	SYSTIMER_t timer1 = 0;
-	SYSTIMER_t timer2 = 0;
-	SYSTIMER_t timer3 = 0;
+	SYSTIMER_Task_Params_t tparams0 = SYSTIMER_Get_Task_Params(100);
+	SYSTIMER_Task_Params_t tparams1 = SYSTIMER_Get_Task_Params(200);
+	SYSTIMER_Task_Params_t tparams2 = SYSTIMER_Get_Task_Params(500);
+	SYSTIMER_Task_Params_t tparams3 = SYSTIMER_Get_Task_Params(1000);
 	
 	while (1)
 	{
-		SYSTIMER_Run_Task(&timer0, Task0, 100);  // run every 100  ticks
-		SYSTIMER_Run_Task(&timer1, Task1, 200);  // run every 200  ticks
-		SYSTIMER_Run_Task(&timer2, Task2, 500);  // run every 500  ticks
-		SYSTIMER_Run_Task(&timer3, Task3, 1000); // run every 1000 ticks
+		SYSTIMER_Run_Task(&tparams0, Task0);  // run every 100  ticks
+		SYSTIMER_Run_Task(&tparams1, Task1);  // run every 200  ticks
+		SYSTIMER_Run_Task(&tparams2, Task2);  // run every 500  ticks
+		SYSTIMER_Run_Task(&tparams3, Task3);  // run every 1000 ticks
 		
 		
 		
