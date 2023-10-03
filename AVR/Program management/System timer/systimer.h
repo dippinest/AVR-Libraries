@@ -46,8 +46,23 @@ typedef uint16_t SYSTIMER_t;
 
 #endif
 
-
 SYSTIMER_t SYSTIMER_Get_Value();
+
+
+// ===============================================================================
+
+
+typedef struct
+{
+	SYSTIMER_t timer;
+	SYSTIMER_t interval;
+	
+} SYSTIMER_Task_Params_t;
+
+
+SYSTIMER_Task_Params_t SYSTIMER_Get_Task_Params(SYSTIMER_t interval);
+
+void SYSTIMER_Run_Task(SYSTIMER_Task_Params_t *task_params, void (*task)());
 
 
 #endif
