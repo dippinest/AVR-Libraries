@@ -39,6 +39,7 @@ void SYSTIMER_Run_Task(SYSTIMER_Task_Params_t *task_params, void (*task)())
 //
 ISR(TIMER0_COMP_vect)
 {
+	TCNT0 = 6;
 	++__SYSTIMER;
 }
 
