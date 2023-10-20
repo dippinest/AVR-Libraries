@@ -1,7 +1,6 @@
 
 #include <avr/pgmspace.h>
 
-#define F_CPU 16000000UL
 #include "uart.h"
 
 const char FLASH_STRING[] PROGMEM = "this string is in a flash memory";	
