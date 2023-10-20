@@ -1,7 +1,5 @@
 
-#define F_CPU 16000000UL
-
-#include <util/delay.h>
+##include <util/delay.h>
 
 #include "uart.h"
 #include "adc.h"
