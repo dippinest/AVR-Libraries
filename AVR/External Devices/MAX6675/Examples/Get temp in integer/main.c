@@ -3,7 +3,6 @@
 // MAX6675_USE_SPI_CS_CALLBACKS macro in the max6675_configuration.h file!
 
 #include <util/delay.h>
-#define F_CPU 16000000UL
 
 #include "i2c.h"
 #include "hd44780_i2c.h"
