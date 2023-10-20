@@ -1,7 +1,6 @@
 
 #include <avr/pgmspace.h>
 
-#define F_CPU 16000000UL
 #include "hd44780.h"
 #include "deftypes.h"
 #include "itoa.h"
