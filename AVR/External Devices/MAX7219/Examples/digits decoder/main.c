@@ -2,7 +2,6 @@
 // ATN! to run the example, be sure to uncomment out the
 // MAX7219_USE_SPI_CS_CALLBACKS macro in the max7219_configuration.h file!
 
-#define F_CPU 16000000UL
 #include <util/delay.h>
 
 #include "spi.h"
