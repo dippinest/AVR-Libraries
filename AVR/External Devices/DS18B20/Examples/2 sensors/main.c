@@ -2,8 +2,6 @@
 // ATN! to work with multiple sensors, uncomment the macro
 // "DS18B20_USE_MULTIPLE_SENSORS" in the file "ds18b20_configuration.h"!
 
-#define F_CPU 16000000UL
-
 #include <util/delay.h>
 
 #include "uart.h"
