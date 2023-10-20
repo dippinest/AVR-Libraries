@@ -1,6 +1,4 @@
 
-#define F_CPU 16000000UL
-
 #include "i2c.h"
 #include "hd44780_i2c.h"
 #include "lm75.h"
