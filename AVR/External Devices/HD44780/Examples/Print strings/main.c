@@ -1,5 +1,4 @@
 
-#define F_CPU 16000000UL
 #include "hd44780.h"
 
 int main(void)
