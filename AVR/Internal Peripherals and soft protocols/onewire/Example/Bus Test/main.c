@@ -1,8 +1,6 @@
 
 // For example, I connect DS18B20 sensor on 1-wire bus
 
-#define F_CPU 16000000UL
-
 #include <util/delay.h>
 
 #include "uart.h"
