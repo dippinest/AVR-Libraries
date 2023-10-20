@@ -1,5 +1,4 @@
 
-#define F_CPU 16000000UL
 #include "i2c.h"
 #include "uart.h"
 
