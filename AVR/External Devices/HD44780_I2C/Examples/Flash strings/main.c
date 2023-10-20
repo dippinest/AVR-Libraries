@@ -1,7 +1,6 @@
 
 #include <avr/pgmspace.h>
 
-#define F_CPU 16000000UL
 #include "i2c.h"
 #include "hd44780_i2c.h"
 #include "deftypes.h"
