@@ -33,6 +33,9 @@
 #define NACK false
 #endif
 
+#define SOFTI2C_DELAY (_delay_loop_2(SOTFI2C_CLOCK_DELAY))
+
+
 #ifndef SOFTI2C_USE_MULTIPLE_INTERFACE
 
 #define SOTFI2C_SDA_SET_LOW	  SOTFI2C_SDA_PIN_DDR |=  (1 << SOTFI2C_SDA_PIN)
