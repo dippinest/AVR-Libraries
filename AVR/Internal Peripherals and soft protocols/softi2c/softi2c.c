@@ -2,6 +2,7 @@
 #include "softi2c.h"
 #include "softi2c_configuration.h"
 
+
 #ifndef SOFTI2C_USE_MULTIPLE_INTERFACE
 
 void SOFTI2C_Initialize()
@@ -17,20 +18,20 @@ void SOFTI2C_Initialize()
 void SOFTI2C_Start()
 {
 	SOTFI2C_SCL_SET_HIGH;
-	_delay_loop_2(SOTFI2C_CLOCK_DELAY);
+	SOFTI2C_DELAY;
 	
 	SOTFI2C_SDA_SET_LOW;
-	_delay_loop_2(SOTFI2C_CLOCK_DELAY);
 }
 
 void SOFTI2C_Stop()
 {
 	SOTFI2C_SDA_SET_LOW;
-	_delay_loop_2(SOTFI2C_CLOCK_DELAY);
+	SOFTI2C_DELAY;
+	
 	SOTFI2C_SCL_SET_HIGH;
-	_delay_loop_2(SOTFI2C_CLOCK_DELAY);
+	SOFTI2C_DELAY;
+	
 	SOTFI2C_SDA_SET_HIGH;
-	_delay_loop_2(SOTFI2C_CLOCK_DELAY);
 }
 
 void SOFTI2C_Restart()
@@ -43,7 +44,7 @@ uint8_t SOFTI2C_Send_Byte(uint8_t data)
 	for (int8_t i = 0; i < 8; ++i)
 	{
 		SOTFI2C_SCL_SET_LOW;
-		_delay_loop_2(SOTFI2C_CLOCK_DELAY);
+		SOFTI2C_DELAY;
 		
 		if (data & 0x80)
 		{
@@ -54,9 +55,10 @@ uint8_t SOFTI2C_Send_Byte(uint8_t data)
 			SOTFI2C_SDA_SET_LOW;
 		}
 		
-		_delay_loop_2(SOTFI2C_CLOCK_DELAY);
+		SOFTI2C_DELAY;
+		
 		SOTFI2C_SCL_SET_HIGH;
-		_delay_loop_2(SOTFI2C_CLOCK_DELAY);
+		SOFTI2C_DELAY;
 		
 		while (!(SOTFI2C_SCL_PIN_PINX & (1 << SOTFI2C_SCL_PIN)));
 		
@@ -64,41 +66,37 @@ uint8_t SOFTI2C_Send_Byte(uint8_t data)
 	}
 	
 	SOTFI2C_SCL_SET_LOW;
-	_delay_loop_2(SOTFI2C_CLOCK_DELAY);
+	SOFTI2C_DELAY;
 	
 	SOTFI2C_SDA_SET_HIGH;
-	_delay_loop_2(SOTFI2C_CLOCK_DELAY);
+	SOFTI2C_DELAY;
 	
 	SOTFI2C_SCL_SET_HIGH;
-	_delay_loop_2(SOTFI2C_CLOCK_DELAY);
+	SOFTI2C_DELAY;
 	
 	uint8_t ack = !(SOTFI2C_SDA_PIN_PINX & (1 << SOTFI2C_SDA_PIN));
 	
 	SOTFI2C_SCL_SET_LOW;
-	_delay_loop_2(SOTFI2C_CLOCK_DELAY);
+	SOFTI2C_DELAY;
 	
 	return ack;
 }
 
 void SOFTI2C_Read_Byte(uint8_t *data, bool ack)
-{	
+{
 	for (int8_t i = 0; i < 8; ++i)
 	{
-		SOTFI2C_SCL_SET_LOW;
-		_delay_loop_2(SOTFI2C_CLOCK_DELAY);
 		SOTFI2C_SCL_SET_HIGH;
-		_delay_loop_2(SOTFI2C_CLOCK_DELAY);
-		
-		while (!(SOTFI2C_SCL_PIN_PINX & (1 << SOTFI2C_SCL_PIN)));
+		SOFTI2C_DELAY;
 		
 		if (SOTFI2C_SDA_PIN_PINX & (1 << SOTFI2C_SDA_PIN))
 		{
 			*data |= (0x80 >> i);
 		}
+		
+		SOTFI2C_SCL_SET_LOW;
+		SOFTI2C_DELAY;
 	}
-	
-	SOTFI2C_SCL_SET_LOW;
-	_delay_loop_2(SOTFI2C_CLOCK_DELAY);
 	
 	if (ack)
 	{
@@ -109,14 +107,15 @@ void SOFTI2C_Read_Byte(uint8_t *data, bool ack)
 		SOTFI2C_SDA_SET_HIGH;
 	}
 	
-	_delay_loop_2(SOTFI2C_CLOCK_DELAY);
-	
 	SOTFI2C_SCL_SET_HIGH;
-	_delay_loop_2(SOTFI2C_CLOCK_DELAY);
+	SOFTI2C_DELAY;
 	
 	SOTFI2C_SCL_SET_LOW;
-	_delay_loop_2(SOTFI2C_CLOCK_DELAY);
+	SOFTI2C_DELAY;
+	
+	SOTFI2C_SDA_SET_HIGH;
 }
+
 
 #else
 
@@ -261,24 +260,19 @@ uint8_t SOFTI2C_Send_Byte(uint8_t data)
 
 void SOFTI2C_Read_Byte(uint8_t *data, bool ack)
 {
-	
 	for (int8_t i = 0; i < 8; ++i)
 	{
-		_SOTFI2C_SCL_SET_LOW();
-		_SOTFI2C_CLOCK_DELAY();
 		_SOTFI2C_SCL_SET_HIGH();
 		_SOTFI2C_CLOCK_DELAY();
-		
-		while (!(*(target_softi2c_interface_object->softi2c_scl_pinx) & (1 << target_softi2c_interface_object->softi2c_scl_pin)));
 		
 		if (*(target_softi2c_interface_object->softi2c_sda_pinx) & (1 << target_softi2c_interface_object->softi2c_sda_pin))
 		{
 			*data |= (0x80 >> i);
 		}
+		
+		_SOTFI2C_SCL_SET_LOW();
+		_SOTFI2C_CLOCK_DELAY();
 	}
-	
-	_SOTFI2C_SCL_SET_LOW();
-	_SOTFI2C_CLOCK_DELAY();
 	
 	if (ack)
 	{
@@ -289,13 +283,13 @@ void SOFTI2C_Read_Byte(uint8_t *data, bool ack)
 		_SOTFI2C_SDA_SET_HIGH();
 	}
 	
-	_SOTFI2C_CLOCK_DELAY();
-	
 	_SOTFI2C_SCL_SET_HIGH();
 	_SOTFI2C_CLOCK_DELAY();
 	
 	_SOTFI2C_SCL_SET_LOW();
 	_SOTFI2C_CLOCK_DELAY();
+	
+	_SOTFI2C_SDA_SET_HIGH();
 }
 
 #endif
