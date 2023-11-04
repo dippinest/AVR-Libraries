@@ -2,19 +2,23 @@
 
 // ===============================================================================
 //
-// Библиотека для работы с LCD дисплеем на контроллере HD44780 посредством I2C
-// расширителя портов ввода-вывода PCF8574 (переходник). Библиотека позволяет
-// работать с дисплеем как с I2C устройством. I2C можно использовать как
-// аппаратный, так и программный - это можно настроить в
-// файле конфигурации hd44780_configuration.h
+// Р‘РёР±Р»РёРѕС‚РµРєР° РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ FRAM РїР°РјСЏС‚СЊСЋ FM24CXX РїРѕ С€РёРЅРµ I2C.
+// РџРѕРґРґРµСЂР¶РёРІР°СЋС‚СЃСЏ  С‡РёРїС‹ СЃ СЂР°Р·РјРµСЂРѕРј РїР°РјСЏС‚Рё РѕС‚ 64 РњР‘РёС‚ (8 РљР‘).
+// Р‘РёР±Р»РёРѕС‚РµРєР° РїРѕР·РІРѕР»СЏРµС‚ Р·Р°РїРёСЃС‹РІР°С‚СЊ Рё С‡РёС‚Р°С‚СЊ РґР°РЅРЅС‹Рµ РёР· РїР°РјСЏС‚Рё РїРѕ РїСЂРѕРёР·РІРѕР»СЊРЅС‹Рј
+// Р°РґСЂРµСЃР°Рј, Р° С‚Р°РєР¶Рµ Р·Р°РїРѕР»РЅСЏС‚СЊ РїР°РјСЏС‚СЊ РєРѕРЅРєСЂРµС‚РЅС‹Рј Р·РЅР°С‡РµРЅРёРµРј.
+//
+// I2C РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РєР°Рє Р°РїРїР°СЂР°С‚РЅС‹Р№, С‚Р°Рє Рё РїСЂРѕРіСЂР°РјРјРЅС‹Р№ -
+// СЌС‚Рѕ РјРѕР¶РЅРѕ РЅР°СЃС‚СЂРѕРёС‚СЊ РІ С„Р°Р№Р»Рµ РєРѕРЅС„РёРіСѓСЂР°С†РёРё frami2c_configuration.h
 //
 // -------------------------------------------------------------------------------
 //
-// Library for working with the LCD display on the HD44780 controller via
-// the I2C I/O port extender PCF8574 (adapter). The library allows you to
-// work with the display as an I2C device. I2C can be used both hardware
-// and software - this can be configured in the configuration
-// file hd44780_configuration.h
+// Library for working with FM24CXX FRAM memory over the I2C bus.
+// Chips with a memory size of 64 MBit (8 KB) are supported.
+// The library allows you to write and read data from memory
+// at arbitrary addresses, as well as fill memory with a specific value.
+//
+// I2C can be used both hardware and software - this can be
+// configured in the frami2c_configuration.h configuration file
 //
 // ===============================================================================
 
@@ -39,12 +43,6 @@
 #define FRAMI2C_DEV_ADDR_A2T_A1T_A0T 0x57 // A2T+ A1T+ A0T+
 
 // --------------------------------------------
-#define FM24C01_MAX_MEM_ADDR         127UL
-#define FM24C02_MAX_MEM_ADDR         255UL
-#define FM24C04_MAX_MEM_ADDR         511UL
-#define FM24C08_MAX_MEM_ADDR         1023UL
-#define FM24C16_MAX_MEM_ADDR         2047UL
-#define FM24C32_MAX_MEM_ADDR         4095UL
 #define FM24C64_MAX_MEM_ADDR         8191UL
 #define FM24C128_MAX_MEM_ADDR        16383UL
 #define FM24C256_MAX_MEM_ADDR        32767UL
