@@ -1,26 +1,4 @@
 
-
-// ===============================================================================
-//
-// Библиотека для работы с микросхемами FRAM памяти по протоколу I2C (и SOFTI2C).
-// Библиотека позволяет записывать и читать данные из памяти по произвольным
-// адресам, а также заполнять память конкретным значением.
-//
-// Библиотека способна работать как с аппаратным I2C, так и с его программной
-// реализацией (это настраивается в файле frami2c_configuration.h)
-//
-// -------------------------------------------------------------------------------
-//
-// A library for working with FRAM memory chips over the I2C protocol
-// (and SOFTI2C). The library allows you to write and read data from memory
-// at arbitrary addresses, as well as fill memory with a specific value.
-//
-// The library is able to work with both hardware I2C and it is software
-// implementation (this is configured in the frami2c_configuration.h file)
-//
-// ===============================================================================
-
-
 #include "frami2c.h"
 
 static FRAMI2C_t *target_memory_chip = NULL;
@@ -60,10 +38,7 @@ void FRAMI2C_Write_Byte(uint16_t memory_addr, uint8_t byte)
 	
 	SOFTI2C_Send_Byte(target_memory_chip->dev_addr << 1);
 	
-	if (target_memory_chip->max_mem_addr > FM24C16_MAX_MEM_ADDR)
-	{
-		SOFTI2C_Send_Byte(memory_addr >> 8);
-	}
+	SOFTI2C_Send_Byte(memory_addr >> 8);
 	
 	SOFTI2C_Send_Byte((uint8_t)memory_addr);
 	
@@ -78,10 +53,7 @@ uint8_t FRAMI2C_Read_Byte(uint16_t memory_addr)
 	
 	SOFTI2C_Send_Byte(target_memory_chip->dev_addr << 1);
 	
-	if (target_memory_chip->max_mem_addr > FM24C16_MAX_MEM_ADDR)
-	{
-		SOFTI2C_Send_Byte(memory_addr >> 8);
-	}
+	SOFTI2C_Send_Byte(memory_addr >> 8);
 	
 	SOFTI2C_Send_Byte((uint8_t)memory_addr);
 	
@@ -104,10 +76,7 @@ uint16_t FRAMI2C_Write_Data(uint16_t memory_addr, void *data, uint16_t data_size
 	
 	SOFTI2C_Send_Byte(target_memory_chip->dev_addr << 1);
 	
-	if (target_memory_chip->max_mem_addr > FM24C16_MAX_MEM_ADDR)
-	{
-		SOFTI2C_Send_Byte(memory_addr >> 8);
-	}
+	SOFTI2C_Send_Byte(memory_addr >> 8);
 	
 	SOFTI2C_Send_Byte((uint8_t)memory_addr);
 	
@@ -135,10 +104,7 @@ uint16_t FRAMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_size)
 	
 	SOFTI2C_Send_Byte(target_memory_chip->dev_addr << 1);
 	
-	if (target_memory_chip->max_mem_addr > FM24C16_MAX_MEM_ADDR)
-	{
-		SOFTI2C_Send_Byte(memory_addr >> 8);
-	}
+	SOFTI2C_Send_Byte(memory_addr >> 8);
 	
 	SOFTI2C_Send_Byte((uint8_t)memory_addr);
 	
@@ -168,10 +134,7 @@ uint32_t FRAMI2C_Fill(uint16_t memory_addr, uint8_t val, uint32_t num)
 	
 	SOFTI2C_Send_Byte(target_memory_chip->dev_addr << 1);
 	
-	if (target_memory_chip->max_mem_addr > FM24C16_MAX_MEM_ADDR)
-	{
-		SOFTI2C_Send_Byte(memory_addr >> 8);
-	}
+	SOFTI2C_Send_Byte(memory_addr >> 8);
 	
 	SOFTI2C_Send_Byte((uint8_t)memory_addr);
 	
