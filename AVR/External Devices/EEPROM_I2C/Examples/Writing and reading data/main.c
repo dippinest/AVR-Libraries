@@ -31,12 +31,12 @@ int main(void)
 	// запись данных из массива str в EEPROM по адресу 0x0000 (закомментировано)
 	// -------------------------------------------------------------------------------
 	// writing data from the str array to EEPROM at 0x0000 (commented out)
-	// EEPROMI2C_Write_Data(0x0000, str, STR_SIZE, 10);
+	// EEPROMI2C_Write_Data(0x0000, str, STR_SIZE, 5);
 	
 	// чтение данных из EEPROM по адресу 0x0000 в массив buffer
 	// -------------------------------------------------------------------------------
 	// reading data from EEPROM at address 0x0000 to buffer array
-	EEPROMI2C_Read_Data(0x0000, buffer, STR_SIZE, 10);
+	EEPROMI2C_Read_Data(0x0000, buffer, STR_SIZE, 5);
 	
 	
 	UART_Data_Transmit(buffer, STR_SIZE);
