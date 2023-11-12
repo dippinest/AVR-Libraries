@@ -10,7 +10,7 @@
 // требует некоторого временного интервала, поэтому между транзакциями
 // следует делать паузу (к примеру, использовать временной промежуток для
 // полезной работы или просто ждать, используя функцию EEPROMI2C_Operation_Delay_Ms()).
-// Обычно время между транзакциями занимает ~10 мс.
+// Обычно время между транзакциями занимает ~5 мс.
 //
 // В функциях EEPROMI2C_Write_Data(), EEPROMI2C_Read_Data() и EEPROMI2C_Fill_All_Memory()
 // таймаут между транзакциями задаётся непосредственно с помощью передаваемого
@@ -30,7 +30,7 @@
 // requires a certain time interval, so you should pause between transactions
 // (for example, use a time interval for useful work or just wait using the
 // EEPROMI2C_Operation_Delay_Ms() function). Usually the time between
-// transactions takes ~10 ms.
+// transactions takes ~5 ms.
 //
 // In the functions EEPROMI2C_Write_Data(), EEPROMI2C_Read_Data() and
 // EEPROMI2C_Fill_All_Memory(), the timeout between transactions is set
