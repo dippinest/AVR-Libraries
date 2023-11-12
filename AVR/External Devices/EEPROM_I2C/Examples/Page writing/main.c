@@ -39,7 +39,7 @@ int main(void)
 	// запись данных из массива str в EEPROM по адресу 0x0000 (закомментировано)
 	// -------------------------------------------------------------------------------
 	// writing data from the str array to EEPROM at 0x0000 (commented out)
-	EEPROMI2C_Write_Page(0x0000, data, DATA_SIZE);
+	// EEPROMI2C_Write_Page(0x0000, data, DATA_SIZE);
 	
 	
 	// задержка 5 мс между транзакциями чтения страниц
