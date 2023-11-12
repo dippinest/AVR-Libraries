@@ -23,12 +23,12 @@ int main(void)
 
 
 	// заполнение байтом 0xAC всех ячейки данных FRAM
-	// (последний аргумент 10 - время в мс между транзакциями)
+	// (последний аргумент '5' - время в мс между транзакциями)
 	// -------------------------------------------------------------------------------
 	// filling of all FRAM data cells with 0xAC byte
-	// (the last argument 10 is the time in milliseconds between transactions)
+	// (the last argument '5' is the time in milliseconds between transactions)
 	
-	EEPROMI2C_Fill_All_Memory(0x0000, 0xAC, EEPROM_MAX_MEM_ADDR, 10);
+	EEPROMI2C_Fill_All_Memory(0x0000, 0xAC, EEPROM_MAX_MEM_ADDR, 5);
 	
 	
 	// приёмный буфер размером в страницу EEPROM
@@ -42,7 +42,7 @@ int main(void)
 	
 	for (uint32_t i = 0; i < EEPROM_MAX_MEM_ADDR; i += BUFFER_SIZE)
 	{
-		EEPROMI2C_Read_Data(i, buffer, BUFFER_SIZE, 10);
+		EEPROMI2C_Read_Data(i, buffer, BUFFER_SIZE, 5);
 		
 		UART_Data_Transmit(buffer, BUFFER_SIZE);
 	}
