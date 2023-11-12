@@ -12,7 +12,6 @@ static char data[] = "This is a data for writing to EEPROM";
 // -------------------------------------------------------------------------------
 // this is the receiving buffer is the size of an EEPROM page
 
-//uint8_t buffer[DATA_SIZE];
 uint8_t buffer[DATA_SIZE];
 
 
