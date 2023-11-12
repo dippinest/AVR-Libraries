@@ -28,7 +28,7 @@ int main(void)
 	EEPROMI2C_Fill_All_Memory(0x0000, 0xAC, (fram.max_mem_addr + 1));
 	
 	
-	for (uint32_t i = 0; i <= fram.max_mem_addr; i += BUFFER_SIZE)
+	for (uint32_t i = 0; i < fram.max_mem_addr; i += BUFFER_SIZE)
 	{
 		FRAMI2C_Read_Data(i, buffer, BUFFER_SIZE);
 		
