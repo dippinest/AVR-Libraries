@@ -15,7 +15,10 @@
 // В функциях EEPROMI2C_Write_Data(), EEPROMI2C_Read_Data() и EEPROMI2C_Fill_All_Memory()
 // таймаут между транзакциями задаётся непосредственно с помощью передаваемого
 // параметра operation_delay_ms. Эти функции надолго блокируют систему, поэтому
-// используйте их с осторожностью!
+// используйте их с осторожностью! Если для Вас важно быстродействие и/или
+// энергоэффективность, я не рекомендую использовать эти функции напрямую,
+// а весь необходимый функционал реализовывать с помощью конечных автоматов
+// через отдельные транзакции (чтение/запись отдельных байтов, страниц).
 //
 // I2C можно использовать как аппаратный, так и программный -
 // это можно настроить в файле конфигурации eepromi2c_configuration.h
@@ -35,7 +38,11 @@
 // In the functions EEPROMI2C_Write_Data(), EEPROMI2C_Read_Data() and
 // EEPROMI2C_Fill_All_Memory(), the timeout between transactions is set
 // directly using the passed parameter operation_delay_ms. These functions
-// block the system for a long time, so use them with caution!
+// block the system for a long time, so use them with caution! If speed and/or
+// energy efficiency are important to you, I do not recommend using these
+// functions directly, but implementing all the necessary functionality
+// using finite state machines through separate transactions
+// (reading/writing individual bytes, pages).
 //
 // I2C can be used both hardware and software - this can be
 // configured in the eepromi2c_configuration.h configuration file
