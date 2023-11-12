@@ -83,7 +83,7 @@ int main(void)
 	DDRD  &= ~(0 << 4);
 	
 	
-	// устанавливаем коллбек обработчика кнопки
+	// устанавливаем коллбэк обработчика кнопки
 	// -------------------------------------------------------------------------------
 	// installing the button handler callback
 	Delay_Ms_Set_Yield_CallBack_Function(Button_Press_Check);
