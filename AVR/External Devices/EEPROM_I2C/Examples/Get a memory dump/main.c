@@ -11,6 +11,16 @@
 #define EEPROM_PAGE_SIZE     EEPROMI2C_24C128_PAGE_SIZE
 #define EEPROM_MAX_MEM_ADDR  EEPROMI2C_24C128_MAX_MEM_ADDR
 
+
+// приёмный буфер размером в страницу EEPROM
+// -------------------------------------------------------------------------------
+// this is the receiving buffer is the size of an EEPROM page
+
+#define BUFFER_SIZE EEPROM_PAGE_SIZE
+
+uint8_t buffer[BUFFER_SIZE];
+
+
 int main(void)
 {
 	SOFTI2C_Initialize();
@@ -33,16 +43,7 @@ int main(void)
 	EEPROMI2C_Fill_All_Memory(0x0000, 0xAC, EEPROM_MAX_MEM_ADDR, 5);
 	
 	
-	// приёмный буфер размером в страницу EEPROM
-	// -------------------------------------------------------------------------------
-	// this is the receiving buffer is the size of an EEPROM page
-
-	#define BUFFER_SIZE EEPROM_PAGE_SIZE
-	
-	uint8_t buffer[BUFFER_SIZE];
-	
-	
-	for (uint32_t i = 0; i < EEPROM_MAX_MEM_ADDR; i += BUFFER_SIZE)
+	for (uint32_t i = 0; i <= EEPROM_MAX_MEM_ADDR; i += BUFFER_SIZE)
 	{
 		EEPROMI2C_Read_Data(i, buffer, BUFFER_SIZE, 5);
 		
@@ -53,5 +54,4 @@ int main(void)
 	{
 	}
 }
-
 
