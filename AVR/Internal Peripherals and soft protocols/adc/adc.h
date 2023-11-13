@@ -200,9 +200,9 @@ uint32_t ADC_Get_Random_Entropy_Value_32bit(uint8_t channel);
 
 #ifdef ADC_USE_CALLBACK
 
-void ADC_Set_Reception_Buffer_Ptr(const void *buffer);
+void ADC_Set_Reception_Buffer_Ptr(void *buffer);
 
-void ADC_Set_Reception_Buffer_Size(const uint16_t buffer_size);
+void ADC_Set_Reception_Buffer_Size(uint16_t buffer_size);
 
 void ADC_Set_Reception_CallBack_Function(void (*callback_function)());
 
