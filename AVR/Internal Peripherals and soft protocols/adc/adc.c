@@ -101,12 +101,12 @@ static volatile bool      _reception_buffer_is_filled   = false;
 
 static void (*_reception_callback)() = NULL;
 
-void ADC_Set_Reception_Buffer_Ptr(const void *buffer)
+void ADC_Set_Reception_Buffer_Ptr(void *buffer)
 {
 	_reception_buffer = (uint16_t*)buffer;
 }
 
-void ADC_Set_Reception_Buffer_Size(const uint16_t buffer_size)
+void ADC_Set_Reception_Buffer_Size(uint16_t buffer_size)
 {
 	_reception_buffer_size = buffer_size;
 }
