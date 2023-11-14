@@ -29,7 +29,7 @@
 #include "scheduler.h"
 #include "scheduler_configuration.h"
 
-#include "queue.h"
+#include "tasks_queue.h"
 
 #include "uart.h"
 #include "uart_async.h"
