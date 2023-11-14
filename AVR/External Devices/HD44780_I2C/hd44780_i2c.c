@@ -31,35 +31,47 @@ static void _HD44780_I2C_Write(uint8_t data)
 
 static void _HD44780_I2C_Send_Byte(uint8_t b, uint8_t mode)
 {
-	uint8_t lcd_bufer = b & 0xF0;
+	uint8_t lcd_control_mask = 0x00; // spetial f mask (for display backlighting)
+	
+	if (target_display->display_backlight_is_enable)
+	{
+		lcd_control_mask |= _HD44780_I2C_SPECIAL_F_BACKLIGHT;
+	}
+	
+	uint8_t lcd_buffer = b & 0xF0;
 	
 	if (!mode)
 	{
-		lcd_bufer &= ~_HD44780_I2C_RS;
+		lcd_buffer &= ~_HD44780_I2C_RS;
 	}
 	else
 	{
-		lcd_bufer |= _HD44780_I2C_RS;
+		lcd_buffer |= _HD44780_I2C_RS;
 	}
 	
-	lcd_bufer |= _HD44780_I2C_E; _HD44780_I2C_Write(lcd_bufer); _delay_us(40);
+	if (target_display->display_backlight_is_enable)
+	{
+		lcd_buffer |= (1 << 3);
+	}
 	
-	lcd_bufer &= ~_HD44780_I2C_E; _HD44780_I2C_Write(lcd_bufer); _delay_us(100);
+	lcd_buffer |= _HD44780_I2C_E;  lcd_buffer |= lcd_control_mask; _HD44780_I2C_Write(lcd_buffer); _delay_us(40);
 	
-	lcd_bufer = (b & 0x0F) << 4;
+	lcd_buffer &= ~_HD44780_I2C_E; lcd_buffer |= lcd_control_mask; _HD44780_I2C_Write(lcd_buffer); _delay_us(100);
+	
+	lcd_buffer = (b & 0x0F) << 4;
 	
 	if (!mode)
 	{
-		lcd_bufer &= ~_HD44780_I2C_RS;
+		lcd_buffer &= ~_HD44780_I2C_RS;
 	}
 	else
 	{
-		lcd_bufer |= _HD44780_I2C_RS;
+		lcd_buffer |= _HD44780_I2C_RS;
 	}
 	
-	lcd_bufer |= _HD44780_I2C_E;; _HD44780_I2C_Write(lcd_bufer); _delay_us(40);
+	lcd_buffer |= _HD44780_I2C_E;  lcd_buffer |= lcd_control_mask; _HD44780_I2C_Write(lcd_buffer); _delay_us(40);
 
-	lcd_bufer &= ~_HD44780_I2C_E; _HD44780_I2C_Write(lcd_bufer);
+	lcd_buffer &= ~_HD44780_I2C_E; lcd_buffer |= lcd_control_mask; _HD44780_I2C_Write(lcd_buffer);
 }
 
 static int _HD44780_I2C_Send_Char(char c, FILE *stream)
@@ -73,10 +85,11 @@ HD44780_I2C_t HD44780_I2C_Get_Display_Object(uint8_t dev_addr, bool display_is_e
 	HD44780_I2C_t display;
 	
 	display.dev_addr = dev_addr;
-	display.entry_mode_display        = _HD44780_I2C_INITIAL_ENTRY_MODE_DISPLAY;
-	display.control_mode_display      = _HD44780_I2C_INITIAL_CONTROL_MODE_DISPLAY;
-	display.cursor_display_shift_mode = _HD44780_I2C_INITIAL_CURSOR_DISPLAY_SHIFT_MODE;
-	display.function_set_mode_display = _HD44780_I2C_INITIAL_FUNCTION_SET_MODE_DISPLAY;
+	display.entry_mode_display          = _HD44780_I2C_INITIAL_ENTRY_MODE_DISPLAY;
+	display.control_mode_display        = _HD44780_I2C_INITIAL_CONTROL_MODE_DISPLAY;
+	display.cursor_display_shift_mode   = _HD44780_I2C_INITIAL_CURSOR_DISPLAY_SHIFT_MODE;
+	display.function_set_mode_display   = _HD44780_I2C_INITIAL_FUNCTION_SET_MODE_DISPLAY;
+	display.display_backlight_is_enable =  true;
 	
 	target_display = &display;
 	
@@ -145,6 +158,20 @@ void HD44780_I2C_Set_Cursor_Blink(bool cursor_is_blink)
 	}
 	
 	_HD44780_I2C_Send_Byte(target_display->control_mode_display, _HD44780_I2C_DISPLAY_SEND_COMMAND_MODE); _delay_us(40);
+}
+
+void HD44780_I2C_Set_Display_Backlight_Enable(bool display_backlight_is_enable)
+{
+	uint8_t data = 0x00;
+	
+	target_display->display_backlight_is_enable = display_backlight_is_enable;
+	
+	if (display_backlight_is_enable)
+	{
+		data |= _HD44780_I2C_SPECIAL_F_BACKLIGHT;
+	}
+	
+	_HD44780_I2C_Write(data);
 }
 
 void HD44780_I2C_Set_Cursor_Pos(uint8_t string_pos, uint8_t first_char_pos)
