@@ -9,7 +9,7 @@
 // this define sets the maximum number of
 // tasks in the scheduler (max - 256 tasks)
 
-#define SCHEDULER_MAX_TASK_NUM 2
+#define SCHEDULER_MAX_TASK_NUM 4
 
 
 #endif
