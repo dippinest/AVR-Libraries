@@ -1,4 +1,5 @@
 
+#include <util/delay.h>
 
 #include "i2c.h"
 #include "hd44780_i2c.h"
