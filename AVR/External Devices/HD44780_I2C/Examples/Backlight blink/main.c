@@ -25,10 +25,12 @@ int main(void)
 	while (1)
 	{
 		// переключение подсветки каждые 500 мс.
-		// Этот эффект можно применить для индикации какого-либо события
+		// Этот эффект можно применить для индикации какого-либо события.
+		// Кроме того, подсветку можно выключать с целью экономии энергии
 		// -------------------------------------------------------------------------------
 		// switching the backlight every 500 ms.
-		// This effect can be applied to indicate an event
+		// This effect can be applied to indicate an event.
+		// In addition, the backlight can be turned off in order to save energy
 		
 		HD44780_I2C_Set_Display_Backlight_Enable(false);
 		_delay_ms(500);
