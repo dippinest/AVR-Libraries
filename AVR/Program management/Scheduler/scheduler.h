@@ -168,12 +168,12 @@ void Scheduler_Run();
 #define SCHEDULER_USE_MUTEX(_MUTEX_, _IFCODE_, _ELSECODE_)  \
 if (Scheduler_Mutex_Is_Unlock(&_MUTEX_))                    \
 {                                                           \
-	Scheduler_Mutex_Set_Lock(&_MUTEX_);                     \
-	_IFCODE_;                                               \
+	Scheduler_Mutex_Set_Lock(&_MUTEX_);                 \
+	_IFCODE_;                                           \
 }                                                           \
 else                                                        \
 {                                                           \
-	_ELSECODE_;                                             \
+	_ELSECODE_;                                         \
 }
 
 
