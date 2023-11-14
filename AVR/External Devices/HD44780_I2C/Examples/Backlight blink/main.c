@@ -1,12 +1,12 @@
 
 #include <util/delay.h>
 
-#include "i2c.h"
+#include "softi2c.h"
 #include "hd44780_i2c.h"
 
 int main(void)
 {
-	I2C_Initialize(100000);
+	SOFTI2C_Initialize();
 	
 	
 	// по умолчанию подсветка дисплея всегда включена - её не надо включать вручную
