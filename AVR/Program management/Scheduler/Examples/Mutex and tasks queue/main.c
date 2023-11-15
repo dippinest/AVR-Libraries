@@ -2,8 +2,7 @@
 
 // ===============================================================================
 //
-// В данном примере демонстрируется возможерсть работы с мьютексами
-// и очередями задач.
+// В данном примере демонстрируется работа с мьютексами и очередями задач.
 //
 // Здесь применён модуль UART, защищаемый мьютексом и очередь задач.
 // Каждая из задач добавляет в очередь задание на отпраку своих данных,
@@ -13,7 +12,7 @@
 //
 // -------------------------------------------------------------------------------
 //
-// This example demonstrates the ability to work with mutexes and task queues.
+// This example demonstrates working with mutexes and task queues.
 //
 // A UART module protected by a mutex and a task queue are used here.
 // Each of the tasks adds a task to the queue to send its data,
@@ -29,7 +28,7 @@
 #include "scheduler.h"
 #include "scheduler_configuration.h"
 
-#include "tasks_queue.h"
+#include "task_queue.h"
 
 #include "uart.h"
 #include "uart_async.h"
@@ -64,7 +63,16 @@ void Send_Msg_1()
 
 void Send_Msg_2()
 {
-	SCHEDULER_USE_MUTEX(uart_mutex, UART_Async_StringLn_Transmit("Msg 2 was send!"), );
+	// пример прямой работы с мьютексом
+	// -------------------------------------------------------------------------------
+	// example of direct work with a mutex
+	
+	if (Scheduler_Mutex_Is_Unlock(&uart_mutex))
+	{
+		Scheduler_Mutex_Set_Lock(&uart_mutex);
+		
+		UART_Async_StringLn_Transmit("Msg 2 was send!");
+	}
 }
 
 
@@ -96,11 +104,14 @@ void Task2()
 
 void UART_Msg_Scheduler()
 {
-	void (*Target_Task)(void) = Task_Queue_Pop(&uart_queue);
-	
-	if (Target_Task != NULL && Scheduler_Mutex_Is_Unlock(&uart_mutex))
+	if (Scheduler_Mutex_Is_Unlock(&uart_mutex))
 	{
-		Target_Task();
+		void (*Target_Task)(void) = Task_Queue_Pop(&uart_queue);
+		
+		if (Target_Task != NULL)
+		{
+			Target_Task();
+		}
 	}
 }
 
@@ -130,7 +141,7 @@ int main(void)
 	uart_mutex = Scheduler_Create_Mutex();
 	
 	
-	// инициализация статического массива задач и очереди на его основе 
+	// инициализация статического массива задач и очереди на его основе
 	// размер очереди - 3)
 	// -------------------------------------------------------------------------------
 	// initialization of a static array of tasks and a queue based
