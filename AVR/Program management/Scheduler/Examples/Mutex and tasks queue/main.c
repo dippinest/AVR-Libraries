@@ -53,26 +53,17 @@ static Scheduler_Mutex_t uart_mutex;
 
 void Send_Msg_0()
 {
-	SCHEDULER_USE_MUTEX(uart_mutex, UART_Async_String_Transmit("Msg 0 was send!  "), );
+	UART_Async_String_Transmit("Msg 0 was send!  ");
 }
 
 void Send_Msg_1()
 {
-	SCHEDULER_USE_MUTEX(uart_mutex, UART_Async_String_Transmit("Msg 1 was send!  "), );
+	UART_Async_String_Transmit("Msg 1 was send!  ");
 }
 
 void Send_Msg_2()
 {
-	// пример прямой работы с мьютексом
-	// -------------------------------------------------------------------------------
-	// example of direct work with a mutex
-	
-	if (Scheduler_Mutex_Is_Unlock(&uart_mutex))
-	{
-		Scheduler_Mutex_Set_Lock(&uart_mutex);
-		
-		UART_Async_StringLn_Transmit("Msg 2 was send!");
-	}
+	UART_Async_StringLn_Transmit("Msg 2 was send!");
 }
 
 
@@ -106,11 +97,17 @@ void UART_Msg_Scheduler()
 {
 	if (Scheduler_Mutex_Is_Unlock(&uart_mutex))
 	{
+		Scheduler_Mutex_Set_Lock(&uart_mutex);
+		
 		void (*Target_Task)(void) = Task_Queue_Pop(&uart_queue);
 		
 		if (Target_Task != NULL)
 		{
 			Target_Task();
+		}
+		else
+		{
+			Scheduler_Mutex_Set_Unlock(&uart_mutex);
 		}
 	}
 }
