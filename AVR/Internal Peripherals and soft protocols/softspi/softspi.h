@@ -66,9 +66,7 @@ uint8_t SOFTSPI_Get_Byte();
 
 
 #ifndef _T
-
 #define _T(P) ((uint8_t*)&P)
-
 #endif
 
 
