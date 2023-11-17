@@ -18,7 +18,7 @@
 //
 // -------------------------------------------------------------------------------
 //
-// TThis example demonstrates working with mutexes and task queues.
+// This example demonstrates working with mutexes and task queues.
 //
 // A UART module protected by a mutex and a task queue are used here.
 // Each of the tasks adds a task to the queue to send its data,
