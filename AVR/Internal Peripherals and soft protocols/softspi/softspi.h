@@ -72,20 +72,20 @@ uint8_t SOFTSPI_Get_Byte();
 
 typedef struct
 {
-	uint8_t *softspi_miso_ddr;
-	uint8_t *softspi_miso_pinx;
-	uint8_t  softspi_miso_pin;
+	uint8_t *miso_ddr;
+	uint8_t *miso_pinx;
+	uint8_t  miso_pin;
 	
-	uint8_t *softspi_mosi_ddr;
-	uint8_t *softspi_mosi_port;
-	uint8_t  softspi_mosi_pin;
+	uint8_t *mosi_ddr;
+	uint8_t *mosi_port;
+	uint8_t  mosi_pin;
 	
-	uint8_t *softspi_clk_ddr;
-	uint8_t *softspi_clk_port;
-	uint8_t  softspi_clk_pin;
+	uint8_t *clk_ddr;
+	uint8_t *clk_port;
+	uint8_t  clk_pin;
 	
-	uint8_t  softspi_mode;
-	bool     softspi_data_order;
+	uint8_t  mode;
+	bool     data_order;
 	
 } SOFTSPI_t;
 
