@@ -31,7 +31,6 @@
 
 #include <stdint.h>
 #include <stddef.h>
-#include <stdbool.h>
 
 #include "encoder_configuration.h"
 
