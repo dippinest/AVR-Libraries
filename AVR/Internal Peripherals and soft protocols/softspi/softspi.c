@@ -356,37 +356,37 @@ SOFTSPI_t SOFTSPI_Get_Interface_Object(
 {
 	SOFTSPI_t softspi_interface;
 	
-	softspi_interface.softspi_miso_ddr    = miso_ddr;
-	softspi_interface.softspi_miso_pinx   = miso_pinx;
-	softspi_interface.softspi_miso_pin    = miso_pin;
+	softspi_interface.miso_ddr    = miso_ddr;
+	softspi_interface.miso_pinx   = miso_pinx;
+	softspi_interface.miso_pin    = miso_pin;
 	
-	softspi_interface.softspi_mosi_ddr    = mosi_ddr;
-	softspi_interface.softspi_mosi_port   = mosi_port;
-	softspi_interface.softspi_mosi_pin    = mosi_pin;
+	softspi_interface.mosi_ddr    = mosi_ddr;
+	softspi_interface.mosi_port   = mosi_port;
+	softspi_interface.mosi_pin    = mosi_pin;
 	
-	softspi_interface.softspi_clk_ddr     = clk_ddr;
-	softspi_interface.softspi_clk_port    = clk_port;
-	softspi_interface.softspi_clk_pin     = clk_pin;
+	softspi_interface.clk_ddr     = clk_ddr;
+	softspi_interface.clk_port    = clk_port;
+	softspi_interface.clk_pin     = clk_pin;
 	
-	softspi_interface.softspi_mode        = spi_mode;
-	softspi_interface.softspi_data_order  = data_order;
+	softspi_interface.mode        = spi_mode;
+	softspi_interface.data_order  = data_order;
 	
 	return softspi_interface;
 }
 
 void SOFTSPI_Set_Target_Interface_Object(SOFTSPI_t *softspi_interface)
 {	
-	*(softspi_interface->softspi_miso_ddr) &= ~(1 << softspi_interface->softspi_miso_pin);
-	*(softspi_interface->softspi_mosi_ddr) |=  (1 << softspi_interface->softspi_mosi_pin);
-	*(softspi_interface->softspi_clk_ddr)  |=  (1 << softspi_interface->softspi_clk_pin);
+	*(softspi_interface->miso_ddr) &= ~(1 << softspi_interface->miso_pin);
+	*(softspi_interface->mosi_ddr) |=  (1 << softspi_interface->mosi_pin);
+	*(softspi_interface->clk_ddr)  |=  (1 << softspi_interface->clk_pin);
 	
-	if (softspi_interface->softspi_mode == SOFTSPI_MODE_0 || softspi_interface->softspi_mode == SOFTSPI_MODE_1)
+	if (softspi_interface->mode == SOFTSPI_MODE_0 || softspi_interface->mode == SOFTSPI_MODE_1)
 	{
-		*(softspi_interface->softspi_clk_port) &= ~(1 << softspi_interface->softspi_clk_pin);
+		*(softspi_interface->clk_port) &= ~(1 << softspi_interface->clk_pin);
 	}
 	else
 	{
-		*(softspi_interface->softspi_clk_port) |=  (1 << softspi_interface->softspi_clk_pin);
+		*(softspi_interface->clk_port) |=  (1 << softspi_interface->clk_pin);
 	}
 	
 	target_softspi_interface_object = softspi_interface;
@@ -401,35 +401,35 @@ SOFTSPI_t *SOFTSPI_Get_Target_Interface_Object()
 
 static void _SOFTSPI_CLK_Set_High()
 {
-	*(target_softspi_interface_object->softspi_clk_port) |= (1 << target_softspi_interface_object->softspi_clk_pin);
+	*(target_softspi_interface_object->clk_port) |= (1 << target_softspi_interface_object->clk_pin);
 }
 
 static void _SOFTSPI_CLK_Set_Low()
 {
-	*(target_softspi_interface_object->softspi_clk_port) &= ~(1 << target_softspi_interface_object->softspi_clk_pin);
+	*(target_softspi_interface_object->clk_port) &= ~(1 << target_softspi_interface_object->clk_pin);
 }
 
 static void _SOFTSPI_MOSI_Set_High()
 {
-	*(target_softspi_interface_object->softspi_mosi_port) |= (1 << target_softspi_interface_object->softspi_mosi_pin);
+	*(target_softspi_interface_object->mosi_port) |= (1 << target_softspi_interface_object->mosi_pin);
 }
 
 static void _SOFTSPI_MOSI_Set_Low()
 {
-	*(target_softspi_interface_object->softspi_mosi_port) &= ~(1 << target_softspi_interface_object->softspi_mosi_pin);
+	*(target_softspi_interface_object->mosi_port) &= ~(1 << target_softspi_interface_object->mosi_pin);
 }
 
 static uint8_t _SOFTSPI_MISO_Get()
 {
-	return *(target_softspi_interface_object->softspi_miso_pinx) & (1 << target_softspi_interface_object->softspi_miso_pin);
+	return *(target_softspi_interface_object->miso_pinx) & (1 << target_softspi_interface_object->miso_pin);
 }
 
 // ===============================================================================
 
 void SOFTSPI_Send_Byte(uint8_t byte)
 {
-	const uint8_t target_softspi_data_order = target_softspi_interface_object->softspi_data_order;
-	const uint8_t target_softspi_mode       = target_softspi_interface_object->softspi_mode;
+	const uint8_t target_softspi_data_order = target_softspi_interface_object->data_order;
+	const uint8_t target_softspi_mode       = target_softspi_interface_object->mode;
 	
 	if (target_softspi_data_order == SOFTSPI_DATA_IS_ORDER_HIGHEST_BIT)
 	{
@@ -598,8 +598,8 @@ void SOFTSPI_Send_Data(void* data, uint16_t data_size)
 uint8_t SOFTSPI_Get_Byte()
 {
 	uint8_t data = 0x00;
-	const uint8_t target_softspi_data_order = target_softspi_interface_object->softspi_data_order;
-	const uint8_t target_softspi_mode       = target_softspi_interface_object->softspi_mode;
+	const uint8_t target_softspi_data_order = target_softspi_interface_object->data_order;
+	const uint8_t target_softspi_mode       = target_softspi_interface_object->mode;
 	
 	if (target_softspi_data_order == SOFTSPI_DATA_IS_ORDER_HIGHEST_BIT)
 	{
