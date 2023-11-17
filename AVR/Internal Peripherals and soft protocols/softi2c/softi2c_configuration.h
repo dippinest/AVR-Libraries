@@ -2,8 +2,6 @@
 #ifndef SOFTI2C_CONFIGURATION_H_
 #define SOFTI2C_CONFIGURATION_H_
 
-#include <util/delay.h>
-
 
 // если вы хотите работать с несколькими программными I2C, раскомментируйте
 // этот дефайн (иначе закомментируйте его)
