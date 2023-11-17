@@ -88,18 +88,18 @@ void (*_right_turn_callback)()
 {
 	Encoder_t encoder;
 	
-	encoder.encoder_input0_ddr   = input0_ddr;
-	encoder.encoder_input0_pinx  = input0_pinx;
-	encoder.encoder_input0_pin   = input0_pin;
+	encoder.input0_ddr   = input0_ddr;
+	encoder.input0_pinx  = input0_pinx;
+	encoder.input0_pin   = input0_pin;
 	
-	encoder.encoder_input1_ddr   = input1_ddr;
-	encoder.encoder_input1_pinx  = input1_pinx;
-	encoder.encoder_input1_pin   = input1_pin;
+	encoder.input1_ddr   = input1_ddr;
+	encoder.input1_pinx  = input1_pinx;
+	encoder.input1_pin   = input1_pin;
 	
 	encoder._left_turn_callback  = _left_turn_callback;
 	encoder._right_turn_callback = _right_turn_callback;
 	
-	encoder.encoder_status = 1;
+	encoder.status = 1;
 	
 	*(input0_ddr) &= ~(1 << input0_pin);
 	*(input1_ddr) &= ~(1 << input1_pin);
@@ -111,20 +111,20 @@ void (*_right_turn_callback)()
 
 void Encoder_Polling(Encoder_t *encoder)
 {
-	if (encoder->encoder_status == 0)
+	if (encoder->status == 0)
 	{
-		if (_Bit_Is_Reset_P(encoder->encoder_input0_pinx, encoder->encoder_input0_pin) ||
-		_Bit_Is_Reset_P(encoder->encoder_input1_pinx, encoder->encoder_input1_pin))
+		if (_Bit_Is_Reset_P(encoder->input0_pinx, encoder->input0_pin) ||
+		_Bit_Is_Reset_P(encoder->input1_pinx, encoder->input1_pin))
 		{
-			encoder->encoder_status = 1;
+			encoder->status = 1;
 
-			if (_Bit_Is_Reset_P(encoder->encoder_input0_pinx, encoder->encoder_input0_pin) &&
+			if (_Bit_Is_Reset_P(encoder->input0_pinx, encoder->input0_pin) &&
 			encoder->_left_turn_callback != NULL)
 			{
 				encoder->_left_turn_callback();
 			}
 			
-			if (_Bit_Is_Reset_P(encoder->encoder_input1_pinx, encoder->encoder_input1_pin) &&
+			if (_Bit_Is_Reset_P(encoder->input1_pinx, encoder->input1_pin) &&
 			encoder->_right_turn_callback != NULL)
 			{
 				encoder->_right_turn_callback();
@@ -132,10 +132,10 @@ void Encoder_Polling(Encoder_t *encoder)
 		}
 	}
 
-	if (_Bit_Is_Set_P(encoder->encoder_input0_pinx, encoder->encoder_input0_pin) &&
-	_Bit_Is_Set_P(encoder->encoder_input1_pinx, encoder->encoder_input1_pin))
+	if (_Bit_Is_Set_P(encoder->input0_pinx, encoder->input0_pin) &&
+	_Bit_Is_Set_P(encoder->input1_pinx, encoder->input1_pin))
 	{
-		encoder->encoder_status = 0;
+		encoder->status = 0;
 	}
 }
 
