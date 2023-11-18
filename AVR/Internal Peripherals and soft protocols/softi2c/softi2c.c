@@ -7,8 +7,8 @@
 
 void SOFTI2C_Initialize()
 {
-	SOTFI2C_SDA_PIN_PORT &= ~(1 << SOTFI2C_SDA_PIN);
-	SOTFI2C_SCL_PIN_PORT &= ~(1 << SOTFI2C_SCL_PIN);
+	SOTFI2C_SDA_PORT &= ~(1 << SOTFI2C_SDA_PIN);
+	SOTFI2C_SCL_PORT &= ~(1 << SOTFI2C_SCL_PIN);
 	
 	SOTFI2C_SDA_SET_HIGH;
 	SOTFI2C_SCL_SET_HIGH;
@@ -60,7 +60,7 @@ uint8_t SOFTI2C_Send_Byte(uint8_t data)
 		SOTFI2C_SCL_SET_HIGH;
 		SOFTI2C_DELAY;
 		
-		while (!(SOTFI2C_SCL_PIN_PINX & (1 << SOTFI2C_SCL_PIN)));
+		while (!(SOTFI2C_SCL_PINX & (1 << SOTFI2C_SCL_PIN)));
 		
 		data <<= 1;
 	}
@@ -74,7 +74,7 @@ uint8_t SOFTI2C_Send_Byte(uint8_t data)
 	SOTFI2C_SCL_SET_HIGH;
 	SOFTI2C_DELAY;
 	
-	uint8_t ack = !(SOTFI2C_SDA_PIN_PINX & (1 << SOTFI2C_SDA_PIN));
+	uint8_t ack = !(SOTFI2C_SDA_PINX & (1 << SOTFI2C_SDA_PIN));
 	
 	SOTFI2C_SCL_SET_LOW;
 	SOFTI2C_DELAY;
@@ -89,7 +89,7 @@ void SOFTI2C_Read_Byte(uint8_t *data, bool ack)
 		SOTFI2C_SCL_SET_HIGH;
 		SOFTI2C_DELAY;
 		
-		if (SOTFI2C_SDA_PIN_PINX & (1 << SOTFI2C_SDA_PIN))
+		if (SOTFI2C_SDA_PINX & (1 << SOTFI2C_SDA_PIN))
 		{
 			*data |= (0x80 >> i);
 		}
