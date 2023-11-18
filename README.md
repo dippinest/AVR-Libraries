@@ -2,7 +2,7 @@
 ___
 
 #### Набор библиотек для микроконтроллеров AVR.
-<br>
+
 #### A set of libraries for AVR series microcontrollers.
 
 ___
