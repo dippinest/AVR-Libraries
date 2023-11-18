@@ -4,6 +4,16 @@
 
 #ifndef ENCODER_USE_MULTIPLE_DEVICES
 
+
+#ifndef _Bit_Is_Set
+#define _Bit_Is_Set(port, bit)    ((port & (1 << bit)))
+#endif
+
+#ifndef _Bit_Is_Reset
+#define _Bit_Is_Reset(port, bit) !((port & (1 << bit)))
+#endif
+
+
 static void (*_left_turn_callback)()  = NULL;
 static void (*_right_turn_callback)() = NULL;
 
@@ -70,6 +80,15 @@ void *Encoder_Get_Right_Turn_CallBack_Function()
 
 
 #else // ===============================================================================
+
+
+#ifndef _Bit_Is_Set_P
+#define _Bit_Is_Set_P(port, bit)    ((*port) & (1 << bit))
+#endif
+
+#ifndef _Bit_Is_Reset_P
+#define _Bit_Is_Reset_P(port, bit) !((*port) & (1 << bit))
+#endif
 
 
 Encoder_t Encoder_Get_Device_Object(
