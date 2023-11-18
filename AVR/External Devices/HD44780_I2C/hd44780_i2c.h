@@ -100,14 +100,16 @@ void HD44780_I2C_Set_Cursor_Enable(bool cursor_is_enable);
 
 void HD44780_I2C_Set_Cursor_Blink(bool cursor_is_blink);
 
-void HD44780_I2C_Set_Display_Backlight_Enable(bool display_backlight_is_enable, uint8_t backlight_pin);
-
 void HD44780_I2C_Set_Cursor_Pos(uint8_t string_pos, uint8_t first_char_pos);
 
 void HD44780_I2C_Set_User_Symbol_To_CGRAM(const uint8_t *_8byte_simbol_bitmap_array, uint8_t simbol_number);
 
 void HD44780_I2C_Set_Flash_User_Symbol_To_CGRAM(const uint8_t *_8byte_flash_simbol_bitmap_array, uint8_t flash_simbol_number);
 
+
+// ===============================================================================
+
+void HD44780_I2C_Set_PCF8574_Alternative_Function_Pin_Enable(bool is_enable, uint8_t pin);
 
 // ===============================================================================
 
