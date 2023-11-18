@@ -2,7 +2,8 @@
 
 // ===============================================================================
 //
-// Библиотека для работы с инкрементальным энкодером.
+// Библиотека для работы с инкрементальным энкодером, подключенных
+// к портам GPIO микроконтроллера.
 // Максимальная отслеживаемая скорость вращения энкодера зависит
 // исключительно от частоты его опроса, задающейся логикой работы программы.
 //
@@ -12,7 +13,8 @@
 //
 // -------------------------------------------------------------------------------
 //
-// Library for working with an incremental encoder.
+// Library for working with an incremental encoder connected
+// to the GPIO ports of the microcontroller.
 // The maximum tracked rotation speed of the encoder depends
 // solely on the frequency of its polling, which is set by
 // the logic of the program.
