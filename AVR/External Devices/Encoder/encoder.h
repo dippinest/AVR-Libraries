@@ -2,8 +2,7 @@
 
 // ===============================================================================
 //
-// Библиотека для работы с инкрементальным энкодером, подключенных
-// к портам GPIO микроконтроллера.
+// Библиотека для работы с инкрементальным энкодером.
 // Максимальная отслеживаемая скорость вращения энкодера зависит
 // исключительно от частоты его опроса, задающейся логикой работы программы.
 //
@@ -13,8 +12,7 @@
 //
 // -------------------------------------------------------------------------------
 //
-// Library for working with an incremental encoder connected
-// to the GPIO ports of the microcontroller.
+// Library for working with an incremental encoder.
 // The maximum tracked rotation speed of the encoder depends
 // solely on the frequency of its polling, which is set by
 // the logic of the program.
@@ -39,15 +37,6 @@
 
 #ifndef ENCODER_USE_MULTIPLE_DEVICES
 
-#ifndef _Bit_Is_Set
-#define _Bit_Is_Set(port, bit)    ((port & (1 << bit)))
-#endif
-
-#ifndef _Bit_Is_Reset
-#define _Bit_Is_Reset(port, bit) !((port & (1 << bit)))
-#endif
-
-
 
 void Encoder_Initialize();
 
@@ -69,15 +58,6 @@ void *Encoder_Get_Right_Turn_CallBack_Function();
 
 #ifndef T
 #define T(P) ((uint8_t*)&P)
-#endif
-
-
-#ifndef _Bit_Is_Set_P
-#define _Bit_Is_Set_P(port, bit)    ((*port) & (1 << bit))
-#endif
-
-#ifndef _Bit_Is_Reset_P
-#define _Bit_Is_Reset_P(port, bit) !((*port) & (1 << bit))
 #endif
 
 
