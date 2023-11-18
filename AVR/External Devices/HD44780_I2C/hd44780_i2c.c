@@ -147,22 +147,6 @@ void HD44780_I2C_Set_Cursor_Blink(bool cursor_is_blink)
 	_HD44780_I2C_Send_Byte(target_display->control_mode_display, _HD44780_I2C_DISPLAY_SEND_COMMAND_MODE); _delay_us(40);
 }
 
-void HD44780_I2C_Set_Display_Backlight_Enable(bool display_backlight_is_enable, uint8_t backlight_pin)
-{
-	uint8_t data = 0x00;
-	
-	if (display_backlight_is_enable)
-	{
-		data |=  (1 << backlight_pin);
-	}
-	else
-	{
-		data &= ~(1 << backlight_pin);
-	}
-	
-	_HD44780_I2C_Write(data);
-}
-
 void HD44780_I2C_Set_Cursor_Pos(uint8_t string_pos, uint8_t first_char_pos)
 {
 	if (string_pos == 2)
@@ -205,6 +189,24 @@ void HD44780_I2C_Set_Flash_User_Symbol_To_CGRAM(const uint8_t *_8byte_flash_simb
 	}
 	
 	_HD44780_I2C_Send_Byte(0b10000000, _HD44780_I2C_DISPLAY_SEND_COMMAND_MODE); _delay_us(40);
+}
+
+// ===============================================================================
+
+void HD44780_I2C_Set_PCF8574_Alternative_Function_Pin_Enable(bool is_enable, uint8_t pin);
+{
+	uint8_t data = 0x00;
+	
+	if (is_enable)
+	{
+		data |=  (1 << pin);
+	}
+	else
+	{
+		data &= ~(1 << pin);
+	}
+	
+	_HD44780_I2C_Write(data);
 }
 
 // ===============================================================================
