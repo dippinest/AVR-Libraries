@@ -38,11 +38,11 @@
 
 #ifndef SOFTI2C_USE_MULTIPLE_INTERFACE
 
-#define SOTFI2C_SDA_SET_LOW	  SOTFI2C_SDA_PIN_DDR |=  (1 << SOTFI2C_SDA_PIN)
-#define SOTFI2C_SDA_SET_HIGH  SOTFI2C_SDA_PIN_DDR &= ~(1 << SOTFI2C_SDA_PIN)
+#define SOTFI2C_SDA_SET_LOW	  SOTFI2C_SDA_DDR |=  (1 << SOTFI2C_SDA_PIN)
+#define SOTFI2C_SDA_SET_HIGH  SOTFI2C_SDA_DDR &= ~(1 << SOTFI2C_SDA_PIN)
 
-#define SOTFI2C_SCL_SET_LOW	  SOTFI2C_SCL_PIN_DDR |=  (1 << SOTFI2C_SCL_PIN)
-#define SOTFI2C_SCL_SET_HIGH  SOTFI2C_SCL_PIN_DDR &= ~(1 << SOTFI2C_SCL_PIN)
+#define SOTFI2C_SCL_SET_LOW	  SOTFI2C_SCL_DDR |=  (1 << SOTFI2C_SCL_PIN)
+#define SOTFI2C_SCL_SET_HIGH  SOTFI2C_SCL_DDR &= ~(1 << SOTFI2C_SCL_PIN)
 
 
 // ===============================================================================
@@ -123,5 +123,4 @@ void SOFTI2C_Read_Byte(uint8_t *data, bool ack);
 
 
 #endif
-
 
