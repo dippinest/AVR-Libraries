@@ -73,8 +73,6 @@
 #define _HD44780_I2C_RS  (1 << 0)
 #define _HD44780_I2C_E   (1 << 2)
 
-#define _HD44780_I2C_SPECIAL_F_BACKLIGHT  (1 << 3)
-
 #define _HD44780_I2C_INITIAL_ENTRY_MODE_DISPLAY         0b00000100
 #define _HD44780_I2C_INITIAL_CONTROL_MODE_DISPLAY       0b00001000
 #define _HD44780_I2C_INITIAL_CURSOR_DISPLAY_SHIFT_MODE  0b00010000
@@ -89,8 +87,6 @@ typedef struct
 	uint8_t cursor_display_shift_mode;
 	uint8_t function_set_mode_display;
 	
-	bool    display_backlight_is_enable;
-	
 } HD44780_I2C_t;
 
 
@@ -104,7 +100,7 @@ void HD44780_I2C_Set_Cursor_Enable(bool cursor_is_enable);
 
 void HD44780_I2C_Set_Cursor_Blink(bool cursor_is_blink);
 
-void HD44780_I2C_Set_Display_Backlight_Enable(bool display_backlight_is_enable);
+void HD44780_I2C_Set_Display_Backlight_Enable(bool display_backlight_is_enable, uint8_t backlight_pin);
 
 void HD44780_I2C_Set_Cursor_Pos(uint8_t string_pos, uint8_t first_char_pos);
 
