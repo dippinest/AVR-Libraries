@@ -62,10 +62,10 @@ int main(void)
 	
 	while (1)
 	{
-		// функция опроса однократного нажатия и отпускания кнопки button1
+		// функция опроса однократного нажатия кнопки button1
 		//
 		// -------------------------------------------------------------------------------
-		// polling function of pressing and releasing the button 'button1' once
+		// polling function of pressing the button 'button1' once
 		//
 		Button_Pressed_Polling(&button1, Press);
 		
