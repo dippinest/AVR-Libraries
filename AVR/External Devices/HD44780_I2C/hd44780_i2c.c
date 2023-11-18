@@ -193,7 +193,7 @@ void HD44780_I2C_Set_Flash_User_Symbol_To_CGRAM(const uint8_t *_8byte_flash_simb
 
 // ===============================================================================
 
-void HD44780_I2C_Set_PCF8574_Alternative_Function_Pin_Enable(bool is_enable, uint8_t pin);
+void HD44780_I2C_Set_PCF8574_Alternative_Function_Pin_Enable(bool is_enable, uint8_t pin)
 {
 	uint8_t data = 0x00;
 	
