@@ -96,6 +96,22 @@ void Button_Hold_With_Timeout_Polling(Button_t *button, uint16_t press_timeout, 
 			button->status = 0;
 		}
 	}
+	else
+	{
+		if (_Bit_Is_Set_P(button->input_pinx, button->input_pin))
+		{
+			++(button->status);
+			
+			if ((button->status % press_timeout) == 0)
+			{
+				callback_function();
+			}
+		}
+		else
+		{
+			button->status = 0;
+		}
+	}
 }
 
 
