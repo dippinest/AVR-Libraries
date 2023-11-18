@@ -7,7 +7,7 @@ ___
 
 ___
 
-<img src="/resources/logo.png" alt="AVR logo"/>
+<img src="/resources/logo.jpg" alt="AVR logo"/>
 
 ___
 
