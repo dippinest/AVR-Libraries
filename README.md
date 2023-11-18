@@ -17,6 +17,8 @@ ___
 Внимание! Набор библиотек реализован для компилятора avr-gcc! Некоторые библиотеки используют зависимости набора библиотек кроссплатформенных алгоритмов (смотрите в репозитории [MCU-Algorhitms](https://github.com/dippinest/MCU-Algorhitms))), поэтому рекомендуется использовать в проекте и эти библиотеки.
 <br>
 <br>
+___
+<br>
 <br>
 The set of libraries includes tools for working with the microcontroller itself and its internal peripherals, as well as external sensors. This set will be updated periodically.
 <br>
