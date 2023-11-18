@@ -57,26 +57,9 @@ int main(void)
 	{
 		// функция опроса однократного нажатия и отпускания кнопки
 		//
-		// P.S. Для опроса ТОЛЬКО нажатия я рекомендую использовать функцию
-		//
-		// Button_Pressed_Polling(Button_t *button, void (*callback_function)()).
-		//
-		// Кроме того, если Вам нужно отрабатывать только отжатие (отпускание)
-		// кнопки, Вы можете не использовать колбэк для обработки нажатия,
-		// например, вот так:
-		//
-		// Button_Pressed_And_Released_Polling(&button, NULL, Release);
 		// -------------------------------------------------------------------------------
 		// polling function of pressing and releasing the button once
 		//
-		// P.S. To poll ONLY clicks, I recommend using the
-		// Button_Pressed_Polling(Button_t *button, void (*callback_function)()).
-		//
-		// In addition, if you only need to work out pressing (releasing)
-		// the button, you can not use the callback to process the pressing,
-		// for example, like this:
-		//
-		// Button_Pressed_And_Released_Polling(&button, NULL, Release);
 		Button_Pressed_And_Released_Polling(&button, Press, Release);
 		
 		
