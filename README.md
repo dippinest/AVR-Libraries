@@ -1,7 +1,7 @@
 # AVR Libraries
 ___
 
-#### A set of libraries for AVR series microcontrollers.
+#### Набор библиотек для микроконтроллеров AVR.
 
 #### A set of libraries for AVR series microcontrollers.
 
