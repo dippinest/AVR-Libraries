@@ -72,8 +72,6 @@ int main(void)
 // this code is an example of writing user characters to the CGRAM
 // of the display from the flash memory (program memory) of the MCU
 
-#define F_CPU 16000000UL
-
 #include <avr/pgmspace.h>
 
 #include "i2c.h"
