@@ -12,24 +12,12 @@
 //
 // -------------------------------------------------------------------------------
 //
-// A small library with software delay functions. The functions
-// presented in the library are an add-on to the _delay_ms() and
-// _delay_us() functions from avr-libc. Unlike these original
-// inline functions, the void Delay_Ms and void Delay_Us functions
-// of the library allow you to pass a variable as arguments.
+// Library for polling buttons connected to the GPIO ports of the microcontroller
 //
-// The library can be used in simple projects and prototyping,
-// where high energy efficiency and speed are not required.
-// Otherwise, I do not recommend using this library - in this
-// case, use timer interrupts and power-saving functions for
-// more efficient operation.
+// The library allows you to work with buttons pulled up to Vcc or to GND
 //
-// In addition, during the execution of the delay, there is
-// a specific possibility of pseudo-parallel execution of a
-// separate light operation (for the Delay_Ms function) every
-// 1 millisecond, for which there is a corresponding define
-// in the delay_configuration.h file. You can see an example
-// of the work in the corresponding directory with code examples
+// It's possible to continuously poll the button, press once,
+// release the button, as well as long-term pressing
 //
 // ===============================================================================
 
