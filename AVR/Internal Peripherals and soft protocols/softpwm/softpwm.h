@@ -116,7 +116,7 @@ inline static void SOFTPWM_Channel_2_Polling()
 {
 	static uint8_t _pwm_counter = 0;
 	
-	if (_pwm_counter >= 0)
+	if (_pwm_counter == 0)
 	{
 		SOFTWARE_PWM_CH2_PORT |= (1 << SOFTWARE_PWM_CH2);
 	}
