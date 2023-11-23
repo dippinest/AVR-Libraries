@@ -104,7 +104,7 @@ inline static void SOFTPWM_Channel_1_Polling()
 	}
 	
 	
-	if (_pwm_counter == SOFTPWM_Channel_1_Value)
+	if (_pwm_counter >= SOFTPWM_Channel_1_Value)
 	{
 		SOFTWARE_PWM_CH1_PORT &= ~(1 << SOFTWARE_PWM_CH1);
 	}
@@ -116,13 +116,13 @@ inline static void SOFTPWM_Channel_2_Polling()
 {
 	static uint8_t _pwm_counter = 0;
 	
-	if (_pwm_counter == 0)
+	if (_pwm_counter >= 0)
 	{
 		SOFTWARE_PWM_CH2_PORT |= (1 << SOFTWARE_PWM_CH2);
 	}
 	
 	
-	if (_pwm_counter == SOFTPWM_Channel_2_Value)
+	if (_pwm_counter >= SOFTPWM_Channel_2_Value)
 	{
 		SOFTWARE_PWM_CH2_PORT &= ~(1 << SOFTWARE_PWM_CH2);
 	}
@@ -140,7 +140,7 @@ inline static void SOFTPWM_Channel_3_Polling()
 	}
 	
 	
-	if (_pwm_counter == SOFTPWM_Channel_3_Value)
+	if (_pwm_counter >= SOFTPWM_Channel_3_Value)
 	{
 		SOFTWARE_PWM_CH3_PORT &= ~(1 << SOFTWARE_PWM_CH3);
 	}
@@ -168,17 +168,17 @@ inline static void SOFTPWM_All_Channels_Polling()
 		SOFTWARE_PWM_CH3_PORT |= (1 << SOFTWARE_PWM_CH3);
 	}
 	
-	if (_pwm_counter == SOFTPWM_Channel_1_Value)
+	if (_pwm_counter >= SOFTPWM_Channel_1_Value)
 	{
 		SOFTWARE_PWM_CH1_PORT &= ~(1 << SOFTWARE_PWM_CH1);
 	}
 	
-	if (_pwm_counter == SOFTPWM_Channel_2_Value)
+	if (_pwm_counter >= SOFTPWM_Channel_2_Value)
 	{
 		SOFTWARE_PWM_CH2_PORT &= ~(1 << SOFTWARE_PWM_CH2);
 	}
 	
-	if (_pwm_counter == SOFTPWM_Channel_3_Value)
+	if (_pwm_counter >= SOFTPWM_Channel_3_Value)
 	{
 		SOFTWARE_PWM_CH3_PORT &= ~(1 << SOFTWARE_PWM_CH3);
 	}
