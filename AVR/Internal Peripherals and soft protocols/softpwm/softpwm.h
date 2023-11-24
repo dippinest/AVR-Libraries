@@ -1,26 +1,21 @@
 
 // ===============================================================================
 //
-// Это не библиотека в привычном понимании, а лишь файл с реализацией
-// программного ШИМ. Поскольку реализация программного ШИМ занимает довольно
-// много процессорного времени, все функции являются встраиваемыми (inline).
-// Соответственно, здесь отсутствуют какие-либо колбэк-функции и прочее.
+// Библиотека для реализации программной ШИМ.
 //
-// Настройка программного ШИМ выполняется исключительно редактированием
-// этого файла. Для работы необходимо периодически вызывать функции
-// опроса ШИМ (к примеру, в обработчике прерывания таймера).
+// У данной библиотеке отсутствует файл реализации функций
+// (файл с расширением *.c). Все функции являются встраиваемыми (inline)
+// с целью повышения быстродействия, поскольку программная ШИМ является
+// достаточно тяжёлой для процессора, так как занимает много процессорного времени
 //
 // -------------------------------------------------------------------------------
 //
-// This is not a library in the usual sense, but only a file with the
-// implementation of a software PWM. Since the implementation of software
-// PWM takes quite a lot of CPU time, all functions are inline.
-// Accordingly, there are no callback functions and so on.
-// The configuration of the software PWM is performed
-// exclusively by editing this file.
+// A library for implementing software PWM.
 //
-// To work, it is necessary to periodically call the PWM polling functions
-// (for example, in the timer interrupt handler).
+// This library does not have a function implementation file
+// (a file with the extension *.c). All functions are inline in order
+// to increase performance, since the software PWM is quite heavy enough
+// for the processor, since it takes a lot of processor time
 //
 // ===============================================================================
 
@@ -28,162 +23,88 @@
 #ifndef SOFTPWM_H_
 #define SOFTPWM_H_
 
+
 #include <avr/io.h>
 
-#include <stdint.h>
+#include <stdlib.h>
 
 
 // ===============================================================================
 
 
-// дефайны с определениями регистров GPIO
-//
-// -------------------------------------------------------------------------------
-// defines with GPIO register definitions
-//
-#define SOFTWARE_PWM_CH1_PORT PORTB
-#define SOFTWARE_PWM_CH1_DDRX DDRB
-
-#define SOFTWARE_PWM_CH2_PORT PORTB
-#define SOFTWARE_PWM_CH2_DDRX DDRB
-
-#define SOFTWARE_PWM_CH3_PORT PORTB
-#define SOFTWARE_PWM_CH3_DDRX DDRB
-
-#define SOFTWARE_PWM_CH1  1
-#define SOFTWARE_PWM_CH2  2
-#define SOFTWARE_PWM_CH3  3
+#ifndef T
+#define T(P) ((uint8_t*)&P)
+#endif
 
 
-// ===============================================================================
-
-
-// инициализация GPIO портов, выделенные под каждый канал программного ШИМ
-//
-// -------------------------------------------------------------------------------
-// initialization of GPIO ports allocated for each channel of the software PWM
-//
-inline void SOFTPWM_Initialize()
+typedef struct
 {
-	SOFTWARE_PWM_CH1_DDRX |= (1 << SOFTWARE_PWM_CH1);
-	SOFTWARE_PWM_CH2_DDRX |= (1 << SOFTWARE_PWM_CH2);
-	SOFTWARE_PWM_CH3_DDRX |= (1 << SOFTWARE_PWM_CH3);
+	uint8_t *softpwm_channel_port;
+	uint8_t  softpwm_channel_pin;
 	
-	SOFTWARE_PWM_CH1_PORT |= (1 << SOFTWARE_PWM_CH1);
-	SOFTWARE_PWM_CH2_PORT |= (1 << SOFTWARE_PWM_CH2);
-	SOFTWARE_PWM_CH3_PORT |= (1 << SOFTWARE_PWM_CH3);
+	uint8_t  softpwm_channel_max_width;
+	uint8_t  softpwm_channel_duty_cycle;
+	uint8_t  softpwm_channel_duty_cycle_buf;
+	
+	uint8_t  softpwm_channel_counter;
+
+} SOFTPWM_t;
+
+
+// ===============================================================================
+
+
+inline SOFTPWM_t SOFTPWM_Get_Channel_Object(uint8_t *port, uint8_t pin, uint8_t max_width, uint8_t duty_cycle)
+{
+	SOFTPWM_t pwm;
+	
+	pwm.softpwm_channel_port           = port;
+	pwm.softpwm_channel_pin            = pin;
+	
+	pwm.softpwm_channel_max_width      = max_width;
+	pwm.softpwm_channel_duty_cycle     = duty_cycle;
+	pwm.softpwm_channel_duty_cycle_buf = duty_cycle;
+	
+	pwm.softpwm_channel_counter        = 0;
+	
+	return pwm;
 }
 
 
 // ===============================================================================
 
 
-// переменные, хранящие коэффициент заполнения каждого для канала программного ШИМ
-//
-// -------------------------------------------------------------------------------
-// variables storing the duty cycle for each channel of the software PWM
-//
-volatile uint8_t SOFTPWM_Channel_1_Value, SOFTPWM_Channel_2_Value, SOFTPWM_Channel_3_Value;
+#define SOFTPWM_DUTY_CYCLE(T) (T.softpwm_channel_duty_cycle)
 
 
 // ===============================================================================
 
 
-// функции опроса отдельных каналов программного ШИМ
-//
-// -------------------------------------------------------------------------------
-// polling functions of individual channels of the software PWM
-//
-inline static void SOFTPWM_Channel_1_Polling()
+inline void SOFTPWM_Channel_Processing(SOFTPWM_t *channel)
 {
-	static uint8_t _pwm_counter = 0;
-	
-	if (_pwm_counter == 0)
+	if (channel->softpwm_channel_counter == channel->softpwm_channel_max_width)
 	{
-		SOFTWARE_PWM_CH1_PORT |= (1 << SOFTWARE_PWM_CH1);
+		*(channel->softpwm_channel_port) |=  (1 << channel->softpwm_channel_pin);
+		
+		channel->softpwm_channel_duty_cycle_buf = channel->softpwm_channel_duty_cycle;
+		
+		channel->softpwm_channel_counter = 0;
 	}
 	
-	
-	if (_pwm_counter >= SOFTPWM_Channel_1_Value)
+	if (channel->softpwm_channel_counter >= channel->softpwm_channel_duty_cycle_buf)
 	{
-		SOFTWARE_PWM_CH1_PORT &= ~(1 << SOFTWARE_PWM_CH1);
+		*(channel->softpwm_channel_port) &= ~(1 << channel->softpwm_channel_pin);
 	}
 	
-	++_pwm_counter;
+	++(channel->softpwm_channel_counter);
 }
 
-inline static void SOFTPWM_Channel_2_Polling()
+inline void SOFTPWM_All_Channels_Processing(SOFTPWM_t *channels, uint8_t num_of_channels)
 {
-	static uint8_t _pwm_counter = 0;
-	
-	if (_pwm_counter == 0)
+	for (uint8_t i = 0; i < num_of_channels; ++i)
 	{
-		SOFTWARE_PWM_CH2_PORT |= (1 << SOFTWARE_PWM_CH2);
+		SOFTPWM_Channel_Processing(&(channels[i]));
 	}
-	
-	
-	if (_pwm_counter >= SOFTPWM_Channel_2_Value)
-	{
-		SOFTWARE_PWM_CH2_PORT &= ~(1 << SOFTWARE_PWM_CH2);
-	}
-	
-	++_pwm_counter;
-}
-
-inline static void SOFTPWM_Channel_3_Polling()
-{
-	static uint8_t _pwm_counter = 0;
-	
-	if (_pwm_counter == 0)
-	{
-		SOFTWARE_PWM_CH3_PORT |= (1 << SOFTWARE_PWM_CH3);
-	}
-	
-	
-	if (_pwm_counter >= SOFTPWM_Channel_3_Value)
-	{
-		SOFTWARE_PWM_CH3_PORT &= ~(1 << SOFTWARE_PWM_CH3);
-	}
-	
-	++_pwm_counter;
-}
-
-
-// ===============================================================================
-
-
-// функции опроса всех каналов программного ШИМ
-//
-// -------------------------------------------------------------------------------
-// polling functions for all channels of the software PWM
-//
-inline static void SOFTPWM_All_Channels_Polling()
-{
-	static uint8_t _pwm_counter = 0;
-	
-	if (_pwm_counter == 0)
-	{
-		SOFTWARE_PWM_CH1_PORT |= (1 << SOFTWARE_PWM_CH1);
-		SOFTWARE_PWM_CH2_PORT |= (1 << SOFTWARE_PWM_CH2);
-		SOFTWARE_PWM_CH3_PORT |= (1 << SOFTWARE_PWM_CH3);
-	}
-	
-	if (_pwm_counter >= SOFTPWM_Channel_1_Value)
-	{
-		SOFTWARE_PWM_CH1_PORT &= ~(1 << SOFTWARE_PWM_CH1);
-	}
-	
-	if (_pwm_counter >= SOFTPWM_Channel_2_Value)
-	{
-		SOFTWARE_PWM_CH2_PORT &= ~(1 << SOFTWARE_PWM_CH2);
-	}
-	
-	if (_pwm_counter >= SOFTPWM_Channel_3_Value)
-	{
-		SOFTWARE_PWM_CH3_PORT &= ~(1 << SOFTWARE_PWM_CH3);
-	}
-	
-	++_pwm_counter;
 }
 
 
