@@ -42,7 +42,7 @@ typedef struct
 	uint8_t *softpwm_channel_port;
 	uint8_t  softpwm_channel_pin;
 	
-	uint8_t  softpwm_channel_max_width;
+	uint8_t  softpwm_channel_max_depth;
 	uint8_t  softpwm_channel_duty_cycle;
 	uint8_t  softpwm_channel_duty_cycle_buf;
 	
@@ -54,14 +54,14 @@ typedef struct
 // ===============================================================================
 
 
-inline SOFTPWM_t SOFTPWM_Get_Channel_Object(uint8_t *port, uint8_t pin, uint8_t max_width, uint8_t duty_cycle)
+inline SOFTPWM_t SOFTPWM_Get_Channel_Object(uint8_t *port, uint8_t pin, uint8_t max_depth, uint8_t duty_cycle)
 {
 	SOFTPWM_t pwm;
 	
 	pwm.softpwm_channel_port           = port;
 	pwm.softpwm_channel_pin            = pin;
 	
-	pwm.softpwm_channel_max_width      = max_width;
+	pwm.softpwm_channel_max_depth      = max_depth;
 	pwm.softpwm_channel_duty_cycle     = duty_cycle;
 	pwm.softpwm_channel_duty_cycle_buf = duty_cycle;
 	
@@ -82,7 +82,7 @@ inline SOFTPWM_t SOFTPWM_Get_Channel_Object(uint8_t *port, uint8_t pin, uint8_t 
 
 inline void SOFTPWM_Channel_Processing(SOFTPWM_t *channel)
 {
-	if (channel->softpwm_channel_counter == channel->softpwm_channel_max_width)
+	if (channel->softpwm_channel_counter == channel->softpwm_channel_max_depth)
 	{
 		*(channel->softpwm_channel_port) |=  (1 << channel->softpwm_channel_pin);
 		
