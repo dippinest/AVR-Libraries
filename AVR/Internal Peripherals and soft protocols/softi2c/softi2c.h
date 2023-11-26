@@ -108,6 +108,10 @@ void SOFTI2C_Set_Target_Interface_Object(SOFTI2C_t *softi2c_interface);
 
 SOFTI2C_t *SOFTI2C_Get_Target_Interface_Object();
 
+
+// ===============================================================================
+
+
 void SOFTI2C_Start();
 
 void SOFTI2C_Stop();
