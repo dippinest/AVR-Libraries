@@ -116,6 +116,10 @@ void SOFTSPI_Set_Target_Interface_Object(SOFTSPI_t *spi_interface);
 
 SOFTSPI_t *SOFTSPI_Get_Target_Interface_Object();
 
+
+// ===============================================================================
+
+
 void SOFTSPI_Send_Byte(uint8_t byte);
 
 void SOFTSPI_Send_Data(void* data, uint16_t data_size);
