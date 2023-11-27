@@ -128,7 +128,7 @@ bool DS18B20_Get_Power_Supply()
 	_DS18B20_Contact_To_Address();
 	ONEWIRE_Send_Byte(0xB4);
 	
-	return _ONEWIRE_Get_Level();
+	return ONEWIRE_Get_Level();
 }
 
 #else // ===============================================================================
@@ -217,7 +217,9 @@ bool DS18B20_Get_Power_Supply()
 	ONEWIRE_Send_Byte(0xCC);
 	ONEWIRE_Send_Byte(0xB4);
 	
-	return _ONEWIRE_Get_Level();
+	return ONEWIRE_Get_Level();
 }
 
 #endif
+
+
