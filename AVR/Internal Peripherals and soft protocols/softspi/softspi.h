@@ -1,4 +1,20 @@
 
+
+// ===============================================================================
+//
+// Библиотека для работы с программным SPI. Библиотека позволяет работать
+// как с одиночным программным модулем SPI, так и с их множеством (это настраивается
+// в файле softspi_configuration.h)
+//
+// -------------------------------------------------------------------------------
+//
+// Library for working with software SPI. The library allows you to work with
+// a single SPI software module, as well as with many of them (this is configured
+// in the softspi_configuration.h file)
+//
+// ===============================================================================
+
+
 #ifndef SOFTSPI_H_
 #define SOFTSPI_H_
 
