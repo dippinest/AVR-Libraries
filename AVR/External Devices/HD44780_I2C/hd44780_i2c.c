@@ -68,6 +68,10 @@ static int _HD44780_I2C_Send_Char(char c, FILE *stream)
 	return 0;
 }
 
+
+// ===============================================================================
+
+
 HD44780_I2C_t HD44780_I2C_Get_Display_Object(uint8_t dev_addr, bool display_is_enable)
 {
 	HD44780_I2C_t display;
@@ -104,6 +108,15 @@ void HD44780_I2C_Set_Target_Display_Object(HD44780_I2C_t *display)
 {
 	target_display = display;
 }
+
+HD44780_I2C_t *HD44780_I2C_Get_Target_Display_Object()
+{
+	return target_display;
+}
+
+
+// ===============================================================================
+
 
 void HD44780_I2C_Set_Display_Enable(bool display_is_enable)
 {
