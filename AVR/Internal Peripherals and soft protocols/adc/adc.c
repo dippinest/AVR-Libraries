@@ -25,7 +25,54 @@ float ADC_Get_Voltage_Value()
 	return (_max_ref_voltage / 1023) * ADC_Get_Value_10bit();
 }
 
+float ADC_Get_Voltage_Value_From_Value(uint16_t adc_value)
+{
+	return (_max_ref_voltage / 1023) * adc_value;
+}
+
+
 // ===============================================================================
+
+
+uint32_t ADC_Get_Oversampling_Value(uint8_t bitrate)
+{
+	uint32_t oversampling_value = 0;
+	
+	uint32_t count = ADC_GET_DATA_SIZE_FOR_OVERSAMPLING(bitrate);
+	
+	for (uint32_t i = 0; i < count; ++i)
+	{
+		oversampling_value += ADC_Get_Value_10bit();
+	}
+	
+	return (uint32_t)(oversampling_value >> (bitrate - 10));
+}
+
+uint32_t ADC_Get_Oversampling_Value_From_Set_Of_Dimensions
+(
+	uint8_t   bitrate,
+	uint16_t *set_of_dimensions,
+	uint8_t   set_of_dimensions_size
+)
+{
+	uint32_t oversampling_value = 0;
+	
+	uint32_t count = ADC_GET_DATA_SIZE_FOR_OVERSAMPLING(bitrate);
+	
+	for (uint32_t i = 0; i < count; ++i)
+	{
+		if (i < set_of_dimensions_size)
+		{
+			oversampling_value += set_of_dimensions[i];
+		}
+	}
+	
+	return (uint32_t)(oversampling_value >> (bitrate - 10));
+}
+
+
+// ===============================================================================
+
 
 uint8_t ADC_Get_Random_Entropy_Value_8bit(uint8_t channel)
 {
@@ -101,12 +148,12 @@ static volatile bool      _reception_buffer_is_filled   = false;
 
 static void (*_reception_callback)() = NULL;
 
-void ADC_Set_Reception_Buffer_Ptr(void *buffer)
+void ADC_Set_Reception_Buffer_Ptr(const void *buffer)
 {
 	_reception_buffer = (uint16_t*)buffer;
 }
 
-void ADC_Set_Reception_Buffer_Size(uint16_t buffer_size)
+void ADC_Set_Reception_Buffer_Size(const uint16_t buffer_size)
 {
 	_reception_buffer_size = buffer_size;
 }
@@ -140,6 +187,11 @@ uint16_t ADC_Get_Current_Reception_Buffer_Fullness()
 {
 	return _reception_counter;
 }
+
+
+// ===============================================================================
+
+
 
 ISR(ADC_vect)
 {
