@@ -11,8 +11,8 @@ int main(void)
 	
 	while (1)
 	{
-		uint16_t adc_val     = ADC_Get_Value_10bit();
-		uint16_t adc_val_ovs = ADC_Get_Oversampling_Value(12); // 12 bit oversampling oversampling
+		uint16_t adc_val      = ADC_Get_Value_10bit();
+		uint16_t adc_val_ovs  = ADC_Get_Oversampling_Value(12); // 12 bit oversampling oversampling
 		
 		float adc_voltage     = ADC_GET_FLOAT_VOLTAGE(adc_val,     10, 5.0);
 		float adc_voltage_ovs = ADC_GET_FLOAT_VOLTAGE(adc_val_ovs, 12, 5.0);
