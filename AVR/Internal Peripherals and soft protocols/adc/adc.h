@@ -1,4 +1,5 @@
 
+
 // ===============================================================================
 //
 // Библиотека для работы с внутренним модулем АЦП. Большинство функций данной
@@ -47,7 +48,18 @@
 #define ADC_PRESCALER_128  0b111
 
 
+
 // ===============================================================================
+
+
+#define ADC_GET_FLOAT_VOLTAGE(ADC_VAL, ADC_BITRATE, MAX_REF_VOLTAGE) \
+							(((float)MAX_REF_VOLTAGE / ((1ULL << ADC_BITRATE) - 1)) * ADC_VAL)
+							
+#define ADC_GET_DATA_SIZE_FOR_OVERSAMPLING(BITRATE) (1ULL << (2 * (BITRATE - 10)))
+
+
+// ===============================================================================
+
 
 
 inline void ADC_Set_Enable(bool is_enable)
@@ -159,6 +171,21 @@ uint16_t ADC_Get_Value_10bit();
 
 float ADC_Get_Voltage_Value();
 
+float ADC_Get_Voltage_Value_From_Value(uint16_t adc_value);
+
+
+// ===============================================================================
+
+
+uint32_t ADC_Get_Oversampling_Value(uint8_t required_bitrate);
+
+uint32_t ADC_Get_Oversampling_Value_From_Set_Of_Dimensions
+(
+	uint8_t   required_bitrate,
+	uint16_t *set_of_dimensions,
+	uint8_t   set_of_dimensions_size
+);
+
 
 // ===============================================================================
 
@@ -200,9 +227,9 @@ uint32_t ADC_Get_Random_Entropy_Value_32bit(uint8_t channel);
 
 #ifdef ADC_USE_CALLBACK
 
-void ADC_Set_Reception_Buffer_Ptr(void *buffer);
+void ADC_Set_Reception_Buffer_Ptr(const void *buffer);
 
-void ADC_Set_Reception_Buffer_Size(uint16_t buffer_size);
+void ADC_Set_Reception_Buffer_Size(const uint16_t buffer_size);
 
 void ADC_Set_Reception_CallBack_Function(void (*callback_function)());
 
