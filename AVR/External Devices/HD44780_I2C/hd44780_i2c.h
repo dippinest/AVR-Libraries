@@ -97,6 +97,8 @@ HD44780_I2C_t HD44780_I2C_Get_Display_Object(uint8_t dev_addr, bool display_is_e
 
 void HD44780_I2C_Set_Target_Display_Object(HD44780_I2C_t *display);
 
+HD44780_I2C_t *HD44780_I2C_Get_Target_Display_Object();
+
 
 // ===============================================================================
 
