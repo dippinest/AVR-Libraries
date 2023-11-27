@@ -2,9 +2,7 @@
 #include "onewire.h"
 
 
-
 #ifdef ONEWIRE_USE_MULTIPLE_INTERFACE
-
 
 static volatile ONEWIRE_t *target_onewire_interface_object = NULL;
 
