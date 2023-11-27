@@ -19,6 +19,7 @@
 #define DS18B20_H_
 
 #include <util/delay.h>
+
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdbool.h>
