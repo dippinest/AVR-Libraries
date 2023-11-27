@@ -14,7 +14,7 @@
 //
 // I suggest using this library implementation for a relatively
 // low-frequency PWM with a large number of channels. To work with
-// a limited number of channels of high-frequency software PWM,
+// a limited number of channels of HIGH-FREQUENCY software PWM,
 // I recommend using the version of the library with embedded
 // (inline) functions softpwm_inline.h
 //
