@@ -79,6 +79,9 @@
 #define _HD44780_I2C_INITIAL_FUNCTION_SET_MODE_DISPLAY  0b00101000
 
 
+// ===============================================================================
+
+
 typedef struct
 {
 	uint8_t dev_addr;
@@ -93,6 +96,10 @@ typedef struct
 HD44780_I2C_t HD44780_I2C_Get_Display_Object(uint8_t dev_addr, bool display_is_enable);
 
 void HD44780_I2C_Set_Target_Display_Object(HD44780_I2C_t *display);
+
+
+// ===============================================================================
+
 
 void HD44780_I2C_Set_Display_Enable(bool display_is_enable);
 
