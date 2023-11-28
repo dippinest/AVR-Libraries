@@ -106,11 +106,11 @@ float LM75_Get_Float_Temperature();
 
 // the return value is a signed int32_t number with a pseudo-fixed point
 // with 2 decimal places
-int32_t LM75_Get_PFIXPoint_2digits_Temperature();
+int32_t LM75_Get_FIXPoint_2digits_Temperature();
 
 // the return value is a signed int32_t number with a pseudo-fixed point
 // with 3 decimal places
-int32_t LM75_Get_PFIXPoint_3digits_Temperature();
+int32_t LM75_Get_FIXPoint_3digits_Temperature();
 
 #endif
 
