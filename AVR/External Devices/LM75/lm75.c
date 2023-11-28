@@ -232,7 +232,7 @@ float LM75_Get_Float_Temperature()
 	return (float)(raw_temperature_data >> 5) * 0.125;
 }
 
-int32_t LM75_Get_PFIXPoint_2digits_Temperature()
+int32_t LM75_Get_FIXPoint_2digits_Temperature()
 {
 	int8_t int_part, fract_part_3bit;
 	int16_t raw_temperature_data = (_LM75_Read_UINT16_Register(_LM75_DATA_TEMP_REGISTER_ADDR));
@@ -258,7 +258,7 @@ int32_t LM75_Get_PFIXPoint_2digits_Temperature()
 	return pfixp_temp;
 }
 
-int32_t LM75_Get_PFIXPoint_3digits_Temperature()
+int32_t LM75_Get_FIXPoint_3digits_Temperature()
 {
 	int8_t int_part, fract_part_3bit;
 	int16_t raw_temperature_data = (_LM75_Read_UINT16_Register(_LM75_DATA_TEMP_REGISTER_ADDR));
