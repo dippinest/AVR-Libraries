@@ -283,3 +283,6 @@ int32_t LM75_Get_FIXPoint_3digits_Temperature()
 	
 	return pfixp_temp;
 }
+
+
+
