@@ -5,14 +5,14 @@
 // Пример использования программного ШИМ.
 //
 // В данном примере используются 1 канал программного ШИМ разрядностью
-// 32 бита для управления яркостью светодиода
+// 4 бита (16 градаций) для управления яркостью светодиода
 //
 // -------------------------------------------------------------------------------
 //
 // An example of using a software PWM.
-//
-// In this example, 1 channel of 32-bit software PWM is used to control
-// the brightness of the LED
+// 
+// In this example, 1 channel of 4 bits (16 gradations) software PWM is used to
+// control the brightness of the LED
 //
 // ===============================================================================
 
