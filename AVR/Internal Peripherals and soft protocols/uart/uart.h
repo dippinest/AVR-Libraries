@@ -76,6 +76,12 @@
 #endif
 
 
+#ifndef FLASH
+#define FLASH(VAL, TYPE, DATA) const TYPE VAL[] PROGMEM = DATA
+#endif
+
+
+
 #define UART_NUM_OF_DATA_BITS_5 5
 #define UART_NUM_OF_DATA_BITS_6 6
 #define UART_NUM_OF_DATA_BITS_7 7
