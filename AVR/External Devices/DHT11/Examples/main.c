@@ -12,7 +12,7 @@ int main(void)
 	
 	while (1)
 	{
-		// перед началом преобразования необходима инициализация.
+		// перед началом преобразования необходима подготовка.
 		// Процедура инициализации является достаточно длительной
 		// по времени (~20 мс), поэтому она вынесена отдельно для того,
 		// чтобы у Вас юыла возможность реализовать её по-другому
@@ -20,12 +20,12 @@ int main(void)
 		//
 		// -------------------------------------------------------------------------------
 		// Initialization is required before starting the conversion.
-		// The initialization procedure is quite time-consuming (~20 ms),
+		// The preparing procedure is quite time-consuming (~20 ms),
 		// so it is rendered separately so that you have the opportunity
 		// to implement it in a different way
 		// (for example, it is non-blocking implementation)
 		//
-		DHT11_Convert_Initialize();
+		DHT11_Convert_Prepare();
 		
 		
 		// при ошибке конвертации выводим ошибку
