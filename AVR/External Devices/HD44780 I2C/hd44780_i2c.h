@@ -31,6 +31,13 @@
 
 #include "hd44780_i2c_configuration.h"
 
+
+#ifndef FLASH
+#define FLASH(VAL, TYPE, DATA) const TYPE VAL[] PROGMEM = DATA
+#endif
+
+
+
 // macros different I2C addresses for PCF8574 and PCF8574A
 #define HD44780_I2C_PCF8574_DEV_ADDR_A2F_A1F_A0F   0x20
 #define HD44780_I2C_PCF8574_DEV_ADDR_A2F_A1F_A0T   0x21
