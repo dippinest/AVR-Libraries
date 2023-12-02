@@ -332,7 +332,19 @@ uint8_t SOFTSPI_Get_Byte()
 	return data;
 }
 
-#else
+void *SOFTSPI_Get_Data(void* data, uint16_t data_size)
+{
+	for (uint16_t j = 0; j < data_size; ++j)
+	{
+		((uint8_t*)data)[j] = SOFTSPI_Get_Byte();
+	}
+	
+	return data;
+}
+
+
+#else // ===============================================================================
+
 
 static SOFTSPI_t *target_softspi_interface_object = NULL;
 
@@ -726,9 +738,19 @@ uint8_t SOFTSPI_Get_Byte()
 }
 
 
-#endif
+void *SOFTSPI_Get_Data(void* data, uint16_t data_size)
+{
+	for (uint16_t j = 0; j < data_size; ++j)
+	{
+		((uint8_t*)data)[j] = SOFTSPI_Get_Byte();
+	}
+	
+	return data;
+}
 
-// ===============================================================================
+
+#endif // ===============================================================================
+
 
 static void (*_cs_set_on)()  = NULL;
 static void (*_cs_set_off)() = NULL;
@@ -748,3 +770,5 @@ void SOFTSPI_Call_CS_OFF()
 {
 	_cs_set_off();
 }
+
+
