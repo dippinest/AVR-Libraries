@@ -77,6 +77,8 @@ void SOFTSPI_Send_Data(void* data, uint16_t data_size);
 
 uint8_t SOFTSPI_Get_Byte();
 
+void *SOFTSPI_Get_Data(void* data, uint16_t data_size);
+
 
 #else // ===============================================================================
 
@@ -142,10 +144,10 @@ void SOFTSPI_Send_Data(void* data, uint16_t data_size);
 
 uint8_t SOFTSPI_Get_Byte();
 
-#endif
+void *SOFTSPI_Get_Data(void* data, uint16_t data_size);
 
 
-// ===============================================================================
+#endif // ===============================================================================
 
 
 void SOFTSPI_Set_CS_CallBack_Functions(void (*cs_on_callback)(), void (*cs_off_callback)());
@@ -156,5 +158,6 @@ void SOFTSPI_Call_CS_OFF();
 
 
 #endif
+
 
 
