@@ -28,6 +28,11 @@
 #include <avr/interrupt.h>
 
 
+#ifndef FLASH
+#define FLASH(VAL, TYPE, DATA) const TYPE VAL[] PROGMEM = DATA
+#endif
+
+
 
 #define UART_ASYNC_TRANSMITTION_IS_ACTIVE          true
 #define UART_ASYNC_TRANSMITTION_IS_NOT_ACTIVE      false
