@@ -2,7 +2,7 @@
 #include "dht11.h"
 
 
-void DHT11_Convert_Initialize()
+void DHT11_Convert_Prepare()
 {
 	ONEWIRE_Set_Low();
 	_delay_ms(18);
