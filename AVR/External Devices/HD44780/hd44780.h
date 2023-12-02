@@ -29,6 +29,13 @@
 
 #include "hd44780_configuration.h"
 
+
+#ifndef FLASH
+#define FLASH(VAL, TYPE, DATA) const TYPE VAL[] PROGMEM = DATA
+#endif
+
+
+
 #define _HD44780_SET_E_HIGH  (HD44780_E_PORT |=  (1 << HD44780_E_PIN))
 #define _HD44780_SET_E_LOW   (HD44780_E_PORT &= ~(1 << HD44780_E_PIN))
 
