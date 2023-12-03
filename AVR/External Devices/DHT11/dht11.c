@@ -11,6 +11,10 @@ void DHT11_Convert_Prepare()
 	_delay_us(40);
 }
 
+
+// ===============================================================================
+
+
 uint8_t DHT11_Start_Convert(DHT11_Data_t *dht11)
 {
 	cli();
