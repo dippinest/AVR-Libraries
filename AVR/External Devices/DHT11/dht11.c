@@ -69,16 +69,15 @@ uint8_t DHT11_Start_Convert(DHT11_Data_t *dht11)
 // ===============================================================================
 
 
-int8_t DHT11_Get_Temperature(DHT11_Data_t *dht11)
+int8_t DHT11_Get_Integer_Temperature(DHT11_Data_t *dht11)
 {
 	return dht11->dht11_40bit_data_buffer[2];
 }
 
 
-int8_t DHT11_Get_Humidity(DHT11_Data_t *dht11)
+int8_t DHT11_Get_Integer_Humidity(DHT11_Data_t *dht11)
 {
 	return dht11->dht11_40bit_data_buffer[0];
 }
-
 
 
