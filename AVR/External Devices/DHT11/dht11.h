@@ -36,6 +36,8 @@ typedef struct
 
 void DHT11_Convert_Prepare();
 
+// ===============================================================================
+
 uint8_t DHT11_Start_Convert(DHT11_Data_t *dht11);
 
 int8_t DHT11_Get_Temperature(DHT11_Data_t *dht11);
