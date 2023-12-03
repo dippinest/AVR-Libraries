@@ -51,8 +51,7 @@ uint8_t DHT11_Start_Convert(DHT11_Data_t *dht11)
 		}
 	}
 	
-	uint8_t crc = dht11->dht11_40bit_data_buffer[0] + dht11->dht11_40bit_data_buffer[1] +
-	dht11->dht11_40bit_data_buffer[2] + dht11->dht11_40bit_data_buffer[3];
+	uint8_t crc = dht11->dht11_40bit_data_buffer[0] + dht11->dht11_40bit_data_buffer[2];
 	
 	if (crc != dht11->dht11_40bit_data_buffer[4])
 	{
