@@ -39,8 +39,8 @@ int main(void)
 		}
 		else
 		{
-			UART_StringFmt_Transmit("Temp = %d *C\r\n", DHT11_Get_Temperature(&dht11));
-			UART_StringFmt_Transmit("Hum  = %d  %%\r\n", DHT11_Get_Humidity(&dht11));
+			UART_StringFmt_Transmit("Temp = %d *C\r\n", DHT11_Get_Integer_Temperature(&dht11));
+			UART_StringFmt_Transmit("Hum  = %d  %%\r\n", DHT11_Get_Integer_Humidity(&dht11));
 		}
 		
 		UART_NEW_LINE;
