@@ -28,7 +28,7 @@ int main(void)
 		HD44780_I2C_Print_String("Temp = *C");
 		
 		HD44780_I2C_Print_String(
-			FIXPoint_Int32PFP_To_String(
+			FIXPoint_Int32FP_To_String(
 				LM75_Get_FIXPoint_2_Fractional_Digits_Temperature(), 3, FIXPoint_Get_Number_Of_Decimal_Places()
 			)
 		);
