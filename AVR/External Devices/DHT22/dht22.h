@@ -2,15 +2,13 @@
 
 // ===============================================================================
 //
-// Библиотека для работы с датчиками температуры DS18B20 по программной шине 1-Wire.
-// Вы можете работать как с одним датчиком, так и с несколькими - это можно
-// настроить в файле конфигурации ds18b20_configuration.h
+// Библиотека для работы с датчиком температуры и влажности DHT22
+// по программной шине 1-Wire.
 //
 // -------------------------------------------------------------------------------
 //
-// Library for working with DS18B20 temperature sensors over the 1-Wire
-// software bus. You can work with either one sensor or several - this can be
-// configured in the ds18b20_configuration.h configuration file
+// Library for working with the DHT22 temperature and humidity sensor
+// via the 1-Wire software bus.
 //
 // ===============================================================================
 
