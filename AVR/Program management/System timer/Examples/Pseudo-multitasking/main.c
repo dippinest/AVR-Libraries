@@ -4,18 +4,19 @@
 //
 // Внимание! Выполняющиеся задачи не будут синхронизированны друг с другом.
 // Чтобы избежать ошибок в синхронизации и доступа к общим ресурсам, используйте
-// полноценную ОСРВ (к примеру, FreeRTOS)
+// полноценную ОСРВ (к примеру, FreeRTOS) или библиотеку scheduler.h
 //
 // -------------------------------------------------------------------------------
 // An example of implementing pseudo-multitasking using a system timer
 //
 // Attention! Running tasks will not be synchronized with each other
 // To avoid errors in synchronization and access to shared resources,
-// use the full-fledged RTOS (for example, FreeRTOS)
+// use the full-fledged RTOS (for example, FreeRTOS) or the scheduler.h library
 //
 
 #include <avr/sleep.h>
-
+
+
 #include "systimer.h"
 
 
