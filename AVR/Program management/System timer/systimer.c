@@ -9,6 +9,21 @@ SYSTIMER_t SYSTIMER_Get_Value()
 	return __SYSTIMER;
 }
 
+
+// ===============================================================================
+
+
+void SYSTIMER_Delay(SYSTIMER_t ticks)
+{
+	const SYSTIMER_t tagret_time = __SYSTIMER;
+	
+	while((__SYSTIMER - tagret_time) < ticks)
+	{
+		asm("nop");
+	}
+}
+
+
 // ===============================================================================
 
 
@@ -38,7 +53,7 @@ void SYSTIMER_Run_Task(SYSTIMER_Task_Params_t *task_params, void (*task)())
 // system timer interrupt handler
 //
 ISR(TIMER0_COMP_vect)
-{
+{
 	++__SYSTIMER;
 }
 
