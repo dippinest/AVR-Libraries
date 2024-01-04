@@ -4,44 +4,24 @@
 
 void EEPROM_Write_Byte(uint16_t mem_addr, uint8_t byte)
 {
-	while (SPMCR & (1 << SPMEN));
-	while (EECR & (1 << EEWE));
-	
-	EEAR = mem_addr;
-	EEDR = byte;
-	
-	cli();
-	EECR |= (1 << EEMWE);
-	EECR |= (1 << EEWE);
-	sei();
+	eeprom_write_byte((void*)mem_addr, byte);
 }
 
 uint8_t EEPROM_Read_Byte(uint16_t mem_addr)
 {
-	while (SPMCR & (1 << SPMEN));
-	while (EECR & (1 << EEWE));
-	
-	EEAR  = mem_addr;
-	EECR |= (1 << EERE);
-	
-	return EEDR;
+	return eeprom_read_byte((void*)mem_addr);
 }
 
 void EEPROM_Write_Data(uint16_t mem_addr, void *data, uint16_t data_size)
 {
-	for (uint16_t i = mem_addr; i < (mem_addr + data_size); ++i)
-	{
-		EEPROM_Write_Byte(i, ((uint8_t*)data)[i]);
-	}
+	eeprom_write_block(data, (void*)mem_addr, data_size);
 }
 
 void *EEPROM_Read_Data(uint16_t mem_addr, void *data, uint16_t data_size)
 {
-	for (uint16_t i = mem_addr; i < (mem_addr + data_size); ++i)
-	{
-		((uint8_t*)data)[i] = EEPROM_Read_Byte(i);
-	}
+	eeprom_read_block(data, (void*)mem_addr, data_size);
 	
 	return data;
 }
+
 
