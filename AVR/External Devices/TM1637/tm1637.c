@@ -21,12 +21,14 @@ static const uint8_t _digits[] =
 // ===============================================================================
 
 
+#define TM1637_DELAY_1  _delay_us(10)
+#define TM1637_DELAY_2  _delay_us(20)
+
+
 #ifndef TM1637_USE_MULTIPLE_INTERFACE
 
 
 
-#define TM1637_DELAY_1  _delay_us(10)
-#define TM1637_DELAY_2  _delay_us(20)
 
 #define TM1637_DIO_SET_LOW	  TM1637_DIO_DDR |=  (1 << TM1637_DIO_PIN)
 #define TM1637_DIO_SET_HIGH   TM1637_DIO_DDR &= ~(1 << TM1637_DIO_PIN)
@@ -172,9 +174,6 @@ void TM1637_Set_Brightness(uint8_t brightness_coef)
 
 static TM1637_t *target_indicator_object = NULL;
 
-
-#define TM1637_DELAY_1  _delay_us(10)
-#define TM1637_DELAY_2  _delay_us(20)
 
 #define TM1637_DIO_SET_LOW	  *(target_indicator_object->dio_ddr) |=  (1 << (target_indicator_object->dio_pin))
 #define TM1637_DIO_SET_HIGH   *(target_indicator_object->dio_ddr) &= ~(1 << (target_indicator_object->dio_pin))
