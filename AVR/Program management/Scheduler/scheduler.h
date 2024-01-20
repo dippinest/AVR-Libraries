@@ -11,7 +11,7 @@
 // Это обеспечивает высокую гибкость кода.
 //
 // Максимальное количество задач для планировщика вы можете указать в
-// конфигурационном файле scheduler.h (максимум - 256 задач)
+// конфигурационном файле scheduler_configuration.h (максимум - 256 задач)
 //
 // ВНИМАНИЕ! ЭТО НЕ ОПЕРАЦИОННАЯ СИСТЕМА! Планировщик лишь имитирует
 // кооперативную ОС, но не является ей.
@@ -27,7 +27,7 @@
 // This ensures high code flexibility.
 //
 // You can specify the maximum number of tasks for the scheduler
-// in the scheduler.h configuration file (max - 256 tasks)
+// in the scheduler_configuration.h configuration file (max - 256 tasks)
 //
 // Attention! THIS IS NOT AN OPERATING SYSTEM!
 // The scheduler only simulates the cooperative OS, but is not it.
