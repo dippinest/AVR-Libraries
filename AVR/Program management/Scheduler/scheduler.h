@@ -29,7 +29,7 @@
 // You can specify the maximum number of tasks for the scheduler
 // in the scheduler_configuration.h configuration file (max - 256 tasks)
 //
-// Attention! THIS IS NOT AN OPERATING SYSTEM!
+// ATTENTION! THIS IS NOT AN OPERATING SYSTEM!
 // The scheduler only simulates the cooperative OS, but is not it.
 //
 // ===============================================================================
