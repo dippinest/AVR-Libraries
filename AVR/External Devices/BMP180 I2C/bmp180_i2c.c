@@ -79,9 +79,6 @@ uint8_t _BMP180_I2C_Read_Byte(uint8_t addr_reg)
 #endif // ===============================================================================
 
 
-
-// ===============================================================================
-
 BMP180_I2C_t BMP180_I2C_Get_Device_Object()
 {
 	BMP180_I2C_t sensor;
@@ -324,8 +321,5 @@ float BMP180_I2C_Get_Altitude_From_Pressure(int32_t pa)
 	
 	return altitude;
 }
-
-
-
 
 
