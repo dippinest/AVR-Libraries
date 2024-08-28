@@ -118,6 +118,7 @@ void *UART_Async_Get_Transmittion_CallBack_Function()
 static void _UART_Async_Byte_Transmit()
 {
 	_transmittion_callback = _UART_Async_Byte_Transmit;
+	
 	UDR = _transmittion_byte;
 	
 	if (_transmittion_counter)
@@ -141,7 +142,9 @@ static void _UART_Async_Byte_Transmit()
 static void _UART_Async_Data_Transmit()
 {
 	_transmittion_callback = _UART_Async_Data_Transmit;
+	
 	UDR = _transmittion_data[_transmittion_counter];
+	
 	++_transmittion_counter;
 	
 	if (_transmittion_counter >= _transmittion_data_size)
@@ -163,6 +166,7 @@ static void _UART_Async_Data_Transmit()
 static void _UART_Async_String_Transmit()
 {
 	_transmittion_callback = _UART_Async_String_Transmit;
+	
 	if (_transmittion_data[_transmittion_counter] != '\0')
 	{
 		UDR = _transmittion_data[_transmittion_counter];
@@ -187,6 +191,7 @@ static void _UART_Async_String_Transmit()
 static void _UART_Async_StringLn_Transmit()
 {
 	_transmittion_callback = _UART_Async_StringLn_Transmit;
+	
 	if (_transmittion_data[_transmittion_counter] != '\0')
 	{
 		UDR = _transmittion_data[_transmittion_counter];
@@ -207,6 +212,7 @@ static void _UART_Async_StringLn_Transmit()
 static void _UART_Async_Safe_String_Transmit()
 {
 	_transmittion_callback = _UART_Async_Safe_String_Transmit;
+	
 	if (_transmittion_data[_transmittion_counter] != '\0' && _transmittion_counter < _transmittion_data_size)
 	{
 		UDR = _transmittion_data[_transmittion_counter];
@@ -231,6 +237,7 @@ static void _UART_Async_Safe_String_Transmit()
 static void _UART_Async_Safe_StringLn_Transmit()
 {
 	_transmittion_callback = _UART_Async_Safe_StringLn_Transmit;
+	
 	if (_transmittion_data[_transmittion_counter] != '\0' && _transmittion_counter < _transmittion_data_size)
 	{
 		UDR = _transmittion_data[_transmittion_counter];
@@ -252,6 +259,7 @@ static void _UART_Async_Flash_Data_Transmit()
 	_transmittion_callback = _UART_Async_Flash_Data_Transmit;
 	
 	UDR = pgm_read_byte(&((uint8_t*)_transmittion_data)[_transmittion_counter]);
+	
 	++_transmittion_counter;
 	
 	if (_transmittion_counter >= _transmittion_data_size)
@@ -476,6 +484,7 @@ static void _UART_Async_Set_Reception_Data_To_Buffer(uint8_t byte)
 	if (_reception_status == UART_ASYNC_RECEPTION_IS_ACTIVE && _reception_data_buffer != NULL)
 	{
 		_reception_data_buffer[_reception_counter] = byte;
+		
 		++_reception_counter;
 		
 		if (_reception_counter >= _reception_data_buffer_size)
