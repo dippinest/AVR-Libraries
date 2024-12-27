@@ -112,11 +112,11 @@ void DS1307_Set_Clock_Enable(bool clock_is_enable);
 
 void DS1307_Set_SQW_Enable(bool sqw_is_enable);
 
+void DS1307_Set_SQW_Frequency(uint8_t sqw_frequency);
+
 
 // these functions are used to write data to the user RAM area
 // (56 bytes are available). Memory addresses range - from 0x00 to 0x37
-
-void DS1307_Set_SQW_Frequency(uint8_t sqw_frequency);
 
 void DS1307_Write_Byte_To_User_RAM(uint8_t mem_addr, uint8_t byte);
 
