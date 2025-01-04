@@ -9,7 +9,7 @@
 // if you want to work with multiple software I2C, uncomment this define
 // (otherwise comment it out)
 
-#define SOFTI2C_USE_MULTIPLE_INTERFACE
+//#define SOFTI2C_USE_MULTIPLE_INTERFACE
 
 
 
@@ -20,9 +20,9 @@
 // -------------------------------------------------------------------------------
 // GPIO definitions for SCL output of software I2C
 
-#define SOTFI2C_SCL_PIN_DDR	  DDRA
-#define SOTFI2C_SCL_PIN_PINX  PINA
-#define SOTFI2C_SCL_PIN_PORT  PORTA
+#define SOTFI2C_SCL_DDR	  DDRD
+#define SOTFI2C_SCL_PINX  PIND
+#define SOTFI2C_SCL_PORT  PORTD
 #define SOTFI2C_SCL_PIN       1
 
 
@@ -30,9 +30,9 @@
 // -------------------------------------------------------------------------------
 // GPIO definitions for SDA output of software I2C
 
-#define SOTFI2C_SDA_PIN_DDR	  DDRD
-#define SOTFI2C_SDA_PIN_PINX  PIND
-#define SOTFI2C_SDA_PIN_PORT  PORTD
+#define SOTFI2C_SDA_DDR	  DDRD
+#define SOTFI2C_SDA_PINX  PIND
+#define SOTFI2C_SDA_PORT  PORTD
 #define SOTFI2C_SDA_PIN       6
 
 
