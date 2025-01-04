@@ -13,12 +13,18 @@ int main(void)
 {
 	UART_Initialize(9600, true, false);
 	
-	// Генерирация 16-ми битного псевдослучайного сида (семени) для стандартного ГПСЧ
-	// с использованием диапазона рабочих адресов от 0x00 до 0x20. Основная ячейка - 0x00
+	
+	// Инициализация ГПСЧ. Адрес начальной рабочей ячейки - 0x0000.
+	// Диапазон рабочих адресов - от 0x0000 до 0x0020 (32 dec)
 	// -------------------------------------------------------------------------------
-	// Generation of a 16-bit pseudorandom seed for the standard rand() PRNG using
-	// the range of operating addresses from 0x00 to 0x20. The main cell is 0x00
-	srand(EEPROM_RAND_Get_16Bit_Value(0x00, 0x20));
+	// Initialization of the PRNG. The address of the initial working cell is 0x0000.
+	// The range of working addresses is from 0x0000 to 0x0020 (32 dec)
+	EEPROM_RAND_Initialize(0x0000, 32);
+	
+	// Генерирация 16-ми битного псевдослучайного сида (семени) для стандартного ГПСЧ
+	// -------------------------------------------------------------------------------
+	// Generation of a 16-bit pseudorandom seed for the standard rand() PRNG
+	srand(EEPROM_RAND_Get_16Bit_Value());
 	
 	while (1)
 	{
@@ -31,14 +37,6 @@ int main(void)
 		UART_Byte_Transmit(seed); _delay_ms(100);
 	}
 }
-
-
-
-
-
-
-
-
 
 
 
