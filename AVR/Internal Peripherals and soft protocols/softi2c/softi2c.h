@@ -19,8 +19,9 @@
 #define SOFTI2C_H_
 
 #include <avr/io.h>
-#include <stdlib.h>
 #include <util/delay.h>
+
+#include <stdlib.h>
 #include <stdbool.h>
 
 #include "softi2c_configuration.h"
