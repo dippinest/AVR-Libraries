@@ -35,20 +35,21 @@
 #ifndef EEPROM_RAND_H_
 #define EEPROM_RAND_H_
 
-
-#include <avr/eeprom.h>
-
 #include <stdint.h>
+
+#include "eeprom.h"
 
 
 // ===============================================================================
 
 
-uint8_t EEPROM_RAND_Get_8Bit_Value(uint8_t init_eeprom_addr, uint8_t max_eeprom_addr);
+void EEPROM_RAND_Initialize(uint16_t init_eeprom_addr, uint16_t max_eeprom_addr);
 
-uint16_t EEPROM_RAND_Get_16Bit_Value(uint8_t init_eeprom_addr, uint8_t max_eeprom_addr);
+uint8_t EEPROM_RAND_Get_8Bit_Value();
 
-uint32_t EEPROM_RAND_Get_32Bit_Value(uint8_t init_eeprom_addr, uint8_t max_eeprom_addr);
+uint16_t EEPROM_RAND_Get_16Bit_Value();
+
+uint32_t EEPROM_RAND_Get_32Bit_Value();
 
 
 #endif
