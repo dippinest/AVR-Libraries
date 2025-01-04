@@ -36,6 +36,7 @@
 #define EEPROM_RAND_H_
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #include "eeprom.h"
 
@@ -50,6 +51,26 @@ uint8_t EEPROM_RAND_Get_8Bit_Value();
 uint16_t EEPROM_RAND_Get_16Bit_Value();
 
 uint32_t EEPROM_RAND_Get_32Bit_Value();
+
+
+// ===============================================================================
+
+
+bool EEPROM_RAND_Get_Bool_Value();
+
+uint8_t EEPROM_RAND_Get_UInt8_Value(uint8_t min, uint8_t max);
+
+int8_t EEPROM_RAND_Get_Int8_Value(int8_t min, int8_t max);
+
+uint16_t EEPROM_RAND_Get_UInt16_Value(uint16_t min, uint16_t max);
+
+int16_t EEPROM_RAND_Get_Int16_Value(int16_t min, int16_t max);
+
+uint32_t EEPROM_RAND_Get_UInt32_Value(uint32_t min, uint32_t max);
+
+int32_t EEPROM_RAND_Get_Int32_Value(int32_t min, int32_t max);
+
+float EEPROM_RAND_Get_Float_Value();
 
 
 #endif
