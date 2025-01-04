@@ -25,7 +25,6 @@
 #define EEPROM_H_
 
 #include <avr/io.h>
-#include <avr/interrupt.h>
 #include <avr/eeprom.h>
 
 #include <stdint.h>
@@ -34,7 +33,7 @@
 // ===============================================================================
 
 
-void EEPROM_Write_Byte(uint16_t mem_addr, uint8_t byte);
+void EEPROM_Write_Byte(uint16_t mem_addr, uint8_t b);
 
 uint8_t EEPROM_Read_Byte(uint16_t mem_addr);
 
