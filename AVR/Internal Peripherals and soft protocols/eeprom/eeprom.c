@@ -15,7 +15,7 @@ void EEPROM_Write_Byte(uint16_t mem_addr, uint8_t b)
 
 uint8_t EEPROM_Read_Byte(uint16_t mem_addr)
 {
-	while (EECR & (1<<EEWE));
+	while (EECR & (1 << EEWE));
 	
 	EEAR = mem_addr;
 	
