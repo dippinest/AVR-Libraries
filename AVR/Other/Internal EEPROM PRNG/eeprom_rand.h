@@ -4,7 +4,8 @@
 // Библиотека генератора псевдослучайных чисел на основе внутренней EEPROM.
 //
 // Функции библиотеки позволяют получать псевдослучайные числа в диапазоне
-// 8, 16 и 32 бита, используя EEPROM ячейки с адресами от 0x00 до max_eeprom_addr,
+// 8, 16 и 32 бита (а также числа в установленном диапазоне), используя
+// EEPROM ячейки с адресами от 0x00 до max_eeprom_addr,
 // который задаётся в параметрах функции. Основная ячейка памяти также
 // задаётся в параметрах функции.
 //
@@ -18,9 +19,10 @@
 //
 // Library of a pseudo-random number generator based on an internal EEPROM.
 //
-// The library functions allow you to get pseudo-random numbers in
-// the range of 8, 16, and 32 bits using the cell EEPROM with addresses
-// from 0x00 to max_eeprom_addr, which is set in the function parameters.
+// The library functions allow you to get pseudorandom numbers in the range
+// of 8, 16, and 32 bits (as well as numbers in the specified range)
+// using the cell EEPROM with addresses from 0x00 to max_eeprom_addr,
+// which is set in the function parameters.
 // The main memory location is also set in the function parameters.
 //
 // Since EEPROM cells have a limited resource for a write operation,
