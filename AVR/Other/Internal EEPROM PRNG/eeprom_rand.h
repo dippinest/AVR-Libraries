@@ -72,6 +72,9 @@ uint32_t EEPROM_RAND_Get_UInt32_Value(uint32_t min, uint32_t max);
 
 int32_t EEPROM_RAND_Get_Int32_Value(int32_t min, int32_t max);
 
+// генерация числа с плавающей точкой от 0 до 1.0
+// -------------------------------------------------------------------------------
+// generating a floating point number from 0 to 1.0
 float EEPROM_RAND_Get_Float_Value();
 
 
