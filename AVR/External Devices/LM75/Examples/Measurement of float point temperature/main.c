@@ -10,11 +10,11 @@ int main(void)
 {
 	I2C_Initialize(100000);
 	
-	HD44780_I2C_t display = HD44780_I2C_Get_Device_Object(HD44780_I2C_PCF8574_DEV_ADDR_A2T_A1T_A0T, true);
-	HD44780_I2C_Set_Target_Device_Object(&display);
+	HD44780_I2C_t display = HD44780_I2C_Get_Object(HD44780_I2C_PCF8574_DEV_ADDR_A2T_A1T_A0T, true);
+	HD44780_I2C_Set_Target_Object(&display);
 	
-	LM75_t thermometer = LM75_Get_Device_Object(LM75_I2C_DEV_ADDR_A2F_A1T_A0T, true);
-	LM75_Set_Target_Device_Object(&thermometer);
+	LM75_t thermometer = LM75_Get_Object(LM75_I2C_DEV_ADDR_A2F_A1T_A0T, true);
+	LM75_Set_Target_Object(&thermometer);
 	
 	HD44780_I2C_Set_Cursor_Pos(0, 0); HD44780_I2C_Print_String("LM75 THERMOMETER");
 	
@@ -30,6 +30,5 @@ int main(void)
 		_delay_ms(500);
 	}
 }
-
 
 
