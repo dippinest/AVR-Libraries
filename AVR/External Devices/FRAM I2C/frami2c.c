@@ -7,7 +7,7 @@ static FRAMI2C_t *target_memory_chip = NULL;
 // ===============================================================================
 
 
-FRAMI2C_t FRAMI2C_Get_Device_Object(uint8_t dev_addr, uint16_t max_mem_addr)
+FRAMI2C_t FRAMI2C_Get_Object(uint8_t dev_addr, uint16_t max_mem_addr)
 {
 	FRAMI2C_t mem;
 	
@@ -17,12 +17,12 @@ FRAMI2C_t FRAMI2C_Get_Device_Object(uint8_t dev_addr, uint16_t max_mem_addr)
 	return mem;
 }
 
-void FRAMI2C_Set_Target_Device_Object(FRAMI2C_t *memory_chip)
+void FRAMI2C_Set_Target_Object(FRAMI2C_t *memory_chip)
 {
 	target_memory_chip = memory_chip;
 }
 
-FRAMI2C_t *FRAMI2C_Get_Target_Device_Object()
+FRAMI2C_t *FRAMI2C_Get_Target_Object()
 {
 	return target_memory_chip;
 }
@@ -128,7 +128,7 @@ uint16_t FRAMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_size)
 	return i;
 }
 
-uint32_t FRAMI2C_Fill_All_Memory(uint16_t memory_addr, uint8_t val, uint32_t num)
+uint32_t FRAMI2C_Fill(uint16_t memory_addr, uint8_t val, uint32_t num)
 {
 	SOFTI2C_Start();
 	
@@ -248,7 +248,7 @@ uint16_t FRAMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_size)
 	return i;
 }
 
-uint32_t FRAMI2C_Fill_All_Memory(uint16_t memory_addr, uint8_t val, uint32_t num)
+uint32_t EEPROMI2C_Fill_All_Memory(uint16_t memory_addr, uint8_t val, uint32_t num)
 {
 	I2C_Start();
 	
