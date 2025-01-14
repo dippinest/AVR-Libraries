@@ -23,7 +23,7 @@ static const uint8_t _digits[] =
 static HC595_LEDInd_t *target_indicator_object = NULL;
 
 
-HC595_LEDInd_t HC595_LEDInd_Get_Device_Object()
+HC595_LEDInd_t HC595_LEDInd_Get_Object()
 {
 	HC595_LEDInd_t indicator;
 	
@@ -32,12 +32,12 @@ HC595_LEDInd_t HC595_LEDInd_Get_Device_Object()
 	return indicator;
 }
 
-void HC595_LEDInd_Set_Target_Device_Object(HC595_LEDInd_t *indicator)
+void HC595_LEDInd_Set_Target_Object(HC595_LEDInd_t *indicator)
 {
 	target_indicator_object = indicator;
 }
 
-HC595_LEDInd_t *HC595_LEDInd_Get_Target_Device_Object()
+HC595_LEDInd_t *HC595_LEDInd_Get_Target_Object()
 {
 	return target_indicator_object;
 }
