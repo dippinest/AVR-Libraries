@@ -7,7 +7,7 @@ static EEPROMI2C_t *target_memory_chip = NULL;
 // ===============================================================================
 
 
-EEPROMI2C_t EEPROMI2C_Get_Device_Object(uint8_t dev_addr, uint16_t max_mem_addr, uint8_t page_size)
+EEPROMI2C_t EEPROMI2C_Get_Object(uint8_t dev_addr, uint16_t max_mem_addr, uint8_t page_size)
 {
 	EEPROMI2C_t mem;
 	
@@ -18,12 +18,12 @@ EEPROMI2C_t EEPROMI2C_Get_Device_Object(uint8_t dev_addr, uint16_t max_mem_addr,
 	return mem;
 }
 
-void EEPROMI2C_Set_Target_Device_Object(EEPROMI2C_t *memory_chip)
+void EEPROMI2C_Set_Target_Object(EEPROMI2C_t *memory_chip)
 {
 	target_memory_chip = memory_chip;
 }
 
-EEPROMI2C_t *EEPROMI2C_Get_Target_Device_Object()
+EEPROMI2C_t *EEPROMI2C_Get_Target_Object()
 {
 	return target_memory_chip;
 }
