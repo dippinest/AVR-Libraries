@@ -29,6 +29,9 @@
 #include "onewire_configuration.h"
 
 
+#define ONEWIRE_LEVEL_IS_LOW      0
+#define ONEWIRE_LEVEL_IS_HIGH     1
+
 #define ONEWIRE_DEVICES_WAS_FOUND 0
 #define ONEWIRE_NO_DEVICES_FOUND  1
 
@@ -71,16 +74,16 @@ typedef struct
 
 
 
-ONEWIRE_t ONEWIRE_Get_Interface_Object(
+ONEWIRE_t ONEWIRE_Get_Object(
 
-	uint8_t *data_ddr,
-	uint8_t *data_pinx,
-	uint8_t  data_pin
+uint8_t *data_ddr,
+uint8_t *data_pinx,
+uint8_t  data_pin
 );
 
-void ONEWIRE_Set_Target_Interface_Object(ONEWIRE_t *onewire_interface);
+void ONEWIRE_Set_Target_Object(ONEWIRE_t *onewire);
 
-volatile ONEWIRE_t *ONEWIRE_Get_Target_Interface_Object();
+volatile ONEWIRE_t *ONEWIRE_Get_Target_Object();
 
 
 // ===============================================================================
@@ -120,5 +123,7 @@ bool ONEWIRE_Check_CRC8_From_Unique_ROM_ID(uint8_t *_8byte_unique_rom_id_buf);
 
 
 #endif
+
+
 
 
