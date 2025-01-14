@@ -59,11 +59,11 @@ typedef struct
 
 // ===============================================================================
 
-FRAMI2C_t FRAMI2C_Get_Device_Object(uint8_t dev_addr, uint16_t max_mem_addr);
+FRAMI2C_t FRAMI2C_Get_Object(uint8_t dev_addr, uint16_t max_mem_addr);
 
-void FRAMI2C_Set_Target_Device_Object(FRAMI2C_t *memory_chip);
+void FRAMI2C_Set_Target_Object(FRAMI2C_t *memory_chip);
 
-FRAMI2C_t *FRAMI2C_Get_Target_Device_Object();
+FRAMI2C_t *FRAMI2C_Get_Device_Object();
 
 // ===============================================================================
 
@@ -75,7 +75,7 @@ uint16_t FRAMI2C_Write_Data(uint16_t memory_addr, void *data, uint16_t data_size
 
 uint16_t FRAMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_size);
 
-uint32_t FRAMI2C_Fill_All_Memory(uint16_t memory_addr, uint8_t val, uint32_t num);
+uint32_t EEPROMI2C_Fill_All_Memory(uint16_t memory_addr, uint8_t val, uint32_t num);
 
 
 #endif
