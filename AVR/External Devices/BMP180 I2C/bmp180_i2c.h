@@ -94,11 +94,11 @@ typedef struct
 // ===============================================================================
 
 
-BMP180_I2C_t BMP180_I2C_Get_Device_Object();
+BMP180_I2C_t BMP180_I2C_Get_Object();
 
-void BMP180_I2C_Set_Target_Device_Object(BMP180_I2C_t *sensor);
+void BMP180_I2C_Set_Target_Object(BMP180_I2C_t *sensor);
 
-BMP180_I2C_t *BMP180_I2C_Get_Target_Device_Object();
+BMP180_I2C_t *BMP180_I2C_Get_Target_Object();
 
 
 // ===============================================================================
