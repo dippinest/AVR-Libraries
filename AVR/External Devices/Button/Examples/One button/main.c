@@ -48,7 +48,7 @@ int main(void)
 	// -------------------------------------------------------------------------------
 	// button is pulled up to Vcc
 	//
-	Button_t button = Button_Get_Device_Object(T(DDRD), T(PIND), 2, BUTTON_INPUT_PULLUP);
+	Button_t button = Button_Get_Object(T(DDRD), T(PIND), 2, BUTTON_INPUT_PULLUP);
 	
 	
 	UART_Initialize(115200, true, false);
