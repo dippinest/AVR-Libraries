@@ -27,9 +27,9 @@ int main(void)
 	SOFTI2C_Initialize();
 	
 	
-	EEPROMI2C_t eeprom = EEPROMI2C_Get_Device_Object(EEPROM_CHIP_ADDR, EEPROM_MAX_MEM_ADDR, EEPROM_PAGE_SIZE);
+	EEPROMI2C_t eeprom = EEPROMI2C_Get_Object(EEPROM_CHIP_ADDR, EEPROM_MAX_MEM_ADDR, EEPROM_PAGE_SIZE);
 	
-	EEPROMI2C_Set_Target_Device_Object(&eeprom);
+	EEPROMI2C_Set_Target_Object(&eeprom);
 	
 	
 	UART_Initialize(9600, true, false);
@@ -52,7 +52,6 @@ int main(void)
 	{
 	}
 }
-
 
 
 
