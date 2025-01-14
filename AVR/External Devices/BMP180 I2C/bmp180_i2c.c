@@ -79,7 +79,7 @@ uint8_t _BMP180_I2C_Read_Byte(uint8_t addr_reg)
 #endif // ===============================================================================
 
 
-BMP180_I2C_t BMP180_I2C_Get_Device_Object()
+BMP180_I2C_t BMP180_I2C_Get_Object()
 {
 	BMP180_I2C_t sensor;
 	
@@ -98,12 +98,12 @@ BMP180_I2C_t BMP180_I2C_Get_Device_Object()
 	return sensor;
 }
 
-void BMP180_I2C_Set_Target_Device_Object(BMP180_I2C_t *sensor)
+void BMP180_I2C_Set_Target_Object(BMP180_I2C_t *sensor)
 {
 	target_sensor = sensor;
 }
 
-BMP180_I2C_t *BMP180_I2C_Get_Target_Device_Object()
+BMP180_I2C_t *BMP180_I2C_Get_Target_Object()
 {
 	return target_sensor;
 }
