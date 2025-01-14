@@ -4,14 +4,14 @@
 
 #ifdef ONEWIRE_USE_MULTIPLE_INTERFACE
 
-static volatile ONEWIRE_t *target_onewire_interface_object = NULL;
+static volatile ONEWIRE_t *target_onewire_object = NULL;
 
 
-ONEWIRE_t ONEWIRE_Get_Interface_Object(
+ONEWIRE_t ONEWIRE_Get_Object(
 
-	uint8_t *data_ddr,
-	uint8_t *data_pinx,
-	uint8_t  data_pin
+uint8_t *data_ddr,
+uint8_t *data_pinx,
+uint8_t  data_pin
 )
 {
 	ONEWIRE_t onewire;
@@ -23,14 +23,14 @@ ONEWIRE_t ONEWIRE_Get_Interface_Object(
 	return onewire;
 }
 
-void ONEWIRE_Set_Target_Interface_Object(ONEWIRE_t *onewire_interface)
+void ONEWIRE_Set_Target_Object(ONEWIRE_t *onewire)
 {
-	target_onewire_interface_object = onewire_interface;
+	target_onewire_object = onewire;
 }
 
-volatile ONEWIRE_t *ONEWIRE_Get_Target_Interface_Object()
+volatile ONEWIRE_t *ONEWIRE_Get_Target_Object()
 {
-	return target_onewire_interface_object;
+	return target_onewire_object;
 }
 
 
@@ -39,17 +39,17 @@ volatile ONEWIRE_t *ONEWIRE_Get_Target_Interface_Object()
 
 void ONEWIRE_Set_Low()
 {
-	*(target_onewire_interface_object->data_ddr) |=  (1 << target_onewire_interface_object->data_pin);
+	*(target_onewire_object->data_ddr) |=  (1 << target_onewire_object->data_pin);
 }
 
 void ONEWIRE_Set_High()
 {
-	*(target_onewire_interface_object->data_ddr) &= ~(1 << target_onewire_interface_object->data_pin);
+	*(target_onewire_object->data_ddr) &= ~(1 << target_onewire_object->data_pin);
 }
 
 uint8_t ONEWIRE_Get_Level()
 {
-	return *(target_onewire_interface_object->data_pinx) & (1 << target_onewire_interface_object->data_pin);
+	return *(target_onewire_object->data_pinx) & (1 << target_onewire_object->data_pin);
 }
 
 
@@ -211,5 +211,6 @@ bool ONEWIRE_Check_CRC8_From_Unique_ROM_ID(uint8_t *_8byte_unique_rom_id_buf)
 	
 	return (received_crc8 == ONEWIRE_Get_CRC8(_8byte_unique_rom_id_buf, 7));
 }
+
 
 
