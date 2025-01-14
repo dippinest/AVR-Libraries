@@ -13,10 +13,10 @@ static char buf[4];
 int main(void)
 {
 	TM1637_t tm1637_1 =
-		TM1637_Get_Device_Object(T(DDRC), T(PORTC), 0, T(DDRC), T(PINC), T(PORTC), 1, true, TM1637_BRIGHTNESS_COEFFICIENT_2);
-		
+	TM1637_Get_Object(T(DDRC), T(PORTC), 0, T(DDRC), T(PINC), T(PORTC), 1, true, TM1637_BRIGHTNESS_COEFFICIENT_2);
+	
 	TM1637_t tm1637_2 =
-		TM1637_Get_Device_Object(T(DDRA), T(PORTA), 0, T(DDRA), T(PINA), T(PORTA), 1, true, TM1637_BRIGHTNESS_COEFFICIENT_8);
+	TM1637_Get_Object(T(DDRA), T(PORTA), 0, T(DDRA), T(PINA), T(PORTA), 1, true, TM1637_BRIGHTNESS_COEFFICIENT_8);
 	
 	
 	ITOA_Set_String_Buffer(buf);
@@ -25,7 +25,7 @@ int main(void)
 	
 	while (1)
 	{
-		TM1637_Set_Target_Device_Object(&tm1637_1);
+		TM1637_Set_Target_Object(&tm1637_1);
 		
 		
 		++data1;
@@ -34,7 +34,7 @@ int main(void)
 		
 		
 		
-		TM1637_Set_Target_Device_Object(&tm1637_2);
+		TM1637_Set_Target_Object(&tm1637_2);
 		
 		
 		data2 += 0.1;
@@ -46,7 +46,6 @@ int main(void)
 		_delay_ms(100);
 	}
 }
-
 
 
 
