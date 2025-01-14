@@ -89,11 +89,11 @@ typedef struct
 // ===============================================================================
 
 
-HC595_LEDInd_t HC595_LEDInd_Get_Device_Object();
+HC595_LEDInd_t HC595_LEDInd_Get_Object();
 
-void HC595_LEDInd_Set_Target_Device_Object(HC595_LEDInd_t *indicator);
+void HC595_LEDInd_Set_Target_Object(HC595_LEDInd_t *indicator);
 
-HC595_LEDInd_t *HC595_LEDInd_Get_Target_Device_Object();
+HC595_LEDInd_t *HC595_LEDInd_Get_Target_Object();
 
 const uint8_t *HC595_LEDInd_Get_Digits_Table();
 
