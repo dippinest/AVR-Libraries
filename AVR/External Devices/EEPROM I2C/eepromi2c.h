@@ -106,11 +106,11 @@ typedef struct
 
 // ===============================================================================
 
-EEPROMI2C_t EEPROMI2C_Get_Device_Object(uint8_t dev_addr, uint16_t max_mem_addr, uint8_t page_size);
+EEPROMI2C_t EEPROMI2C_Get_Object(uint8_t dev_addr, uint16_t max_mem_addr, uint8_t page_size);
 
-void EEPROMI2C_Set_Target_Device_Object(EEPROMI2C_t *memory_chip);
+void EEPROMI2C_Set_Target_Object(EEPROMI2C_t *memory_chip);
 
-EEPROMI2C_t *EEPROMI2C_Get_Target_Device_Object();
+EEPROMI2C_t *EEPROMI2C_Get_Target_Object();
 
 void EEPROMI2C_Operation_Delay_Ms(uint8_t ms);
 
