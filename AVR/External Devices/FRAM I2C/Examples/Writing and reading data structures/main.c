@@ -4,7 +4,7 @@
 
 #include "uart.h"
 
-typedef struct 
+typedef struct
 {
 	int8_t   i8_1;
 	int8_t   i8_2;
@@ -22,9 +22,9 @@ int main(void)
 	SOFTI2C_Initialize();
 	
 	
-	FRAMI2C_t fram = FRAMI2C_Get_Memory_Chip_Object(FRAMI2C_DEV_ADDR_A2F_A1F_A0F, FM24C256_MAX_MEM_ADDR);
+	FRAMI2C_t fram = FRAMI2C_Get_Object(FRAMI2C_DEV_ADDR_A2F_A1F_A0F, FM24C256_MAX_MEM_ADDR);
 	
-	FRAMI2C_Set_Target_Memory_Chip_Object(&fram);
+	FRAMI2C_Set_Target_Object(&fram);
 	
 	
 	UART_Initialize(9600, true, false);
@@ -57,7 +57,6 @@ int main(void)
 	{
 	}
 }
-
 
 
 
