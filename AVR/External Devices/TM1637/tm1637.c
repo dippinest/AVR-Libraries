@@ -253,7 +253,7 @@ uint8_t _TM1637_Send_Byte(uint8_t byte)
 // ===============================================================================
 
 
-TM1637_t TM1637_Get_Device_Object(
+TM1637_t TM1637_Get_Object(
 
 	uint8_t *clk_ddr,
 	uint8_t *clk_port,
@@ -306,12 +306,12 @@ TM1637_t TM1637_Get_Device_Object(
 	return device;
 }
 
-void TM1637_Set_Target_Device_Object(TM1637_t *device)
+void TM1637_Set_Target_Object(TM1637_t *device)
 {
 	target_indicator_object = device;
 }
 
-TM1637_t *TM1637_Get_Target_Device_Object()
+TM1637_t *TM1637_Get_Target_Object()
 {
 	return target_indicator_object;
 }
