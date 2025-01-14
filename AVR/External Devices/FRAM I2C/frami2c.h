@@ -63,7 +63,7 @@ FRAMI2C_t FRAMI2C_Get_Object(uint8_t dev_addr, uint16_t max_mem_addr);
 
 void FRAMI2C_Set_Target_Object(FRAMI2C_t *memory_chip);
 
-FRAMI2C_t *FRAMI2C_Get_Device_Object();
+FRAMI2C_t *FRAMI2C_Get_Target_Object();
 
 // ===============================================================================
 
