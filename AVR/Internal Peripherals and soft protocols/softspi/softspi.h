@@ -111,7 +111,7 @@ typedef struct
 // ===============================================================================
 
 
-SOFTSPI_t SOFTSPI_Get_Interface_Object(
+SOFTSPI_t SOFTSPI_Get_Object(
 
 	uint8_t *miso_ddr,
 	uint8_t *miso_pinx,
@@ -130,9 +130,9 @@ SOFTSPI_t SOFTSPI_Get_Interface_Object(
 );
 
 
-void SOFTSPI_Set_Target_Interface_Object(SOFTSPI_t *spi_interface);
+void SOFTSPI_Set_Target_Object(SOFTSPI_t *spi_interface);
 
-SOFTSPI_t *SOFTSPI_Get_Target_Interface_Object();
+SOFTSPI_t *SOFTSPI_Get_Target_Object();
 
 
 // ===============================================================================
