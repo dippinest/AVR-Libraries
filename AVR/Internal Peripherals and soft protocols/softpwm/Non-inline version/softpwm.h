@@ -55,7 +55,7 @@ typedef struct
 // ===============================================================================
 
 
-SOFTPWM_t SOFTPWM_Get_Channel_Object(uint8_t *port, uint8_t pin, uint8_t max_depth, uint8_t duty_cycle);
+SOFTPWM_t SOFTPWM_Get_Object(uint8_t *port, uint8_t pin, uint8_t max_depth, uint8_t duty_cycle);
 
 
 // ===============================================================================
@@ -67,9 +67,9 @@ SOFTPWM_t SOFTPWM_Get_Channel_Object(uint8_t *port, uint8_t pin, uint8_t max_dep
 // ===============================================================================
 
 
-void SOFTPWM_Channel_Processing(SOFTPWM_t *channel);
+void SOFTPWM_Channel_Processing(SOFTPWM_t *pwm);
 
-void SOFTPWM_All_Channels_Processing(SOFTPWM_t *channels, uint8_t num_of_channels);
+void SOFTPWM_All_Channels_Processing(SOFTPWM_t *pwm, uint8_t num_of_channels);
 
 
 #endif
