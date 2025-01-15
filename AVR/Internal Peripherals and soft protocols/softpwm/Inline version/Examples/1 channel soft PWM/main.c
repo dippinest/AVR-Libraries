@@ -10,7 +10,7 @@
 // -------------------------------------------------------------------------------
 //
 // An example of using a software PWM.
-// 
+//
 // In this example, 1 channel of 4 bits (16 gradations) software PWM is used to
 // control the brightness of the LED
 //
@@ -75,7 +75,7 @@ int main(void)
 	//
 	DDRB |= (1 << 1);
 
-	softpwm = SOFTPWM_Inline_Get_Channel_Object(T(PORTB), 1, MAX_PWM_WIDTH, MAX_PWM_WIDTH);
+	softpwm = SOFTPWM_Inline_Get_Object(T(PORTB), 1, MAX_PWM_WIDTH, MAX_PWM_WIDTH);
 	
 	sei();
 	
@@ -100,6 +100,5 @@ int main(void)
 		}
 	}
 }
-
 
 
