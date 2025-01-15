@@ -1,11 +1,9 @@
 
-#include <avr/pgmspace.h>
-
 #include "hd44780.h"
 #include "deftypes.h"
 #include "itoa.h"
 
-const char FLASH_STRING[] PROGMEM = "String FLASH";
+AVR_FLASH_DATA(FLASH_STRING, char, "String FLASH");
 
 int main(void)
 {
@@ -21,3 +19,6 @@ int main(void)
 	{
 	}
 }
+
+
+
