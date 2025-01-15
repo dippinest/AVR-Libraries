@@ -39,7 +39,7 @@ int main(void)
 	//
 	// SPI mode - MODE0
 	// Data order is highest bit
-	SOFTSPI_t spi_1 = SOFTSPI_Get_Interface_Object(T(DDRA), T(PINA), 0, T(DDRA), T(PORTA), 1, T(DDRA), T(PORTA), 2, SOFTSPI_MODE_0, SOFTSPI_DATA_IS_ORDER_HIGHEST_BIT);
+	SOFTSPI_t spi_1 = SOFTSPI_Get_Object(T(DDRA), T(PINA), 0, T(DDRA), T(PORTA), 1, T(DDRA), T(PORTA), 2, SOFTSPI_MODE_0, SOFTSPI_DATA_IS_ORDER_HIGHEST_BIT);
 	
 	// SPI1
 	//
@@ -49,14 +49,14 @@ int main(void)
 	//
 	// SPI mode - MODE0
 	// Data order is highest bit
-	SOFTSPI_t spi_2 = SOFTSPI_Get_Interface_Object(T(DDRD), T(PIND), 4, T(DDRD), T(PORTD), 5, T(DDRD), T(PORTD), 6, SOFTSPI_MODE_0, SOFTSPI_DATA_IS_ORDER_HIGHEST_BIT);
+	SOFTSPI_t spi_2 = SOFTSPI_Get_Object(T(DDRD), T(PIND), 4, T(DDRD), T(PORTD), 5, T(DDRD), T(PORTD), 6, SOFTSPI_MODE_0, SOFTSPI_DATA_IS_ORDER_HIGHEST_BIT);
 	
 	DDRA |= (1 << 3);
 	DDRD |= (1 << 7);
 	
 	
 	// setting SPI1
-	SOFTSPI_Set_Target_Interface_Object(&spi_1);
+	SOFTSPI_Set_Target_Object(&spi_1);
 	
 	CS_ON_1();
 	
@@ -66,7 +66,7 @@ int main(void)
 	
 	
 	// setting SPI2
-	SOFTSPI_Set_Target_Interface_Object(&spi_2);
+	SOFTSPI_Set_Target_Object(&spi_2);
 	
 	CS_ON_2();
 	
@@ -78,3 +78,5 @@ int main(void)
 	{
 	}
 }
+
+
