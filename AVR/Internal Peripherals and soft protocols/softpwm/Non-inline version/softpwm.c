@@ -2,7 +2,7 @@
 #include "softpwm.h"
 
 
-SOFTPWM_t SOFTPWM_Get_Channel_Object(uint8_t *port, uint8_t pin, uint8_t max_depth, uint8_t duty_cycle)
+SOFTPWM_t SOFTPWM_Get_Object(uint8_t *port, uint8_t pin, uint8_t max_depth, uint8_t duty_cycle)
 {
 	SOFTPWM_t pwm;
 	
@@ -22,23 +22,23 @@ SOFTPWM_t SOFTPWM_Get_Channel_Object(uint8_t *port, uint8_t pin, uint8_t max_dep
 // ===============================================================================
 
 
-void SOFTPWM_Channel_Processing(SOFTPWM_t *channel)
+void SOFTPWM_Channel_Processing(SOFTPWM_t *pwm)
 {
-	if (channel->softpwm_channel_counter == channel->softpwm_channel_max_depth)
+	if (pwm->softpwm_channel_counter == pwm->softpwm_channel_max_depth)
 	{
-		*(channel->softpwm_channel_port) |=  (1 << channel->softpwm_channel_pin);
+		*(pwm->softpwm_channel_port) |=  (1 << pwm->softpwm_channel_pin);
 		
-		channel->softpwm_channel_duty_cycle_buf = channel->softpwm_channel_duty_cycle;
+		pwm->softpwm_channel_duty_cycle_buf = pwm->softpwm_channel_duty_cycle;
 		
-		channel->softpwm_channel_counter = 0;
+		pwm->softpwm_channel_counter = 0;
 	}
 	
-	if (channel->softpwm_channel_counter >= channel->softpwm_channel_duty_cycle_buf)
+	if (pwm->softpwm_channel_counter >= pwm->softpwm_channel_duty_cycle_buf)
 	{
-		*(channel->softpwm_channel_port) &= ~(1 << channel->softpwm_channel_pin);
+		*(pwm->softpwm_channel_port) &= ~(1 << pwm->softpwm_channel_pin);
 	}
 	
-	++(channel->softpwm_channel_counter);
+	++(pwm->softpwm_channel_counter);
 }
 
 void SOFTPWM_All_Channels_Processing(SOFTPWM_t *channels, uint8_t num_of_channels)
