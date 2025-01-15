@@ -28,8 +28,8 @@
 #include <avr/pgmspace.h>
 
 
-#ifndef AVR_FLASH_STRING
-#define AVR_FLASH_STRING(VAL, TYPE, DATA) const TYPE VAL[] PROGMEM = DATA
+#ifndef AVR_FLASH_DATA
+#define AVR_FLASH_DATA(VAL, TYPE, DATA) const TYPE VAL[] PROGMEM = DATA
 #endif
 
 
