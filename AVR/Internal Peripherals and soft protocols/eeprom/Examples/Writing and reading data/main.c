@@ -16,8 +16,6 @@ static char buffer[STR_SIZE];
 
 int main(void)
 {
-	sei();
-	
 	UART_Initialize(9600, true, false);
 
 
