@@ -2,7 +2,7 @@
 #include "uart.h"
 #include "uart_async.h"
 
-FLASH(flash_str, char, "Hello, world!");
+AVR_FLASH_DATA(flash_str, char, "Hello, world!");
 
 int main(void)
 {
@@ -19,3 +19,6 @@ int main(void)
 	{
 	}
 }
+
+
+
