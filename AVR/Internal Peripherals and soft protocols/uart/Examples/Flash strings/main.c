@@ -1,8 +1,8 @@
 
 #include "uart.h"
 
-FLASH(flash_str,     char, "this string is in a flash memory");
-FLASH(flash_fmt_str, char, "Math constant Pi ~ %.2f\r\n");
+AVR_FLASH_DATA(flash_str,     char, "this string is in a flash memory");
+AVR_FLASH_DATA(flash_fmt_str, char, "Math constant Pi ~ %.2f\r\n");
 
 int main(void)
 {
@@ -15,3 +15,6 @@ int main(void)
 	{
 	}
 }
+
+
+
