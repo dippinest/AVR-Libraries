@@ -121,19 +121,19 @@ void SOFTI2C_Read_Byte(uint8_t *data, bool ack)
 
 static SOFTI2C_t *target_softi2c_interface_object = NULL;
 
-SOFTI2C_t SOFTI2C_Get_Interface_Object(
+SOFTI2C_t SOFTI2C_Get_Object(
 
-	uint8_t *scl_ddr,
-	uint8_t *scl_pinx,
-	uint8_t *scl_port,
-	uint8_t  scl_pin,
+uint8_t *scl_ddr,
+uint8_t *scl_pinx,
+uint8_t *scl_port,
+uint8_t  scl_pin,
 
-	uint8_t *sda_ddr,
-	uint8_t *sda_pinx,
-	uint8_t *sda_port,
-	uint8_t  sda_pin,
+uint8_t *sda_ddr,
+uint8_t *sda_pinx,
+uint8_t *sda_port,
+uint8_t  sda_pin,
 
-	uint8_t  clock_delay
+uint8_t  clock_delay
 )
 {
 	SOFTI2C_t softi2c_interface;
@@ -153,7 +153,12 @@ SOFTI2C_t SOFTI2C_Get_Interface_Object(
 	return softi2c_interface;
 }
 
-SOFTI2C_t *SOFTI2C_Get_Target_Interface_Object()
+void SOFTI2C_Set_Target_Object(SOFTI2C_t *softi2c_interface)
+{
+	target_softi2c_interface_object = softi2c_interface;
+}
+
+SOFTI2C_t *SOFTI2C_Get_Target_Object()
 {
 	return target_softi2c_interface_object;
 }
@@ -186,11 +191,6 @@ static void _SOTFI2C_SCL_SET_HIGH()
 }
 
 // ===============================================================================
-
-void SOFTI2C_Set_Target_Interface_Object(SOFTI2C_t *softi2c_interface)
-{
-	target_softi2c_interface_object = softi2c_interface;
-}
 
 void SOFTI2C_Start()
 {
@@ -293,4 +293,5 @@ void SOFTI2C_Read_Byte(uint8_t *data, bool ack)
 }
 
 #endif
+
 
