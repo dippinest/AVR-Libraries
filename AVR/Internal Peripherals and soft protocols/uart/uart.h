@@ -28,6 +28,11 @@
 #include <avr/pgmspace.h>
 
 
+#ifndef AVR_FLASH_STRING
+#define AVR_FLASH_STRING(VAL, TYPE, DATA) const TYPE VAL[] PROGMEM = DATA
+#endif
+
+
 #if defined\
 (__AVR_ATmega64__)   ||\
 (__AVR_ATmega64A__)  ||\
