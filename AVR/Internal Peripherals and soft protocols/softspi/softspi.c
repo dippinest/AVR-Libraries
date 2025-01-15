@@ -348,7 +348,7 @@ void *SOFTSPI_Get_Data(void* data, uint16_t data_size)
 
 static SOFTSPI_t *target_softspi_interface_object = NULL;
 
-SOFTSPI_t SOFTSPI_Get_Interface_Object(
+SOFTSPI_t SOFTSPI_Get_Object(
 
 	uint8_t *miso_ddr,
 	uint8_t *miso_pinx,
@@ -386,7 +386,7 @@ SOFTSPI_t SOFTSPI_Get_Interface_Object(
 	return softspi_interface;
 }
 
-void SOFTSPI_Set_Target_Interface_Object(SOFTSPI_t *softspi_interface)
+void SOFTSPI_Set_Target_Object(SOFTSPI_t *softspi_interface)
 {	
 	*(softspi_interface->miso_ddr) &= ~(1 << softspi_interface->miso_pin);
 	*(softspi_interface->mosi_ddr) |=  (1 << softspi_interface->mosi_pin);
@@ -404,7 +404,7 @@ void SOFTSPI_Set_Target_Interface_Object(SOFTSPI_t *softspi_interface)
 	target_softspi_interface_object = softspi_interface;
 }
 
-SOFTSPI_t *SOFTSPI_Get_Target_Interface_Object()
+SOFTSPI_t *SOFTSPI_Get_Target_Object()
 {
 	return target_softspi_interface_object;
 }
