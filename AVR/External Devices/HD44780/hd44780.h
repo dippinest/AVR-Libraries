@@ -30,8 +30,8 @@
 #include "hd44780_configuration.h"
 
 
-#ifndef FLASH
-#define FLASH(VAL, TYPE, DATA) const TYPE VAL[] PROGMEM = DATA
+#ifndef AVR_FLASH_DATA
+#define AVR_FLASH_DATA(VAL, TYPE, DATA) const TYPE VAL[] PROGMEM = DATA
 #endif
 
 
