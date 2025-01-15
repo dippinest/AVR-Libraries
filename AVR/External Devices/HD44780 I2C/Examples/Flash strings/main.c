@@ -1,13 +1,11 @@
 
-#include <avr/pgmspace.h>
-
 #include "softi2c.h"
 #include "hd44780_i2c.h"
 #include "deftypes.h"
 
-const char FLASH_STRING_1[] PROGMEM = "String FLASH 1";
-const char FLASH_STRING_2[] PROGMEM = "String FLASH 2";
-const char FLASH_FMT_STRING[] PROGMEM = "Euler's num E = %.2f";
+AVR_FLASH_DATA(FLASH_STRING_1,    char, "String FLASH 1");
+AVR_FLASH_DATA(FLASH_STRING_2,    char, "String FLASH 2");
+AVR_FLASH_DATA(FLASH_FMT_STRING,  char, "Euler's num E = %.2f");
 
 int main(void)
 {
@@ -30,3 +28,6 @@ int main(void)
 	{
 	}
 }
+
+
+
