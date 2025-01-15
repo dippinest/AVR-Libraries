@@ -64,7 +64,7 @@ typedef struct
 // ===============================================================================
 
 
-inline SOFTPWM_Inline_t SOFTPWM_Inline_Get_Channel_Object(uint8_t *port, uint8_t pin, uint8_t max_depth, uint8_t duty_cycle)
+inline SOFTPWM_Inline_t SOFTPWM_Inline_Get_Object(uint8_t *port, uint8_t pin, uint8_t max_depth, uint8_t duty_cycle)
 {
 	SOFTPWM_Inline_t pwm;
 	
