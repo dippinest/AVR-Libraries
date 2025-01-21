@@ -2,7 +2,7 @@
 #include "task_queue.h"
 
 
-Task_Queue_t Task_Queue_Create(void (**tasks_buffer)(), uint16_t buffer_size)
+Task_Queue_t Task_Queue_Create_Object(void (**tasks_buffer)(), uint16_t buffer_size)
 {
 	Task_Queue_t queue;
 	
@@ -22,7 +22,7 @@ Task_Queue_t Task_Queue_Create(void (**tasks_buffer)(), uint16_t buffer_size)
 	return queue;
 }
 
-Task_Queue_t *Task_Queue_Create_To_Dynamic_Memory(uint16_t buffer_size)
+Task_Queue_t *Task_Queue_Create_Object_To_Dynamic_Memory(uint16_t buffer_size)
 {
 	Task_Queue_t *queue = (Task_Queue_t*)malloc(sizeof(Task_Queue_t));
 	
@@ -54,7 +54,7 @@ Task_Queue_t *Task_Queue_Create_To_Dynamic_Memory(uint16_t buffer_size)
 	return queue;
 }
 
-void Task_Queue_Delete_From_Dynamic_Memory(Task_Queue_t* queue)
+void Task_Queue_Delete_Object_From_Dynamic_Memory(Task_Queue_t* queue)
 {
 	if (queue == NULL)
 	{
