@@ -154,7 +154,7 @@ int main(void)
 	// -------------------------------------------------------------------------------
 	// allocation of memory in the heap for a queue of size 3 and its initialization
 	
-	uart_queue = Task_Queue_Create_To_Dynamic_Memory(3);
+	uart_queue = Task_Queue_Create_Object_To_Dynamic_Memory(3);
 	
 	
 	// при создании задачи указываем её номер, колбэк, статус и интервал выполнения
