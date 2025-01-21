@@ -146,7 +146,7 @@ int main(void)
 	
 	static void (*uart_queue_buf[3])();
 	
-	uart_queue = Task_Queue_Create(uart_queue_buf, 3);
+	uart_queue = Task_Queue_Create_Object(uart_queue_buf, 3);
 	
 	
 	// при создании задачи указываем её номер, колбэк, статус и интервал выполнения
