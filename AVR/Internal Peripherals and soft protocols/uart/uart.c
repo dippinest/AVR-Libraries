@@ -313,15 +313,15 @@ void *UART_Data_Receive(void *data, uint16_t data_size)
 
 uint16_t UART_Data_Receive_Before_Terminator(void *data, uint8_t terminator, uint16_t max_data_size)
 {
-	uint16_t i = 0;
+	uint16_t reception_counter = 0;
 	
-	while (i < max_data_size)
+	while (reception_counter < max_data_size)
 	{
 		uint8_t b = UART_Byte_Receive();
 		
-		((uint8_t*)data)[i] = b;
+		((uint8_t*)data)[reception_counter] = b;
 		
-		++i;
+		++reception_counter;
 		
 		if (b == terminator)
 		{
@@ -329,7 +329,7 @@ uint16_t UART_Data_Receive_Before_Terminator(void *data, uint8_t terminator, uin
 		}
 	}
 	
-	return i;
+	return reception_counter;
 }
 
 
