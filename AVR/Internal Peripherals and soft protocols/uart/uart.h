@@ -81,12 +81,6 @@
 #endif
 
 
-#ifndef FLASH
-#define FLASH(VAL, TYPE, DATA) const TYPE VAL[] PROGMEM = DATA
-#endif
-
-
-
 #define UART_NUM_OF_DATA_BITS_5 5
 #define UART_NUM_OF_DATA_BITS_6 6
 #define UART_NUM_OF_DATA_BITS_7 7
@@ -271,6 +265,16 @@ void UART_Flash_StringFmt_Transmit(const char *flash_string_fmt, ...);
 void UART_Flash_Safe_String_Transmit(const char *flash_string, uint16_t max_flash_string_len);
 
 void UART_Flash_Safe_StringLn_Transmit(const char *flash_string, uint16_t max_flash_string_len);
+
+
+// ===============================================================================
+
+
+uint8_t UART_Byte_Receive();
+
+void *UART_Data_Receive(void *data, uint16_t data_size);
+
+uint16_t UART_Data_Receive_Before_Terminator(void *data, uint8_t terminator, uint16_t max_data_size);
 
 
 // ===============================================================================
