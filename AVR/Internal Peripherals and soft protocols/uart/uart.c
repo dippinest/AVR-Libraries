@@ -206,7 +206,9 @@ void UART_Safe_StringLn_Transmit(const char *string, uint16_t max_string_len)
 	UART_Safe_String_Transmit("\r\n", 2);
 }
 
+
 // ===============================================================================
+
 
 void UART_Flash_Byte_Transmit(const uint8_t *flash_byte)
 {
@@ -292,6 +294,45 @@ void UART_Flash_Safe_StringLn_Transmit(const char *flash_string, uint16_t max_fl
 
 // ===============================================================================
 
+uint8_t UART_Byte_Receive()
+{
+	while ( !(UCSRA & (1 << RXC)) );
+	return UDR;
+}
+
+
+void *UART_Data_Receive(void *data, uint16_t data_size)
+{
+	for (uint16_t i = 0; i < data_size; ++i)
+	{
+		((uint8_t*)data)[i] = UART_Byte_Receive();
+	}
+	
+	return data;
+}
+
+uint16_t UART_Data_Receive_Before_Terminator(void *data, uint8_t terminator, uint16_t max_data_size)
+{
+	uint16_t i = 0;
+	
+	for (; i < max_data_size; ++i)
+	{
+		uint8_t b = UART_Byte_Receive();
+		((uint8_t*)data)[i] = b;
+		
+		if (b == terminator)
+		{
+			break;
+		}
+	}
+	
+	return i;
+}
+
+
+// ===============================================================================
+
+
 void UART_Initialize(uint32_t baudrate, bool transmittion_is_enable, bool reception_is_enable)
 {
 	UART_Set_Baudrate(baudrate);
@@ -303,5 +344,3 @@ void UART_Initialize(uint32_t baudrate, bool transmittion_is_enable, bool recept
 	UART_Set_Transmittion_Enable(transmittion_is_enable);
 	UART_Set_Reception_Enable(reception_is_enable);
 }
-
-
