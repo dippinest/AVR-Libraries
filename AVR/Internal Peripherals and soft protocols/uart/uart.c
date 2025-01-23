@@ -315,10 +315,13 @@ uint16_t UART_Data_Receive_Before_Terminator(void *data, uint8_t terminator, uin
 {
 	uint16_t i = 0;
 	
-	for (; i < max_data_size; ++i)
+	while (i < max_data_size)
 	{
 		uint8_t b = UART_Byte_Receive();
+		
 		((uint8_t*)data)[i] = b;
+		
+		++i;
 		
 		if (b == terminator)
 		{
