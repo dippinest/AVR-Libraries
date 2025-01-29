@@ -122,7 +122,7 @@ uint32_t EEPROM_RAND_Get_32Bit_Value()
 
 bool EEPROM_RAND_Get_Bool_Value()
 {
-	return (bool)(EEPROM_RAND_Get_8Bit_Value() & 0x0001);
+	return (bool)(EEPROM_RAND_Get_8Bit_Value() & 0x01);
 }
 
 uint8_t EEPROM_RAND_Get_UInt8_Value(uint8_t min, uint8_t max)
