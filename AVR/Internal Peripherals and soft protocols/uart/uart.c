@@ -311,6 +311,7 @@ void *UART_Data_Receive(void *data, uint16_t data_size)
 	return data;
 }
 
+
 uint16_t UART_Data_Receive_Before_Terminator(void *data, uint8_t terminator, uint16_t max_data_size)
 {
 	uint16_t reception_counter = 0;
@@ -333,6 +334,7 @@ uint16_t UART_Data_Receive_Before_Terminator(void *data, uint8_t terminator, uin
 }
 
 
+
 // ===============================================================================
 
 
@@ -347,3 +349,5 @@ void UART_Initialize(uint32_t baudrate, bool transmittion_is_enable, bool recept
 	UART_Set_Transmittion_Enable(transmittion_is_enable);
 	UART_Set_Reception_Enable(reception_is_enable);
 }
+
+
