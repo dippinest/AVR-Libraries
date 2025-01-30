@@ -76,6 +76,10 @@ void UART_Async_Set_Reception_Buffer_Ptr(const void *buffer);
 
 void UART_Async_Set_Reception_Buffer_Size(const uint16_t buffer_size);
 
+void UART_Async_Set_Reception_Terminator(uint8_t terminator);
+
+void UART_Async_Set_Reception_Terminator_Enable(bool is_enable);
+
 void UART_Async_Set_Reception_CallBack_Function(void (*callback_function)());
 
 bool UART_Async_Get_Reception_Status();
@@ -85,6 +89,12 @@ bool UART_Async_Reception_Buffer_Is_Filled();
 void *UART_Async_Get_Reception_Buffer_Ptr();
 
 uint16_t UART_Async_Get_Reception_Buffer_Size();
+
+uint16_t UART_Async_Get_Reception_Buffer_Counter();
+
+uint8_t UART_Async_Get_Reception_Terminator();
+
+bool UART_Async_Reception_Terminator_Is_Enable();
 
 void *UART_Async_Get_Reception_CallBack_Function();
 
