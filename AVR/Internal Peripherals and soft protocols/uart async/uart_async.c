@@ -30,6 +30,8 @@ static volatile uint16_t  _reception_data_buffer_size  = 0;
 static volatile uint16_t  _reception_counter           = 0;
 static volatile bool      _reception_buffer_is_filled  = UART_ASYNC_RECEPTION_BUFFER_IS_NOT_FILLED;
 static volatile bool      _reception_status            = UART_ASYNC_RECEPTION_IS_NOT_ACTIVE;
+static volatile uint8_t   _reception_terminator        = 0x00;
+static volatile bool      _reception_terminator_enable = false;
 
 
 static void (*_reception_callback)() = NULL;
@@ -50,6 +52,18 @@ void UART_Async_Set_Reception_Buffer_Ptr(const void *buffer)
 void UART_Async_Set_Reception_Buffer_Size(const uint16_t buffer_size)
 {
 	_reception_data_buffer_size = buffer_size;
+}
+
+
+void UART_Async_Set_Reception_Terminator(uint8_t terminator)
+{
+	_reception_terminator = terminator;
+}
+
+
+void UART_Async_Set_Reception_Terminator_Enable(bool is_enable)
+{
+	_reception_terminator_enable = is_enable;
 }
 
 
@@ -80,6 +94,24 @@ void *UART_Async_Get_Reception_Buffer_Ptr()
 uint16_t UART_Async_Get_Reception_Buffer_Size()
 {
 	return _reception_data_buffer_size;
+}
+
+
+uint16_t UART_Async_Get_Reception_Buffer_Counter()
+{
+	return _reception_counter;
+}
+
+
+uint8_t UART_Async_Get_Reception_Terminator()
+{
+	return _reception_terminator;
+}
+
+
+bool UART_Async_Reception_Terminator_Is_Enable()
+{
+	return _reception_terminator_enable;
 }
 
 
@@ -487,17 +519,17 @@ static void _UART_Async_Set_Reception_Data_To_Buffer(uint8_t byte)
 		
 		++_reception_counter;
 		
-		if (_reception_counter >= _reception_data_buffer_size)
+		if ((_reception_terminator_enable && (byte == _reception_terminator)) || (_reception_counter >= _reception_data_buffer_size))
 		{
 			UART_Async_Stop_Reception_Data_To_Buffer();
-			_reception_counter = 0;
-			_reception_buffer_is_filled = UART_ASYNC_RECEPTION_BUFFER_IS_FILLED;
 			
 			if (_reception_callback != NULL)
 			{
 				_reception_callback();
-				_reception_buffer_is_filled = UART_ASYNC_RECEPTION_BUFFER_IS_NOT_FILLED;
 			}
+			
+			_reception_counter = 0;
+			_reception_buffer_is_filled = UART_ASYNC_RECEPTION_BUFFER_IS_FILLED;
 		}
 	}
 }
@@ -507,14 +539,12 @@ static void _UART_Async_Set_Reception_Data_To_Buffer(uint8_t byte)
 void UART_Async_Start_Reception_Data_To_Buffer()
 {
 	_reception_status = UART_ASYNC_RECEPTION_IS_ACTIVE;
-	UART_Async_Set_Reception_Enable(true);
 }
 
 
 void UART_Async_Stop_Reception_Data_To_Buffer()
 {
 	_reception_status = UART_ASYNC_RECEPTION_IS_NOT_ACTIVE;
-	UART_Async_Set_Reception_Enable(false);
 }
 
 
