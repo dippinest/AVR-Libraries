@@ -115,11 +115,9 @@ int main(void)
 	ITOA_Set_String_Buffer(strbuf);
 	
 	
-	SYSTIMER_Task_Params_t encoder1_polling_task_params =
-	SYSTIMER_Get_Task_Params(2); // run every 2 ms
+	SYSTIMER_Task_Params_t encoder1_polling_task_params = SYSTIMER_Create_Task_Params(2); // run every 2 ms
 	
-	SYSTIMER_Task_Params_t encoder2_polling_task_params =
-	SYSTIMER_Get_Task_Params(2); // run every 2 ms
+	SYSTIMER_Task_Params_t encoder2_polling_task_params = SYSTIMER_Create_Task_Params(2); // run every 2 ms
 	
 	SYSTIMER_Initialize();
 	
@@ -135,3 +133,5 @@ int main(void)
 		SYSTIMER_Run_Task(&encoder2_polling_task_params, Task_Encoder2_Polling);
 	}
 }
+
+
