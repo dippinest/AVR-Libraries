@@ -55,7 +55,7 @@ int main(void)
 	// -------------------------------------------------------------------------------
 	// this button is pulled up to GND
 	//
-	Button_t button4 = Button_Get_Object(T(DDRC), T(PINC), 0, BUTTON_INPUT_PULLDOWN);
+	Button_t button4 = Button_Create_Object(T(DDRC), T(PINC), 0, BUTTON_INPUT_PULLDOWN);
 	
 	
 	UART_Initialize(115200, true, false);
