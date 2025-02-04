@@ -25,7 +25,7 @@ int main(void)
 	SOFTI2C_Initialize();
 	
 	
-	EEPROMI2C_t eeprom = EEPROMI2C_Get_Object(EEPROM_CHIP_ADDR, EEPROM_MAX_MEM_ADDR, EEPROM_PAGE_SIZE);
+	EEPROMI2C_t eeprom = EEPROMI2C_Create_Object(EEPROM_CHIP_ADDR, EEPROM_MAX_MEM_ADDR, EEPROM_PAGE_SIZE);
 	
 	EEPROMI2C_Set_Target_Object(&eeprom);
 	
@@ -39,7 +39,7 @@ int main(void)
 	// filling of all FRAM data cells with 0xAC byte
 	// (the last argument '5' is the time in milliseconds between transactions)
 	
-	EEPROMI2C_Fill_All_Memory(0x0000, 0xAC, EEPROM_MAX_MEM_ADDR, 5);
+	EEPROMI2C_Fill_Memory(0x0000, 0xAC, EEPROM_MAX_MEM_ADDR, 5);
 	
 	
 	for (uint32_t i = 0; i <= EEPROM_MAX_MEM_ADDR; i += BUFFER_SIZE)
