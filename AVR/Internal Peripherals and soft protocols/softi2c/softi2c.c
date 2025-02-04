@@ -121,7 +121,7 @@ void SOFTI2C_Read_Byte(uint8_t *data, bool ack)
 
 static SOFTI2C_t *target_softi2c_interface_object = NULL;
 
-SOFTI2C_t SOFTI2C_Get_Object(
+SOFTI2C_t SOFTI2C_Create_Object(
 
 uint8_t *scl_ddr,
 uint8_t *scl_pinx,
