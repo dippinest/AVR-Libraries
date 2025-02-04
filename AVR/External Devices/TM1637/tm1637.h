@@ -134,7 +134,7 @@ typedef struct
 // ===============================================================================
 
 
-TM1637_t TM1637_Get_Object(
+TM1637_t TM1637_Create_Object(
 
 	uint8_t *clk_ddr,
 	uint8_t *clk_port,
