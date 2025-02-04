@@ -89,7 +89,7 @@ typedef struct
 // ===============================================================================
 
 
-HC595_LEDInd_t HC595_LEDInd_Get_Object();
+HC595_LEDInd_t HC595_LEDInd_Create_Object();
 
 void HC595_LEDInd_Set_Target_Object(HC595_LEDInd_t *indicator);
 
