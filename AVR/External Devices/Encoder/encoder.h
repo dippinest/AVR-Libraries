@@ -79,7 +79,7 @@ typedef struct
 } Encoder_t;
 
 
-Encoder_t Encoder_Get_Object(
+Encoder_t Encoder_Create_Object(
 
 uint8_t *input0_ddr,
 uint8_t *input0_pinx,
