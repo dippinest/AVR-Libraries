@@ -38,7 +38,7 @@ int main(void)
 	
 	SOFTSPI_Set_CS_CallBack_Functions(CS_ON, CS_OFF);
 	
-	HC595_LEDInd_t indicator = HC595_LEDInd_Get_Object();
+	HC595_LEDInd_t indicator = HC595_LEDInd_Create_Object();
 	HC595_LEDInd_Set_Target_Object(&indicator);
 	
 	
