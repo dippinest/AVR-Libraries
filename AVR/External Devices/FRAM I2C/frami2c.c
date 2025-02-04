@@ -248,7 +248,7 @@ uint16_t FRAMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_size)
 	return i;
 }
 
-uint32_t EEPROMI2C_Fill_Memory(uint16_t memory_addr, uint8_t val, uint32_t num)
+uint32_t FRAMI2C_Fill_Memory(uint16_t memory_addr, uint8_t val, uint32_t num)
 {
 	I2C_Start();
 	
