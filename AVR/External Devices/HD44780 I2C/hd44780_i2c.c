@@ -72,7 +72,7 @@ static int _HD44780_I2C_Send_Char(char c, FILE *stream)
 // ===============================================================================
 
 
-HD44780_I2C_t HD44780_I2C_Get_Object(uint8_t dev_addr, bool display_is_enable)
+HD44780_I2C_t HD44780_I2C_Create_Object(uint8_t dev_addr, bool display_is_enable)
 {
 	HD44780_I2C_t display;
 	
