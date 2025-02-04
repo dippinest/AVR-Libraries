@@ -94,7 +94,7 @@ typedef struct
 // ===============================================================================
 
 
-BMP180_I2C_t BMP180_I2C_Get_Object();
+BMP180_I2C_t BMP180_I2C_Create_Object();
 
 void BMP180_I2C_Set_Target_Object(BMP180_I2C_t *sensor);
 
