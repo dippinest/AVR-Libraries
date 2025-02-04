@@ -54,7 +54,7 @@ typedef struct
 } Button_t;
 
 
-Button_t Button_Get_Object
+Button_t Button_Create_Object
 (
 
 	uint8_t *input_ddr,
