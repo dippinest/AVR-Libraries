@@ -111,7 +111,7 @@ typedef struct
 // ===============================================================================
 
 
-SOFTSPI_t SOFTSPI_Get_Object(
+SOFTSPI_t SOFTSPI_Create_Object(
 
 	uint8_t *miso_ddr,
 	uint8_t *miso_pinx,
