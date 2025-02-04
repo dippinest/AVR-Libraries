@@ -105,7 +105,7 @@ static uint16_t _LM75_Read_UINT16_Register(uint8_t addr_reg)
 #endif // ===============================================================================
 
 
-LM75_t LM75_Get_Object(uint8_t dev_addr, bool thermometer_is_enable)
+LM75_t LM75_Create_Object(uint8_t dev_addr, bool thermometer_is_enable)
 {
 	LM75_t thermometer;
 	
