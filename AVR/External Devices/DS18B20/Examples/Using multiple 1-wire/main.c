@@ -10,8 +10,8 @@ int main(void)
 {
 	UART_Initialize(9600, true, false);
 	
-	ONEWIRE_t onewire_1 = ONEWIRE_Get_Object(T(DDRA), T(PINA), 0);
-	ONEWIRE_t onewire_2 = ONEWIRE_Get_Object(T(DDRA), T(PINA), 1);
+	ONEWIRE_t onewire_1 = ONEWIRE_Create_Object(T(DDRA), T(PINA), 0);
+	ONEWIRE_t onewire_2 = ONEWIRE_Create_Object(T(DDRA), T(PINA), 1);
 	
 	
 	ONEWIRE_Set_Target_Object(&onewire_1);
