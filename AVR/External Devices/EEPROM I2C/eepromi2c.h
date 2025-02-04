@@ -106,7 +106,7 @@ typedef struct
 
 // ===============================================================================
 
-EEPROMI2C_t EEPROMI2C_Get_Object(uint8_t dev_addr, uint16_t max_mem_addr, uint8_t page_size);
+EEPROMI2C_t EEPROMI2C_Create_Object(uint8_t dev_addr, uint16_t max_mem_addr, uint8_t page_size);
 
 void EEPROMI2C_Set_Target_Object(EEPROMI2C_t *memory_chip);
 
@@ -130,8 +130,7 @@ uint16_t EEPROMI2C_Write_Data(uint16_t memory_addr, void *data, uint16_t data_si
 
 uint16_t EEPROMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_size, uint8_t operation_delay_ms);
 
-uint32_t EEPROMI2C_Fill_All_Memory(uint16_t memory_addr, uint8_t val, uint32_t num, uint8_t operation_delay_ms);
+uint32_t EEPROMI2C_Fill_Memory(uint16_t memory_addr, uint8_t val, uint32_t num, uint8_t operation_delay_ms);
 
 
 #endif
-
