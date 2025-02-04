@@ -66,10 +66,10 @@ int main(void)
 	// -------------------------------------------------------------------------------
 	// variables for storing the execution params of each task
 	//
-	SYSTIMER_Task_Params_t tparams0 = SYSTIMER_Get_Task_Params(100);
-	SYSTIMER_Task_Params_t tparams1 = SYSTIMER_Get_Task_Params(200);
-	SYSTIMER_Task_Params_t tparams2 = SYSTIMER_Get_Task_Params(500);
-	SYSTIMER_Task_Params_t tparams3 = SYSTIMER_Get_Task_Params(1000);
+	SYSTIMER_Task_Params_t tparams0 = SYSTIMER_Create_Task_Params(100);
+	SYSTIMER_Task_Params_t tparams1 = SYSTIMER_Create_Task_Params(200);
+	SYSTIMER_Task_Params_t tparams2 = SYSTIMER_Create_Task_Params(500);
+	SYSTIMER_Task_Params_t tparams3 = SYSTIMER_Create_Task_Params(1000);
 	
 	while (1)
 	{
