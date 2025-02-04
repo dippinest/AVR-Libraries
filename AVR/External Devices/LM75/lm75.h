@@ -80,7 +80,7 @@ typedef struct
 // ===============================================================================
 
 
-LM75_t LM75_Get_Object(uint8_t dev_addr, bool thermometer_is_enable);
+LM75_t LM75_Create_Object(uint8_t dev_addr, bool thermometer_is_enable);
 
 void LM75_Set_Target_Object(LM75_t *thermometer);
 
