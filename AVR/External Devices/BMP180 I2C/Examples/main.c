@@ -15,7 +15,7 @@ int main(void)
 	I2C_Initialize(100000);
 	UART_Initialize(9600, true, false);
 	
-	bmp180 = BMP180_I2C_Get_Object();
+	bmp180 = BMP180_I2C_Create_Object();
 	BMP180_I2C_Set_Target_Object(&bmp180);
 	
 	int16_t t;
