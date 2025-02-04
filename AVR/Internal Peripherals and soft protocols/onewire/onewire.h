@@ -74,7 +74,7 @@ typedef struct
 
 
 
-ONEWIRE_t ONEWIRE_Get_Object(
+ONEWIRE_t ONEWIRE_Create_Object(
 
 uint8_t *data_ddr,
 uint8_t *data_pinx,
