@@ -23,7 +23,7 @@ static const uint8_t _digits[] =
 static HC595_LEDInd_t *target_indicator_object = NULL;
 
 
-HC595_LEDInd_t HC595_LEDInd_Get_Object()
+HC595_LEDInd_t HC595_LEDInd_Create_Object()
 {
 	HC595_LEDInd_t indicator;
 	
