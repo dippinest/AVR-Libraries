@@ -7,7 +7,7 @@ static EEPROMI2C_t *target_memory_chip = NULL;
 // ===============================================================================
 
 
-EEPROMI2C_t EEPROMI2C_Get_Object(uint8_t dev_addr, uint16_t max_mem_addr, uint8_t page_size)
+EEPROMI2C_t EEPROMI2C_Create_Object(uint8_t dev_addr, uint16_t max_mem_addr, uint8_t page_size)
 {
 	EEPROMI2C_t mem;
 	
@@ -375,7 +375,7 @@ uint16_t EEPROMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_siz
 	return i;
 }
 
-uint32_t EEPROMI2C_Fill_All_Memory(uint16_t memory_addr, uint8_t val, uint32_t num, uint8_t operation_delay_ms)
+uint32_t EEPROMI2C_Fill_Memory(uint16_t memory_addr, uint8_t val, uint32_t num, uint8_t operation_delay_ms)
 {
 	uint16_t i = 0, n = 0;
 	
@@ -392,6 +392,5 @@ uint32_t EEPROMI2C_Fill_All_Memory(uint16_t memory_addr, uint8_t val, uint32_t n
 	
 	return i;
 }
-
 
 
