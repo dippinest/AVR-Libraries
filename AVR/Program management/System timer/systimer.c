@@ -27,7 +27,7 @@ void SYSTIMER_Delay(SYSTIMER_t ticks)
 // ===============================================================================
 
 
-SYSTIMER_Task_Params_t SYSTIMER_Get_Task_Params(SYSTIMER_t interval)
+SYSTIMER_Task_Params_t SYSTIMER_Create_Task_Params(SYSTIMER_t interval)
 {
 	SYSTIMER_Task_Params_t params;
 	
