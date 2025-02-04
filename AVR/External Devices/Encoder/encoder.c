@@ -91,7 +91,7 @@ void *Encoder_Get_Right_Turn_CallBack_Function()
 #endif
 
 
-Encoder_t Encoder_Get_Object(
+Encoder_t Encoder_Create_Object(
 
 uint8_t *input0_ddr,
 uint8_t *input0_pinx,
