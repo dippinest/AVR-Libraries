@@ -64,7 +64,7 @@ typedef struct
 } SYSTIMER_Task_Params_t;
 
 
-SYSTIMER_Task_Params_t SYSTIMER_Get_Task_Params(SYSTIMER_t interval);
+SYSTIMER_Task_Params_t SYSTIMER_Create_Task_Params(SYSTIMER_t interval);
 
 void SYSTIMER_Run_Task(SYSTIMER_Task_Params_t *task_params, void (*task)());
 
