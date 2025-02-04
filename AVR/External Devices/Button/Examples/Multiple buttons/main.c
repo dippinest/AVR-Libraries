@@ -47,9 +47,9 @@ int main(void)
 	// -------------------------------------------------------------------------------
 	// all buttons are pulled up to Vcc
 	//
-	Button_t button1 = Button_Get_Object(T(DDRD), T(PIND), 2, BUTTON_INPUT_PULLUP);
-	Button_t button2 = Button_Get_Object(T(DDRD), T(PIND), 3, BUTTON_INPUT_PULLUP);
-	Button_t button3 = Button_Get_Object(T(DDRD), T(PIND), 4, BUTTON_INPUT_PULLUP);
+	Button_t button1 = Button_Create_Object(T(DDRD), T(PIND), 2, BUTTON_INPUT_PULLUP);
+	Button_t button2 = Button_Create_Object(T(DDRD), T(PIND), 3, BUTTON_INPUT_PULLUP);
+	Button_t button3 = Button_Create_Object(T(DDRD), T(PIND), 4, BUTTON_INPUT_PULLUP);
 	
 	// эта кнопка подтянута к GND (к земле)
 	// -------------------------------------------------------------------------------
