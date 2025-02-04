@@ -348,7 +348,7 @@ void *SOFTSPI_Get_Data(void* data, uint16_t data_size)
 
 static SOFTSPI_t *target_softspi_interface_object = NULL;
 
-SOFTSPI_t SOFTSPI_Get_Object(
+SOFTSPI_t SOFTSPI_Create_Object(
 
 	uint8_t *miso_ddr,
 	uint8_t *miso_pinx,
