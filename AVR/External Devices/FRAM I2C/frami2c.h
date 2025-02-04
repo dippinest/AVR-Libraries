@@ -75,7 +75,7 @@ uint16_t FRAMI2C_Write_Data(uint16_t memory_addr, void *data, uint16_t data_size
 
 uint16_t FRAMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_size);
 
-uint32_t EEPROMI2C_Fill_All_Memory(uint16_t memory_addr, uint8_t val, uint32_t num);
+uint32_t EEPROMI2C_Fill_Memory(uint16_t memory_addr, uint8_t val, uint32_t num);
 
 
 #endif
