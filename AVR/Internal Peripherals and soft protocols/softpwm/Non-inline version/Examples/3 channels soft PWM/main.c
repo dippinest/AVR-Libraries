@@ -77,9 +77,9 @@ int main(void)
 	//
 	DDRB |= (1 << 1) | (1 << 2) | (1 << 3);
 
-	softpwm[0] = SOFTPWM_Get_Object(T(PORTB), 1, MAX_PWM_WIDTH, MAX_PWM_WIDTH);
-	softpwm[1] = SOFTPWM_Get_Object(T(PORTB), 2, MAX_PWM_WIDTH, MAX_PWM_WIDTH);
-	softpwm[2] = SOFTPWM_Get_Object(T(PORTB), 3, MAX_PWM_WIDTH, MAX_PWM_WIDTH);
+	softpwm[0] = SOFTPWM_Create_Object(T(PORTB), 1, MAX_PWM_WIDTH, MAX_PWM_WIDTH);
+	softpwm[1] = SOFTPWM_Create_Object(T(PORTB), 2, MAX_PWM_WIDTH, MAX_PWM_WIDTH);
+	softpwm[2] = SOFTPWM_Create_Object(T(PORTB), 3, MAX_PWM_WIDTH, MAX_PWM_WIDTH);
 	
 	sei();
 	
