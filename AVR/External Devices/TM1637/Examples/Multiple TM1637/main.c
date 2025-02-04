@@ -13,10 +13,10 @@ static char buf[4];
 int main(void)
 {
 	TM1637_t tm1637_1 =
-	TM1637_Get_Object(T(DDRC), T(PORTC), 0, T(DDRC), T(PINC), T(PORTC), 1, true, TM1637_BRIGHTNESS_COEFFICIENT_2);
+	TM1637_Create_Object(T(DDRC), T(PORTC), 0, T(DDRC), T(PINC), T(PORTC), 1, true, TM1637_BRIGHTNESS_COEFFICIENT_2);
 	
 	TM1637_t tm1637_2 =
-	TM1637_Get_Object(T(DDRA), T(PORTA), 0, T(DDRA), T(PINA), T(PORTA), 1, true, TM1637_BRIGHTNESS_COEFFICIENT_8);
+	TM1637_Create_Object(T(DDRA), T(PORTA), 0, T(DDRA), T(PINA), T(PORTA), 1, true, TM1637_BRIGHTNESS_COEFFICIENT_8);
 	
 	
 	ITOA_Set_String_Buffer(buf);
