@@ -106,8 +106,8 @@ void Task_Encoder2_Polling()
 
 int main(void)
 {
-	encoder1 = Encoder_Get_Object(T(DDRA), T(PINA), 0, T(DDRA), T(PINA), 1, Encoder1_Left, Encoder1_Right);
-	encoder2 = Encoder_Get_Object(T(DDRA), T(PINA), 2, T(DDRA), T(PINA), 3, Encoder2_Left, Encoder2_Right);
+	encoder1 = Encoder_Create_Object(T(DDRA), T(PINA), 0, T(DDRA), T(PINA), 1, Encoder1_Left, Encoder1_Right);
+	encoder2 = Encoder_Create_Object(T(DDRA), T(PINA), 2, T(DDRA), T(PINA), 3, Encoder2_Left, Encoder2_Right);
 	
 	
 	UART_Initialize(115200, true, false);
