@@ -11,7 +11,7 @@ int main(void)
 	// SDA - PORTD 6
 	//
 	// soft I2C delay = 10
-	SOFTI2C_t i2c_1 = SOFTI2C_Get_Object(T(DDRD), T(PIND), T(PORTD), 5, T(DDRD), T(PIND), T(PORTD), 6, 10);
+	SOFTI2C_t i2c_1 = SOFTI2C_Create_Object(T(DDRD), T(PIND), T(PORTD), 5, T(DDRD), T(PIND), T(PORTD), 6, 10);
 	
 	// I2C2
 	//
@@ -19,7 +19,7 @@ int main(void)
 	// SDA - PORTA 1
 	//
 	// soft I2C delay = 10
-	SOFTI2C_t i2c_2 = SOFTI2C_Get_Object(T(DDRA), T(PINA), T(PORTA), 0, T(DDRA), T(PINA), T(PORTA), 1, 10);
+	SOFTI2C_t i2c_2 = SOFTI2C_Create_Object(T(DDRA), T(PINA), T(PORTA), 0, T(DDRA), T(PINA), T(PORTA), 1, 10);
 	
 	// setting I2C1
 	SOFTI2C_Set_Target_Object(&i2c_1);
