@@ -11,7 +11,7 @@ int main(void)
 {
 	SOFTI2C_Initialize();
 	
-	HD44780_I2C_t display = HD44780_I2C_Get_Object(HD44780_I2C_PCF8574_DEV_ADDR_A2T_A1T_A0T, true);
+	HD44780_I2C_t display = HD44780_I2C_Create_Object(HD44780_I2C_PCF8574_DEV_ADDR_A2T_A1T_A0T, true);
 	
 	HD44780_I2C_Set_Target_Object(&display);
 	
