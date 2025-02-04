@@ -7,7 +7,7 @@ static FRAMI2C_t *target_memory_chip = NULL;
 // ===============================================================================
 
 
-FRAMI2C_t FRAMI2C_Get_Object(uint8_t dev_addr, uint16_t max_mem_addr)
+FRAMI2C_t FRAMI2C_Create_Object(uint8_t dev_addr, uint16_t max_mem_addr)
 {
 	FRAMI2C_t mem;
 	
