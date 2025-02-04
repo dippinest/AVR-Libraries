@@ -92,7 +92,7 @@ typedef struct
 // ===============================================================================
 
 
-SOFTI2C_t SOFTI2C_Get_Object(
+SOFTI2C_t SOFTI2C_Create_Object(
 
 uint8_t *scl_ddr,
 uint8_t *scl_pinx,
