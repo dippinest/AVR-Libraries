@@ -2,7 +2,7 @@
 #include "softpwm.h"
 
 
-SOFTPWM_t SOFTPWM_Get_Object(uint8_t *port, uint8_t pin, uint8_t max_depth, uint8_t duty_cycle)
+SOFTPWM_t SOFTPWM_Create_Object(uint8_t *port, uint8_t pin, uint8_t max_depth, uint8_t duty_cycle)
 {
 	SOFTPWM_t pwm;
 	
