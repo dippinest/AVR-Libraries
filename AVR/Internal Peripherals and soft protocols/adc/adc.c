@@ -25,7 +25,7 @@ float ADC_Get_Voltage_Value()
 	return (_max_ref_voltage / 1023) * ADC_Get_Value_10bit();
 }
 
-float ADC_Get_Voltage_Value_From_Value(uint16_t adc_value)
+float ADC_Get_Voltage_Value_From_Measured_Value(uint16_t adc_value)
 {
 	return (_max_ref_voltage / 1023) * adc_value;
 }
