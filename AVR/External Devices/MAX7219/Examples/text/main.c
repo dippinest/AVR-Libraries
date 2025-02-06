@@ -26,22 +26,22 @@ int main(void)
 	
 	// data output by character
 	
-	//MAX7219_Set_Digit(7, MAX7219_L);      // "L"
-	//MAX7219_Set_Digit(6, MAX7219_E);      // "E"
-	//MAX7219_Set_Digit(5, MAX7219_d);      // "d"
-	//MAX7219_Set_Digit(4, MAX7219_SPACE);  // " "
-	//MAX7219_Set_Digit(3, MAX7219_t);      // "t"
-	//MAX7219_Set_Digit(2, MAX7219_E);      // "E"
-	//MAX7219_Set_Digit(1, MAX7219_S);      // "S"
-	//MAX7219_Set_Digit(0, MAX7219_t);      // "t"
+	//MAX7219_Set_Digit(7, MAX7219_L_SYMB);      // "L"
+	//MAX7219_Set_Digit(6, MAX7219_E_SYMB);      // "E"
+	//MAX7219_Set_Digit(5, MAX7219_d_SYMB);      // "d"
+	//MAX7219_Set_Digit(4, MAX7219_SPACE_SYMB);  // " "
+	//MAX7219_Set_Digit(3, MAX7219_t_SYMB);      // "t"
+	//MAX7219_Set_Digit(2, MAX7219_E_SYMB);      // "E"
+	//MAX7219_Set_Digit(1, MAX7219_S_SYMB);      // "S"
+	//MAX7219_Set_Digit(0, MAX7219_t_SYMB);      // "t"
 	
 	uint8_t max7219_data[] =
 	{
-		MAX7219_L, MAX7219_E, MAX7219_d,
+		MAX7219_L_SYMB, MAX7219_E_SYMB, MAX7219_d_SYMB,
 		
-		MAX7219_SPACE,
+		MAX7219_SPACE_SYMB,
 		
-		MAX7219_t, MAX7219_E, MAX7219_S, MAX7219_t
+		MAX7219_t_SYMB, MAX7219_E_SYMB, MAX7219_S_SYMB, MAX7219_t_SYMB
 	};
 	
 	MAX7219_Set_Data(max7219_data, 8, true);
