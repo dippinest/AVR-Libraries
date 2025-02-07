@@ -295,7 +295,7 @@ void UART_Initialize(uint32_t baudrate, bool transmittion_is_allowed, bool recep
 
 #define DEBUGPRINTLN(STR)  UART_StringLn_Transmit(STR);
 
-#elif
+#else
 
 #define DEBUGPRINT(STR)
 
