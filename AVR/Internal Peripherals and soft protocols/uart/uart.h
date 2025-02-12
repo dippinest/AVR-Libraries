@@ -33,54 +33,6 @@
 #endif
 
 
-#if defined\
-(__AVR_ATmega64__)   ||\
-(__AVR_ATmega64A__)  ||\
-(__AVR_ATmega128__)  ||\
-(__AVR_ATmega128A__)
-
-#define UDR   UDR0
-#define UCSRA UCSR0A
-#define UCSRB UCSR0B
-#define UCSRC UCSR0C
-#define UBRRL UBRR0L
-#define UBRRH UBRR0H
-
-#endif
-
-
-#if defined\
-(__AVR_ATmega64A__)  ||\
-(__AVR_ATmega128A__)
-
-#define U2X    U2X0
-#define UCSZ0  UCSZ00
-#define UCSZ1  UCSZ10
-#define USBS   USBS0
-#define UPM0   UPM00
-#define UPM1   UPM10
-#define UDRE   UDRE0
-#define TXEN   TXEN0
-#define RXEN   RXEN0
-#define UDRIE  UDRIE0
-#define TXCIE  TXCIE0
-#define RXCIE  RXCIE0
-
-#endif
-
-
-#if defined\
-(__AVR_ATmega64__)  ||\
-(__AVR_ATmega64A__) ||\
-(__AVR_ATmega128__) ||\
-(__AVR_ATmega128A__)
-
-#define USART_TXC_vect USART0_TX_vect
-#define USART_RXC_vect USART0_RX_vect
-
-#endif
-
-
 #define UART_NUM_OF_DATA_BITS_5 5
 #define UART_NUM_OF_DATA_BITS_6 6
 #define UART_NUM_OF_DATA_BITS_7 7
