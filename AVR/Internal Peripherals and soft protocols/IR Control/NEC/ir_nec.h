@@ -45,6 +45,8 @@ enum IR_NEC_Reception_Status
 #define _IR_NEC_NUM_OF_POSTSTART_SAMPLES         16
 #define _IR_NEC_NUM_OF_POSTSTART_REPEAT_SAMPLES   8
 
+#define _IR_NEC_MAX_NUM_OF_IDLE_PERIOD_SAMPLES  450
+
 
 typedef struct
 {
