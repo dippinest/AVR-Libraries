@@ -118,7 +118,13 @@ void IR_NEC_FSM()
 		
 		if (_repeat_reception_callback_function != NULL)
 		{
-			_repeat_reception_callback_function();
+			if ((nec_data.addr ^ nec_data.addr_inv) == 0xFF && (nec_data.commmand ^ nec_data.commmand_inv) == 0xFF)
+			{
+				if (_repeat_reception_callback_function != NULL)
+				{
+					_repeat_reception_callback_function();
+				}
+			}
 			
 			fsm_status = NO_RECEPTION;
 		}
