@@ -31,6 +31,31 @@ void IR_NEC_Initialize(void (*reception_callback_function)(), void (*repeat_rece
 	IR_NEC_Reset();
 }
 
+// ===============================================================================
+
+void IR_NEC_Set_Reception_Callback_Function(void (*reception_callback_function)())
+{
+	_reception_callback_function = reception_callback_function;
+}
+
+void *IR_NEC_Get_Reception_Callback_Function()
+{
+	return _reception_callback_function;
+}
+
+void IR_NEC_Set_Repeat_Reception_Callback_Function(void (*repeat_reception_callback_function)())
+{
+	_repeat_reception_callback_function = repeat_reception_callback_function;
+}
+
+void *IR_NEC_Get_Repeat_Reception_Callback_Function()
+{
+	return _repeat_reception_callback_function;
+}
+
+
+// ===============================================================================
+
 
 IR_NEC_Protocol_t IR_NEC_Get_Data()
 {
@@ -283,7 +308,7 @@ ISR(IR_NEC_TIMER_VECTOR_INTERRUPT)
 {
 	++main_ir_nec_counter;
 	
-	if (main_ir_nec_counter >= 450)
+	if (main_ir_nec_counter >= _IR_NEC_MAX_NUM_OF_IDLE_PERIOD_SAMPLES)
 	{
 		IR_NEC_Reset();
 	}
@@ -293,6 +318,5 @@ ISR(IR_NEC_EXINT_VECTOR_INTERRUPT)
 {
 	IR_NEC_FSM();
 }
-
 
 
