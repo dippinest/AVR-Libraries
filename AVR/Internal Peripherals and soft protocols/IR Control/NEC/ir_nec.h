@@ -60,6 +60,18 @@ typedef struct
 
 void IR_NEC_Initialize(void (*reception_callback_function)(), void (*repeat_reception_callback_function)());
 
+
+void IR_NEC_Set_Reception_Callback_Function(void (*reception_callback_function)());
+
+void *IR_NEC_Get_Reception_Callback_Function();
+
+void IR_NEC_Set_Repeat_Reception_Callback_Function(void (*repeat_reception_callback_function)());
+
+void *IR_NEC_Get_Repeat_Reception_Callback_Function();
+
+// ===============================================================================
+
+
 IR_NEC_Protocol_t IR_NEC_Get_Data();
 
 void IR_NEC_Reset();
