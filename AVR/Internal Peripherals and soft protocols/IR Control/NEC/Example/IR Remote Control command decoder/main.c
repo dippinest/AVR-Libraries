@@ -1,0 +1,46 @@
+
+
+#include "uart.h"
+#include "ir_nec.h"
+
+
+void IR_NEC_Callback()
+{
+	IR_NEC_Protocol_t nec = IR_NEC_Get_Data();
+	
+	UART_StringFmt_Transmit("ADDR = %X, CMD = %X\r\n", nec.addr, nec.commmand);
+}
+
+
+int main(void)
+{
+	UART_Initialize(19200, true, false);
+	
+	
+	// первая передаваемая функция срабатывает при первом принятии
+	// пакета NEC протокола; вторая - при повторных принятиях пакета
+	// -------------------------------------------------------------------------------
+	// first transmitted function is triggered when the NEC protocol
+	// packet is received for the first time; the second is triggered
+	// when the packet is received again.
+	
+	IR_NEC_Initialize(IR_NEC_Callback, NULL);
+	
+	
+	
+	// инициализация прерываний, необходимых для работы декодера NEC
+	// -------------------------------------------------------------------------------
+	// initializing interrupts necessary for NEC decoder operation
+	
+	IR_NEC_FSM_Timer_Initialize();
+	IR_NEC_EXINT_Interrupt_Initialize();
+	
+	
+	sei();
+	
+	while (1)
+	{
+	}
+}
+
+
