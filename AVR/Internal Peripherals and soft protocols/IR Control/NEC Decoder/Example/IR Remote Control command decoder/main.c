@@ -11,11 +11,6 @@ void NEC_Decoder_Callback()
 	UART_StringFmt_Transmit("ADDR = %X, CMD = %X\r\n", nec.addr, nec.commmand);
 }
 
-void NEC_Decoder_Repeat_Callback()
-{
-	UART_StringLn_Transmit("REPEAT");
-}
-
 
 int main(void)
 {
@@ -29,7 +24,7 @@ int main(void)
 	// packet is received for the first time; the second is triggered
 	// when the packet is received again.
 	
-	NEC_Decoder_Initialize(NEC_Decoder_Callback, NEC_Decoder_Repeat_Callback);
+	NEC_Decoder_Initialize(NEC_Decoder_Callback, NULL);
 	
 	
 	
