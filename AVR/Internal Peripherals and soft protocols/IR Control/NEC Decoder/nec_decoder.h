@@ -76,10 +76,6 @@ void *NEC_Decoder_Get_Repeat_Reception_Callback_Function();
 
 NEC_Protocol_Data_t NEC_Decoder_Get_Data();
 
-void NEC_Decoder_Reset();
-
-void NEC_Decoder_FSM();
-
 
 
 #endif
