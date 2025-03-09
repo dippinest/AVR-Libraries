@@ -77,7 +77,7 @@ void NEC_Decoder_Reset()
 }
 
 
-bool NEC_Decoder_Get_Input_Level()
+bool _NEC_Decoder_Get_Input_Level()
 {
 	if (NEC_DECODER_EXINT_IN_GPIO_PINX & (1 << NEC_DECODER_EXINT_IN_GPIO_PIN))
 	{
@@ -88,13 +88,38 @@ bool NEC_Decoder_Get_Input_Level()
 }
 
 
+void _NEC_Decoder_Receive_Byte(uint8_t *b)
+{
+	++samples_counter;
+	
+	if (samples_counter == 2)
+	{
+		if (main_ir_nec_counter >= (_NEC_DECODER_BIT0_TIMEOUT - 1) && main_ir_nec_counter <= (_NEC_DECODER_BIT0_TIMEOUT + 1))
+		{
+			++bits_counter;
+		}
+		
+		if (main_ir_nec_counter >= (_NEC_DECODER_BIT1_TIMEOUT - 1))
+		{
+			*b |= (1 << bits_counter);
+			
+			++bits_counter;
+		}
+		
+		samples_counter = 0;
+		
+		main_ir_nec_counter = 0;
+	}
+}
+
+
 void NEC_Decoder_FSM()
 {
 	switch(fsm_status)
 	{
 		case NO_RECEPTION:
 		
-		if (NEC_Decoder_Get_Input_Level() == _NEC_DECODER_INPUT_LEVEL_LOW)
+		if (_NEC_Decoder_Get_Input_Level() == _NEC_DECODER_INPUT_LEVEL_LOW)
 		{
 			fsm_status = RECEPTION_START;
 		}
@@ -161,32 +186,13 @@ void NEC_Decoder_FSM()
 		
 		case RECEPTION_ADDRESS:
 		
-		++samples_counter;
+		_NEC_Decoder_Receive_Byte(&(nec_data.addr));
 		
-		if (samples_counter == 2)
+		if (bits_counter >= 8)
 		{
-			if (main_ir_nec_counter >= (_NEC_DECODER_BIT0_TIMEOUT - 1) && main_ir_nec_counter <= (_NEC_DECODER_BIT0_TIMEOUT + 1))
-			{
-				++bits_counter;
-			}
+			fsm_status = RECEPTION_INV_ADDRESS;
 			
-			if (main_ir_nec_counter >= (_NEC_DECODER_BIT1_TIMEOUT - 1))
-			{
-				nec_data.addr |= (1 << bits_counter);
-				
-				++bits_counter;
-			}
-			
-			if (bits_counter >= 8)
-			{
-				fsm_status = RECEPTION_INV_ADDRESS;
-				
-				bits_counter = 0;
-			}
-			
-			samples_counter = 0;
-			
-			main_ir_nec_counter = 0;
+			bits_counter = 0;
 		}
 		
 		break;
@@ -194,32 +200,13 @@ void NEC_Decoder_FSM()
 		
 		case RECEPTION_INV_ADDRESS:
 		
-		++samples_counter;
+		_NEC_Decoder_Receive_Byte(&(nec_data.addr_inv));
 		
-		if (samples_counter == 2)
+		if (bits_counter >= 8)
 		{
-			if (main_ir_nec_counter >= (_NEC_DECODER_BIT0_TIMEOUT - 1) && main_ir_nec_counter <= (_NEC_DECODER_BIT0_TIMEOUT + 1))
-			{
-				++bits_counter;
-			}
+			fsm_status = RECEPTION_COMMAND;
 			
-			if (main_ir_nec_counter >= (_NEC_DECODER_BIT1_TIMEOUT - 1))
-			{
-				nec_data.addr_inv |= (1 << bits_counter);
-				
-				++bits_counter;
-			}
-			
-			if (bits_counter >= 8)
-			{
-				fsm_status = RECEPTION_COMMAND;
-				
-				bits_counter = 0;
-			}
-			
-			samples_counter = 0;
-			
-			main_ir_nec_counter = 0;
+			bits_counter = 0;
 		}
 		
 		break;
@@ -227,32 +214,13 @@ void NEC_Decoder_FSM()
 		
 		case RECEPTION_COMMAND:
 		
-		++samples_counter;
+		_NEC_Decoder_Receive_Byte(&(nec_data.commmand));
 		
-		if (samples_counter == 2)
+		if (bits_counter >= 8)
 		{
-			if (main_ir_nec_counter >= (_NEC_DECODER_BIT0_TIMEOUT - 1) && main_ir_nec_counter <= (_NEC_DECODER_BIT0_TIMEOUT + 1))
-			{
-				++bits_counter;
-			}
+			fsm_status = RECEPTION_INV_COMMAND;
 			
-			if (main_ir_nec_counter >= (_NEC_DECODER_BIT1_TIMEOUT - 1))
-			{
-				nec_data.commmand |= (1 << bits_counter);
-				
-				++bits_counter;
-			}
-			
-			if (bits_counter >= 8)
-			{
-				fsm_status = RECEPTION_INV_COMMAND;
-				
-				bits_counter = 0;
-			}
-			
-			samples_counter = 0;
-			
-			main_ir_nec_counter = 0;
+			bits_counter = 0;
 		}
 		
 		break;
@@ -260,40 +228,21 @@ void NEC_Decoder_FSM()
 		
 		case RECEPTION_INV_COMMAND:
 		
-		++samples_counter;
+		_NEC_Decoder_Receive_Byte(&(nec_data.commmand_inv));
 		
-		if (samples_counter == 2)
+		if (bits_counter >= 8)
 		{
-			if (main_ir_nec_counter >= (_NEC_DECODER_BIT0_TIMEOUT - 1) && main_ir_nec_counter <= (_NEC_DECODER_BIT0_TIMEOUT + 1))
+			if ((nec_data.addr ^ nec_data.addr_inv) == 0xFF && (nec_data.commmand ^ nec_data.commmand_inv) == 0xFF)
 			{
-				++bits_counter;
-			}
-			
-			if (main_ir_nec_counter >= (_NEC_DECODER_BIT1_TIMEOUT - 1))
-			{
-				nec_data.commmand_inv |= (1 << bits_counter);
-				
-				++bits_counter;
-			}
-			
-			if (bits_counter >= 8)
-			{
-				if ((nec_data.addr ^ nec_data.addr_inv) == 0xFF && (nec_data.commmand ^ nec_data.commmand_inv) == 0xFF)
+				if (_reception_callback_function != NULL)
 				{
-					if (_reception_callback_function != NULL)
-					{
-						_reception_callback_function();
-					}
+					_reception_callback_function();
 				}
-				
-				fsm_status = NO_RECEPTION;
-				
-				bits_counter = 0;
 			}
 			
-			samples_counter = 0;
+			fsm_status = NO_RECEPTION;
 			
-			main_ir_nec_counter = 0;
+			bits_counter = 0;
 		}
 		
 		break;
