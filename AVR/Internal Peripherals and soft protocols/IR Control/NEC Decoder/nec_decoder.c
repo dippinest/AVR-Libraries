@@ -246,6 +246,13 @@ void NEC_Decoder_FSM()
 		}
 		
 		break;
+
+
+		default:
+
+		NEC_Decoder_Reset();
+			
+		break;
 	}
 }
 
