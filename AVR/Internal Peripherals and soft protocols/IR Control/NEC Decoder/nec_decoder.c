@@ -19,11 +19,7 @@ static void (*_repeat_reception_callback_function)() = NULL;
 
 void NEC_Decoder_Initialize(void (*reception_callback_function)(), void (*repeat_reception_callback_function)())
 {
-	uint8_t reg = NEC_DECODER_EXINT_IN_GPIO_DDR;
-	
-	reg &= ~(1 << NEC_DECODER_EXINT_IN_GPIO_PIN);
-	
-	NEC_DECODER_EXINT_IN_GPIO_DDR = reg;
+	NEC_DECODER_EXINT_IN_GPIO_DDR &= ~(1 << NEC_DECODER_EXINT_IN_GPIO_PIN);
 	
 	_reception_callback_function        = reception_callback_function;
 	_repeat_reception_callback_function = repeat_reception_callback_function;
