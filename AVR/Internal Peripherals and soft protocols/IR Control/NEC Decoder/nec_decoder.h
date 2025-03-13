@@ -3,9 +3,17 @@
 //
 // Библиотека программного декодера протокола ИК управления NEC
 //
+// Данная библиотека позволяет автоматически контроллировать целостность
+// принятых пакетов. Для своей работы библиотека требует одного аппаратного таймера
+// и одного внешнего прерывания EXINT
+//
 // -------------------------------------------------------------------------------
 //
 // NEC IR Control protocol software decoder library
+//
+// This library allows you to automatically monitor the integrity of
+// received packets. For its operation, the library requires one hardware timer
+// and one EXINT external interrupt.
 //
 // ===============================================================================
 
