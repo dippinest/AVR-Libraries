@@ -22,7 +22,7 @@ int main(void)
 	
 	while (1)
 	{
-		// шлём пакет каждые 500 мс
+		// С€Р»С‘Рј РїР°РєРµС‚ РєР°Р¶РґС‹Рµ 500 РјСЃ
 		// -------------------------------------------------------------------------------
 		// send a packet every 500 ms
 		NEC_Encoder_Transmit_Packet(0x01, ir_nec_command, false); _delay_ms(500);
