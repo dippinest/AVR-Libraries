@@ -14,6 +14,7 @@ static uint8_t  bits_counter        = 0;
 
 // ===============================================================================
 
+
 void NEC_Encoder_Initialize()
 {
 	NEC_ENCODER_IR_OUT_GPIO_DDR |= (1 << NEC_ENCODER_IR_OUT_GPIO_PIN);
@@ -23,10 +24,15 @@ void NEC_Encoder_Initialize()
 	main_ir_nec_counter   =  0;
 	samples_counter       =  0;
 	bits_counter          =  0;
+	
+	NEC_Encoder_FSM_Timer_Interrupt_Initialize();
+	
+	NEC_Encoder_Carrier_Frequency_Generator_Timer_Initialize();
 }
 
 
 // ===============================================================================
+
 
 bool NEC_Encoder_Is_Active()
 {
