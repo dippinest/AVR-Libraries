@@ -24,10 +24,15 @@ void NEC_Decoder_Initialize(void (*reception_callback_function)(), void (*repeat
 	_reception_callback_function        = reception_callback_function;
 	_repeat_reception_callback_function = repeat_reception_callback_function;
 	
+	NEC_Decoder_FSM_Timer_Initialize();
+	NEC_Decoder_EXINT_Interrupt_Initialize();
+	
 	NEC_Decoder_Reset();
 }
 
+
 // ===============================================================================
+
 
 void NEC_Decoder_Set_Reception_Callback_Function(void (*reception_callback_function)())
 {
