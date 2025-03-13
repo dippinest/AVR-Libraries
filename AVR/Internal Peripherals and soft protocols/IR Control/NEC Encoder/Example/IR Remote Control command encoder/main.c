@@ -12,6 +12,9 @@ int main(void)
 	NEC_Encoder_Initialize();
 	
 
+	// не забудьте включить глобальные прерывания
+	// -------------------------------------------------------------------------------
+	// don't forget to enable global interrupts
 	sei();
 	
 	uint8_t ir_nec_command = 0;
