@@ -24,16 +24,7 @@ int main(void)
 	// packet is received for the first time; the second is triggered
 	// when the packet is received again.
 	
-	NEC_Decoder_Initialize(NEC_Decoder_Callback, NULL);
-	
-	
-	
-	// инициализация прерываний, необходимых для работы декодера NEC
-	// -------------------------------------------------------------------------------
-	// initializing interrupts necessary for NEC decoder operation
-	
-	NEC_Decoder_FSM_Timer_Interrupt_Initialize();
-	NEC_Decoder_EXINT_Interrupt_Initialize();
+	NEC_Decoder_Initialize(NEC_Decoder_Callback, NEC_Decoder_Repeat_Callback);
 	
 	
 	sei();
