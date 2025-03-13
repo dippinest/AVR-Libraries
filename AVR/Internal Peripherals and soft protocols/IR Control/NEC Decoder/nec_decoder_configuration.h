@@ -37,7 +37,7 @@
 // An interrupt is called every 280 microseconds. You can change the settings,
 // but do not change the interruption period, as this will cause the library to malfunction!
 
-inline void NEC_Decoder_FSM_Timer_Initialize()
+inline void NEC_Decoder_FSM_Timer_Interrupt_Initialize()
 {
 	TIMSK = (1 << OCIE2);
 	TCCR2 = (0 << CS22) | (1 << CS21) | (1 << CS20) | (1 << WGM21);
