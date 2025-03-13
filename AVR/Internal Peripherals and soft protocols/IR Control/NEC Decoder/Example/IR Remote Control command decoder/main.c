@@ -32,7 +32,7 @@ int main(void)
 	// -------------------------------------------------------------------------------
 	// initializing interrupts necessary for NEC decoder operation
 	
-	NEC_Decoder_FSM_Timer_Initialize();
+	NEC_Decoder_FSM_Timer_Interrupt_Initialize();
 	NEC_Decoder_EXINT_Interrupt_Initialize();
 	
 	
