@@ -27,6 +27,9 @@ int main(void)
 	NEC_Decoder_Initialize(NEC_Decoder_Callback, NEC_Decoder_Repeat_Callback);
 	
 	
+	// не забудьте включить глобальные прерывания
+	// -------------------------------------------------------------------------------
+	// don't forget to enable global interrupts
 	sei();
 	
 	while (1)
