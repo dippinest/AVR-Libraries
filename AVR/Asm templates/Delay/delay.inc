@@ -106,6 +106,42 @@
 ; Macro for delay in milliseconds (max - 65535 ms (~ 65 sec))
 .MACRO DELAY_MS
 
+	LDI  R18, LOW(@0)
+	LDI  R19, HIGH(@0)
+
+	CPI  R18, 0
+	BREQ L2_DELAY_MS
+
+	L1_DELAY_MS:
+
+		DELAY_CLK16 (F_CPU / 1000)
+
+		SUBI R18, 1				
+		CPI  R18, 0				
+		BREQ L2_DELAY_MS		
+		RJMP L1_DELAY_MS		
+
+	L2_DELAY_MS:
+
+		CPI  R19, 0
+		BREQ L3_DELAY_MS_EXIT
+		SUBI R19, 1
+		LDI  R18, 255
+
+		DELAY_CLK16 ((F_CPU / 1000) - 255 * 5)
+
+		RJMP L1_DELAY_MS
+
+	L3_DELAY_MS_EXIT:
+
+.ENDM
+
+
+; Макрос для задержки в миллисекундах (макс - 65535 мс (~ 65 сек))
+; -------------------------------------------------------------------------------
+; Macro for delay in milliseconds (max - 65535 ms (~ 65 sec))
+.MACRO DELAY_MS_WITH_CASHING_REGISTERS
+
 	PUSH R19
 	PUSH R18
 	PUSH R17
