@@ -140,7 +140,7 @@
 ; Макрос для задержки в миллисекундах (макс - 65535 мс (~ 65 сек))
 ; -------------------------------------------------------------------------------
 ; Macro for delay in milliseconds (max - 65535 ms (~ 65 sec))
-.MACRO DELAY_MS_WITH_CASHING_REGISTERS
+.MACRO DELAY_MS_WITH_PUSHING_REGISTERS
 
 	PUSH R19
 	PUSH R18
