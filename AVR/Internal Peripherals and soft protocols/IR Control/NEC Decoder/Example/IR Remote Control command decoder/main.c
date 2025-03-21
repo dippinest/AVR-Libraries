@@ -24,7 +24,7 @@ int main(void)
 	// packet is received for the first time; the second is triggered
 	// when the packet is received again.
 	
-	NEC_Decoder_Initialize(NEC_Decoder_Callback, NEC_Decoder_Repeat_Callback);
+	NEC_Decoder_Initialize(NEC_Decoder_Callback, NULL);
 	
 	
 	// не забудьте включить глобальные прерывания
