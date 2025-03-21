@@ -119,7 +119,7 @@ void TM1637_Initialize(bool is_enable, uint8_t brightness_coef)
 	TM1637_DIO_PORT &= ~(1 << TM1637_DIO_PIN);
 	TM1637_CLK_PORT &= ~(1 << TM1637_CLK_PIN);
 	
-	if (is_enable == true)
+	if (is_enable)
 	{
 		_tm1637_configuration_register_buffer |= (1 << 3);
 	}
