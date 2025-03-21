@@ -136,7 +136,7 @@ void TM1637_Initialize(bool is_enable, uint8_t brightness_coef)
 
 void TM1637_Set_Enable(bool is_enable)
 {
-	if (is_enable == true)
+	if (is_enable)
 	{
 		_tm1637_configuration_register_buffer |= (1 << 3);
 	}
