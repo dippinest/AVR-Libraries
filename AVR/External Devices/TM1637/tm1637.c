@@ -21,13 +21,11 @@ static const uint8_t _digits[] =
 // ===============================================================================
 
 
-#define TM1637_DELAY_1  _delay_us(10)
-#define TM1637_DELAY_2  _delay_us(20)
+#define TM1637_DELAY_1  _delay_us(TM1637_MIN_PULSE_DURATION_DELAY_US)
+#define TM1637_DELAY_2  _delay_us(TM1637_MIN_PULSE_DURATION_DELAY_US * 2)
 
 
 #ifndef TM1637_USE_MULTIPLE_INTERFACE
-
-
 
 
 #define TM1637_DIO_SET_LOW	  TM1637_DIO_DDR |=  (1 << TM1637_DIO_PIN)
@@ -45,13 +43,13 @@ static uint8_t _tm1637_configuration_register_buffer = 0b10000000;
 // ===============================================================================
 
 
-static inline void _TM1637_Start()
+static void _TM1637_Start()
 {
 	TM1637_DIO_SET_LOW;
 	TM1637_DELAY_2;
 }
 
-static inline void _TM1637_Stop()
+static void _TM1637_Stop()
 {
 	TM1637_SCL_SET_LOW;
 	TM1637_DELAY_1;
@@ -119,7 +117,7 @@ void TM1637_Initialize(bool is_enable, uint8_t brightness_coef)
 	TM1637_DIO_PORT &= ~(1 << TM1637_DIO_PIN);
 	TM1637_CLK_PORT &= ~(1 << TM1637_CLK_PIN);
 	
-	if (is_enable)
+	if (is_enable == true)
 	{
 		_tm1637_configuration_register_buffer |= (1 << 3);
 	}
@@ -136,7 +134,7 @@ void TM1637_Initialize(bool is_enable, uint8_t brightness_coef)
 
 void TM1637_Set_Enable(bool is_enable)
 {
-	if (is_enable)
+	if (is_enable == true)
 	{
 		_tm1637_configuration_register_buffer |= (1 << 3);
 	}
@@ -184,13 +182,13 @@ static TM1637_t *target_indicator_object = NULL;
 #define TM1637_SCL_SET_HIGH   *(target_indicator_object->clk_ddr) &= ~(1 << (target_indicator_object->clk_pin))
 
 
-static inline void _TM1637_Start()
+static void _TM1637_Start()
 {
 	TM1637_DIO_SET_LOW;
 	TM1637_DELAY_2;
 }
 
-static inline void _TM1637_Stop()
+static void _TM1637_Stop()
 {
 	TM1637_SCL_SET_LOW;
 	TM1637_DELAY_1;
@@ -255,17 +253,17 @@ uint8_t _TM1637_Send_Byte(uint8_t byte)
 
 TM1637_t TM1637_Create_Object(
 
-	uint8_t *clk_ddr,
-	uint8_t *clk_port,
-	uint8_t  clk_pin,
+uint8_t *clk_ddr,
+uint8_t *clk_port,
+uint8_t  clk_pin,
 
-	uint8_t *dio_ddr,
-	uint8_t *dio_pinx,
-	uint8_t *dio_port,
-	uint8_t  dio_pin,
+uint8_t *dio_ddr,
+uint8_t *dio_pinx,
+uint8_t *dio_port,
+uint8_t  dio_pin,
 
-	bool is_enable,
-	uint8_t brightness_coef
+bool is_enable,
+uint8_t brightness_coef
 )
 {
 	TM1637_t device;
@@ -292,9 +290,6 @@ TM1637_t TM1637_Create_Object(
 	}
 	
 	device.configuration_register_buffer |= (brightness_coef & 0b111);
-	
-	
-	target_indicator_object = &device;
 	
 	
 	_TM1637_Start();
@@ -531,6 +526,5 @@ char *TM1637_Convert_Num_String_To_Symbols_Array(char *num_string, uint8_t num_s
 	
 	return num_string;
 }
-
 
 
