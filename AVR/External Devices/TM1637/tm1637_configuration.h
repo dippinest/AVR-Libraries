@@ -27,7 +27,7 @@
 // 2. Reduce the capacitance of the RC circuit capacitors or remove them (not recommended!)
 // 3. Increase the value of the constant TM1637_MIN_PULSE_DURATION_DELAY_US (optimally 20 - 40 us)
 
-#define TM1637_MIN_PULSE_DURATION_DELAY_US 40
+#define TM1637_MIN_PULSE_DURATION_DELAY_US 20
 
 
 
