@@ -1,6 +1,8 @@
 
 #include <util/delay.h>
+
 #include "softspi.h"
+
 
 // macro enabling latches that transmit data to the storage register
 #define HC595_LATCHES         \
