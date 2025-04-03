@@ -29,7 +29,7 @@ Main:
 		; -------------------------------------------------------------------------------
 		; The delay is 500 milliseconds = 2 Hz for one LED switching
 		; or 1 Hz (1000 ms) for one flashing cycle
-		DELAY_MS_WITH_PUSHING_REGISTERS 500
+		DELAY_MS_WITH_SAVING_REGISTERS 500
 
 		IN  R16,   PORTD
 		LDI R17,   (1 << 7)
