@@ -18,7 +18,7 @@ int main(void)
 		float adc_voltage_ovs = ADC_GET_FLOAT_VOLTAGE(adc_val_ovs, 12, 5.0);
 		
 		UART_StringFmt_Transmit("ADC     val = %d;  Voltage = %f\r\n", adc_val,     adc_voltage);
-		UART_StringFmt_Transmit("ADC OVS val = %d; Voltage = %f\r\n", adc_val_ovs, adc_voltage_ovs);
+		UART_StringFmt_Transmit("ADC OVS val = %d; Voltage = %f\r\n",  adc_val_ovs, adc_voltage_ovs);
 		
 		UART_NEW_LINE;
 		
