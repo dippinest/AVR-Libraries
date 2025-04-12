@@ -41,7 +41,7 @@ int main(void)
 	// Data order is highest bit
 	SOFTSPI_t spi_1 = SOFTSPI_Create_Object(T(DDRA), T(PINA), 0, T(DDRA), T(PORTA), 1, T(DDRA), T(PORTA), 2, SOFTSPI_MODE_0, SOFTSPI_DATA_IS_ORDER_HIGHEST_BIT);
 	
-	// SPI1
+	// SPI2
 	//
 	// MISO - PORTD 4
 	// MOSI - PORTD 5
