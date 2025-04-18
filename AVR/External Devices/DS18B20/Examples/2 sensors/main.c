@@ -5,7 +5,7 @@
 #include <util/delay.h>
 
 #include "uart.h"
-#include "itoa.h"
+#include "ftoa.h"
 #include "onewire.h"
 #include "ds18b20.h"
 
@@ -17,7 +17,7 @@ static char buf[16];
 int main(void)
 {
 	UART_Initialize(9600, true, false);
-	ITOA_Set_String_Buffer(buf);
+	FTOA_Set_String_Buffer(buf);
 	
 	DS18B20_Set_Resolution_With_Skip_ROM(DS18B20_12BIT_RESOLUTION);
 	
@@ -35,11 +35,11 @@ int main(void)
 		
 
 		UART_String_Transmit("TEMP 1 = ");
-		UART_String_Transmit(ITOA_Float_To_String(ds18b20_1_thermometer_data, 3, 2));
+		UART_String_Transmit(FTOA_Float32_To_String(ds18b20_1_thermometer_data, 3, 2));
 		UART_String_Transmit(" *C\r\n");
 
 		UART_String_Transmit("TEMP 2 = ");
-		UART_String_Transmit(ITOA_Float_To_String(ds18b20_2_thermometer_data, 3, 2));
+		UART_String_Transmit(FTOA_Float32_To_String(ds18b20_2_thermometer_data, 3, 2));
 		UART_String_Transmit(" *C\r\n\r\n");
 	}
 }
