@@ -6,7 +6,7 @@
 
 #include "softspi.h"
 #include "tm74hc595.h"
-#include "itoa.h"
+#include "ftoa.h"
 
 
 void CS_ON()
@@ -26,8 +26,8 @@ static char buf[8];
 
 ISR(TIMER0_OVF_vect)
 {
-	TM74HC595_Convert_Num_String_To_Symbols_Array(ITOA_Float_To_String(data, 2, 2), 4);
-	TM74HC595_Put_Symbols((uint8_t*)ITOA_Get_String_Buffer_Ptr(), 4);
+	TM74HC595_Convert_Num_String_To_Symbols_Array(FTOA_Float32_To_String(data, 2, 2), 4);
+	TM74HC595_Put_Symbols((uint8_t*)FTOA_Get_String_Buffer_Ptr(), 4);
 }
 
 int main(void)
@@ -35,7 +35,7 @@ int main(void)
 	DDRC |= (1 << 3);
 	
 	
-	ITOA_Set_String_Buffer(buf);
+	FTOA_Set_String_Buffer(buf);
 	
 	SOFTSPI_Initialize();
 	SOFTSPI_Set_CS_CallBack_Functions(CS_OFF, CS_ON);
