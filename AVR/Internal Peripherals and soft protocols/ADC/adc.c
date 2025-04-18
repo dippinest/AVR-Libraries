@@ -3,6 +3,10 @@
 
 static float _max_ref_voltage = 5.0f; // default value
 
+
+// ===============================================================================
+
+
 void ADC_Set_Max_Reference_Voltage_Value(float voltage)
 {
 	_max_ref_voltage = voltage;
