@@ -15,9 +15,11 @@
 // -------------------------------------------------------------------------------
 // this is the receiving buffer is the size of an EEPROM page
 
-#define BUFFER_SIZE EEPROM_PAGE_SIZE
+// приёмный буфер размером в страницу EEPROM
+// -------------------------------------------------------------------------------
+// this is the receiving buffer is the size of an EEPROM page
 
-uint8_t buffer[BUFFER_SIZE];
+uint8_t buffer[EEPROM_PAGE_SIZE];
 
 
 int main(void)
@@ -31,22 +33,13 @@ int main(void)
 	
 	
 	UART_Initialize(9600, true, false);
-
-
-	// заполнение байтом 0xAC всех ячейки данных FRAM
-	// (последний аргумент '5' - время в мс между транзакциями)
-	// -------------------------------------------------------------------------------
-	// filling of all FRAM data cells with 0xAC byte
-	// (the last argument '5' is the time in milliseconds between transactions)
-	
-	EEPROMI2C_Fill_Memory(0x0000, 0xAC, (EEPROM_MAX_MEM_ADDR + 1), 5);
 	
 	
-	for (uint32_t i = 0; i <= EEPROM_MAX_MEM_ADDR; i += BUFFER_SIZE)
+	for (uint32_t i = 0; i < EEPROM_MAX_MEM_ADDR; i += EEPROM_PAGE_SIZE)
 	{
-		EEPROMI2C_Read_Data(i, buffer, BUFFER_SIZE, 5);
+		EEPROMI2C_Read_Data(i, buffer, EEPROM_PAGE_SIZE, 5);
 		
-		UART_Data_Transmit(buffer, BUFFER_SIZE);
+		UART_Data_Transmit(buffer, EEPROM_PAGE_SIZE);
 	}
 	
 	while (1)
