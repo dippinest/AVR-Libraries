@@ -39,7 +39,7 @@ int main(void)
 	// filling of all FRAM data cells with 0xAC byte
 	// (the last argument '5' is the time in milliseconds between transactions)
 	
-	EEPROMI2C_Fill_Memory(0x0000, 0xAC, EEPROM_MAX_MEM_ADDR, 5);
+	EEPROMI2C_Fill_Memory(0x0000, 0xAC, (EEPROM_MAX_MEM_ADDR + 1), 5);
 	
 	
 	for (uint32_t i = 0; i <= EEPROM_MAX_MEM_ADDR; i += BUFFER_SIZE)
