@@ -38,7 +38,7 @@ int main(void)
 	// запись данных из массива str в EEPROM по адресу 0x0000 (закомментировано)
 	// -------------------------------------------------------------------------------
 	// writing data from the str array to EEPROM at 0x0000 (commented out)
-	// EEPROMI2C_Write_Data(0x0000, str, STR_SIZE, 5);
+	// EEPROMI2C_Write_Data(0x0000, str, STR_SIZE, 10);
 	
 	// чтение данных из EEPROM по адресу 0x0000 в массив buffer
 	// -------------------------------------------------------------------------------
