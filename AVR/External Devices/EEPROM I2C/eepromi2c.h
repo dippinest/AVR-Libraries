@@ -118,19 +118,24 @@ void EEPROMI2C_Operation_Delay_Ms(uint8_t ms);
 
 void EEPROMI2C_Write_Byte(uint16_t memory_addr, uint8_t byte);
 
-uint8_t EEPROMI2C_Read_Byte(uint16_t memory_addr);
-
 uint16_t EEPROMI2C_Write_Page(uint16_t memory_addr, void *page, uint16_t data_size);
-
-uint16_t EEPROMI2C_Fill_Page(uint16_t memory_addr, uint8_t val, uint16_t num);
-
-uint16_t EEPROMI2C_Read_Page(uint16_t memory_addr, void *page, uint16_t data_size);
 
 uint16_t EEPROMI2C_Write_Data(uint16_t memory_addr, void *data, uint16_t data_size, uint8_t operation_delay_ms);
 
-uint16_t EEPROMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_size, uint8_t operation_delay_ms);
+
+uint8_t EEPROMI2C_Read_Byte(uint16_t memory_addr);
+
+uint16_t EEPROMI2C_Read_Page(uint16_t memory_addr, void *page, uint16_t data_size);
+
+uint16_t EEPROMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_size);
+
+
+uint16_t EEPROMI2C_Fill_Page(uint16_t memory_addr, uint8_t val, uint16_t num);
 
 uint32_t EEPROMI2C_Fill_Memory(uint16_t memory_addr, uint8_t val, uint32_t num, uint8_t operation_delay_ms);
 
 
 #endif
+
+
+
