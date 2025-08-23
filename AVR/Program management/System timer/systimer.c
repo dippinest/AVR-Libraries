@@ -52,9 +52,10 @@ void SYSTIMER_Run_Task(SYSTIMER_Task_Params_t *task_params, void (*task)())
 // -------------------------------------------------------------------------------
 // system timer interrupt handler
 //
-ISR(TIMER0_COMP_vect)
+ISR(SYSTIMER_VECTOR_INTERRUPT)
 {
 	++__SYSTIMER;
 }
+
 
 
