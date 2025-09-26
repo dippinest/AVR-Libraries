@@ -21,6 +21,6 @@ ___
 The set of libraries includes tools for working with the microcontroller itself and its internal peripherals, as well as external sensors. This set will be updated periodically.
 <br>
 <br>
-Attention! A set of libraries is implemented for the avr-gcc compiler! Some libraries use dependencies of a set of libraries for cross-platform algorithms (see the [Microcontrollers-Algorithms](https://github.com/dippinest/Microcontrollers-Algorithms) repository), therefore, it is recommended to use these libraries in the project.
+Attention! A set of libraries is implemented for the avr-gcc compiler! Some libraries use dependencies of a set of libraries for cross-platform algorithms (see the [Microcontrollers-Algorithms](https://github.com/dippinest/Microcontrollers-Algorithms)), therefore, it is recommended to use these libraries in the project.
 
 ___
