@@ -11,13 +11,20 @@
 //
 void Soft_Reboot()
 {
+	// устанавливаем значение WDT на минимально возможный период
+	// (в данном случае - 15 мс)
+	//
+	// -------------------------------------------------------------------------------
+	// setting the WDT value to the minimum possible period
+	// (in this case - 15 ms)
+	//
+	wdt_enable(WDTO_15MS);
+
 	// в этом месте микроконтроллер будет перезагружен через 15 мс
 	//
 	// -------------------------------------------------------------------------------
 	// at this point the microcontroller will reboot after 15 ms
 	//
-	wdt_enable(WDTO_15MS);
-	
 	while(1);
 }
 
@@ -60,6 +67,7 @@ int main(void)
 	{
 	}
 }
+
 
 
 
