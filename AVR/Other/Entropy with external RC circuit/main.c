@@ -25,12 +25,12 @@
 //    _
 //   | |
 //   | | R (резистор)
-//   |_|              _______
-//    |              |       |
-//    |              |       |
-//    *--- GPIO -----|  MCU  |
-//    |              |       |
-//    |              |_______|
+//   |_|                        _______
+//    |        R'              |       |
+//    |      ____              |       |
+//    *-----|____|-- GPIO -----|  MCU  |
+//    |                        |       |
+//    |                        |_______|
 //  _____
 //  _____ C (конденсатор)
 //    |
@@ -44,7 +44,11 @@
 // на время заряда RC влияют множество факторов (напряжение питания, температура
 // окружающей среды, воздействие внешних помех, дробового и теплового шума в резисторе
 // и т.д.), оно не является детерминированным и может меняться при каждом измерении
-// в некоторых пределах. Это свойство RC цепи используется для получения начального значения для ГПСЧ.
+// в некоторых пределах. Это свойство RC цепи используется для получения начального
+// значения для ГПСЧ.
+//
+// Резистор R', подключенный к GPIO, необходим для ограничения тока разряда.
+// Его номинал должен быть в пределах 100 - 500 Ом.
 //
 // Внимание! Не используйте значения измерений времени звряда RC как случайные числа
 // непосредственно, поскольку статистические характеристики такого "ГПСЧ" очень плохи.
@@ -58,16 +62,18 @@
 //
 // An example of getting a random value for the initial initialization of the RNG.
 //
-// For various implementations of RNGs (pseudorandom number generators) to initialize them,
-// an initial value is needed, based on which a pseudorandom sequence is subsequently generated.
-// Obviously, this initial value of the RNG must be different each time the program is started,
-// otherwise the generated sequence will be repeated each time.
+// For various implementations of RNGs (pseudorandom number generators) to
+// initialize them, an initial value is needed, based on which a pseudorandom
+// sequence is subsequently generated.
+// Obviously, this initial value of the RNG must be different each time
+// the program is started, otherwise the generated sequence will be repeated each time.
 //
-// You can get this initial value from external peripherals: ADCs, external devices, etc.
-// However, in some situations, it is difficult or impossible to use these entropy sources
-// (for example, some older microcontroller models lack an ADC). In this case, one solution
-// may be to use an external RC circuit connected to any GPIO microcontroller and measure
-// the charging time of the capacitor. To implement this, an external RC circuit consisting
+// You can get this initial value from external peripherals: ADCs, external
+// devices, etc. However, in some situations, it is difficult or impossible
+// to use these entropy sources (for example, some older microcontroller models
+// lack an ADC). In this case, one solution may be to use an external RC circuit
+// connected to any GPIO microcontroller and measure the charging time of
+// the capacitor. To implement this, an external RC circuit consisting
 // of a resistor and a capacitor must be properly connected as follows:
 //
 //
@@ -77,12 +83,12 @@
 //    _
 //   | |
 //   | | R (resistor)
-//   |_|              _______
-//    |              |       |
-//    |              |       |
-//    *--- GPIO -----|  MCU  |
-//    |              |       |
-//    |              |_______|
+//   |_|                        _______
+//    |        R'              |       |
+//    |      ____              |       |
+//    *-----|____|-- GPIO -----|  MCU  |
+//    |                        |       |
+//    |                        |_______|
 //  _____
 //  _____ C (capacitor)
 //    |
@@ -91,20 +97,27 @@
 //   GND
 //
 //
-// The essence of the proposed algorithm is the primary discharge of the capacitor C
-// and its further charging through the resistor R with measurements of its charge time.
-// Since the RC charge time is influenced by many factors (supply voltage, ambient temperature,
-// exposure to external interference, shot and thermal noise in the resistor, etc.), it is
-// not deterministic and may vary with each measurement within certain limits. This property
+// The essence of the proposed algorithm is the primary discharge of
+// the capacitor C and it is further charging through the resistor R
+// with measurements of its charge time.
+// Since the RC charge time is influenced by many factors (supply voltage,
+// ambient temperature, exposure to external interference, shot and thermal
+// noise in the resistor, etc.), it is not deterministic and may vary with
+// each measurement within certain limits. This property
 // of the RC circuit is used to obtain the initial value for the RNG.
 //
-// Attention! Do not use the values of the RC discharge time measurements as random
-// numbers directly, because the statistical characteristics of such a "RNG" are very poor.
+// The resistor R' connected to the GPIO is needed to limit the discharge
+// current. Its nominal value should be in the range of 100 - 500 ohms.
+//
+// Attention! Do not use the values of the RC discharge time measurements
+// as random numbers directly, because the statistical characteristics
+// of such a "RNG" are very poor.
 // Use these values only for the initial initialization of the RNG.
 //
-// I also recommend using electrolytic capacitors in the RC circuit, since their
-// temperature stability is lower than other types of capacitors, which will allow
-// you to get more random values of the charge time of the RC circuit
+// I also recommend using electrolytic capacitors in the RC circuit,
+// since their temperature stability is lower than other types of capacitors,
+// which will allow you to get more random values of the charge time
+// of the RC circuit
 //
 // ===============================================================================
 
@@ -214,6 +227,7 @@ int main(void)
 		UART_StringFmt_Transmit("Value: %u\r\n\r\n", value);
 	}
 }
+
 
 
 
