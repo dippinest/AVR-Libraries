@@ -1,7 +1,8 @@
 
 #include <avr/io.h>
-#include <avr/wdt.h>
 
+
+#include <avr/wdt.h>
 
 // функция программной перезагрузки микроконтроллера на основе watchdog таймера
 //
@@ -22,10 +23,7 @@ void Soft_Reboot()
 
 
 
-
-
 #include <util/delay.h>
-
 
 int main(void)
 {
@@ -62,6 +60,7 @@ int main(void)
 	{
 	}
 }
+
 
 
 
