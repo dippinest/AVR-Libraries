@@ -57,6 +57,7 @@
 // Также рекомендую в RC цепи использовать электролитические конденсаторы,
 // поскольку их температурная стабильность меньше, чем другие типы конденсаторов,
 // что позволит получить более случайные значения времени заряда RC цепи
+// и значительно меньше значения резистора R (как минимум в 15-20 раз)
 //
 // -------------------------------------------------------------------------------
 //
@@ -107,7 +108,8 @@
 // of the RC circuit is used to obtain the initial value for the RNG.
 //
 // The resistor R' connected to the GPIO is needed to limit the discharge
-// current. Its nominal value should be in the range of 100 - 500 ohms.
+// current. Its nominal value should be in the range of 100 - 500 ohms
+// and significantly less than the value of the resistor R (at least 15-20 times)
 //
 // Attention! Do not use the values of the RC discharge time measurements
 // as random numbers directly, because the statistical characteristics
@@ -227,6 +229,7 @@ int main(void)
 		UART_StringFmt_Transmit("Value: %u\r\n\r\n", value);
 	}
 }
+
 
 
 
