@@ -61,9 +61,9 @@
 //
 // -------------------------------------------------------------------------------
 //
-// An example of getting a random value for the initial initialization of the RNG.
+// An example of getting a random value for the initial initialization of the PRNG.
 //
-// For various implementations of RNGs (pseudorandom number generators) to
+// For various implementations of PRNGs (pseudorandom number generators) to
 // initialize them, an initial value is needed, based on which a pseudorandom
 // sequence is subsequently generated.
 // Obviously, this initial value of the RNG must be different each time
@@ -105,7 +105,7 @@
 // ambient temperature, exposure to external interference, shot and thermal
 // noise in the resistor, etc.), it is not deterministic and may vary with
 // each measurement within certain limits. This property
-// of the RC circuit is used to obtain the initial value for the RNG.
+// of the RC circuit is used to obtain the initial value for the PRNG.
 //
 // The resistor R' connected to the GPIO is necessary to limit the discharge
 // current of the capacitor C. Its nominal value should be in the range
@@ -114,8 +114,8 @@
 //
 // Attention! Do not use the values of the RC discharge time measurements
 // as random numbers directly, because the statistical characteristics
-// of such a "RNG" are very poor.
-// Use these values only for the initial initialization of the RNG.
+// of such a "PRNG" are very poor.
+// Use these values only for the initial initialization of the PRNG.
 //
 // I also recommend using electrolytic capacitors in the RC circuit,
 // since their temperature stability is lower than other types of capacitors,
@@ -230,6 +230,7 @@ int main(void)
 		UART_StringFmt_Transmit("Value: %u\r\n\r\n", value);
 	}
 }
+
 
 
 
