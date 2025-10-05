@@ -47,8 +47,8 @@
 // в некоторых пределах. Это свойство RC цепи используется для получения начального
 // значения для ГПСЧ.
 //
-// Резистор R', подключенный к GPIO, необходим для ограничения тока разряда.
-// Его номинал должен быть в пределах 100 - 500 Ом и значительно меньше
+// Резистор R', подключенный к GPIO, необходим для ограничения тока разряда
+// конденсатора C. Его номинал должен быть в пределах 100 - 500 Ом и значительно меньше
 // значения резистора R (как минимум в 15-20 раз)
 //
 // Внимание! Не используйте значения измерений времени звряда RC как случайные числа
@@ -107,9 +107,10 @@
 // each measurement within certain limits. This property
 // of the RC circuit is used to obtain the initial value for the RNG.
 //
-// The resistor R' connected to the GPIO is needed to limit the discharge
-// current. Its nominal value should be in the range of 100 - 500 ohms
-// and significantly less than the value of the resistor R (at least 15-20 times)
+// The resistor R' connected to the GPIO is necessary to limit the discharge
+// current of the capacitor C. Its nominal value should be in the range
+// of 100 - 500 ohms and significantly less than the value
+// of the resistor R (at least 15-20 times)
 //
 // Attention! Do not use the values of the RC discharge time measurements
 // as random numbers directly, because the statistical characteristics
@@ -229,6 +230,7 @@ int main(void)
 		UART_StringFmt_Transmit("Value: %u\r\n\r\n", value);
 	}
 }
+
 
 
 
