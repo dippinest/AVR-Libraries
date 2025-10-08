@@ -2,7 +2,7 @@
 
 // ===============================================================================
 //
-// Пример получения случайного значения для начальной инициализации ГПСЧ.
+// Пример получения случайного значения для начальной инициализации ГПСЧ с помощью внешней  RC цепи.
 //
 // Для различных реализаций ГПСЧ (генераторов псевдослучайных чисел) для их
 // инициализации необходимо начальное значение, на основе которого в дальнейшем
@@ -61,7 +61,7 @@
 //
 // -------------------------------------------------------------------------------
 //
-// An example of getting a random value for the initial initialization of the PRNG.
+// An example of obtaining a random value for initializing the PRNG using an external RC circuit.
 //
 // For various implementations of PRNGs (pseudorandom number generators) to
 // initialize them, an initial value is needed, based on which a pseudorandom
