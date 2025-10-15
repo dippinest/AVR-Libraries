@@ -70,7 +70,8 @@ inline void ANACOMP_Set_Enable(bool is_enable)
 
 inline void ANACOMP_Direct_Input_Set_Connect(bool direct_input_is_connect)
 {
-	if (direct_input_is_connect)	{
+	if (direct_input_is_connect)
+	{
 		ACSR |=  (1 << ACBG);
 	}
 	else
@@ -181,5 +182,6 @@ void *ANACOMP_Get_CallBack_Function();
 
 
 #endif
+
 
 
