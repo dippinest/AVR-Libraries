@@ -4,8 +4,11 @@
 #include "uart.h"
 #include "adc.h"
 
+
 #define ADC_BUF_SIZE 16
+
 static uint16_t adc_buffer[ADC_BUF_SIZE];
+
 
 void send_buffer()
 {
@@ -46,4 +49,5 @@ int main(void)
 	{
 	}
 }
+
 
