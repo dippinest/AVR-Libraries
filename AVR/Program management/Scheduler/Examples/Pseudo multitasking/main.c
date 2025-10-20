@@ -53,11 +53,14 @@ int main(void)
 	// Initializing the system timer and enabling global interrupts
 	
 	SYSTIMER_Initialize();
-	
 	sei();
 	
 	while (1)
 	{
+		// в бесконечном цикле запускаем обработчик планировщика задач
+		// -------------------------------------------------------------------------------
+		// in an endless loop, we run the task scheduler handler
+		//
 		Scheduler_Run();
 		
 		// при желании после отработки всех задач вы можете
@@ -71,5 +74,6 @@ int main(void)
 		sleep_cpu();
 	}
 }
+
 
 
