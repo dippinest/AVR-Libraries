@@ -42,8 +42,8 @@ inline void NEC_Decoder_FSM_Timer_Interrupt_Initialize()
 	TIMSK = (1 << OCIE2);
 	TCCR2 = (0 << CS22) | (1 << CS21) | (1 << CS20) | (1 << WGM21);
 	
-	TCNT2 = 0xDD;
-	OCR2  = 0x22;
+	TCNT2 = 0x00;
+	OCR2  = 0x8B;
 }
 
 
@@ -67,6 +67,5 @@ inline void NEC_Decoder_EXINT_Interrupt_Initialize()
 
 
 #endif
-
 
 
