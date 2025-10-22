@@ -252,7 +252,7 @@ void NEC_Decoder_FSM()
 		default:
 
 		NEC_Decoder_Reset();
-			
+		
 		break;
 	}
 }
@@ -275,5 +275,4 @@ ISR(NEC_DECODER_EXINT_VECTOR_INTERRUPT)
 {
 	NEC_Decoder_FSM();
 }
-
 
