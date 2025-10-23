@@ -158,9 +158,13 @@ int main(void)
 	//
 	NEC_Decoder_Initialize(NEC_Decoder_Callback, NULL);
 	
-	
+
+	// инициализация GPIO
+	//
+	// ------------------------------------------------------------------------------
+	// GPIO initialize
+	//
 	GPIO_Initialize();
-	
 	
 	
 	// не забудьте включить глобальные прерывания
@@ -175,6 +179,7 @@ int main(void)
 	{
 	}
 }
+
 
 
 
