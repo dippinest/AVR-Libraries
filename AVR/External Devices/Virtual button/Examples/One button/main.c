@@ -81,26 +81,32 @@ int main(void)
 		// функция опроса нажатия кнопки через таймаут
 		//
 		// Второй параметр '10' является значением таймаута.
-		// При достижении 10-й итерации вызова этой функции сработает колбэк Hold_With_Timeout()
+		// При достижении 10-й итерации вызова этой функции сработает колбэк
+		// Hold_With_Timeout(), затем счётчик таймаута сбросится в 0
 		// -------------------------------------------------------------------------------
 		// function of polling button presses after a timeout
 		//
 		// The second parameter '10' is the timeout value.
 		// When the 10th iteration of calling this function is reached,
-		// the Long_Press() callback will trigger
+		// the Hold_With_Timeout() callback will trigger, then the timeout counter
+		// will reset to 0
 		VirtualButton_Hold_With_Timeout_Polling(&vbutton, 10, Hold_With_Timeout);
 		
 		
 		// функция опроса длительного нажатия кнопки
 		//
 		// Второй параметр '50' является значением таймаута.
-		// При достижении 50-й итерации вызова этой функции сработает колбэк Long_Press()
+		// При достижении 50-й итерации вызова этой функции сработает колбэк Long_Press().
+		// В отличии от VirtualButton_Hold_With_Timeout_Polling() этот обработчик
+		// выполняется однократно при зажатой
 		// -------------------------------------------------------------------------------
 		// long-press polling function
 		//
 		// The second parameter '50' is the timeout value.
 		// When the 50th iteration of calling this function is reached,
-		// the Long_Press() callback will trigger
+		// the Long_Press() callback will trigger.
+		// Unlike VirtualButton_Hold_With_Timeout_Polling(),
+		// this handler is executed once when the button is clamped
 		VirtualButton_Long_Pressed_Polling(&vbutton, 50, Long_Press);
 		
 		
@@ -111,6 +117,7 @@ int main(void)
 		_delay_ms(50);
 	}
 }
+
 
 
 
