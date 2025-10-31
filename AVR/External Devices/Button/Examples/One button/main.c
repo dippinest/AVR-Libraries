@@ -66,13 +66,15 @@ int main(void)
 		// функция опроса нажатия кнопки через таймаут
 		//
 		// Второй параметр '10' является значением таймаута.
-		// При достижении 10-й итерации вызова этой функции сработает колбэк Hold_With_Timeout()
+		// При достижении 10-й итерации вызова этой функции сработает колбэк
+		// Hold_With_Timeout(), затем счётчик таймаута сбросится в 0
 		// -------------------------------------------------------------------------------
 		// function of polling button presses after a timeout
 		//
 		// The second parameter '10' is the timeout value.
 		// When the 10th iteration of calling this function is reached,
-		// the Long_Press() callback will trigger
+		// the Hold_With_Timeout() callback will trigger, then the timeout counter
+		// will reset to 0
 		Button_Hold_With_Timeout_Polling(&button, 10, Hold_With_Timeout);
 		
 		
@@ -96,4 +98,5 @@ int main(void)
 		_delay_ms(20);
 	}
 }
+
 
