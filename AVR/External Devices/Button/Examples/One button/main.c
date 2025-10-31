@@ -91,7 +91,7 @@ int main(void)
 		// When the 50th iteration of calling this function is reached,
 		// the Long_Press() callback will trigger.
 		// Unlike Button_Hold_With_Timeout_Polling(),
-		// this handler is executed once when the button is clamped.
+		// this handler is executed once when the button is clamped
 		Button_Long_Pressed_Polling(&button, 50, Long_Press);
 		
 		
@@ -102,6 +102,7 @@ int main(void)
 		_delay_ms(20);
 	}
 }
+
 
 
 
