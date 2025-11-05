@@ -36,6 +36,15 @@
 #include <stdbool.h>
 
 
+#define VIRTUALBUTTON_INPUT_LOGICAL_LEVEL_HIGH  true
+#define VIRTUALBUTTON_INPUT_LOGICAL_LEVEL_LOW   false
+
+
+#ifndef T
+#define T(P) ((uint8_t*)&P)
+#endif
+
+
 #ifndef _Bit_Is_Set
 #define _Bit_Is_Set(port, bit)    (port & (1 << bit))
 #endif
@@ -44,14 +53,6 @@
 #define _Bit_Is_Reset(port, bit) !(port & (1 << bit))
 #endif
 
-
-#define VIRTUALBUTTON_INPUT_LOGICAL_LEVEL_HIGH  true
-#define VIRTUALBUTTON_INPUT_LOGICAL_LEVEL_LOW   false
-
-
-#ifndef T
-#define T(P) ((uint8_t*)&P)
-#endif
 
 
 typedef struct
@@ -91,6 +92,7 @@ void VirtualButton_Long_Pressed_Polling(VirtualButton_t* vbutton, uint16_t press
 
 
 #endif
+
 
 
 
