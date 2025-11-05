@@ -47,6 +47,16 @@
 #endif
 
 
+#ifndef _Bit_Is_Set_P
+#define _Bit_Is_Set_P(port, bit)    ((*port) & (1 << bit))
+#endif
+
+#ifndef _Bit_Is_Reset_P
+#define _Bit_Is_Reset_P(port, bit) !((*port) & (1 << bit))
+#endif
+
+
+
 typedef struct
 {
 	uint8_t *input_ddr;
@@ -86,4 +96,5 @@ void Button_Long_Pressed_Polling(Button_t *button, uint16_t press_timeout, void 
 
 
 #endif
+
 
