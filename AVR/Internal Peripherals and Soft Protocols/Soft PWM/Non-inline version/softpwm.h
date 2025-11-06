@@ -61,7 +61,7 @@ SOFTPWM_t SOFTPWM_Create_Object(uint8_t *port, uint8_t pin, uint8_t max_depth, u
 // ===============================================================================
 
 
-#define SOFTPWM_DUTY_CYCLE(T) (T.softpwm_channel_duty_cycle)
+#define SOFTPWM_DUTY_CYCLE(SOFTPWMCHANNEL) (SOFTPWMCHANNEL.softpwm_channel_duty_cycle)
 
 
 // ===============================================================================
@@ -73,6 +73,7 @@ void SOFTPWM_All_Channels_Processing(SOFTPWM_t *pwm, uint8_t num_of_channels);
 
 
 #endif
+
 
 
 
