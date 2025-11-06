@@ -36,7 +36,7 @@
 
 #include <avr/io.h>
 
-#include <stdlib.h>
+#include <stdint.h>
 
 
 // ===============================================================================
@@ -119,3 +119,4 @@ inline void SOFTPWM_Inline_All_Channels_Processing(SOFTPWM_Inline_t *channels, u
 
 
 #endif
+
