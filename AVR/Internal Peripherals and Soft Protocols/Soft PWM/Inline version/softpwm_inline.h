@@ -84,7 +84,7 @@ inline SOFTPWM_Inline_t SOFTPWM_Inline_Create_Object(uint8_t *port, uint8_t pin,
 // ===============================================================================
 
 
-#define SOFTPWM_INLINE_DUTY_CYCLE(T) (T.softpwm_channel_duty_cycle)
+#define SOFTPWM_INLINE_DUTY_CYCLE(SOFTPWMCHANNEL) (SOFTPWMCHANNEL.softpwm_channel_duty_cycle)
 
 
 // ===============================================================================
@@ -119,4 +119,5 @@ inline void SOFTPWM_Inline_All_Channels_Processing(SOFTPWM_Inline_t *channels, u
 
 
 #endif
+
 
