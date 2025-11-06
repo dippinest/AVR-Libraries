@@ -27,7 +27,7 @@
 
 #include <avr/io.h>
 
-#include <stdlib.h>
+#include <stdint.h>
 
 
 // ===============================================================================
@@ -73,6 +73,7 @@ void SOFTPWM_All_Channels_Processing(SOFTPWM_t *pwm, uint8_t num_of_channels);
 
 
 #endif
+
 
 
 
