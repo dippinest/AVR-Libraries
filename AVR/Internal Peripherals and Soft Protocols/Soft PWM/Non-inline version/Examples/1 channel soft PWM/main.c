@@ -76,7 +76,13 @@ int main(void)
 	DDRB |= (1 << 1);
 
 	softpwm = SOFTPWM_Create_Object(T(PORTB), 1, MAX_PWM_WIDTH, MAX_PWM_WIDTH);
-	
+
+
+	// не забудьте включить глобальные прерывания
+	//
+	// -------------------------------------------------------------------------------
+	// don't forget to enable global interrupts
+	//
 	sei();
 	
 	while (1)
@@ -100,5 +106,6 @@ int main(void)
 		}
 	}
 }
+
 
 
