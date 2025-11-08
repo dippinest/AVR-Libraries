@@ -80,7 +80,13 @@ int main(void)
 	softpwm[0] = SOFTPWM_Create_Object(T(PORTB), 1, MAX_PWM_WIDTH, MAX_PWM_WIDTH);
 	softpwm[1] = SOFTPWM_Create_Object(T(PORTB), 2, MAX_PWM_WIDTH, MAX_PWM_WIDTH);
 	softpwm[2] = SOFTPWM_Create_Object(T(PORTB), 3, MAX_PWM_WIDTH, MAX_PWM_WIDTH);
-	
+
+
+	// не забудьте включить глобальные прерывания
+	//
+	// -------------------------------------------------------------------------------
+	// don't forget to enable global interrupts
+	//
 	sei();
 	
 	while (1)
@@ -126,5 +132,6 @@ int main(void)
 		}
 	}
 }
+
 
 
