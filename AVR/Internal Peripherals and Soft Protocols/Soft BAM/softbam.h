@@ -3,7 +3,7 @@
 //
 // Библиотека для реализации программной BAM.
 //
-// BAM (Binary Angle Modulation) - один из методов модуляции аналогового сигнала,
+// BAM (Bit Angle Modulation) - один из методов модуляции аналогового сигнала,
 // используя всего один вывод GPIO. В отличии от ШИМ (широтно-импульсной модуляции),
 // BAM оперирует не скважностью сигнала, а периодом удержания высокого или низкого
 // логического уровня в зависимости от входных данных.
@@ -25,7 +25,7 @@
 //
 // Library for implementing software BAM.
 //
-// BAM (Binary Angle Modulation) is one of the methods of modulating
+// BAM (Bit Angle Modulation) is one of the methods of modulating
 // an analog signal using only one GPIO pin. Unlike PWM (pulse width modulation),
 // BAM does not operate with the frequency of the signal, but with the retention
 // period of a high or low logic level, depending on the input data.
