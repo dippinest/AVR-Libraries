@@ -9,12 +9,23 @@
 
 
 
+// число каналов BAM
+//
+// -------------------------------------------------------------------------------
+// num of BAM channels
+//
 #define SOFTBAM_NUM_OF_CHANNELS 8
 
 
+// объявление объекта BAM и массива его каналов
+//
+// -------------------------------------------------------------------------------
+// declaring a BAM object and an array of its channels
+//
+SOFTBAM_t softbam;
+
 SOFTBAM_Channel_t softbam_channels[SOFTBAM_NUM_OF_CHANNELS];
 
-SOFTBAM_t softbam;
 
 
 // инициализируем таймера 2 (Timer2)
@@ -129,6 +140,8 @@ int main(void)
 		}
 	}
 }
+
+
 
 
 
