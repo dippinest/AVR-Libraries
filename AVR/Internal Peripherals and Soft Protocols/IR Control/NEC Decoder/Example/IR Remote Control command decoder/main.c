@@ -28,7 +28,7 @@ void NEC_Decoder_Callback()
 
 int main(void)
 {
-	UART_Initialize(19200, true, false);
+	UART_Initialize(9600, true, false);
 	
 	
 	// первая передаваемая функция срабатывает при первом принятии
@@ -50,6 +50,7 @@ int main(void)
 	{
 	}
 }
+
 
 
 
