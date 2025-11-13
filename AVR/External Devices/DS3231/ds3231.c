@@ -15,6 +15,7 @@ uint8_t _DS3231_UInt8BCD_To_UInt8(uint8_t bcd_code)
 }
 
 
+
 #ifdef DS3231_USE_SOFTI2C
 
 
@@ -1112,6 +1113,7 @@ void DS3231_Set_Alarm_2_Mode(uint8_t alarm_2_mode)
 	
 	_DS3231_Set_Byte(_DS3231_ADDR_REGISTER_ALARM_2_WEEKDAY, alarm_2_reg);
 }
+
 
 
 
