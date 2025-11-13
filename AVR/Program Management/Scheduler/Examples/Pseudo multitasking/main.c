@@ -8,7 +8,7 @@
 // Задачи для переключения пинов порта (мигания соответствующими светодиодами)
 // -------------------------------------------------------------------------------
 // Tasks for switching port pins (flashing the corresponding LEDs)
-
+//
 void Task0()
 {
 	PORTB ^= (1 << 0);
@@ -38,7 +38,7 @@ int main(void)
 	// При создании задачи указываем её номер, колбэк, статус и интервал выполнения
 	// -------------------------------------------------------------------------------
 	// When creating a task, we specify its number, callback, status and execution interval
-	
+	//
 	Scheduler_Create_Task(0, Task0, SCHEDULER_TASK_IS_ACTIVE, 100);  // run every 100  ms
 	Scheduler_Create_Task(1, Task1, SCHEDULER_TASK_IS_ACTIVE, 250);  // run every 250  ms
 	Scheduler_Create_Task(2, Task2, SCHEDULER_TASK_IS_ACTIVE, 500);  // run every 500  ms
@@ -51,8 +51,14 @@ int main(void)
 	// Инициализация системного таймера и включение глобальных прерываний
 	// -------------------------------------------------------------------------------
 	// Initializing the system timer and enabling global interrupts
-	
+	//
 	SYSTIMER_Initialize();
+
+
+	// не забудьте включить глобальные прерывания
+	// -------------------------------------------------------------------------------
+	// don't forget to enable global interrupts
+	//
 	sei();
 	
 	while (1)
@@ -74,6 +80,7 @@ int main(void)
 		sleep_cpu();
 	}
 }
+
 
 
 
