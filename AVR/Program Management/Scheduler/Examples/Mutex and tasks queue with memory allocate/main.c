@@ -49,12 +49,14 @@
 // создаём статическую переменную-указатель на очередь задач
 // -------------------------------------------------------------------------------
 // creating a static variable-a pointer to the task queue
+//
 static Task_Queue_t *uart_queue;
 
 
 // создаём статическую переменную, хранящую мьютекс для работы с модулем UART
 // -------------------------------------------------------------------------------
 // create a static variable that stores a mutex for working with the UART module
+//
 static Scheduler_Mutex_t uart_mutex;
 
 
@@ -62,7 +64,7 @@ static Scheduler_Mutex_t uart_mutex;
 // функции, реализующие работу с UART совместно с мьютексом
 // -------------------------------------------------------------------------------
 // functions that implement working with UART together with mutex
-
+//
 void Send_Msg_0()
 {
 	UART_Async_String_Transmit("Msg 0 was send!  ");
@@ -83,7 +85,7 @@ void Send_Msg_2()
 // задачи, реализующие добавление соответствующих функций в очередь на исполнение
 // -------------------------------------------------------------------------------
 // tasks implementing the addition of appropriate functions to the queue for execution
-
+//
 void Task0()
 {
 	Task_Queue_Push(uart_queue, Send_Msg_0);
@@ -104,7 +106,7 @@ void Task2()
 // задача, реализующая управление потоком задач из очереди
 // -------------------------------------------------------------------------------
 // this is a task that implements control of the flow of tasks from the queue
-
+//
 void UART_Msg_Scheduler()
 {
 	if (Scheduler_Mutex_Is_Unlock(&uart_mutex))
@@ -129,7 +131,7 @@ void UART_Msg_Scheduler()
 // колбэк, реализующий сброс мьютекса UART при завершении отправки данных
 // -------------------------------------------------------------------------------
 // this is a callback that implements the reset of the UART mutex at the end of sending data
-
+//
 void UART_Mutex_Unlock()
 {
 	Scheduler_Mutex_Set_Unlock(&uart_mutex);
@@ -146,21 +148,21 @@ int main(void)
 	// инициализация мьютекса UART
 	// -------------------------------------------------------------------------------
 	// initializing the UART mutex
-	
+	//
 	uart_mutex = Scheduler_Create_Mutex();
 	
 	
 	// выделение памяти в куче под очередь размером 3 и её инициализация
 	// -------------------------------------------------------------------------------
 	// allocation of memory in the heap for a queue of size 3 and its initialization
-	
+	//
 	uart_queue = Task_Queue_Create_Object_To_Dynamic_Memory(3);
 	
 	
 	// при создании задачи указываем её номер, колбэк, статус и интервал выполнения
 	// -------------------------------------------------------------------------------
 	// when creating a task, we specify its number, callback, status and execution interval
-	
+	//
 	Scheduler_Create_Task(0, Task0, SCHEDULER_TASK_IS_ACTIVE,  250);  // run every  250  ms
 	Scheduler_Create_Task(1, Task1, SCHEDULER_TASK_IS_ACTIVE,  500);  // run every  500  ms
 	Scheduler_Create_Task(2, Task2, SCHEDULER_TASK_IS_ACTIVE, 1000);  // run every 1000  ms
@@ -171,7 +173,7 @@ int main(void)
 	// -------------------------------------------------------------------------------
 	// the task of managing the flow of tasks from the queue should be performed
 	// more often than tasks interacting with the UART module! (in this case - 100 ms)
-	
+	//
 	Scheduler_Create_Task(3, UART_Msg_Scheduler, SCHEDULER_TASK_IS_ACTIVE, 100);  // run every 100  ms
 	
 	Scheduler_Tasks_Prepare();
@@ -180,8 +182,14 @@ int main(void)
 	// Инициализация системного таймера и включение глобальных прерываний
 	// -------------------------------------------------------------------------------
 	// Initializing the system timer and enabling global interrupts
-	
+	//
 	SYSTIMER_Initialize();
+
+
+	// не забудьте включить глобальные прерывания
+	// -------------------------------------------------------------------------------
+	// don't forget to enable global interrupts
+	//
 	sei();
 	
 	while (1)
@@ -203,6 +211,7 @@ int main(void)
 		sleep_cpu();
 	}
 }
+
 
 
 
