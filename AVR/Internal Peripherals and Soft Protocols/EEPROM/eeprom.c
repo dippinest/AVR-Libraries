@@ -24,6 +24,16 @@ uint8_t EEPROM_Read_Byte(uint16_t mem_addr)
 	return EEDR;
 }
 
+void EEPROM_Update_Byte(uint16_t mem_addr, uint8_t b)
+{
+	uint8_t tmp = EEPROM_Read_Byte(mem_addr);
+	
+	if (tmp != b)
+	{
+		EEPROM_Write_Byte(mem_addr, b);
+	}
+}
+
 void EEPROM_Write_Data(uint16_t mem_addr, void *data, uint16_t data_size)
 {
 	for (uint16_t i = 0; i < data_size; ++i)
@@ -41,5 +51,21 @@ void *EEPROM_Read_Data(uint16_t mem_addr, void *data, uint16_t data_size)
 	
 	return data;
 }
+
+void EEPROM_Update_Data(uint16_t mem_addr, void *data, uint16_t data_size)
+{
+	uint8_t tmp;
+	
+	for (uint16_t i = 0; i < data_size; ++i)
+	{
+		tmp = EEPROM_Read_Byte((mem_addr + i));
+		
+		if (tmp != ((uint8_t*)data)[i])
+		{
+			EEPROM_Write_Byte((mem_addr + i), ((uint8_t*)data)[i]);
+		}
+	}
+}
+
 
 
