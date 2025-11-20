@@ -5,6 +5,7 @@
 #define NEC_DECODER_CONFIGURATION_H_
 
 #include <avr/io.h>
+#include <avr/interrupt.h>
 
 
 
@@ -67,5 +68,6 @@ inline void NEC_Decoder_EXINT_Interrupt_Initialize()
 
 
 #endif
+
 
 
