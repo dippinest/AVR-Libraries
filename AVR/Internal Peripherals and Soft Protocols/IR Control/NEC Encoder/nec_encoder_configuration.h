@@ -5,6 +5,7 @@
 
 
 #include <avr/io.h>
+#include <avr/interrupt.h>
 
 
 
@@ -93,6 +94,7 @@ inline void _NEC_Encoder_Set_IR_Out_Level_Low()
 
 
 #endif
+
 
 
 
