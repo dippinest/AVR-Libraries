@@ -5,7 +5,7 @@
 
 static NEC_IR_Protocol_Data_t _nec_ir_data;
 
-static uint16_t main_ir_counter = 0;
+static uint16_t main_ir_counter     = 0;
 static uint8_t  fsm_status          = NO_RECEPTION;
 static uint8_t  samples_counter     = 0;
 static uint8_t  bits_counter        = 0;
@@ -66,10 +66,10 @@ NEC_IR_Protocol_Data_t NEC_IR_Decoder_Get_Data()
 
 void NEC_IR_Decoder_Reset()
 {
-	_nec_ir_data.addr_1         = 0x00;
+	_nec_ir_data.addr_1     = 0x00;
 	_nec_ir_data.addr_2     = 0x00;
-	_nec_ir_data.command_1     = 0x00;
-	_nec_ir_data.command_2 = 0x00;
+	_nec_ir_data.command_1  = 0x00;
+	_nec_ir_data.command_2  = 0x00;
 
 	fsm_status         = NO_RECEPTION;
 	main_ir_counter    = 0;
@@ -283,4 +283,5 @@ ISR(NEC_IR_DECODER_EXINT_VECTOR_INTERRUPT)
 {
 	NEC_IR_Decoder_FSM();
 }
+
 
