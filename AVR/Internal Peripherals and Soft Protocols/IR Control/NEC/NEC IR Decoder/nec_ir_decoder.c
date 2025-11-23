@@ -241,12 +241,9 @@ void NEC_IR_Decoder_FSM()
 		
 		if (bits_counter >= 8)
 		{
-			if ((_nec_ir_data.addr_1 ^ _nec_ir_data.addr_2) == 0xFF && (_nec_ir_data.command_1 ^ _nec_ir_data.command_2) == 0xFF)
+			if (_reception_callback_function != NULL)
 			{
-				if (_reception_callback_function != NULL)
-				{
-					_reception_callback_function();
-				}
+				_reception_callback_function();
 			}
 			
 			fsm_status = NO_RECEPTION;
@@ -283,5 +280,6 @@ ISR(NEC_IR_DECODER_EXINT_VECTOR_INTERRUPT)
 {
 	NEC_IR_Decoder_FSM();
 }
+
 
 
