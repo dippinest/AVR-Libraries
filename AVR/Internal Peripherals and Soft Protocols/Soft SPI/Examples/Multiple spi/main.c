@@ -1,27 +1,27 @@
 
 #include "softspi.h"
 
-// chip select ON for SPI1
-inline void CS_ON_1()
+// chip select HIGH for SPI1
+inline void CS_Set_High_1()
 {
 	PORTA &= ~(1 << 3);
 }
 
-// chip select OFF for SPI1
-inline void CS_OFF_1()
+// chip select LOW for SPI1
+inline void CS_Set_Low_1()
 {
 	PORTA |=  (1 << 3);
 }
 
 
-// chip select ON for SPI2
-inline void CS_ON_2()
+// chip select HIGH for SPI2
+inline void CS_Set_High_2()
 {
 	PORTD &= ~(1 << 7);
 }
 
-// chip select OFF for SPI2
-inline void CS_OFF_2()
+// chip select LOW for SPI2
+inline void CS_Set_Low_2()
 {
 	PORTD |=  (1 << 7);
 }
@@ -58,25 +58,26 @@ int main(void)
 	// setting SPI1
 	SOFTSPI_Set_Target_Object(&spi_1);
 	
-	CS_ON_1();
+	CS_Set_High_1();
 	
 	SOFTSPI_Send_Data(spi1_transmitted_data, 8); // send data
 	
-	CS_OFF_1();
+	CS_Set_Low_1();
 	
 	
 	// setting SPI2
 	SOFTSPI_Set_Target_Object(&spi_2);
 	
-	CS_ON_2();
+	CS_Set_High_2();
 	
 	SOFTSPI_Send_Data(spi2_transmitted_data, 8); // send data
 	
-	CS_OFF_2();
+	CS_Set_Low_2();
 	
 	while (1)
 	{
 	}
 }
+
 
 
