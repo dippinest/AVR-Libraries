@@ -1,6 +1,7 @@
 
 #include "spi.h"
 
+
 void SPI_Send_Byte(uint8_t byte)
 {
 	SPDR = byte;
@@ -43,5 +44,6 @@ void SPI_CS_Low()
 {
 	_cs_set_low();
 }
+
 
 
