@@ -31,8 +31,8 @@ static void (*_cs_set_low)()  = NULL;
 
 void SPI_Set_CS_Callback_Functions(void (*cs_high_callback)(), void (*cs_low_callback)())
 {
-	_cs_set_high = cs_on_callback;
-	_cs_set_low  = cs_off_callback;
+	_cs_set_high = cs_high_callback;
+	_cs_set_low  = cs_low_callback;
 }
 
 void SPI_CS_High()
@@ -44,6 +44,7 @@ void SPI_CS_Low()
 {
 	_cs_set_low();
 }
+
 
 
 
