@@ -752,23 +752,24 @@ void *SOFTSPI_Get_Data(void* data, uint16_t data_size)
 #endif // ===============================================================================
 
 
-static void (*_cs_set_on)()  = NULL;
-static void (*_cs_set_off)() = NULL;
+static void (*_cs_set_high)() = NULL;
+static void (*_cs_set_low)()  = NULL;
 
-void SOFTSPI_Set_CS_CallBack_Functions(void (*cs_on_callback)(), void (*cs_off_callback)())
+void SOFTSPI_Set_CS_Callback_Functions(void (*cs_high_callback)(), void (*cs_low_callback)())
 {
-	_cs_set_on  = cs_on_callback;
-	_cs_set_off = cs_off_callback;
+	_cs_set_high = cs_high_callback;
+	_cs_set_low  = cs_low_callback;
 }
 
-void SOFTSPI_Call_CS_ON()
+void SOFTSPI_CS_High()
 {
-	_cs_set_on();
+	_cs_set_high();
 }
 
-void SOFTSPI_Call_CS_OFF()
+void SOFTSPI_CS_Low()
 {
-	_cs_set_off();
+	_cs_set_low();
 }
+
 
 
