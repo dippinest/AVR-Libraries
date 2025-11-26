@@ -28,7 +28,7 @@ int main(void)
 	{
 		for (int8_t i = 1; i < 8; ++i)
 		{
-			SPI_Send_Byte( ~(1 << i) ); HHC595_Latches();
+			SPI_Send_Byte( ~(1 << i) ); HC595_Latches();
 			_delay_ms(100);
 		}
 		for (int8_t i = 6; i >= 0; --i)
@@ -38,6 +38,7 @@ int main(void)
 		}
 	}
 }
+
 
 
 
