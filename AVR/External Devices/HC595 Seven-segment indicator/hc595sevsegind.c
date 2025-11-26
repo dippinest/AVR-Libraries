@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------------
 // table of power approximation values
 //
-const uint8_t _hc595sevsegind_symbols_table[] PROGMEM =
+const uint8_t _hc595sevsegind_digits_symbols_table[] PROGMEM =
 {
 	HC595SEVSEGIND_0, // 0
 	HC595SEVSEGIND_1, // 1
@@ -18,13 +18,7 @@ const uint8_t _hc595sevsegind_symbols_table[] PROGMEM =
 	HC595SEVSEGIND_6, // 6
 	HC595SEVSEGIND_7, // 7
 	HC595SEVSEGIND_8, // 8
-	HC595SEVSEGIND_9, // 9
-	HC595SEVSEGIND_A, // A
-	HC595SEVSEGIND_B, // B
-	HC595SEVSEGIND_C, // C
-	HC595SEVSEGIND_D, // D
-	HC595SEVSEGIND_E, // E
-	HC595SEVSEGIND_F  // F
+	HC595SEVSEGIND_9  // 9
 };
 
 
@@ -73,7 +67,7 @@ void _HC595SevSegInd_Latching_Data()
 
 
 
-#if defined (HC595SEVSEGIND_USE_SOFTSPI)
+#if defined (HC595SEVSEGIND_USE_SOFTSPI3)
 
 
 #include "softspi.h"
@@ -129,7 +123,7 @@ void HC595SevSegInd_Put_Num_String(char *num_string, uint8_t num_string_size)
 		
 		if ((symbol >= 0) && (symbol < 10))
 		{
-			symbol = pgm_read_byte(&_hc595sevsegind_symbols_table[symbol]);
+			symbol = pgm_read_byte(&_hc595sevsegind_digits_symbols_table[symbol]);
 		}
 		else
 		{
@@ -233,7 +227,7 @@ void HC595SevSegInd_Put_Num_String_Reverse(char *num_string, uint8_t num_string_
 		
 		if ((symbol >= 0) && (symbol < 10))
 		{
-			symbol = pgm_read_byte(&_hc595sevsegind_symbols_table[symbol]);
+			symbol = pgm_read_byte(&_hc595sevsegind_digits_symbols_table[symbol]);
 		}
 		else
 		{
@@ -382,7 +376,7 @@ void HC595SevSegInd_Put_Num_String(char *num_string, uint8_t num_string_size)
 		
 		if ((symbol >= 0) && (symbol < 10))
 		{
-			symbol = pgm_read_byte(&_hc595sevsegind_symbols_table[symbol]);
+			symbol = pgm_read_byte(&_hc595sevsegind_digits_symbols_table[symbol]);
 		}
 		else
 		{
@@ -486,7 +480,7 @@ void HC595SevSegInd_Put_Num_String_Reverse(char *num_string, uint8_t num_string_
 		
 		if ((symbol >= 0) && (symbol < 10))
 		{
-			symbol = pgm_read_byte(&_hc595sevsegind_symbols_table[symbol]);
+			symbol = pgm_read_byte(&_hc595sevsegind_digits_symbols_table[symbol]);
 		}
 		else
 		{
@@ -593,7 +587,7 @@ char *HC595SevSegInd_Convert_Num_String_To_Symbols_Array(char *num_string, uint8
 		
 		if ((symbol >= 0) && (symbol < 10))
 		{
-			symbol = pgm_read_byte(&_hc595sevsegind_symbols_table[symbol]);
+			symbol = pgm_read_byte(&_hc595sevsegind_digits_symbols_table[symbol]);
 		}
 		else
 		{
