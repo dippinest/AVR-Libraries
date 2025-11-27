@@ -2,10 +2,10 @@
 #include "hc595sevsegind.h"
 
 
-// таблица значений степенной аппроксимации
+// таблица символов (цифры от 0 до 9 и буквы A, B, C, D, E и F)
 //
 // -------------------------------------------------------------------------------
-// table of power approximation values
+// symbol table (numbers from 0 to 9 and letters A, B, C, D, E and F)
 //
 const uint8_t _hc595sevsegind_digits_symbols_table[] PROGMEM =
 {
@@ -677,6 +677,7 @@ char *HC595SevSegInd_Convert_Num_String_To_Symbols_Array(char *num_string, uint8
 	
 	return num_string;
 }
+
 
 
 
