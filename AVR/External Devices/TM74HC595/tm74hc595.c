@@ -9,7 +9,7 @@
 // -------------------------------------------------------------------------------
 // symbol table (numbers from 0 to 9)
 //
-const uint8_t _tm74hc595_symbol_pointers_symbols_table[] PROGMEM =
+const uint8_t _tm74hc595_digits_symbols_table[] PROGMEM =
 {
 	TM74HC595_0, // 0
 	TM74HC595_1, // 1
@@ -130,7 +130,7 @@ void TM74HC595_Put_Num_String(char *num_string, uint8_t num_string_size)
 	
 	if ((symbol >= 0) && (symbol < 10))
 	{
-		symbol = pgm_read_byte(&_tm74hc595_symbol_pointers_symbols_table[symbol]);
+		symbol = pgm_read_byte(&_tm74hc595_digits_symbols_table[symbol]);
 	}
 	else
 	{
@@ -245,7 +245,7 @@ void TM74HC595_Put_Num_String_Reverse(char *num_string, uint8_t num_string_size)
 	
 	if ((symbol >= 0) && (symbol < 10))
 	{
-		symbol = pgm_read_byte(&_tm74hc595_symbol_pointers_symbols_table[symbol]);
+		symbol = pgm_read_byte(&_tm74hc595_digits_symbols_table[symbol]);
 	}
 	else
 	{
@@ -404,7 +404,7 @@ void TM74HC595_Put_Num_String(char *num_string, uint8_t num_string_size)
 	
 	if ((symbol >= 0) && (symbol < 10))
 	{
-		symbol = pgm_read_byte(&_tm74hc595_symbol_pointers_symbols_table[symbol]);
+		symbol = pgm_read_byte(&_tm74hc595_digits_symbols_table[symbol]);
 	}
 	else
 	{
@@ -516,7 +516,7 @@ void TM74HC595_Put_Num_String_Reverse(char *num_string, uint8_t num_string_size)
 	
 	if ((symbol >= 0) && (symbol < 10))
 	{
-		symbol = pgm_read_byte(&_tm74hc595_symbol_pointers_symbols_table[symbol]);
+		symbol = pgm_read_byte(&_tm74hc595_digits_symbols_table[symbol]);
 	}
 	else
 	{
@@ -681,7 +681,7 @@ void TM74HC595_Put_Num_String(char *num_string, uint8_t num_string_size)
 	
 	if ((symbol >= 0) && (symbol < 10))
 	{
-		symbol = pgm_read_byte(&_tm74hc595_symbol_pointers_symbols_table[symbol]);
+		symbol = pgm_read_byte(&_tm74hc595_digits_symbols_table[symbol]);
 	}
 	else
 	{
@@ -796,7 +796,7 @@ void TM74HC595_Put_Num_String_Reverse(char *num_string, uint8_t num_string_size)
 	
 	if ((symbol >= 0) && (symbol < 10))
 	{
-		symbol = pgm_read_byte(&_tm74hc595_symbol_pointers_symbols_table[symbol]);
+		symbol = pgm_read_byte(&_tm74hc595_digits_symbols_table[symbol]);
 	}
 	else
 	{
@@ -955,7 +955,7 @@ void TM74HC595_Put_Num_String(char *num_string, uint8_t num_string_size)
 	
 	if ((symbol >= 0) && (symbol < 10))
 	{
-		symbol = pgm_read_byte(&_tm74hc595_symbol_pointers_symbols_table[symbol]);
+		symbol = pgm_read_byte(&_tm74hc595_digits_symbols_table[symbol]);
 	}
 	else
 	{
@@ -1067,7 +1067,7 @@ void TM74HC595_Put_Num_String_Reverse(char *num_string, uint8_t num_string_size)
 	
 	if ((symbol >= 0) && (symbol < 10))
 	{
-		symbol = pgm_read_byte(&_tm74hc595_symbol_pointers_symbols_table[symbol]);
+		symbol = pgm_read_byte(&_tm74hc595_digits_symbols_table[symbol]);
 	}
 	else
 	{
@@ -1181,7 +1181,7 @@ char *TM74HC595_Convert_Num_String_To_Symbols_Array(char *num_string, uint8_t nu
 		
 		if ((symbol >= 0) && (symbol < 10))
 		{
-			symbol = pgm_read_byte(&_tm74hc595_symbol_pointers_symbols_table[symbol]);
+			symbol = pgm_read_byte(&_tm74hc595_digits_symbols_table[symbol]);
 		}
 		else
 		{
