@@ -46,7 +46,7 @@ int main(void)
 	
 	
 	
-	uint16_t val = 0;
+	uint16_t val = 0x0000;
 	
 	
 	while (1)
@@ -63,6 +63,7 @@ int main(void)
 		_delay_ms(200);
 	}
 }
+
 
 
 
