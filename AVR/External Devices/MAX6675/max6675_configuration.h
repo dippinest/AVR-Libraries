@@ -8,7 +8,7 @@
 // -------------------------------------------------------------------------------
 // if you want to work with the device via software SPI,
 // uncomment this define (otherwise comment it out)
-
+//
 #define MAX6675_USE_SOFTSPI
 
 
@@ -17,9 +17,10 @@
 // -------------------------------------------------------------------------------
 // if you want to use callback functions to change the CS (chip select) output of the
 // device's SPI, uncomment this define (otherwise comment it out)
-
+//
 #define MAX6675_USE_CS_CALLBACKS
 
 #endif
+
 
 
