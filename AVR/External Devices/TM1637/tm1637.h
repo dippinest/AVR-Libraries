@@ -182,7 +182,7 @@ void TM1637_Put_Num_String(char *num_string, uint8_t num_string_size);
 
 void TM1637_Put_Num_String_Reverse(char *num_string, uint8_t num_string_size);
 
-void TM1637_Clear();
+void TM1637_Clear(uint8_t num_of_segments);
 
 
 
@@ -195,6 +195,7 @@ char *TM1637_Convert_Num_String_To_Symbols_Array(char *num_string, uint8_t num_s
 
 
 #endif
+
 
 
 
