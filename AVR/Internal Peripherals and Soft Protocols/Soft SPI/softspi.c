@@ -350,20 +350,20 @@ static SOFTSPI_t *target_softspi_interface_object = NULL;
 
 SOFTSPI_t SOFTSPI_Create_Object(
 
-	uint8_t *miso_ddr,
-	uint8_t *miso_pinx,
-	uint8_t  miso_pin,
-	
-	uint8_t *mosi_ddr,
-	uint8_t *mosi_port,
-	uint8_t  mosi_pin,
-	
-	uint8_t *clk_ddr,
-	uint8_t *clk_port,
-	uint8_t  clk_pin,
-	
-	uint8_t  spi_mode,
-	bool     data_order
+uint8_t *miso_ddr,
+uint8_t *miso_pinx,
+uint8_t  miso_pin,
+
+uint8_t *mosi_ddr,
+uint8_t *mosi_port,
+uint8_t  mosi_pin,
+
+uint8_t *clk_ddr,
+uint8_t *clk_port,
+uint8_t  clk_pin,
+
+uint8_t  spi_mode,
+bool     data_order
 )
 {
 	SOFTSPI_t softspi_interface;
@@ -387,7 +387,7 @@ SOFTSPI_t SOFTSPI_Create_Object(
 }
 
 void SOFTSPI_Set_Target_Object(SOFTSPI_t *softspi_interface)
-{	
+{
 	*(softspi_interface->miso_ddr) &= ~(1 << softspi_interface->miso_pin);
 	*(softspi_interface->mosi_ddr) |=  (1 << softspi_interface->mosi_pin);
 	*(softspi_interface->clk_ddr)  |=  (1 << softspi_interface->clk_pin);
@@ -451,70 +451,70 @@ void SOFTSPI_Send_Byte(uint8_t byte)
 			{
 				case SOFTSPI_MODE_0:
 				
-					if (byte & (1 << i))
-					{
-						_SOFTSPI_MOSI_Set_High();
-					}
-					else
-					{
-						_SOFTSPI_MOSI_Set_Low();
-					}
-					
-					_SOFTSPI_CLK_Set_High();
-					_SOFTSPI_CLK_Set_Low();
-					
+				if (byte & (1 << i))
+				{
+					_SOFTSPI_MOSI_Set_High();
+				}
+				else
+				{
+					_SOFTSPI_MOSI_Set_Low();
+				}
+				
+				_SOFTSPI_CLK_Set_High();
+				_SOFTSPI_CLK_Set_Low();
+				
 				break;
 				
 				case SOFTSPI_MODE_1:
 				
-					_SOFTSPI_CLK_Set_High();
-					
-					if (byte & (1 << i))
-					{
-						_SOFTSPI_MOSI_Set_High();
-					}
-					else
-					{
-						_SOFTSPI_MOSI_Set_Low();
-					}
-					
-					_SOFTSPI_CLK_Set_Low();
-					
+				_SOFTSPI_CLK_Set_High();
+				
+				if (byte & (1 << i))
+				{
+					_SOFTSPI_MOSI_Set_High();
+				}
+				else
+				{
+					_SOFTSPI_MOSI_Set_Low();
+				}
+				
+				_SOFTSPI_CLK_Set_Low();
+				
 				break;
 				
 				case SOFTSPI_MODE_2:
 				
-					if (byte & (1 << i))
-					{
-						_SOFTSPI_MOSI_Set_High();
-					}
-					else
-					{
-						_SOFTSPI_MOSI_Set_Low();
-					}
-					
-					_SOFTSPI_CLK_Set_Low();
-					_SOFTSPI_CLK_Set_High();
-					
+				if (byte & (1 << i))
+				{
+					_SOFTSPI_MOSI_Set_High();
+				}
+				else
+				{
+					_SOFTSPI_MOSI_Set_Low();
+				}
+				
+				_SOFTSPI_CLK_Set_Low();
+				_SOFTSPI_CLK_Set_High();
+				
 				break;
 				
 				case SOFTSPI_MODE_3:
 				
-					_SOFTSPI_CLK_Set_Low();
-					
-					if (byte & (1 << i))
-					{
-						_SOFTSPI_MOSI_Set_High();
-					}
-					else
-					{
-						_SOFTSPI_MOSI_Set_Low();
-					}
-					
-					_SOFTSPI_CLK_Set_High();
-					
+				_SOFTSPI_CLK_Set_Low();
+				
+				if (byte & (1 << i))
+				{
+					_SOFTSPI_MOSI_Set_High();
+				}
+				else
+				{
+					_SOFTSPI_MOSI_Set_Low();
+				}
+				
+				_SOFTSPI_CLK_Set_High();
+				
 				break;
-					
+				
 				default: break;
 			}
 		}
@@ -752,23 +752,29 @@ void *SOFTSPI_Get_Data(void* data, uint16_t data_size)
 #endif // ===============================================================================
 
 
-static void (*_cs_set_high)() = NULL;
-static void (*_cs_set_low)()  = NULL;
+static void (*_cs_set_active)()   = NULL;
+static void (*_cs_set_inactive)() = NULL;
 
-void SOFTSPI_Set_CS_Callback_Functions(void (*cs_high_callback)(), void (*cs_low_callback)())
+void SOFTSPI_Set_CS_Callback_Functions(void (*cs_active_callback)(), void (*cs_inactive_callback)())
 {
-	_cs_set_high = cs_high_callback;
-	_cs_set_low  = cs_low_callback;
+	_cs_set_active   = cs_active_callback;
+	_cs_set_inactive = cs_inactive_callback;
 }
 
-void SOFTSPI_CS_High()
+void SOFTSPI_CS_Set_Active()
 {
-	_cs_set_high();
+	if (_cs_set_active != NULL)
+	{
+		_cs_set_active();
+	}
 }
 
-void SOFTSPI_CS_Low()
+void SOFTSPI_CS_Set_Inactive()
 {
-	_cs_set_low();
+	if (_cs_set_inactive != NULL)
+	{
+		_cs_set_inactive();
+	}
 }
 
 
