@@ -80,7 +80,7 @@ void TM74HC595_Clear()
 	_TM74HC595_Latching_Data();
 }
 
-void TM74HC595_Put_Symbols(uint8_t *symbols_arr, uint8_t symbols_arr_size)
+void TM74HC595_Put_Symbols(const uint8_t *symbols_arr, uint8_t symbols_arr_size)
 {
 	uint8_t symbol_pointer = (1 << (symbols_arr_size - 1 - target_object->symbols_counter));
 	
@@ -97,7 +97,7 @@ void TM74HC595_Put_Symbols(uint8_t *symbols_arr, uint8_t symbols_arr_size)
 	target_object->symbols_counter = (target_object->symbols_counter + 1) % symbols_arr_size;
 }
 
-void TM74HC595_Put_Symbols_Reverse(uint8_t *symbols_arr, uint8_t symbols_arr_size)
+void TM74HC595_Put_Symbols_Reverse(const uint8_t *symbols_arr, uint8_t symbols_arr_size)
 {
 	uint8_t symbol_pointer = (1 << (target_object->symbols_counter));
 	
@@ -114,7 +114,7 @@ void TM74HC595_Put_Symbols_Reverse(uint8_t *symbols_arr, uint8_t symbols_arr_siz
 	target_object->symbols_counter = (target_object->symbols_counter + 1) % symbols_arr_size;
 }
 
-void TM74HC595_Put_Num_String(char *num_string, uint8_t num_string_size)
+void TM74HC595_Put_Num_String(const char *num_string, uint8_t num_string_size)
 {
 	if (target_object->symbols_counter == 0)
 	{
@@ -228,7 +228,7 @@ void TM74HC595_Put_Num_String(char *num_string, uint8_t num_string_size)
 	target_object->symbols_counter = (target_object->symbols_counter + 1) % num_string_size;
 }
 
-void TM74HC595_Put_Num_String_Reverse(char *num_string, uint8_t num_string_size)
+void TM74HC595_Put_Num_String_Reverse(const char *num_string, uint8_t num_string_size)
 {
 	if (target_object->symbols_counter == 0)
 	{
@@ -357,7 +357,7 @@ void TM74HC595_Clear()
 	SPI_CS_Set_Active();
 }
 
-void TM74HC595_Put_Symbols(uint8_t *symbols_arr, uint8_t symbols_arr_size)
+void TM74HC595_Put_Symbols(const uint8_t *symbols_arr, uint8_t symbols_arr_size)
 {
 	uint8_t symbol_pointer = (1 << (symbols_arr_size - 1 - target_object->symbols_counter));
 	
@@ -374,7 +374,7 @@ void TM74HC595_Put_Symbols(uint8_t *symbols_arr, uint8_t symbols_arr_size)
 	target_object->symbols_counter = (target_object->symbols_counter + 1) % symbols_arr_size;
 }
 
-void TM74HC595_Put_Symbols_Reverse(uint8_t *symbols_arr, uint8_t symbols_arr_size)
+void TM74HC595_Put_Symbols_Reverse(const uint8_t *symbols_arr, uint8_t symbols_arr_size)
 {
 	uint8_t symbol_pointer = (1 << (target_object->symbols_counter));
 	
@@ -391,7 +391,7 @@ void TM74HC595_Put_Symbols_Reverse(uint8_t *symbols_arr, uint8_t symbols_arr_siz
 	target_object->symbols_counter = (target_object->symbols_counter + 1) % symbols_arr_size;
 }
 
-void TM74HC595_Put_Num_String(char *num_string, uint8_t num_string_size)
+void TM74HC595_Put_Num_String(const char *num_string, uint8_t num_string_size)
 {
 	if (target_object->symbols_counter == 0)
 	{
@@ -505,7 +505,7 @@ void TM74HC595_Put_Num_String(char *num_string, uint8_t num_string_size)
 	target_object->symbols_counter = (target_object->symbols_counter + 1) % num_string_size;
 }
 
-void TM74HC595_Put_Num_String_Reverse(char *num_string, uint8_t num_string_size)
+void TM74HC595_Put_Num_String_Reverse(const char *num_string, uint8_t num_string_size)
 {
 	if (target_object->symbols_counter == 0)
 	{
@@ -621,7 +621,6 @@ void TM74HC595_Put_Num_String_Reverse(char *num_string, uint8_t num_string_size)
 
 
 #endif
-
 
 
 
