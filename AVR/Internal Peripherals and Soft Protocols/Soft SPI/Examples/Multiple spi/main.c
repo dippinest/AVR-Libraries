@@ -13,7 +13,6 @@ inline void SPI1_CS_Set_Inactive()
 }
 
 
-
 inline void SPI2_CS_Set_Active()
 {
 	PORTD &= ~(1 << 7);
@@ -23,6 +22,7 @@ inline void SPI2_CS_Set_Inactive()
 {
 	PORTD |=  (1 << 7);
 }
+
 
 uint8_t spi1_transmitted_data[] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07}; // data to be sent via SPI1
 uint8_t spi2_transmitted_data[] = {0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6, 0xC7}; // data to be sent via SPI2
@@ -76,6 +76,7 @@ int main(void)
 	{
 	}
 }
+
 
 
 
