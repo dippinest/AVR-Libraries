@@ -6,6 +6,7 @@
 // я использую чип 24C128 с 128-ю килобитами памяти
 // -------------------------------------------------------------------------------
 // I use 24C128 chip (128 kbit)
+//
 #define EEPROM_CHIP_ADDR     EEPROMI2C_DEV_ADDR_A2F_A1F_A0F
 #define EEPROM_PAGE_SIZE     EEPROMI2C_24C128_PAGE_SIZE
 #define EEPROM_MAX_MEM_ADDR  EEPROMI2C_24C128_MAX_MEM_ADDR
@@ -14,11 +15,7 @@
 // приёмный буфер размером в страницу EEPROM
 // -------------------------------------------------------------------------------
 // this is the receiving buffer is the size of an EEPROM page
-
-// приёмный буфер размером в страницу EEPROM
-// -------------------------------------------------------------------------------
-// this is the receiving buffer is the size of an EEPROM page
-
+//
 uint8_t buffer[EEPROM_PAGE_SIZE];
 
 
@@ -46,6 +43,7 @@ int main(void)
 	{
 	}
 }
+
 
 
 
