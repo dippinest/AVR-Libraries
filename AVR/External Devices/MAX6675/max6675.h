@@ -23,17 +23,6 @@
 #include "max6675_configuration.h"
 
 
-#ifdef MAX6675_USE_SOFTSPI
-
-#include "softspi.h"
-
-#else
-
-#include "spi.h"
-
-#endif
-
-
 // ===============================================================================
 
 
