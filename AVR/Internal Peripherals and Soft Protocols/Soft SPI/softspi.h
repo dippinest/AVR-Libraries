@@ -113,20 +113,20 @@ typedef struct
 
 SOFTSPI_t SOFTSPI_Create_Object(
 
-	uint8_t *miso_ddr,
-	uint8_t *miso_pinx,
-	uint8_t  miso_pin,
-	
-	uint8_t *mosi_ddr,
-	uint8_t *mosi_port,
-	uint8_t  mosi_pin,
-	
-	uint8_t *clk_ddr,
-	uint8_t *clk_port,
-	uint8_t  clk_pin,
-	
-	uint8_t  spi_mode,
-	bool     data_order
+uint8_t *miso_ddr,
+uint8_t *miso_pinx,
+uint8_t  miso_pin,
+
+uint8_t *mosi_ddr,
+uint8_t *mosi_port,
+uint8_t  mosi_pin,
+
+uint8_t *clk_ddr,
+uint8_t *clk_port,
+uint8_t  clk_pin,
+
+uint8_t  spi_mode,
+bool     data_order
 );
 
 
@@ -150,11 +150,11 @@ void *SOFTSPI_Get_Data(void* data, uint16_t data_size);
 #endif // ===============================================================================
 
 
-void SOFTSPI_Set_CS_Callback_Functions(void (*cs_high_callback)(), void (*cs_low_callback)());
+void SOFTSPI_Set_CS_Callback_Functions(void (*cs_active_callback)(), void (*cs_inactive_callback)());
 
-void SOFTSPI_CS_High();
+void SOFTSPI_CS_On();
 
-void SOFTSPI_CS_Low();
+void SOFTSPI_CS_Off();
 
 
 #endif
