@@ -12,7 +12,7 @@ static uint16_t _MAX6675_Get_Data()
 	uint16_t data = 0;
 	
 	
-	SOFTSPI_CS_High();
+	SOFTSPI_CS_Set_Active();
 	
 	data = SOFTSPI_Get_Byte();
 	
@@ -20,7 +20,7 @@ static uint16_t _MAX6675_Get_Data()
 	
 	data |= SOFTSPI_Get_Byte();
 	
-	SOFTSPI_CS_Low();
+	SOFTSPI_CS_Set_Inactive();
 	
 	
 	return data;
@@ -54,7 +54,7 @@ static uint16_t _MAX6675_Get_Data()
 	uint16_t data = 0;
 	
 	
-	SPI_CS_High();
+	SPI_CS_Set_Active();
 	
 	data = SPI_Get_Byte(0x00);
 	
@@ -62,7 +62,7 @@ static uint16_t _MAX6675_Get_Data()
 	
 	data |= SPI_Get_Byte(0x00);
 	
-	SPI_CS_Low();
+	SPI_CS_Set_Inactive();
 	
 	
 	return data;
