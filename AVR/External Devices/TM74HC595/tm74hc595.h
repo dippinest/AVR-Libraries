@@ -108,13 +108,13 @@ TM74HC595_t *TM74HC595_Get_Target_Object();
 
 void TM74HC595_Clear();
 
-void TM74HC595_Put_Symbols(uint8_t *symbols_arr, uint8_t symbols_arr_size);
+void TM74HC595_Put_Symbols(const uint8_t *symbols_arr, uint8_t symbols_arr_size);
 
-void TM74HC595_Put_Symbols_Reverse(uint8_t *symbols_arr, uint8_t symbols_arr_size);
+void TM74HC595_Put_Symbols_Reverse(const uint8_t *symbols_arr, uint8_t symbols_arr_size);
 
-void TM74HC595_Put_Num_String(char *num_string, uint8_t num_string_size);
+void TM74HC595_Put_Num_String(const char *num_string, uint8_t num_string_size);
 
-void TM74HC595_Put_Num_String_Reverse(char *num_string, uint8_t num_string_size);
+void TM74HC595_Put_Num_String_Reverse(const char *num_string, uint8_t num_string_size);
 
 
 // ===============================================================================
@@ -125,5 +125,6 @@ char *TM74HC595_Convert_Num_String_To_Symbols_Array(char *num_string, uint8_t nu
 
 
 #endif
+
 
 
