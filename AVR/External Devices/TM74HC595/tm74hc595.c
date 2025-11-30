@@ -1,10 +1,8 @@
 
-
 #include "tm74hc595.h"
 
 
-
-// таблица символов (цифры от 0 до 9)
+// С‚Р°Р±Р»РёС†Р° СЃРёРјРІРѕР»РѕРІ (С†РёС„СЂС‹ РѕС‚ 0 РґРѕ 9)
 //
 // -------------------------------------------------------------------------------
 // symbol table (numbers from 0 to 9)
@@ -24,9 +22,7 @@ const uint8_t _tm74hc595_digits_symbols_table[] PROGMEM =
 };
 
 
-
 // ===============================================================================
-
 
 
 static TM74HC595_t *target_object = NULL;
@@ -66,9 +62,7 @@ void _TM74HC595_Latching_Data()
 }
 
 
-
 // ===============================================================================
-
 
 
 #if defined (TM74HC595_USE_SOFTSPI)
@@ -349,13 +343,9 @@ void TM74HC595_Put_Num_String_Reverse(char *num_string, uint8_t num_string_size)
 }
 
 
-
-
 #else
 
-
 #include "spi.h"
-
 
 
 void TM74HC595_Clear()
@@ -631,7 +621,6 @@ void TM74HC595_Put_Num_String_Reverse(char *num_string, uint8_t num_string_size)
 
 
 #endif
-
 
 
 
