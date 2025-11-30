@@ -2,10 +2,10 @@
 #include "hc595sevsegind.h"
 
 
-// таблица символов (цифры от 0 до 9)
+// таблица символов (цифры от 0 до 9 и буквы A, B, C, D, E и F)
 //
 // -------------------------------------------------------------------------------
-// symbol table (numbers from 0 to 9)
+// symbol table (numbers from 0 to 9 and letters A, B, C, D, E and F)
 //
 const uint8_t _hc595sevsegind_digits_symbols_table[] PROGMEM =
 {
@@ -67,7 +67,7 @@ void _HC595SevSegInd_Latching_Data()
 
 
 
-#if defined (HC595SEVSEGIND_USE_SOFTSPI3)
+#if defined (HC595SEVSEGIND_USE_SOFTSPI)
 
 
 #include "softspi.h"
@@ -85,7 +85,7 @@ void HC595SevSegInd_Clear_Display()
 }
 
 
-void HC595SevSegInd_Put_Symbols(uint8_t *symbols_arr, int8_t symbols_arr_size)
+void HC595SevSegInd_Put_Symbols(const uint8_t *symbols_arr, int8_t symbols_arr_size)
 {
 	for (uint8_t i = 0; i < symbols_arr_size; ++i)
 	{
@@ -98,7 +98,7 @@ void HC595SevSegInd_Put_Symbols(uint8_t *symbols_arr, int8_t symbols_arr_size)
 }
 
 
-void HC595SevSegInd_Put_Symbols_Reverse(uint8_t *symbols_arr, int8_t symbols_arr_size)
+void HC595SevSegInd_Put_Symbols_Reverse(const uint8_t *symbols_arr, int8_t symbols_arr_size)
 {
 	for (int8_t i = 0; i < symbols_arr_size; ++i)
 	{
@@ -109,14 +109,14 @@ void HC595SevSegInd_Put_Symbols_Reverse(uint8_t *symbols_arr, int8_t symbols_arr
 }
 
 
-void HC595SevSegInd_Put_Num_String(char *num_string, uint8_t num_string_size)
+void HC595SevSegInd_Put_Num_String(const char *num_string, uint8_t num_string_size)
 {
 	bool point_char_separator_flag = false;
 	
 	
 	for (uint8_t i = 0; i < num_string_size; ++i)
 	{
-		uint8_t symbol_pointer = (num_string_size - 1 - i);
+		uint8_t symbol_pointer = (num_string_size - i - 1);
 		
 		uint8_t symbol = num_string[symbol_pointer] - 48;
 		
@@ -215,7 +215,7 @@ void HC595SevSegInd_Put_Num_String(char *num_string, uint8_t num_string_size)
 }
 
 
-void HC595SevSegInd_Put_Num_String_Reverse(char *num_string, uint8_t num_string_size)
+void HC595SevSegInd_Put_Num_String_Reverse(const char *num_string, uint8_t num_string_size)
 {
 	bool point_char_separator_flag = false;
 	
@@ -338,7 +338,7 @@ void HC595SevSegInd_Clear_Display()
 }
 
 
-void HC595SevSegInd_Put_Symbols(uint8_t *symbols_arr, int8_t symbols_arr_size)
+void HC595SevSegInd_Put_Symbols(const uint8_t *symbols_arr, int8_t symbols_arr_size)
 {
 	for (uint8_t i = 0; i < symbols_arr_size; ++i)
 	{
@@ -351,7 +351,7 @@ void HC595SevSegInd_Put_Symbols(uint8_t *symbols_arr, int8_t symbols_arr_size)
 }
 
 
-void HC595SevSegInd_Put_Symbols_Reverse(uint8_t *symbols_arr, int8_t symbols_arr_size)
+void HC595SevSegInd_Put_Symbols_Reverse(const uint8_t *symbols_arr, int8_t symbols_arr_size)
 {
 	for (int8_t i = 0; i < symbols_arr_size; ++i)
 	{
@@ -362,7 +362,7 @@ void HC595SevSegInd_Put_Symbols_Reverse(uint8_t *symbols_arr, int8_t symbols_arr
 }
 
 
-void HC595SevSegInd_Put_Num_String(char *num_string, uint8_t num_string_size)
+void HC595SevSegInd_Put_Num_String(const char *num_string, uint8_t num_string_size)
 {
 	bool point_char_separator_flag = false;
 	
@@ -468,7 +468,7 @@ void HC595SevSegInd_Put_Num_String(char *num_string, uint8_t num_string_size)
 }
 
 
-void HC595SevSegInd_Put_Num_String_Reverse(char *num_string, uint8_t num_string_size)
+void HC595SevSegInd_Put_Num_String_Reverse(const char *num_string, uint8_t num_string_size)
 {
 	bool point_char_separator_flag = false;
 	
@@ -677,8 +677,6 @@ char *HC595SevSegInd_Convert_Num_String_To_Symbols_Array(char *num_string, uint8
 	
 	return num_string;
 }
-
-
 
 
 
