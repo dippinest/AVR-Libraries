@@ -30,25 +30,30 @@ uint8_t SPI_Get_Byte(uint8_t data)
 
 // ===============================================================================
 
-static void (*_cs_set_high)() = NULL;
-static void (*_cs_set_low)()  = NULL;
+static void (*_cs_set_active)()   = NULL;
+static void (*_cs_set_inactive)() = NULL;
 
-void SPI_Set_CS_Callback_Functions(void (*cs_high_callback)(), void (*cs_low_callback)())
+void SPI_Set_CS_Callback_Functions(void (*cs_active_callback)(), void (*cs_inactive_callback)())
 {
-	_cs_set_high = cs_high_callback;
-	_cs_set_low  = cs_low_callback;
+	_cs_set_active   = cs_active_callback;
+	_cs_set_inactive = cs_inactive_callback;
 }
 
-void SPI_CS_High()
+void SPI_CS_Set_Active()
 {
-	_cs_set_high();
+	if (_cs_set_active != NULL)
+	{
+		_cs_set_active();
+	}
 }
 
-void SPI_CS_Low()
+void SPI_CS_Set_Inactive()
 {
-	_cs_set_low();
+	if (_cs_set_inactive != NULL)
+	{
+		_cs_set_inactive();
+	}
 }
-
 
 
 
