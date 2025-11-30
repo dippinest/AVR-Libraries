@@ -152,13 +152,12 @@ void *SOFTSPI_Get_Data(void* data, uint16_t data_size);
 
 void SOFTSPI_Set_CS_Callback_Functions(void (*cs_active_callback)(), void (*cs_inactive_callback)());
 
-void SOFTSPI_CS_On();
+void SOFTSPI_CS_Set_Active();
 
-void SOFTSPI_CS_Off();
+void SOFTSPI_CS_Set_Inactive();
 
 
 #endif
-
 
 
 
