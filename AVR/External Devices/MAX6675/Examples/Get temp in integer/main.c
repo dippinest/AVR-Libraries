@@ -13,12 +13,12 @@
 // ===============================================================================
 // CS output switching functions (Chip Select Pin)
 //
-void CS_High()
+void CS_Set_Active()
 {
 	PORTA &= ~(1 << 3);
 }
 
-void CS_Low()
+void CS_Set_Inactive()
 {
 	PORTA |=  (1 << 3);
 }
@@ -32,14 +32,13 @@ int main(void)
 	UART_Initialize(9600, true, false);
 	
 	SOFTSPI_Initialize();
-	SOFTSPI_Set_CS_Callback_Functions(CS_High, CS_Low);
+	SOFTSPI_Set_CS_Callback_Functions(CS_Set_Active, CS_Set_Inactive);
 	
 	while (1)
 	{
 		UART_StringFmt_Transmit("TEMP = %d *C\r\n", MAX6675_Get_Temperature_In_Celsius_Integer()); _delay_ms(1000);
 	}
 }
-
 
 
 
