@@ -274,14 +274,13 @@ uint8_t SPI_Get_Byte(uint8_t data);
 // ===============================================================================
 
 
-void SPI_Set_CS_Callback_Functions(void (*cs_high_callback)(), void (*cs_low_callback)());
+void SPI_Set_CS_Callback_Functions(void (*cs_active_callback)(), void (*cs_inactive_callback)());
 
-void SPI_CS_High();
+void SPI_CS_Set_Active();
 
-void SPI_CS_Low();
+void SPI_CS_Set_Inactive();
 
 #endif
-
 
 
 
