@@ -174,13 +174,13 @@ void TM1637_Set_Brightness(uint8_t brightness_coef);
 
 
 
-void TM1637_Put_Symbols(uint8_t *simbols_arr, uint8_t simbols_arr_size);
+void TM1637_Put_Symbols(const uint8_t *simbols_arr, uint8_t simbols_arr_size);
 
-void TM1637_Put_Symbols_Reverse(uint8_t *simbols_arr, uint8_t simbols_arr_size);
+void TM1637_Put_Symbols_Reverse(const uint8_t *simbols_arr, uint8_t simbols_arr_size);
 
-void TM1637_Put_Num_String(char *num_string, uint8_t num_string_size);
+void TM1637_Put_Num_String(const char *num_string, uint8_t num_string_size);
 
-void TM1637_Put_Num_String_Reverse(char *num_string, uint8_t num_string_size);
+void TM1637_Put_Num_String_Reverse(const char *num_string, uint8_t num_string_size);
 
 void TM1637_Clear(uint8_t num_of_segments);
 
@@ -195,7 +195,6 @@ char *TM1637_Convert_Num_String_To_Symbols_Array(char *num_string, uint8_t num_s
 
 
 #endif
-
 
 
 
