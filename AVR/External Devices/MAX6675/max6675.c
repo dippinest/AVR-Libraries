@@ -7,6 +7,10 @@
 #if defined (MAX6675_USE_SOFTSPI) && defined (MAX6675_USE_CS_CALLBACKS)
 
 
+#include "softspi.h"
+
+
+
 static uint16_t _MAX6675_Get_Data()
 {
 	uint16_t data = 0;
@@ -30,6 +34,10 @@ static uint16_t _MAX6675_Get_Data()
 #elif defined (MAX6675_USE_SOFTSPI) && !defined (MAX6675_USE_CS_CALLBACKS)
 
 
+#include "softspi.h"
+
+
+
 static uint16_t _MAX6675_Get_Data()
 {
 	uint16_t data = 0;
@@ -47,6 +55,10 @@ static uint16_t _MAX6675_Get_Data()
 
 
 #elif !defined (MAX6675_USE_SOFTSPI) && defined (MAX6675_USE_CS_CALLBACKS)
+
+
+#include "spi.h"
+
 
 
 static uint16_t _MAX6675_Get_Data()
@@ -70,6 +82,10 @@ static uint16_t _MAX6675_Get_Data()
 
 
 #elif !defined (MAX6675_USE_SOFTSPI) && !defined (MAX6675_USE_CS_CALLBACKS)
+
+
+#include "spi.h"
+
 
 
 static uint16_t _MAX6675_Get_Data()
