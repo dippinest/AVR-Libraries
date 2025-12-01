@@ -67,7 +67,7 @@ void UART1_Async_Set_Reception_Terminator_Enable(bool is_enable)
 }
 
 
-void UART1_Async_Set_Reception_CallBack_Function(void (*callback_function)())
+void UART1_Async_Set_Reception_Callback_Function(void (*callback_function)())
 {
 	_reception_callback1 = (void*)callback_function;
 }
@@ -115,7 +115,7 @@ bool UART1_Async_Reception_Terminator_Is_Enable()
 }
 
 
-void *UART1_Async_Get_Reception_CallBack_Function()
+void *UART1_Async_Get_Reception_Callback_Function()
 {
 	return _reception_callback1;
 }
@@ -134,13 +134,13 @@ uint16_t UART1_Async_Get_Current_Reception_Buffer_Fullness()
 #ifdef UART1_ASYNC_USE_TX
 
 
-void UART1_Async_Set_Transmittion_CallBack_Function(void (*callback_function)())
+void UART1_Async_Set_Transmittion_Callback_Function(void (*callback_function)())
 {
 	_user_transmittion_callback1 = (void*)callback_function;
 }
 
 
-void *UART1_Async_Get_Transmittion_CallBack_Function()
+void *UART1_Async_Get_Transmittion_Callback_Function()
 {
 	return _user_transmittion_callback1;
 }
@@ -583,5 +583,6 @@ ISR(USART1_RXC_vect)
 }
 
 #endif
+
 
 
