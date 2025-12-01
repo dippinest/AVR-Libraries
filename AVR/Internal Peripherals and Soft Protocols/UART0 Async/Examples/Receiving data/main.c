@@ -24,7 +24,7 @@ int main(void)
 	UART0_Async_Set_Reception_Buffer_Ptr(rx_buffer);
 	UART0_Async_Set_Reception_Buffer_Size(RX_BUFFER_SIZE);
 	
-	UART0_Async_Set_Reception_CallBack_Function(send_buffer);
+	UART0_Async_Set_Reception_Callback_Function(send_buffer);
 	
 	UART0_Async_Start_Reception_Data_To_Buffer();
 	
@@ -32,5 +32,6 @@ int main(void)
 	{
 	}
 }
+
 
 
