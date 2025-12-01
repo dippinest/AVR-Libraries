@@ -90,18 +90,24 @@ void *SOFTSPI_Get_Data(void* data, uint16_t data_size);
 
 typedef struct
 {
-	uint8_t *miso_ddr;
-	uint8_t *miso_pinx;
+	volatile uint8_t *miso_ddr;
+	volatile uint8_t *miso_pinx;
+
 	uint8_t  miso_pin;
+
 	
-	uint8_t *mosi_ddr;
-	uint8_t *mosi_port;
+	volatile uint8_t *mosi_ddr;
+	volatile uint8_t *mosi_port;
+
 	uint8_t  mosi_pin;
-	
-	uint8_t *clk_ddr;
-	uint8_t *clk_port;
+
+
+	volatile uint8_t *clk_ddr;
+	volatile uint8_t *clk_port;
+
 	uint8_t  clk_pin;
-	
+
+
 	uint8_t  mode;
 	bool     data_order;
 	
@@ -158,6 +164,7 @@ void SOFTSPI_CS_Set_Inactive();
 
 
 #endif
+
 
 
 
