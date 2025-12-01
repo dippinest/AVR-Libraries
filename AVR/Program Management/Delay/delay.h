@@ -62,10 +62,11 @@ void Delay_Ms_Set_Yield_CallBack_Function(void (*delay_yield_ms)());
 #endif
 
 
-void Delay_Ms(uint16_t ms_delay);
+void Delay_Ms(volatile uint16_t ms_delay);
 
-void Delay_Us(uint16_t us_delay);
+void Delay_Us(volatile uint16_t us_delay);
 
 
 #endif
+
 
