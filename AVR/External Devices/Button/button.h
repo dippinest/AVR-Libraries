@@ -59,13 +59,15 @@
 
 typedef struct
 {
-	uint8_t *input_ddr;
-	uint8_t *input_pinx;
+	volatile uint8_t *input_ddr;
+	volatile uint8_t *input_pinx;
+
 	uint8_t  input_pin;
-	
+
+
 	bool     pull;
 	
-	uint16_t status;
+	volatile uint16_t status;
 	
 } Button_t;
 
@@ -96,5 +98,6 @@ void Button_Long_Pressed_Polling(Button_t *button, uint16_t press_timeout, void 
 
 
 #endif
+
 
 
