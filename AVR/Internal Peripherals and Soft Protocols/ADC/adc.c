@@ -162,7 +162,7 @@ void ADC_Set_Reception_Buffer_Size(const uint16_t buffer_size)
 	_reception_buffer_size = buffer_size;
 }
 
-void ADC_Set_Reception_CallBack_Function(void (*callback_function)())
+void ADC_Set_Reception_Callback_Function(void (*callback_function)())
 {
 	_reception_callback = callback_function;
 }
@@ -182,7 +182,7 @@ uint16_t ADC_Get_Reception_Buffer_Size()
 	return _reception_buffer_size;
 }
 
-void *ADC_Get_Reception_CallBack_Function()
+void *ADC_Get_Reception_Callback_Function()
 {
 	return _reception_callback;
 }
