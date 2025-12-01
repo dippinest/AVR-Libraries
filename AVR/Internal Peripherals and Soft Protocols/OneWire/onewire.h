@@ -66,10 +66,12 @@ inline uint8_t ONEWIRE_Get_Level()
 
 typedef struct
 {
-	uint8_t *data_ddr;
-	uint8_t *data_pinx;
+	volatile uint8_t *data_ddr;
+	volatile uint8_t *data_pinx;
+
 	uint8_t  data_pin;
-	
+
+
 } ONEWIRE_t;
 
 
@@ -123,6 +125,7 @@ bool ONEWIRE_Check_CRC8_From_Unique_ROM_ID(uint8_t *_8byte_unique_rom_id_buf);
 
 
 #endif
+
 
 
 
