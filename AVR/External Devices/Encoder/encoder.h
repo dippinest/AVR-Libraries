@@ -63,18 +63,22 @@ void *Encoder_Get_Right_Turn_CallBack_Function();
 
 typedef struct
 {
-	uint8_t *input0_ddr;
-	uint8_t *input0_pinx;
+	volatile uint8_t *input0_ddr;
+	volatile uint8_t *input0_pinx;
+
 	uint8_t  input0_pin;
-	
-	uint8_t *input1_ddr;
-	uint8_t *input1_pinx;
+
+
+	volatile uint8_t *input1_ddr;
+	volatile uint8_t *input1_pinx;
+
 	uint8_t  input1_pin;
+
 	
 	void (*_left_turn_callback)();
 	void (*_right_turn_callback)();
 	
-	int8_t   status;
+	volatile int8_t   status;
 	
 } Encoder_t;
 
@@ -114,5 +118,6 @@ void *Encoder_Get_Right_Turn_CallBack_Function(Encoder_t *encoder);
 
 
 #endif
+
 
 
