@@ -65,9 +65,11 @@
 
 typedef struct
 {
-	uint8_t *softbam_channel_port;
+	volatile uint8_t *softbam_channel_port;
+
 	uint8_t  softbam_channel_pin;
-	
+
+
 	uint8_t  softbam_channel_duty_cycle;
 	uint8_t  softbam_channel_duty_cycle_buf;
 
@@ -109,6 +111,7 @@ void SOFTBAM_Processing(SOFTBAM_t *bam);
 
 
 #endif
+
 
 
 
