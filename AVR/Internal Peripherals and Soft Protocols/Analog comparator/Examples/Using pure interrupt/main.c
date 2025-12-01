@@ -31,6 +31,7 @@ int main(void)
 	ANACOMP_Set_Interrupt_Type(ANACOMP_INTERRUPT_TYPE_ANY_CHANGE);
 	
 	DDRC |= (1 << 5);
+
 	
 	sei();
 	
@@ -38,3 +39,4 @@ int main(void)
 	{
 	}
 }
+
