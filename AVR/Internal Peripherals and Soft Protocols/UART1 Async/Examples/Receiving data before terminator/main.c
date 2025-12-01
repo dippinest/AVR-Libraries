@@ -31,7 +31,7 @@ int main(void)
 	UART1_Async_Set_Reception_Terminator(TERMINATOR_SYMBOL);
 	UART1_Async_Set_Reception_Terminator_Enable(true);
 	
-	UART1_Async_Set_Reception_CallBack_Function(send_buffer);
+	UART1_Async_Set_Reception_Callback_Function(send_buffer);
 	
 	UART1_Async_Start_Reception_Data_To_Buffer();
 	
@@ -42,6 +42,7 @@ int main(void)
 	{
 	}
 }
+
 
 
 
