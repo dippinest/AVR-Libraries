@@ -58,8 +58,8 @@ void SYSTIMER_Delay(SYSTIMER_t ticks);
 
 typedef struct
 {
-	SYSTIMER_t timer;
-	SYSTIMER_t interval;
+	volatile SYSTIMER_t timer;
+	volatile SYSTIMER_t interval;
 	
 } SYSTIMER_Task_Params_t;
 
@@ -70,5 +70,6 @@ void SYSTIMER_Run_Task(SYSTIMER_Task_Params_t *task_params, void (*task)());
 
 
 #endif
+
 
 
