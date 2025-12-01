@@ -87,7 +87,7 @@ void UART0_Async_Set_Reception_Terminator(uint8_t terminator);
 
 void UART0_Async_Set_Reception_Terminator_Enable(bool is_enable);
 
-void UART0_Async_Set_Reception_CallBack_Function(void (*callback_function)());
+void UART0_Async_Set_Reception_Callback_Function(void (*callback_function)());
 
 bool UART0_Async_Get_Reception_Status();
 
@@ -103,7 +103,7 @@ uint8_t UART0_Async_Get_Reception_Terminator();
 
 bool UART0_Async_Reception_Terminator_Is_Enable();
 
-void *UART0_Async_Get_Reception_CallBack_Function();
+void *UART0_Async_Get_Reception_Callback_Function();
 
 uint16_t UART0_Async_Get_Current_Reception_Buffer_Fullness();
 
@@ -116,9 +116,9 @@ uint16_t UART0_Async_Get_Current_Reception_Buffer_Fullness();
 #ifdef UART0_ASYNC_USE_TX
 
 
-void UART0_Async_Set_Transmittion_CallBack_Function(void (*callback_function)());
+void UART0_Async_Set_Transmittion_Callback_Function(void (*callback_function)());
 
-void *UART0_Async_Get_Transmittion_CallBack_Function();
+void *UART0_Async_Get_Transmittion_Callback_Function();
 
 bool UART0_Async_Get_Transmittion_Status();
 
@@ -173,5 +173,6 @@ void UART0_Async_Clear_Reception_Buffer();
 #endif
 
 #endif
+
 
 
