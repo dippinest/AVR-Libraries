@@ -105,11 +105,11 @@ typedef struct
 {
 	void (*task_callback)();
 	
-	SYSTIMER_t task_interval;
+	volatile SYSTIMER_t task_interval;
 	
-	SYSTIMER_t task_initial_time;
+	volatile SYSTIMER_t task_initial_time;
 	
-	Scheduler_Task_Status_t  task_status;
+	volatile Scheduler_Task_Status_t  task_status;
 	
 } Scheduler_Task_t;
 
@@ -178,6 +178,7 @@ else                                                        \
 
 
 #endif
+
 
 
 
