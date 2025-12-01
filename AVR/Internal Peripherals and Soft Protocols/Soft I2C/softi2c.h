@@ -74,16 +74,20 @@ void SOFTI2C_Read_Byte(uint8_t *data, bool ack);
 
 typedef struct
 {
-	uint8_t *scl_ddr;
-	uint8_t *scl_pinx;
-	uint8_t *scl_port;
+	volatile uint8_t *scl_ddr;
+	volatile uint8_t *scl_pinx;
+	volatile uint8_t *scl_port;
+
 	uint8_t  scl_pin;
-	
-	uint8_t *sda_ddr;
-	uint8_t *sda_pinx;
-	uint8_t *sda_port;
+
+
+	volatile uint8_t *sda_ddr;
+	volatile uint8_t *sda_pinx;
+	volatile uint8_t *sda_port;
+
 	uint8_t  sda_pin;
-	
+
+
 	uint8_t  clock_delay;
 	
 } SOFTI2C_t;
@@ -126,5 +130,6 @@ void SOFTI2C_Read_Byte(uint8_t *data, bool ack);
 
 
 #endif
+
 
 
