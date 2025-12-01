@@ -174,9 +174,9 @@ inline bool ANACOMP_Get_State()
 
 #ifdef ANACOMP_USE_CALLBACK
 
-void ANACOMP_Set_CallBack_Function(void (*callback_function)());
+void ANACOMP_Set_Callback_Function(void (*callback_function)());
 
-void *ANACOMP_Get_CallBack_Function();
+void *ANACOMP_Get_Callback_Function();
 
 #endif
 
