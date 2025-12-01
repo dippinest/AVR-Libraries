@@ -57,8 +57,10 @@
 
 typedef struct
 {
-	uint8_t* virtual_port;
+	volatile uint8_t* virtual_port;
+
 	uint8_t  virtual_pin;
+
 
 	bool     pull;
 
@@ -92,6 +94,7 @@ void VirtualButton_Long_Pressed_Polling(VirtualButton_t* vbutton, uint16_t press
 
 
 #endif
+
 
 
 
