@@ -31,7 +31,9 @@ int main(void)
 	ANACOMP_Set_Interrupt_Type(ANACOMP_INTERRUPT_TYPE_ANY_CHANGE);
 	
 	DDRC |= (1 << 5);
-	ANACOMP_Set_CallBack_Function(Analog_Comparator_Callback);
+	
+	ANACOMP_Set_Callback_Function(Analog_Comparator_Callback);
+	
 	
 	sei();
 	
@@ -39,4 +41,6 @@ int main(void)
 	{
 	}
 }
+
+
 
