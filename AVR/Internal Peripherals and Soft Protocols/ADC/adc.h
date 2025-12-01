@@ -231,7 +231,7 @@ void ADC_Set_Reception_Buffer_Ptr(const void *buffer);
 
 void ADC_Set_Reception_Buffer_Size(const uint16_t buffer_size);
 
-void ADC_Set_Reception_CallBack_Function(void (*callback_function)());
+void ADC_Set_Reception_Callback_Function(void (*callback_function)());
 
 bool ADC_Is_Reception_Buffer_Filled();
 
@@ -239,7 +239,7 @@ void *ADC_Get_Reception_Buffer_Ptr();
 
 uint16_t ADC_Get_Reception_Buffer_Size();
 
-void *ADC_Get_Reception_CallBack_Function();
+void *ADC_Get_Reception_Callback_Function();
 
 uint16_t ADC_Get_Current_Reception_Buffer_Fullness();
 
