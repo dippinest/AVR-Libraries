@@ -41,7 +41,7 @@ void NEC_IR_Decoder_Callback()
 	// if the data format conforms to the NEC protocol standard
 	// (addr -> ~addr -> cmd -> ~cmd), output the data.
 	//
-	// If you are using a homemade remote control with a non-standard format,
+	// If you are using a custom remote control with a non-standard format,
 	// then process the data "as is".
 	//
 	if (NEC_IR_Check_Package_Integrity_For_Standart_Protocol(&nec_ir))
@@ -104,6 +104,7 @@ int main(void)
 	{
 	}
 }
+
 
 
 
