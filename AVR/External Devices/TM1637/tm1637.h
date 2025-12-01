@@ -123,14 +123,18 @@ void TM1637_Set_Brightness(uint8_t brightness_coef);
 
 typedef struct
 {
-	uint8_t *clk_ddr;
-	uint8_t *clk_port;
+	volatile uint8_t *clk_ddr;
+	volatile uint8_t *clk_port;
+
 	uint8_t  clk_pin;
-	
-	uint8_t *dio_ddr;
-	uint8_t *dio_pinx;
-	uint8_t *dio_port;
+
+
+	volatile uint8_t *dio_ddr;
+	volatile uint8_t *dio_pinx;
+	volatile uint8_t *dio_port;
+
 	uint8_t  dio_pin;
+
 	
 	uint8_t  configuration_register_buffer;
 	
@@ -195,6 +199,7 @@ char *TM1637_Convert_Num_String_To_Symbols_Array(char *num_string, uint8_t num_s
 
 
 #endif
+
 
 
 
