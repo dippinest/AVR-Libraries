@@ -14,7 +14,7 @@ void Delay_Ms_Set_Yield_CallBack_Function(void (*delay_yield_ms)())
 
 
 
-void Delay_Ms(uint16_t ms_delay)
+void Delay_Ms(volatile uint16_t ms_delay)
 {
 	while(ms_delay)
 	{
@@ -33,7 +33,7 @@ void Delay_Ms(uint16_t ms_delay)
 	}
 }
 
-void Delay_Us(uint16_t us_delay)
+void Delay_Us(volatile uint16_t us_delay)
 {
 	while(us_delay)
 	{
@@ -41,3 +41,4 @@ void Delay_Us(uint16_t us_delay)
 		_delay_us(1);
 	}
 }
+
