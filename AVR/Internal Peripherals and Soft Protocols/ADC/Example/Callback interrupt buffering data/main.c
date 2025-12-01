@@ -40,7 +40,7 @@ int main(void)
 	ADC_Set_Reception_Buffer_Ptr(adc_buffer);
 	ADC_Set_Reception_Buffer_Size(ADC_BUF_SIZE);
 	
-	ADC_Set_Reception_CallBack_Function(send_buffer);
+	ADC_Set_Reception_Callback_Function(send_buffer);
 	
 	ADC_Set_Interrupt_Enable(true);
 	ADC_Start_Conversion();
@@ -49,5 +49,6 @@ int main(void)
 	{
 	}
 }
+
 
 
