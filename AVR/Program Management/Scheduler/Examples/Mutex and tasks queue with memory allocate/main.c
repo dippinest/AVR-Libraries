@@ -142,7 +142,7 @@ int main(void)
 {
 	UART_Initialize(9600, true, false);
 	UART_Async_Set_Transmittion_Enable(true);
-	UART_Async_Set_Transmittion_CallBack_Function(UART_Mutex_Unlock);
+	UART_Async_Set_Transmittion_Callback_Function(UART_Mutex_Unlock);
 	
 	
 	// инициализация мьютекса UART
@@ -211,6 +211,7 @@ int main(void)
 		sleep_cpu();
 	}
 }
+
 
 
 
