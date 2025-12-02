@@ -37,12 +37,12 @@ SOFTBAM_t SOFTBAM_Create_Object(SOFTBAM_Channel_t *channels, const uint8_t num_o
 
 void SOFTBAM_Processing(SOFTBAM_t *bam)
 {
-	register uint8_t prescaler = (0b11111111 >> bam->bits_counter);
+	uint8_t prescaler = (0b11111111 >> bam->bits_counter);
 	
 	bam->prescaler_callback(prescaler);
 	
 	
-	for (register uint8_t i = 0; i < bam->num_of_channels; ++i)
+	for (uint8_t i = 0; i < bam->num_of_channels; ++i)
 	{
 		if (bam->bits_counter == 0)
 		{
@@ -68,6 +68,7 @@ void SOFTBAM_Processing(SOFTBAM_t *bam)
 		bam->bits_counter = 0;
 	}
 }
+
 
 
 
