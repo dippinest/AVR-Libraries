@@ -43,13 +43,12 @@ typedef struct
 	volatile uint8_t *softpwm_channel_port;
 
 	uint8_t  softpwm_channel_pin;
-
-
 	uint8_t  softpwm_channel_max_depth;
-	uint8_t  softpwm_channel_duty_cycle;
-	uint8_t  softpwm_channel_duty_cycle_buf;
+
+	volatile uint8_t  softpwm_channel_duty_cycle;
+	volatile uint8_t  softpwm_channel_duty_cycle_buf;
 	
-	uint8_t  softpwm_channel_counter;
+	volatile uint8_t  softpwm_channel_counter;
 
 } SOFTPWM_t;
 
@@ -75,6 +74,7 @@ void SOFTPWM_All_Channels_Processing(SOFTPWM_t *pwm, uint8_t num_of_channels);
 
 
 #endif
+
 
 
 
