@@ -33,20 +33,19 @@
 // ===============================================================================
 
 
-void EEPROM_Write_Byte(uint16_t mem_addr, uint8_t b);
+void EEPROM_Write_Byte(uint16_t mem_addr, const uint8_t b);
 
 uint8_t EEPROM_Read_Byte(uint16_t mem_addr);
 
-void EEPROM_Update_Byte(uint16_t mem_addr, uint8_t b);
+void EEPROM_Update_Byte(uint16_t mem_addr, const uint8_t b);
 
-void EEPROM_Write_Data(uint16_t mem_addr, void *data, uint16_t data_size);
+void EEPROM_Write_Data(uint16_t mem_addr, const void *data, uint16_t data_size);
 
 void *EEPROM_Read_Data(uint16_t mem_addr, void *data, uint16_t data_size);
 
-void EEPROM_Update_Data(uint16_t mem_addr, void *data, uint16_t data_size);
+void EEPROM_Update_Data(uint16_t mem_addr, const void *data, uint16_t data_size);
 
 
 #endif
-
 
 
