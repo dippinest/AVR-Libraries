@@ -36,7 +36,7 @@ FRAMI2C_t *FRAMI2C_Get_Target_Object()
 #include "softi2c.h"
 
 
-void FRAMI2C_Write_Byte(uint16_t memory_addr, uint8_t byte)
+void FRAMI2C_Write_Byte(uint16_t memory_addr, const uint8_t byte)
 {
 	SOFTI2C_Start();
 	
@@ -72,7 +72,7 @@ uint8_t FRAMI2C_Read_Byte(uint16_t memory_addr)
 	return byte;
 }
 
-uint16_t FRAMI2C_Write_Data(uint16_t memory_addr, void *data, uint16_t data_size)
+uint16_t FRAMI2C_Write_Data(uint16_t memory_addr, const void *data, uint16_t data_size)
 {
 	SOFTI2C_Start();
 	
@@ -128,7 +128,7 @@ uint16_t FRAMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_size)
 	return i;
 }
 
-uint32_t FRAMI2C_Fill_Memory(uint16_t memory_addr, uint8_t val, uint32_t num)
+uint32_t FRAMI2C_Fill_Memory(uint16_t memory_addr, const uint8_t val, uint32_t num)
 {
 	SOFTI2C_Start();
 	
@@ -156,7 +156,7 @@ uint32_t FRAMI2C_Fill_Memory(uint16_t memory_addr, uint8_t val, uint32_t num)
 #include "i2c.h"
 
 
-void FRAMI2C_Write_Byte(uint16_t memory_addr, uint8_t byte)
+void FRAMI2C_Write_Byte(uint16_t memory_addr, const uint8_t byte)
 {
 	I2C_Start();
 	
@@ -192,7 +192,7 @@ uint8_t FRAMI2C_Read_Byte(uint16_t memory_addr)
 	return byte;
 }
 
-uint16_t FRAMI2C_Write_Data(uint16_t memory_addr, void *data, uint16_t data_size)
+uint16_t FRAMI2C_Write_Data(uint16_t memory_addr, const void *data, uint16_t data_size)
 {
 	I2C_Start();
 	
@@ -248,7 +248,7 @@ uint16_t FRAMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_size)
 	return i;
 }
 
-uint32_t FRAMI2C_Fill_Memory(uint16_t memory_addr, uint8_t val, uint32_t num)
+uint32_t FRAMI2C_Fill_Memory(uint16_t memory_addr, const uint8_t val, uint32_t num)
 {
 	I2C_Start();
 	
