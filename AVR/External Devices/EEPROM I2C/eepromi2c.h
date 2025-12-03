@@ -122,7 +122,7 @@ uint8_t EEPROMI2C_Read_Byte(uint16_t memory_addr);
 
 uint16_t EEPROMI2C_Write_Page(uint16_t memory_addr, const void *page, uint16_t data_size);
 
-uint16_t EEPROMI2C_Fill_Page(uint16_t memory_addr, uint8_t val, uint16_t num);
+uint16_t EEPROMI2C_Fill_Page(uint16_t memory_addr, const uint8_t val, uint16_t num);
 
 uint16_t EEPROMI2C_Read_Page(uint16_t memory_addr, void *page, uint16_t data_size);
 
@@ -134,3 +134,4 @@ uint32_t EEPROMI2C_Fill_Memory(uint16_t memory_addr, const uint8_t val, uint32_t
 
 
 #endif
+
