@@ -14,27 +14,33 @@ static LM75_t *target_thermometer = NULL;
 static void _LM75_Set_Register_Pointer(uint8_t addr_reg)
 {
 	SOFTI2C_Start();
+	
 	SOFTI2C_Send_Byte(target_thermometer->dev_addr << 1);
 	SOFTI2C_Send_Byte(addr_reg);
+	
 	SOFTI2C_Stop();
 }
 
 static void _LM75_Write_UINT8_Configuration_Register(uint8_t configuration_data_register)
 {
 	SOFTI2C_Start();
+	
 	SOFTI2C_Send_Byte((target_thermometer->dev_addr << 1) | 0);
 	SOFTI2C_Send_Byte(_LM75_CONFUGURATION_REGISTER_ADDR);
 	SOFTI2C_Send_Byte(configuration_data_register);
+	
 	SOFTI2C_Stop();
 }
 
 static void _LM75_Write_UINT16_Register(uint8_t addr_reg, uint16_t data_register)
 {
 	SOFTI2C_Start();
+	
 	SOFTI2C_Send_Byte((target_thermometer->dev_addr << 1) | 0);
 	SOFTI2C_Send_Byte(addr_reg);
 	SOFTI2C_Send_Byte(data_register >> 8);
 	SOFTI2C_Send_Byte((uint8_t)data_register);
+	
 	SOFTI2C_Stop();
 }
 
@@ -45,9 +51,11 @@ static uint16_t _LM75_Read_UINT16_Register(uint8_t addr_reg)
 	_LM75_Set_Register_Pointer(addr_reg);
 	
 	SOFTI2C_Start();
+	
 	SOFTI2C_Send_Byte((target_thermometer->dev_addr << 1) | 1);
 	SOFTI2C_Read_Byte(&high_byte, ACK);
 	SOFTI2C_Read_Byte(&low_byte, NACK);
+	
 	SOFTI2C_Stop();
 	
 	return ((uint16_t)high_byte << 8) | low_byte;
@@ -62,27 +70,33 @@ static uint16_t _LM75_Read_UINT16_Register(uint8_t addr_reg)
 static void _LM75_Set_Register_Pointer(uint8_t addr_reg)
 {
 	I2C_Start();
+	
 	I2C_Send_Byte(target_thermometer->dev_addr << 1);
 	I2C_Send_Byte(addr_reg);
+	
 	I2C_Stop();
 }
 
 static void _LM75_Write_UINT8_Configuration_Register(uint8_t configuration_data_register)
 {
 	I2C_Start();
+	
 	I2C_Send_Byte((target_thermometer->dev_addr << 1) | 0);
 	I2C_Send_Byte(_LM75_CONFUGURATION_REGISTER_ADDR);
 	I2C_Send_Byte(configuration_data_register);
+	
 	I2C_Stop();
 }
 
 static void _LM75_Write_UINT16_Register(uint8_t addr_reg, uint16_t data_register)
 {
 	I2C_Start();
+	
 	I2C_Send_Byte((target_thermometer->dev_addr << 1) | 0);
 	I2C_Send_Byte(addr_reg);
 	I2C_Send_Byte(data_register >> 8);
 	I2C_Send_Byte((uint8_t)data_register);
+	
 	I2C_Stop();
 }
 
@@ -93,9 +107,11 @@ static uint16_t _LM75_Read_UINT16_Register(uint8_t addr_reg)
 	_LM75_Set_Register_Pointer(addr_reg);
 	
 	I2C_Start();
+	
 	I2C_Send_Byte((target_thermometer->dev_addr << 1) | 1);
 	I2C_Read_Byte(&high_byte, ACK);
 	I2C_Read_Byte(&low_byte, NACK);
+	
 	I2C_Stop();
 	
 	return ((uint16_t)high_byte << 8) | low_byte;
@@ -283,6 +299,7 @@ int32_t LM75_Get_FIXPoint_3_Fractional_Digits_Temperature()
 	
 	return pfixp_temp;
 }
+
 
 
 
