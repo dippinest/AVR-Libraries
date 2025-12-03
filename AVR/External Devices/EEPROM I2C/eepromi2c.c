@@ -90,7 +90,7 @@ uint8_t EEPROMI2C_Read_Byte(uint16_t memory_addr)
 	return byte;
 }
 
-uint16_t EEPROMI2C_Write_Page(uint16_t memory_addr, void *page, uint16_t data_size)
+uint16_t EEPROMI2C_Write_Page(uint16_t memory_addr, const void *page, uint16_t data_size)
 {
 	SOFTI2C_Start();
 	
@@ -120,11 +120,6 @@ uint16_t EEPROMI2C_Write_Page(uint16_t memory_addr, void *page, uint16_t data_si
 
 uint16_t EEPROMI2C_Fill_Page(uint16_t memory_addr, uint8_t val, uint16_t num)
 {
-	if (num == 0)
-	{
-		return 0;
-	}
-	
 	SOFTI2C_Start();
 	
 	SOFTI2C_Send_Byte(target_memory_chip->dev_addr << 1);
@@ -176,7 +171,7 @@ uint16_t EEPROMI2C_Read_Page(uint16_t memory_addr, void *page, uint16_t data_siz
 	uint16_t i = 0;
 	uint16_t j = memory_addr % target_memory_chip->page_size;
 	
-	while(j < target_memory_chip->page_size && i < (data_size - 1))
+	while(j < (target_memory_chip->page_size - 1) && i < (data_size - 1))
 	{
 		SOFTI2C_Read_Byte(&((uint8_t*)page)[i], ACK);
 		++i;
@@ -199,7 +194,7 @@ uint16_t EEPROMI2C_Read_Page(uint16_t memory_addr, void *page, uint16_t data_siz
 #include "i2c.h"
 
 
-void EEPROMI2C_Write_Byte(uint16_t memory_addr, uint8_t byte)
+void EEPROMI2C_Write_Byte(uint16_t memory_addr, const uint8_t byte)
 {
 	I2C_Start();
 	
@@ -243,7 +238,7 @@ uint8_t EEPROMI2C_Read_Byte(uint16_t memory_addr)
 	return byte;
 }
 
-uint16_t EEPROMI2C_Write_Page(uint16_t memory_addr, void *page, uint16_t page_size)
+uint16_t EEPROMI2C_Write_Page(uint16_t memory_addr, const void *page, uint16_t page_size)
 {
 	I2C_Start();
 	
@@ -271,7 +266,7 @@ uint16_t EEPROMI2C_Write_Page(uint16_t memory_addr, void *page, uint16_t page_si
 	return i;
 }
 
-uint16_t EEPROMI2C_Fill_Page(uint16_t memory_addr, uint8_t val, uint16_t num)
+uint16_t EEPROMI2C_Fill_Page(uint16_t memory_addr, const uint8_t val, uint16_t num)
 {
 	I2C_Start();
 	
@@ -344,7 +339,7 @@ uint16_t EEPROMI2C_Read_Page(uint16_t memory_addr, void *page, uint16_t page_siz
 
 
 
-uint16_t EEPROMI2C_Write_Data(uint16_t memory_addr, void *data, uint16_t data_size, uint8_t operation_delay_ms)
+uint16_t EEPROMI2C_Write_Data(uint16_t memory_addr, const void *data, uint16_t data_size, uint8_t operation_delay_ms)
 {
 	uint16_t i = 0, n = 0;
 	
@@ -357,12 +352,12 @@ uint16_t EEPROMI2C_Write_Data(uint16_t memory_addr, void *data, uint16_t data_si
 		i += n;
 		data_size -= n;
 		
-	} while (data_size);
+	} while (n);
 	
 	return i;
 }
 
-uint16_t EEPROMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_size)
+uint16_t EEPROMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_size, uint8_t operation_delay_ms)
 {
 	uint16_t i = 0, n = 0;
 	
@@ -370,15 +365,17 @@ uint16_t EEPROMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_siz
 	{
 		n = EEPROMI2C_Read_Page(memory_addr + i, (void*)(data + i), data_size);
 		
+		EEPROMI2C_Operation_Delay_Ms(operation_delay_ms);
+		
 		i += n;
 		data_size -= n;
 		
-	} while (data_size);
+	} while (n);
 	
 	return i;
 }
 
-uint32_t EEPROMI2C_Fill_Memory(uint16_t memory_addr, uint8_t val, uint32_t num, uint8_t operation_delay_ms)
+uint32_t EEPROMI2C_Fill_Memory(uint16_t memory_addr, const uint8_t val, uint32_t num, uint8_t operation_delay_ms)
 {
 	uint16_t i = 0, n = 0;
 	
@@ -395,6 +392,5 @@ uint32_t EEPROMI2C_Fill_Memory(uint16_t memory_addr, uint8_t val, uint32_t num, 
 	
 	return i;
 }
-
 
 
