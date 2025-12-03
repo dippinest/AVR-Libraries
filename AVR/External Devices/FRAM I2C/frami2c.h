@@ -67,15 +67,15 @@ FRAMI2C_t *FRAMI2C_Get_Target_Object();
 
 // ===============================================================================
 
-void FRAMI2C_Write_Byte(uint16_t memory_addr, uint8_t byte);
+void FRAMI2C_Write_Byte(uint16_t memory_addr, const uint8_t byte);
 
 uint8_t FRAMI2C_Read_Byte(uint16_t memory_addr);
 
-uint16_t FRAMI2C_Write_Data(uint16_t memory_addr, void *data, uint16_t data_size);
+uint16_t FRAMI2C_Write_Data(uint16_t memory_addr, const void *data, uint16_t data_size);
 
 uint16_t FRAMI2C_Read_Data(uint16_t memory_addr, void *data, uint16_t data_size);
 
-uint32_t FRAMI2C_Fill_Memory(uint16_t memory_addr, uint8_t val, uint32_t num);
+uint32_t FRAMI2C_Fill_Memory(uint16_t memory_addr, const uint8_t val, uint32_t num);
 
 
 #endif
