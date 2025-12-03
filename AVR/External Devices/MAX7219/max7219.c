@@ -3,8 +3,7 @@
 #include "max7219.h"
 
 
-
-// таблица символов (цифры от 0 до 9 и буквы A, B, C, D, E и F)
+// С‚Р°Р±Р»РёС†Р° СЃРёРјРІРѕР»РѕРІ (С†РёС„СЂС‹ РѕС‚ 0 РґРѕ 9 Рё Р±СѓРєРІС‹ A, B, C, D, E Рё F)
 //
 // -------------------------------------------------------------------------------
 // symbol table (numbers from 0 to 9 and letters A, B, C, D, E and F)
@@ -550,6 +549,7 @@ char *MAX7219_Convert_Num_String_To_Symbols_Array(char *num_string, uint8_t num_
 	
 	return num_string;
 }
+
 
 
 
