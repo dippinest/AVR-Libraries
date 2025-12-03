@@ -46,7 +46,7 @@ void EEPROMI2C_Operation_Delay_Ms(uint8_t ms)
 #include "softi2c.h"
 
 
-void EEPROMI2C_Write_Byte(uint16_t memory_addr, uint8_t byte)
+void EEPROMI2C_Write_Byte(uint16_t memory_addr, const uint8_t byte)
 {
 	SOFTI2C_Start();
 	
@@ -118,7 +118,7 @@ uint16_t EEPROMI2C_Write_Page(uint16_t memory_addr, const void *page, uint16_t d
 	return i;
 }
 
-uint16_t EEPROMI2C_Fill_Page(uint16_t memory_addr, uint8_t val, uint16_t num)
+uint16_t EEPROMI2C_Fill_Page(uint16_t memory_addr, const uint8_t val, uint16_t num)
 {
 	SOFTI2C_Start();
 	
@@ -392,5 +392,6 @@ uint32_t EEPROMI2C_Fill_Memory(uint16_t memory_addr, const uint8_t val, uint32_t
 	
 	return i;
 }
+
 
 
