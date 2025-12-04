@@ -14,11 +14,11 @@
 //
 void HC595_Latches()
 {
-	PORTA |=  (1 << 2);
+	PORTA |=  (1 << 3);
 	
 	asm("NOP");
 	
-	PORTA &= ~(1 << 2);
+	PORTA &= ~(1 << 3);
 }
 
 
@@ -29,7 +29,7 @@ char string_buf[16];
 
 int main(void)
 {
-	DDRA |= (1 << 2);
+	DDRA |= (1 << 3);
 	
 	
 	ITOA_Set_String_Buffer(string_buf);
@@ -58,6 +58,7 @@ int main(void)
 		_delay_ms(200);
 	}
 }
+
 
 
 
