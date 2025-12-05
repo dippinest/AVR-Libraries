@@ -6,6 +6,8 @@
 #include "softspi.h"
 #include "max6675.h"
 
+#include "fixpoint.h"
+
 
 
 // функции переключения вывода CS (Chip Select Pin)
@@ -25,10 +27,16 @@ void CS_Set_Inactive()
 }
 
 
+
+char string_buffer[16];
+
+
 int main(void)
 {
 	DDRA |= (1 << 3);
 	
+	
+	FIXPoint_Set_String_Buffer(string_buffer);
 	
 	UART_Initialize(9600, true, false);
 	
@@ -54,9 +62,9 @@ int main(void)
 		// if the thermocouple is working properly and connected,
 		// we display the temperature (otherwise we display an error message)
 		//
-		if (MAX6675_Get_Temperature_In_Celsius_Integer(&temperature))
+		if (MAX6675_Get_Temperature_In_Celsius_Fixpoint_2Bit(&temperature))
 		{
-			UART_StringFmt_Transmit("Temperature = %d *C\r\n", temperature);
+			UART_StringFmt_Transmit("Temperature = %s *C\r\n", FIXPoint_Int16FP_To_String(((int16_t)temperature * 25), 4, 2));
 		}
 		else
 		{
