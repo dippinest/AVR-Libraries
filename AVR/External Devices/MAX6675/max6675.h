@@ -47,3 +47,5 @@ bool MAX6675_Get_Temperature_In_Celsius_Fixpoint_2Bit(uint16_t *temperature);
 #endif
 
 
+
+
