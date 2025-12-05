@@ -107,21 +107,65 @@ static uint16_t _MAX6675_Get_Data()
 #endif
 
 
-float MAX6675_Get_Temperature_In_Celsius_Float()
+bool MAX6675_Get_Temperature_In_Celsius_Float(float *temperature)
 {
-	return (_MAX6675_Get_Data() >> 3) * 0.25;
+	bool is_working_properly = true;
+	
+	const uint16_t data = _MAX6675_Get_Data();
+	
+	
+	if (data & (1 << 2))
+	{
+		is_working_properly = false;
+	}
+	else
+	{
+		*temperature = (data >> 3) * 0.25;
+	}
+	
+	
+	return is_working_properly;
 }
 
-uint16_t MAX6675_Get_Temperature_In_Celsius_Integer()
+bool MAX6675_Get_Temperature_In_Celsius_Integer(uint16_t *temperature)
 {
-	return _MAX6675_Get_Data() >> 5;
+	bool is_working_properly = true;
+	
+	const uint16_t data = _MAX6675_Get_Data();
+	
+	
+	if (data & (1 << 2))
+	{
+		is_working_properly = false;
+	}
+	else
+	{
+		*temperature = data >> 5;
+	}
+	
+	
+	return is_working_properly;
 }
 
-uint16_t MAX6675_Get_Temperature_In_Celsius_Fixpoint_2Bit()
+bool MAX6675_Get_Temperature_In_Celsius_Fixpoint_2Bit(uint16_t *temperature)
 {
-	return _MAX6675_Get_Data() >> 3;
+	bool is_working_properly = true;
+	
+	const uint16_t data = _MAX6675_Get_Data();
+	
+	
+	if (data & (1 << 2))
+	{
+		is_working_properly = false;
+	}
+	else
+	{
+		*temperature = data >> 3;
+	}
+	
+	
+	return is_working_properly;
 }
-
 
 
 
