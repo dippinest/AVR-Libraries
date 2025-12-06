@@ -4,12 +4,19 @@
 ; Этот код является шаблоном проекта с закомментированными строками является
 ; своего рода шпаргалкой, которая всегда под рукой.
 ;
+; Приведённый ниже код предназначен для микроконтроллера ATmega8A.
+; Вы можете его адаптировать под любой другой камень AVR - просто внимательно читайте даташит :)
+;
 ; Помните: язык ассемблера очень прост, хотя писать на нём несколько сложнее, чем на Си :)
 ; -------------------------------------------------------------------------------
 ; This example in assembly language implements the Blink program,
 ; the essence of which is to flash the LED using the GPIO port with a
 ; certain frequency. This code is a project template with commented-out lines
 ; is a kind of cheat sheet that is always at hand.
+;
+; The code below is for the ATmega8A microcontroller.
+; You can adapt it to any other AVR "silicon stone" - just read
+; the instructions carefully :)
 ;
 ; Remember: the assembly language is very simple,
 ; although it is somewhat more difficult to write in it than in C :)
