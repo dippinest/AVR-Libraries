@@ -6,7 +6,13 @@ volatile SYSTIMER_t __SYSTIMER = 0;
 
 SYSTIMER_t SYSTIMER_Get_Value()
 {
-	return __SYSTIMER;
+	cli();
+
+	SYSTIMER_t current_value = __SYSTIMER;
+
+	sei();
+	
+	return current_value;
 }
 
 
@@ -54,8 +60,13 @@ void SYSTIMER_Run_Task(SYSTIMER_Task_Params_t *task_params, void (*task)())
 //
 ISR(SYSTIMER_VECTOR_INTERRUPT)
 {
+	cli();
+	
 	++__SYSTIMER;
+	
+	sei();
 }
+
 
 
 
