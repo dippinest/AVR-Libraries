@@ -106,7 +106,7 @@ void NEC_IR_Encoder_Transmit_Custom_Packet(const NEC_IR_Protocol_Data_t data, bo
 	while ((fsm_status != DISABLE) && (fsm_status != TRANSMITTION_REPEATING_START));
 	
 	_nec_ir_data.addr_1       = data.addr_1;
-	_nec_ir_data.addr_2       = data.addr_1;
+	_nec_ir_data.addr_2       = data.addr_2;
 	_nec_ir_data.commmand_1   = data.commmand_1;
 	_nec_ir_data.commmand_2   = data.commmand_2;
 	
@@ -346,5 +346,6 @@ ISR(NEC_IR_ENCODER_TIMER_VECTOR_INTERRUPT)
 {
 	_NEC_IR_Encoder_FSM();
 }
+
 
 
