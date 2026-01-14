@@ -11,6 +11,7 @@ SYSTIMER_t SYSTIMER_Get_Value()
 	SYSTIMER_t current_value = __SYSTIMER;
 
 	sei();
+
 	
 	return current_value;
 }
@@ -66,6 +67,7 @@ ISR(SYSTIMER_VECTOR_INTERRUPT)
 	
 	sei();
 }
+
 
 
 
