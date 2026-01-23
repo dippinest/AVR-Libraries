@@ -22,7 +22,7 @@ void Delay_Ms(volatile uint16_t ms_delay)
 		_delay_ms(1);
 		
 		
-		#ifdef DELAY_USE_YIELD_MS
+		#ifdef DELAY_MS_USE_YIELD
 		
 		if (__delay_yield_ms != NULL)
 		{
@@ -41,4 +41,5 @@ void Delay_Us(volatile uint16_t us_delay)
 		_delay_us(1);
 	}
 }
+
 
