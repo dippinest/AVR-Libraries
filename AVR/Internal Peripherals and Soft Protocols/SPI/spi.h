@@ -224,7 +224,7 @@ inline uint8_t SPI_Get_Mode()
 		spi_dev_mode |= 0b10;
 	}
 	
-	if (SPCR &= (1 << CPHA))
+	if (SPCR & (1 << CPHA))
 	{
 		spi_dev_mode |= 0b1;
 	}
@@ -281,6 +281,7 @@ void SPI_CS_Set_Active();
 void SPI_CS_Set_Inactive();
 
 #endif
+
 
 
 
