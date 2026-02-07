@@ -80,7 +80,7 @@ void Samsung_IR_Encoder_Stop_Transmittion();
 
 void Samsung_IR_Encoder_Wait_Complete_And_Stop_Transmittion();
 
-enum Samsung_IR_Encoder_Reception_Status NEC_Encoder_Get_FSM_Status();
+enum Samsung_IR_Encoder_Reception_Status Samsung_IR_Encoder_Get_FSM_Status();
 
 // ===============================================================================
 
@@ -91,6 +91,7 @@ void Samsung_IR_Encoder_Transmit_Custom_Packet(const Samsung_IR_Protocol_Data_t 
 
 
 #endif
+
 
 
 
