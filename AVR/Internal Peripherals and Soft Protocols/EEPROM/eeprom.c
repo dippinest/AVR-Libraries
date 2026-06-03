@@ -68,4 +68,13 @@ void EEPROM_Update_Data(uint16_t mem_addr, const void *data, uint16_t data_size)
 }
 
 
+void EEPROM_Fill_Memory(uint16_t mem_addr, uint8_t val, uint32_t num)
+{
+	for (uint16_t i = mem_addr; i < num; ++i)
+	{
+		EEPROM_Write_Byte(i, val);
+	}
+}
+
+
 
