@@ -11,7 +11,7 @@ static void _HD44780_I2C_Write(uint8_t data)
 {
 	SOFTI2C_Start();
 	SOFTI2C_Send_Byte(target_display->dev_addr << 1);
-	SOFTI2C_Send_Byte(data);
+	SOFTI2C_Send_Byte(data | 0b1000);
 	SOFTI2C_Stop();
 }
 
@@ -23,7 +23,7 @@ static void _HD44780_I2C_Write(uint8_t data)
 {
 	I2C_Start();
 	I2C_Send_Byte(target_display->dev_addr << 1);
-	I2C_Send_Byte(data);
+	I2C_Send_Byte(data | 0b1000);
 	I2C_Stop();
 }
 
