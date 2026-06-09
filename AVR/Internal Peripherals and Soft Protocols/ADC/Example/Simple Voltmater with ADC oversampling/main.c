@@ -22,7 +22,7 @@ int main(void)
 		UART_StringFmt_Transmit("Voltage = %f\r\n", fvalue);
 		
 		
-		_delay_ms(250);
+		_delay_ms(100);
 	}
 }
 
