@@ -1,13 +1,13 @@
 
 #include <util/delay.h>
 
-#include "uart.h"
 #include "adc.h"
+#include "uart.h"
 
 int main(void)
 {
-	UART_Initialize(9600, true, false);
 	ADC_Initialize(0, ADC_PRESCALER_128, ADC_VREF_SOURCE_EXTERNAL_AVCC, true);
+	UART_Initialize(9600, true, false);
 	
 	while (1)
 	{
