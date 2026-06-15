@@ -131,7 +131,7 @@ inline bool ADC_Is_Interrupt_Enable()
 
 inline uint8_t ADC_Get_Channel()
 {
-	return ADMUX & 0b111;
+	return ADMUX;
 }
 
 inline uint8_t ADC_Get_Prescaler()
