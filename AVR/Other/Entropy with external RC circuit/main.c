@@ -150,10 +150,10 @@ uint16_t Get_Entropy_From_External_RC_Circuit()
 	// -------------------------------------------------------------------------------
 	// definitions of the GPIO to which the midpoint of the external RC circuit is connected
 	//
-	#define GPIO_DDR    DDRD
-	#define GPIO_PINX   PIND
-	#define GPIO_PORT   PORTD
-	#define GPIO_PIN    7
+	#define RC_ENTROPY_GPIO_DDR    DDRD
+	#define RC_ENTROPY_GPIO_PINX   PIND
+	#define RC_ENTROPY_GPIO_PORT   PORTD
+	#define RC_ENTROPY_GPIO_PIN    7
 	
 	
 	// время разряда RC цепи в мс.
@@ -176,8 +176,8 @@ uint16_t Get_Entropy_From_External_RC_Circuit()
 	// -------------------------------------------------------------------------------
 	// GPIO mode is a low-level output (GND). Discharging the RC circuit
 	//
-	GPIO_DDR  |=  (1 << GPIO_PIN);
-	GPIO_PORT &= ~(1 << GPIO_PIN);
+	RC_ENTROPY_GPIO_DDR  |=  (1 << RC_ENTROPY_GPIO_PIN);
+	RC_ENTROPY_GPIO_PORT &= ~(1 << RC_ENTROPY_GPIO_PIN);
 	
 	_delay_ms(T_RC_DISCHARGE_MS);
 	
@@ -187,10 +187,10 @@ uint16_t Get_Entropy_From_External_RC_Circuit()
 	// -------------------------------------------------------------------------------
 	// GPIO mode is input. The RC circuit starts charging
 	//
-	GPIO_DDR  &= ~(1 << GPIO_PIN);
+	RC_ENTROPY_GPIO_DDR  &= ~(1 << RC_ENTROPY_GPIO_PIN);
 	
 	
-	while(!(GPIO_PINX & (1 << GPIO_PIN)))
+	while(!(RC_ENTROPY_GPIO_PINX & (1 << RC_ENTROPY_GPIO_PIN)))
 	{
 		// пока RC полностью не зарядится, инкрементируем переменную "counter".
 		//
@@ -208,6 +208,13 @@ uint16_t Get_Entropy_From_External_RC_Circuit()
 	}
 	
 	return counter;
+
+
+
+	#undef RC_ENTROPY_GPIO_DDR
+	#undef RC_ENTROPY_GPIO_PINX
+	#undef RC_ENTROPY_GPIO_PORT
+	#undef RC_ENTROPY_GPIO_PIN
 }
 
 
