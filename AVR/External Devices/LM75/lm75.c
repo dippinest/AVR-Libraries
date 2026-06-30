@@ -7,7 +7,7 @@ static LM75_t *target_thermometer = NULL;
 // ===============================================================================
 
 
-#ifdef HD44780_I2C_USE_SOFTI2C
+#ifdef LM75_I2C_USE_SOFTI2C
 
 #include "softi2c.h"
 
