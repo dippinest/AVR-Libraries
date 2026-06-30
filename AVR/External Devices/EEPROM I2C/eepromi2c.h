@@ -54,7 +54,9 @@
 #define EEPROMI2C_H_
 
 #include <avr/io.h>
+
 #include <util/delay.h>
+
 #include <stdint.h>
 #include <stdio.h>
 
