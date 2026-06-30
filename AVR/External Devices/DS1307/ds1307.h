@@ -22,8 +22,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-
-
 #include "ds1307_configuration.h"
 
 
