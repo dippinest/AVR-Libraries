@@ -19,6 +19,7 @@
 #define LM75_H_
 
 #include <avr/io.h>
+
 #include <stdbool.h>
 #include <stdint.h>
 #include <stddef.h>
