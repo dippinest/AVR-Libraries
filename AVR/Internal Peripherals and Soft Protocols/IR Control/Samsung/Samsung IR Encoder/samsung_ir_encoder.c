@@ -2,14 +2,14 @@
 #include "samsung_ir_encoder.h"
 
 
-static Samsung_IR_Protocol_Data_t _samsung_ir_data;
+static volatile Samsung_IR_Protocol_Data_t _samsung_ir_data;
 
-static uint8_t  main_ir_counter     = 0;
-static uint8_t  fsm_status          = DISABLE;
-static uint8_t  repeat_status       = NO_REPEAT;
+static volatile uint8_t  main_ir_counter     = 0;
+static volatile uint8_t  fsm_status          = DISABLE;
+static volatile uint8_t  repeat_status       = NO_REPEAT;
 
-static uint8_t  samples_counter     = 0;
-static  int8_t  bits_counter        = 7;
+static volatile uint8_t  samples_counter     = 0;
+static volatile  int8_t  bits_counter        = 7;
 
 
 // ===============================================================================
