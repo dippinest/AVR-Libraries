@@ -23,8 +23,7 @@
 
 #include <util/delay.h>
 
-#include <stdint.h>
-#include <stdlib.h>
+#include <stdint.h>
 #include <stdbool.h>
 
 #include "tm1637_configuration.h"
