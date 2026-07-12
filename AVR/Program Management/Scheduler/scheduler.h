@@ -82,25 +82,25 @@ inline Scheduler_Mutex_t Scheduler_Create_Mutex()
 
 inline void Scheduler_Mutex_Set_Lock(Scheduler_Mutex_t *mutex)
 {
-  cli();
+	cli();
 	*mutex = SCHEDULER_MUTEX_LOCK;
-  sei();
+	sei();
 }
 
 inline void Scheduler_Mutex_Set_Unlock(Scheduler_Mutex_t *mutex)
 {
-  cli();
+	cli();
 	*mutex = SCHEDULER_MUTEX_UNLOCK;
-  sei();
+	sei();
 }
 
 inline bool Scheduler_Mutex_Is_Unlock(Scheduler_Mutex_t *mutex)
 {
- bool res;
+	bool res;
 
- cli();
- res = (bool)(*mutex == SCHEDULER_MUTEX_UNLOCK);
- sei();
+	cli();
+	res = (bool)(*mutex == SCHEDULER_MUTEX_UNLOCK);
+	sei();
 
 
 	return res;
