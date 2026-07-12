@@ -38,6 +38,9 @@
 #ifndef SCHEDULER_H_
 #define SCHEDULER_H_
 
+
+#include <avr/interrupt.h>
+
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
