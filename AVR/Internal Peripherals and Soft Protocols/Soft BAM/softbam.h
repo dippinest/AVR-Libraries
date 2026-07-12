@@ -67,7 +67,7 @@ typedef struct
 {
 	volatile uint8_t *softbam_channel_port;
 
-	uint8_t  softbam_channel_pin;
+	volatile uint8_t  softbam_channel_pin;
 
 
 	volatile uint8_t  softbam_channel_duty_cycle;
