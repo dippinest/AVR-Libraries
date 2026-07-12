@@ -96,13 +96,7 @@ inline void Scheduler_Mutex_Set_Unlock(Scheduler_Mutex_t *mutex)
 
 inline bool Scheduler_Mutex_Is_Unlock(Scheduler_Mutex_t *mutex)
 {
- bool res;
-
- cli();
- res = (bool)(*mutex == SCHEDULER_MUTEX_UNLOCK);
- sei();
-	
-	return res;
+	return (bool)(*mutex == SCHEDULER_MUTEX_UNLOCK);
 }
 
 
