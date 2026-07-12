@@ -56,7 +56,7 @@
 // ===============================================================================
 
 
-typedef bool Scheduler_Mutex_t;
+typedef volatile bool Scheduler_Mutex_t;
 
 #define SCHEDULER_MUTEX_LOCK   true
 #define SCHEDULER_MUTEX_UNLOCK false
