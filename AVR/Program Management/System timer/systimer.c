@@ -22,9 +22,9 @@ SYSTIMER_t SYSTIMER_Get_Value()
 
 void SYSTIMER_Delay(SYSTIMER_t ticks)
 {
-	const SYSTIMER_t tagret_time = __SYSTIMER;
+	const SYSTIMER_t target_time = __SYSTIMER;
 	
-	while((__SYSTIMER - tagret_time) < ticks)
+	while((__SYSTIMER - target_time) < ticks)
 	{
 		asm("nop");
 	}
