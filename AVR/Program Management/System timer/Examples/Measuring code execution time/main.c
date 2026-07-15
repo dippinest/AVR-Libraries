@@ -28,7 +28,7 @@ int main(void)
 	// -------------------------------------------------------------------------------
 	// simulation of long and complex calculations
 	//
-	for (uint32_t i = 0; i < 1000000UL; ++i)
+	for (volatile uint32_t i = 0; i < 1000000UL; ++i)
 	{
 		asm("nop");
 	}
