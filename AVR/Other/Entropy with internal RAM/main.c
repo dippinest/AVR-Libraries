@@ -71,7 +71,7 @@
 // -------------------------------------------------------------------------------
 // functions for obtaining an entropy (random value) of 16 and 32 bits
 //
-uint16_t Get_16bit_Entropy_From_Internal_RAM()
+uint16_t IRAM_Get_16bit_Entropy_From_Internal_RAM()
 {
 	extern uint16_t __bss_end;
 	
@@ -87,7 +87,7 @@ uint16_t Get_16bit_Entropy_From_Internal_RAM()
 	return rnd_data;
 }
 
-uint32_t Get_32bit_Entropy_From_Internal_RAM()
+uint32_t IRAM_Get_32bit_Entropy_From_Internal_RAM()
 {
 	extern uint16_t __bss_end;
 	
@@ -114,7 +114,7 @@ int main(void)
 	// -------------------------------------------------------------------------------
 	// ATTENTION! The function works ONCE WHEN THE POWER IS TURNED ON!
 	//
-	const uint32_t random_value_with_int_ram = Get_32bit_Entropy_From_Internal_RAM();
+	const uint32_t random_value_with_int_ram = IRAM_Get_32bit_Entropy_From_Internal_RAM();
 	
 	UART_StringFmt_Transmit("Random value: %d\r\n\r\n", random_value_with_int_ram);
 	
