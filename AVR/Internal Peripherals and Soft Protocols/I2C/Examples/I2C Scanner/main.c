@@ -13,7 +13,7 @@ int main(void)
 	
 	uint8_t device_counter = 0;
 	
-	UART_StringLn_Transmit("I2C Scanner...");; UART_NEW_LINE;
+	UART_StringLn_Transmit("I2C Scanner..."); UART_NEW_LINE;
 	
 	for (uint8_t i = 1; i < 128; ++i)
 	{
