@@ -10,6 +10,7 @@ static char strbuf[8];
 
 volatile uint8_t i = 0;
 
+
 // колбэк для обработки поворота энкодера влево.
 //
 // Внимание! Не используйте длительные по времени выполнения функции
@@ -28,6 +29,7 @@ void Left()
 	UART_String_Transmit("L: i = ");
 	UART_StringLn_Transmit(ITOA_UInt8_To_String(i, 3));
 }
+
 
 // колбэк для обработки поворота энкодера вправо.
 //
