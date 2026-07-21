@@ -1,4 +1,5 @@
 
+
 #include <util/delay.h>
 
 #include "encoder.h"
@@ -64,11 +65,17 @@ int main(void)
 	
 	while (1)
 	{
-		// частота опроса энкодера = 1 / 2 мс = 500 Гц
+		// частота опроса энкодера = 1 / 5 мс = 200 Гц
 		// -------------------------------------------------------------------------------
-		// encoder polling frequency = 1 / 2 ms = 500 Hz
+		// encoder polling frequency = 1 / 5 ms = 200 Hz
 		Encoder_Polling();
 		
-		_delay_ms(2);
+		_delay_ms(5);
 	}
 }
+
+
+
+
+
+
