@@ -68,14 +68,14 @@ void Encoder_Polling(void)
 
 	if (direction == 1)
 	{
-		if (_left_turn_callback)
+		if (_left_turn_callback != NULL)
 		{
 			_left_turn_callback();
 		}
 	}
 	else if (direction == 2)
 	{
-		if (_right_turn_callback)
+		if (_right_turn_callback != NULL)
 		{
 			_right_turn_callback();
 		}
@@ -204,16 +204,16 @@ void Encoder_Polling(Encoder_t *encoder)
 
 	if (direction == 1)
 	{
-		if (encoder->_left_turn_callback)
+		if ((encoder->_left_turn_callback) != NULL)
 		{
 			encoder->_left_turn_callback();
-		}
-		else if (direction == 2)
+		}	
+	}
+	else if (direction == 2)
+	{
+		if ((encoder->_right_turn_callback) != NULL)
 		{
-			if (encoder->_right_turn_callback)
-			{
-				encoder->_right_turn_callback();
-			}
+			encoder->_right_turn_callback();
 		}
 	}
 
@@ -251,6 +251,7 @@ void *Encoder_Get_Right_Turn_CallBack_Function(Encoder_t *encoder)
 
 
 #endif
+
 
 
 
