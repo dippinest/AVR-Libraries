@@ -23,6 +23,7 @@ volatile uint8_t i = 0;
 void Left()
 {
 	--i;
+	
 	UART_String_Transmit("L: i = ");
 	UART_StringLn_Transmit(ITOA_UInt8_To_String(i, 3));
 }
@@ -41,9 +42,12 @@ void Left()
 void Right()
 {
 	++i;
+	
 	UART_String_Transmit("R: i = ");
 	UART_StringLn_Transmit(ITOA_UInt8_To_String(i, 3));
 }
+
+
 
 int main(void)
 {
