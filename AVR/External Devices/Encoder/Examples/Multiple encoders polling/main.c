@@ -1,4 +1,7 @@
 
+
+#include <avr/sleep.h>
+
 #include "encoder.h"
 #include "uart.h"
 #include "itoa.h"
@@ -6,13 +9,18 @@
 #include "systimer.h"
 
 
+
 static char strbuf[8];
 
-uint8_t i1 = 0;
-uint8_t i2 = 0;
+
+volatile uint8_t i1 = 0;
+volatile uint8_t i2 = 0;
+
 
 Encoder_t encoder1;
 Encoder_t encoder2;
+
+
 
 
 // колбэк для обработки поворота энкодера 1 влево.
@@ -29,9 +37,11 @@ Encoder_t encoder2;
 void Encoder1_Left()
 {
 	--i1;
+	
 	UART_String_Transmit("Enc 1 L: i1 = ");
 	UART_StringLn_Transmit(ITOA_UInt8_To_String(i1, 3));
 }
+
 
 // колбэк для обработки поворота энкодера 1 вправо.
 //
@@ -47,9 +57,11 @@ void Encoder1_Left()
 void Encoder1_Right()
 {
 	++i1;
+	
 	UART_String_Transmit("Enc 1 R: i1 = ");
 	UART_StringLn_Transmit(ITOA_UInt8_To_String(i1, 3));
 }
+
 
 // колбэк для обработки поворота энкодера 2 влево.
 //
@@ -65,9 +77,11 @@ void Encoder1_Right()
 void Encoder2_Left()
 {
 	--i2;
+	
 	UART_String_Transmit("Enc 2 L: i2 = ");
 	UART_StringLn_Transmit(ITOA_UInt8_To_String(i2, 3));
 }
+
 
 // колбэк для обработки поворота энкодера 2 вправо.
 //
@@ -83,28 +97,22 @@ void Encoder2_Left()
 void Encoder2_Right()
 {
 	++i2;
+	
 	UART_String_Transmit("Enc 2 R: i2 = ");
 	UART_StringLn_Transmit(ITOA_UInt8_To_String(i2, 3));
 }
 
 
-// Задача для опроса энкодера 1
+// Задача для опроса энкодеров
 // -------------------------------------------------------------------------------
-// task for interrogating the encoder 1
-void Task_Encoder1_Polling()
+// task for interrogating encoders
+void Task_Encoders_Polling()
 {
 	Encoder_Polling(&encoder1);
 	Encoder_Polling(&encoder2);
 }
 
-// Задача для опроса энкодера 2
-// -------------------------------------------------------------------------------
-// task for interrogating the encoder 2
-void Task_Encoder2_Polling()
-{
-	Encoder_Polling(&encoder1);
-	Encoder_Polling(&encoder2);
-}
+
 
 int main(void)
 {
@@ -117,8 +125,7 @@ int main(void)
 	ITOA_Set_String_Buffer(strbuf);
 	
 	
-	SYSTIMER_Task_Params_t encoder1_polling_task_params = SYSTIMER_Create_Task_Params(2); // run every 2 ms
-	SYSTIMER_Task_Params_t encoder2_polling_task_params = SYSTIMER_Create_Task_Params(2); // run every 2 ms
+	SYSTIMER_Task_Params_t encoders_polling_task_params = SYSTIMER_Create_Task_Params(5); // run every 5 ms
 	
 	SYSTIMER_Initialize();
 	
@@ -127,11 +134,25 @@ int main(void)
 	
 	while (1)
 	{
-		// опрос каждого энкодера в отдельной задаче
+		// опрос энкодеров
 		// -------------------------------------------------------------------------------
-		// polling each encoder in a separate task
-		SYSTIMER_Run_Task(&encoder1_polling_task_params, Task_Encoder1_Polling);
-		SYSTIMER_Run_Task(&encoder2_polling_task_params, Task_Encoder2_Polling);
+		// polling encoders
+		SYSTIMER_Run_Task(&encoders_polling_task_params, Task_Encoders_Polling);
+		
+		
+		
+		// при желании после отработки всех задач вы можете
+		// усыпить процессор с целью экономии энергии
+		//
+		// -------------------------------------------------------------------------------
+		// if desired, after working out all the tasks,
+		// you can put the processor to sleep in order to save energy
+		//
+		sleep_enable();
+		sleep_cpu();
 	}
 }
+
+
+
 
