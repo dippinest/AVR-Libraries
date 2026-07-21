@@ -2,6 +2,17 @@
 #include "encoder.h"
 
 
+// ===============================================================================
+// Глобальная LUT (Общая для всех энкодеров)
+// ===============================================================================
+static const uint8_t _encoder_lut_table[16] =
+{
+	0, 1, 2, 0, 2, 0, 0, 1, 1, 0, 0, 2, 0, 2, 1, 0
+};
+
+
+
+
 #ifndef ENCODER_USE_MULTIPLE_DEVICES
 
 
@@ -14,8 +25,12 @@
 #endif
 
 
+
+static uint8_t _last_state = 0;
+
 static void (*_left_turn_callback)()  = NULL;
 static void (*_right_turn_callback)() = NULL;
+
 
 
 void Encoder_Initialize()
@@ -24,36 +39,51 @@ void Encoder_Initialize()
 	ENCODER_INPUT1_DDR &= ~(1 << ENCODER_INPUT1_PIN);
 }
 
-void Encoder_Polling()
+void Encoder_Polling(void)
 {
-	static int8_t encoder_status = 1;
+	uint8_t current_state = 0;
 	
-	if (encoder_status == 0)
+	
+	if (ENCODER_INPUT0_PINX & (1 << ENCODER_INPUT0_PIN))
 	{
-		if (_Bit_Is_Reset(ENCODER_INPUT0_PINX, ENCODER_INPUT0_PIN) ||
-		_Bit_Is_Reset(ENCODER_INPUT1_PINX, ENCODER_INPUT1_PIN))
-		{
-			encoder_status = 1;
+		current_state |= (1 << 0);
+	}
+	
+	if (ENCODER_INPUT1_PINX & (1 << ENCODER_INPUT1_PIN))
+	{
+		current_state |= (1 << 1);
+	}
+	
 
-			if (_Bit_Is_Reset(ENCODER_INPUT0_PINX, ENCODER_INPUT0_PIN) &&
-			_left_turn_callback != NULL)
-			{
-				_left_turn_callback();
-			}
-			
-			if (_Bit_Is_Reset(ENCODER_INPUT1_PINX, ENCODER_INPUT1_PIN) &&
-			_right_turn_callback != NULL)
-			{
-				_right_turn_callback();
-			}
+	if (current_state == _last_state)
+	{
+		return;
+	}
+	
+
+
+	uint8_t direction = _encoder_lut_table[ ((_last_state << 2) | current_state) ];
+
+
+
+	if (direction == 1)
+	{
+		if (_left_turn_callback)
+		{
+			_left_turn_callback();
+		}
+	}
+	else if (direction == 2)
+	{
+		if (_right_turn_callback)
+		{
+			_right_turn_callback();
 		}
 	}
 
-	if (_Bit_Is_Set(ENCODER_INPUT0_PINX, ENCODER_INPUT0_PIN) &&
-	_Bit_Is_Set(ENCODER_INPUT1_PINX, ENCODER_INPUT1_PIN))
-	{
-		encoder_status = 0;
-	}
+
+
+	_last_state = current_state;
 }
 
 // ===============================================================================
@@ -93,16 +123,16 @@ void *Encoder_Get_Right_Turn_CallBack_Function()
 
 Encoder_t Encoder_Create_Object(
 
-uint8_t *input0_ddr,
-uint8_t *input0_pinx,
-uint8_t  input0_pin,
+	uint8_t *input0_ddr,
+	uint8_t *input0_pinx,
+	uint8_t  input0_pin,
 
-uint8_t *input1_ddr,
-uint8_t *input1_pinx,
-uint8_t  input1_pin,
+	uint8_t *input1_ddr,
+	uint8_t *input1_pinx,
+	uint8_t  input1_pin,
 
-void (*_left_turn_callback)(),
-void (*_right_turn_callback)()
+	void (*_left_turn_callback)(),
+	void (*_right_turn_callback)()
 )
 {
 	Encoder_t encoder;
@@ -115,51 +145,85 @@ void (*_right_turn_callback)()
 	encoder.input1_pinx  = input1_pinx;
 	encoder.input1_pin   = input1_pin;
 	
+	
 	encoder._left_turn_callback  = _left_turn_callback;
 	encoder._right_turn_callback = _right_turn_callback;
 	
-	encoder.status = 1;
 	
 	*(input0_ddr) &= ~(1 << input0_pin);
 	*(input1_ddr) &= ~(1 << input1_pin);
 	
+	
+	
+	encoder.last_state = 0;
+	
+	if (*(encoder.input0_pinx) & (1 << encoder.input0_pin))
+	{
+		encoder.last_state |= (1 << 0);
+	}
+	
+	if (*(encoder.input1_pinx) & (1 << encoder.input1_pin))
+	{
+		encoder.last_state |= (1 << 1);
+	}
+	
+	
 	return encoder;
 }
 
+
 // ===============================================================================
+
 
 void Encoder_Polling(Encoder_t *encoder)
 {
-	if (encoder->status == 0)
+	uint8_t current_state = 0;
+	
+	
+	if (*(encoder->input0_pinx) & (1 << encoder->input0_pin))
 	{
-		if (_Bit_Is_Reset_P(encoder->input0_pinx, encoder->input0_pin) ||
-		_Bit_Is_Reset_P(encoder->input1_pinx, encoder->input1_pin))
-		{
-			encoder->status = 1;
+		current_state |= (1 << 0);
+	}
+	
+	if (*(encoder->input1_pinx) & (1 << encoder->input1_pin))
+	{
+		current_state |= (1 << 1);
+	}
+	
 
-			if (_Bit_Is_Reset_P(encoder->input0_pinx, encoder->input0_pin) &&
-			encoder->_left_turn_callback != NULL)
-			{
-				encoder->_left_turn_callback();
-			}
-			
-			if (_Bit_Is_Reset_P(encoder->input1_pinx, encoder->input1_pin) &&
-			encoder->_right_turn_callback != NULL)
+
+	if (current_state == (encoder->last_state))
+	{
+		return;
+	}
+	
+
+
+	uint8_t direction = _encoder_lut_table[(encoder->last_state << 2) | current_state];
+
+
+	if (direction == 1)
+	{
+		if (encoder->_left_turn_callback)
+		{
+			encoder->_left_turn_callback();
+		}
+		else if (direction == 2)
+		{
+			if (encoder->_right_turn_callback)
 			{
 				encoder->_right_turn_callback();
 			}
 		}
 	}
 
-	if (_Bit_Is_Set_P(encoder->input0_pinx, encoder->input0_pin) &&
-	_Bit_Is_Set_P(encoder->input1_pinx, encoder->input1_pin))
-	{
-		encoder->status = 0;
-	}
+
+	encoder->last_state = current_state;
 }
 
 
 // ===============================================================================
+
 
 void Encoder_Set_Left_Turn_CallBack_Function(Encoder_t *encoder, void (*callback_function)())
 {
@@ -181,8 +245,12 @@ void *Encoder_Get_Right_Turn_CallBack_Function(Encoder_t *encoder)
 	return encoder->_right_turn_callback;
 }
 
+
 // ===============================================================================
 
 
+
 #endif
+
+
 
