@@ -7,7 +7,7 @@
 
 static char strbuf[8];
 
-uint8_t i = 0;
+volatile uint8_t i = 0;
 
 // колбэк для обработки поворота энкодера влево.
 //
