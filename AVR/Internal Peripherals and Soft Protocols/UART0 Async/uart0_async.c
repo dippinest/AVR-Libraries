@@ -4,7 +4,7 @@
 #ifdef UART0_ASYNC_USE_TX
 
 static volatile uint8_t   _transmittion_byte0;
-static volatile uint8_t*  _transmittion_data0       = NULL;
+static volatile uint8_t  *_transmittion_data0       = NULL;
 static volatile uint16_t  _transmittion_data_size0;
 static volatile uint16_t  _transmittion_counter0    = 0;
 static volatile bool      _transmittion_status0     = UART0_ASYNC_TRANSMITTION_IS_NOT_ACTIVE;
