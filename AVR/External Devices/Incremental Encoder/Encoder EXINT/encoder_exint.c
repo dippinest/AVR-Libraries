@@ -9,10 +9,6 @@
 #define _Bit_Is_Set(port, bit)    ((port & (1 << bit)))
 #endif
 
-#ifndef _Bit_Is_Reset
-#define _Bit_Is_Reset(port, bit) !((port & (1 << bit)))
-#endif
-
 
 static void (*_left_turn_callback)()  = NULL;
 static void (*_right_turn_callback)() = NULL;
