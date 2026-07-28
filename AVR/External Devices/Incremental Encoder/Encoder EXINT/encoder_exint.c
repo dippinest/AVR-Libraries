@@ -97,10 +97,6 @@ void *Encoder_EXINT_Get_Right_Turn_CallBack_Function()
 #define _Bit_Is_Set(port, bit)    ((port) & (1 << bit))
 #endif
 
-#ifndef _Bit_Is_Reset
-#define _Bit_Is_Reset(port, bit) !((port) & (1 << bit))
-#endif
-
 
 Encoder_EXINT_t Encoder_EXINT_Create_Object(
 
