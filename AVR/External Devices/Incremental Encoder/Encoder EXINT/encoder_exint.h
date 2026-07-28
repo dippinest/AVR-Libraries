@@ -2,24 +2,21 @@
 
 // ===============================================================================
 //
-// Библиотека для работы с инкрементальным энкодером.
-// Максимальная отслеживаемая скорость вращения энкодера зависит
-// исключительно от частоты его опроса, задающейся логикой работы программы.
+// Р‘РёР±Р»РёРѕС‚РµРєР° РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РёРЅРєСЂРµРјРµРЅС‚Р°Р»СЊРЅС‹Рј СЌРЅРєРѕРґРµСЂРѕРј
+// СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј РІРЅРµС€РЅРёС… РїСЂРµСЂС‹РІР°РЅРёР№ INTx РёР»Рё PCINT.
 //
-// Библиотека позволяет опрашивать несколько энкодеров независимо.
-// Чтобы активировать эту аозможность, раскомментируйте соответствующий дефайн
-// в файле конфигурации encoder_configuration.h
+// Р‘РёР±Р»РёРѕС‚РµРєР° РїРѕР·РІРѕР»СЏРµС‚ РѕРїСЂР°С€РёРІР°С‚СЊ РЅРµСЃРєРѕР»СЊРєРѕ СЌРЅРєРѕРґРµСЂРѕРІ РЅРµР·Р°РІРёСЃРёРјРѕ.
+// Р§С‚РѕР±С‹ Р°РєС‚РёРІРёСЂРѕРІР°С‚СЊ СЌС‚Сѓ Р°РѕР·РјРѕР¶РЅРѕСЃС‚СЊ, СЂР°СЃРєРѕРјРјРµРЅС‚РёСЂСѓР№С‚Рµ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ РґРµС„Р°Р№РЅ
+// РІ С„Р°Р№Р»Рµ РєРѕРЅС„РёРіСѓСЂР°С†РёРё encoder_exint_configuration.h
 //
 // -------------------------------------------------------------------------------
 //
-// Library for working with an incremental encoder.
-// The maximum tracked rotation speed of the encoder depends
-// solely on the frequency of its polling, which is set by
-// the logic of the program.
+// Library for working with an incremental encoder
+// using external INTx or PCINT interrupts.
 //
 // The library allows you to poll multiple encoders independently.
 // To activate this feature, uncomment the corresponding define
-// in the encoder_configuration.h configuration file
+// in the encoder_exint_configuration.h configuration file
 //
 // ===============================================================================
 
