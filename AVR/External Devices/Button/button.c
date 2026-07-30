@@ -2,8 +2,8 @@
 #include "button.h"
 
 
-Button_t Button_Create_Object(
-
+Button_t Button_Create_Object
+(
 	uint8_t *input_ddr,
 	uint8_t *input_pinx,
 	uint8_t  input_pin,
@@ -26,7 +26,10 @@ Button_t Button_Create_Object(
 	return button;
 }
 
+
+
 // ===============================================================================
+
 
 
 bool Button_Is_Pressed(Button_t *button)
@@ -225,6 +228,7 @@ void Button_Long_Pressed_Polling(Button_t *button, uint16_t press_timeout, void 
 			else if (button->status == press_timeout)
 			{
 				callback_function();
+				
 				++(button->status);
 			}
 		}
@@ -235,23 +239,22 @@ void Button_Long_Pressed_Polling(Button_t *button, uint16_t press_timeout, void 
 	}
 	else
 	{
+		if (_Bit_Is_Set_P(button->input_pinx, button->input_pin))
 		{
-			if (_Bit_Is_Set_P(button->input_pinx, button->input_pin))
+			if (button->status < press_timeout)
 			{
-				if (button->status < press_timeout)
-				{
-					++(button->status);
-				}
-				else if (button->status == press_timeout)
-				{
-					callback_function();
-					++(button->status);
-				}
+				++(button->status);
 			}
-			else
+			else if (button->status == press_timeout)
 			{
-				button->status = 0;
+				callback_function();
+					
+				++(button->status);
 			}
+		}
+		else
+		{
+			button->status = 0;
 		}
 	}
 }
