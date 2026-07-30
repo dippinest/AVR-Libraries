@@ -17,9 +17,11 @@ Button_t Button_Create_Object
 	button.input_pinx = input_pinx;
 	button.input_pin  = input_pin;
 	
+	
 	button.pull   = pull;
 	
 	button.status = 0;
+	
 	
 	*(input_ddr) &= ~(1 << input_pin);
 	
