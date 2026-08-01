@@ -3,9 +3,13 @@ ___
 
 #### Набор библиотек для микроконтроллеров семейства AVR.
 
+##### Внимание! В данный момент производится глобальная оптимизация и улучшение библиотек. Все уже имеющиеся, полностью работоспособные библиотеки доступны в директории 'Libraries (old stable version)', поэтому я рекомендую использовать их. В тоже время оптимизированные библиотеки из директории 'Libraries (new unstable version)' я пока не рекомендую использовать, поскольку из-за некоторых неисправленных зависимостей некоторые библиотеки пока могут работать некорректно.
+
 ___
 
 #### A set of libraries for AVR series microcontrollers.
+
+##### Attention! Global library optimization and improvement is currently underway. All existing, fully functional libraries are available in the 'Libraries (old stable version)' directory, so I recommend using them. At the same time, optimized libraries from the directory 'Libraries (new unstable version)' I do not recommend using it yet, because due to some uncorrected dependencies, some libraries may not work correctly yet.
 
 ___
 
