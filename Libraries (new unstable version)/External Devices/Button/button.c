@@ -16,7 +16,8 @@ void Button_Initialize_Object
 	(*button).input_pin  = input_pin;
 	
 	
-	(*button).status = 0;
+	(*button).counter_1 = 0;
+	(*button).counter_2 = 0;
 	
 	
 	*(input_ddr) &= ~(1 << input_pin);
@@ -62,16 +63,16 @@ void Button_PULLUP_Hold_With_Timeout_Polling(Button_t *button, uint16_t press_ti
 	
 	if (_Bit_Is_Reset_P(button->input_pinx, button->input_pin))
 	{
-		++(button->status);
+		++(button->counter_1);
 		
-		if ((button->status % press_timeout) == 0)
+		if ((button->counter_1 % press_timeout) == 0)
 		{
 			callback_function();
 		}
 	}
 	else
 	{
-		button->status = 0;
+		button->counter_1 = 0;
 	}
 }
 
@@ -85,16 +86,16 @@ void Button_PULLUP_Pressed_Polling(Button_t *button, void (*callback_function)()
 	
 	if (_Bit_Is_Reset_P(button->input_pinx, button->input_pin))
 	{
-		if (button->status == 0)
+		if (button->counter_1 == 0)
 		{
-			button->status = 1;
+			button->counter_1 = 1;
 			
 			callback_function();
 		}
 	}
 	else
 	{
-		button->status = 0;
+		button->counter_1 = 0;
 	}
 }
 
@@ -103,9 +104,9 @@ void Button_PULLUP_Pressed_And_Released_Polling(Button_t *button, void (*press_c
 {
 	if (_Bit_Is_Reset_P(button->input_pinx, button->input_pin))
 	{
-		if (button->status == 0)
+		if (button->counter_1 == 0)
 		{
-			button->status = 1;
+			button->counter_1 = 1;
 			
 			if (press_callback_function != NULL)
 			{
@@ -115,7 +116,7 @@ void Button_PULLUP_Pressed_And_Released_Polling(Button_t *button, void (*press_c
 	}
 	else
 	{
-		if (button->status)
+		if (button->counter_1)
 		{
 			if (release_callback_function != NULL)
 			{
@@ -123,7 +124,7 @@ void Button_PULLUP_Pressed_And_Released_Polling(Button_t *button, void (*press_c
 			}
 		}
 		
-		button->status = 0;
+		button->counter_1 = 0;
 	}
 }
 
@@ -137,20 +138,20 @@ void Button_PULLUP_Long_Pressed_Polling(Button_t *button, uint16_t press_timeout
 	
 	if (_Bit_Is_Reset_P(button->input_pinx, button->input_pin))
 	{
-		if (button->status < press_timeout)
+		if (button->counter_2 < press_timeout)
 		{
-			++(button->status);
+			++(button->counter_2);
 		}
-		else if (button->status == press_timeout)
+		else if (button->counter_2 == press_timeout)
 		{
 			callback_function();
 			
-			++(button->status);
+			++(button->counter_2);
 		}
 	}
 	else
 	{
-		button->status = 0;
+		button->counter_2 = 0;
 	}
 }
 
@@ -194,16 +195,16 @@ void Button_PULLDOWN_Hold_With_Timeout_Polling(Button_t *button, uint16_t press_
 	
 	if (_Bit_Is_Set_P(button->input_pinx, button->input_pin))
 	{
-		++(button->status);
+		++(button->counter_1);
 		
-		if ((button->status % press_timeout) == 0)
+		if ((button->counter_1 % press_timeout) == 0)
 		{
 			callback_function();
 		}
 	}
 	else
 	{
-		button->status = 0;
+		button->counter_1 = 0;
 	}
 }
 
@@ -217,16 +218,16 @@ void Button_PULLDOWN_Pressed_Polling(Button_t *button, void (*callback_function)
 	
 	if (_Bit_Is_Set_P(button->input_pinx, button->input_pin))
 	{
-		if (button->status == 0)
+		if (button->counter_1 == 0)
 		{
-			button->status = 1;
+			button->counter_1 = 1;
 			
 			callback_function();
 		}
 	}
 	else
 	{
-		button->status = 0;
+		button->counter_1 = 0;
 	}
 }
 
@@ -235,9 +236,9 @@ void Button_PULLDOWN_Pressed_And_Released_Polling(Button_t *button, void (*press
 {
 	if (_Bit_Is_Set_P(button->input_pinx, button->input_pin))
 	{
-		if (button->status == 0)
+		if (button->counter_1 == 0)
 		{
-			button->status = 1;
+			button->counter_1 = 1;
 			
 			if (press_callback_function != NULL)
 			{
@@ -247,7 +248,7 @@ void Button_PULLDOWN_Pressed_And_Released_Polling(Button_t *button, void (*press
 	}
 	else
 	{
-		if (button->status)
+		if (button->counter_1)
 		{
 			if (release_callback_function != NULL)
 			{
@@ -255,7 +256,7 @@ void Button_PULLDOWN_Pressed_And_Released_Polling(Button_t *button, void (*press
 			}
 		}
 		
-		button->status = 0;
+		button->counter_1 = 0;
 	}
 }
 
@@ -269,20 +270,20 @@ void Button_PULLDOWN_Long_Pressed_Polling(Button_t *button, uint16_t press_timeo
 	
 	if (_Bit_Is_Set_P(button->input_pinx, button->input_pin))
 	{
-		if (button->status < press_timeout)
+		if (button->counter_2 < press_timeout)
 		{
-			++(button->status);
+			++(button->counter_2);
 		}
-		else if (button->status == press_timeout)
+		else if (button->counter_2 == press_timeout)
 		{
 			callback_function();
 			
-			++(button->status);
+			++(button->counter_2);
 		}
 	}
 	else
 	{
-		button->status = 0;
+		button->counter_2 = 0;
 	}
 }
 
