@@ -60,7 +60,8 @@ typedef struct
 	
 	uint8_t  input_pin;
 	
-	volatile uint16_t status;
+	volatile uint16_t counter_1;
+	volatile uint16_t counter_2;
 	
 } Button_t;
 
