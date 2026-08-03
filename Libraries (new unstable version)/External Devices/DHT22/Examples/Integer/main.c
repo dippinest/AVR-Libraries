@@ -31,6 +31,7 @@ int main(void)
 		}
 		
 		UART_NEW_LINE;
+
 		
 		_delay_ms(3000);
 	}
