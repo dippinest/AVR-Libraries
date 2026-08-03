@@ -6,16 +6,13 @@
 
 DHT22_Data_t dht22;
 
-char str_buf[16];
+char string_buffer[16];
 
 
 int main(void)
 {
 	UART_Initialize(9600, true, false);
 	
-	
-	FIXPoint_Set_String_Buffer(str_buf);
-	FIXPoint_Set_Number_Of_Decimal_Places(1);
 	
 	while (1)
 	{
@@ -36,7 +33,7 @@ int main(void)
 			UART_String_Transmit("Temp = ");
 			
 			UART_String_Transmit(
-				FIXPoint_Int16FP_To_String(DHT22_Get_FIXPoint_1_Fractional_Digit_Temperature(&dht22), 2, FIXPoint_Get_Number_Of_Decimal_Places())
+				FIXPoint_Int16FP_To_String(string_buffer, 2, DHT22_Get_FIXPoint_1_Fractional_Digit_Temperature(&dht22), 2, 1, ' ', '.')
 			);
 			
 			UART_StringLn_Transmit(" *C");
@@ -46,7 +43,7 @@ int main(void)
 			UART_String_Transmit("Hum  = ");
 			
 			UART_String_Transmit(
-				FIXPoint_Int16FP_To_String(DHT22_Get_FIXPoint_1_Fractional_Digit_Humidity(&dht22), 2, FIXPoint_Get_Number_Of_Decimal_Places())
+				FIXPoint_Int16FP_To_String(string_buffer, 2, DHT22_Get_FIXPoint_1_Fractional_Digit_Humidity(&dht22), 2, 1, ' ', '.')
 			);
 			
 			UART_StringLn_Transmit(" %");
@@ -54,6 +51,10 @@ int main(void)
 		
 		UART_NEW_LINE;
 		
+		
 		_delay_ms(3000);
 	}
 }
+
+
+
