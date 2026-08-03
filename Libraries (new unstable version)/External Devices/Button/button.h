@@ -60,8 +60,8 @@ typedef struct
 	
 	uint8_t  input_pin;
 	
-	volatile uint16_t counter_1;
-	volatile uint16_t counter_2;
+	volatile uint16_t press_counter;
+	volatile uint16_t long_press_counter;
 	
 } Button_t;
 
@@ -113,6 +113,5 @@ void Button_PULLDOWN_Long_Pressed_Polling(Button_t *button, uint16_t press_timeo
 
 
 #endif
-
 
 
