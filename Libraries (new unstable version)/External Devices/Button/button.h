@@ -38,10 +38,6 @@
 #include <stdbool.h>
 
 
-#define BUTTON_INPUT_PULLUP   true
-#define BUTTON_INPUT_PULLDOWN false
-
-
 #ifndef T
 #define T(P) ((uint8_t*)&P)
 #endif
@@ -61,25 +57,21 @@ typedef struct
 {
 	volatile uint8_t *input_ddr;
 	volatile uint8_t *input_pinx;
-
+	
 	uint8_t  input_pin;
-
-
-	bool     pull;
 	
 	volatile uint16_t status;
 	
 } Button_t;
 
 
-Button_t Button_Create_Object
+void Button_Initialize_Object
 (
+	Button_t *button,
 
-	uint8_t *input_ddr,
-	uint8_t *input_pinx,
-	uint8_t  input_pin,
-
-	bool     pull
+	uint8_t  *input_ddr,
+	uint8_t  *input_pinx,
+	uint8_t   input_pin
 );
 
 
@@ -88,17 +80,35 @@ Button_t Button_Create_Object
 
 
 
-bool Button_Is_Pressed(Button_t *button);
+bool Button_PULLUP_Is_Pressed(Button_t *button);
 
-void Button_Hold_Polling(Button_t *button, void (*callback_function)());
+void Button_PULLUP_Hold_Polling(Button_t *button, void (*callback_function)());
 
-void Button_Hold_With_Timeout_Polling(Button_t *button, uint16_t press_timeout, void (*callback_function)());
+void Button_PULLUP_Hold_With_Timeout_Polling(Button_t *button, uint16_t press_timeout, void (*callback_function)());
 
-void Button_Pressed_Polling(Button_t *button, void (*callback_function)());
+void Button_PULLUP_Pressed_Polling(Button_t *button, void (*callback_function)());
 
-void Button_Pressed_And_Released_Polling(Button_t *button, void (*press_callback_function)(), void (*release_callback_function)());
+void Button_PULLUP_Pressed_And_Released_Polling(Button_t *button, void (*press_callback_function)(), void (*release_callback_function)());
 
-void Button_Long_Pressed_Polling(Button_t *button, uint16_t press_timeout, void (*callback_function)());
+void Button_PULLUP_Long_Pressed_Polling(Button_t *button, uint16_t press_timeout, void (*callback_function)());
+
+
+
+// ===============================================================================
+
+
+
+bool Button_PULLDOWN_Is_Pressed(Button_t *button);
+
+void Button_PULLDOWN_Hold_Polling(Button_t *button, void (*callback_function)());
+
+void Button_PULLDOWN_Hold_With_Timeout_Polling(Button_t *button, uint16_t press_timeout, void (*callback_function)());
+
+void Button_PULLDOWN_Pressed_Polling(Button_t *button, void (*callback_function)());
+
+void Button_PULLDOWN_Pressed_And_Released_Polling(Button_t *button, void (*press_callback_function)(), void (*release_callback_function)());
+
+void Button_PULLDOWN_Long_Pressed_Polling(Button_t *button, uint16_t press_timeout, void (*callback_function)());
 
 
 #endif
