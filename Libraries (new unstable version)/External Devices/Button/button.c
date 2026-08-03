@@ -65,7 +65,7 @@ void Button_PULLUP_Hold_With_Timeout_Polling(Button_t *button, uint16_t press_ti
 	{
 		++(button->counter_1);
 		
-		if ((button->counter_1 % press_timeout) == 0)
+		if ((button->counter_1 > 0) && (button->counter_1 % press_timeout) == 0)
 		{
 			callback_function();
 		}
@@ -197,7 +197,7 @@ void Button_PULLDOWN_Hold_With_Timeout_Polling(Button_t *button, uint16_t press_
 	{
 		++(button->counter_1);
 		
-		if ((button->counter_1 % press_timeout) == 0)
+		if ((button->counter_1 > 0) && (button->counter_1 % press_timeout) == 0)
 		{
 			callback_function();
 		}
