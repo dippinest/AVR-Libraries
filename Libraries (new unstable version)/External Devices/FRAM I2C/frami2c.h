@@ -53,7 +53,6 @@
 typedef struct
 {
 	uint8_t  dev_addr;
-	
 	uint16_t max_mem_addr;
 	
 } FRAMI2C_t;
