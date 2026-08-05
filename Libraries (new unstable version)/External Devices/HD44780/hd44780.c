@@ -1,10 +1,14 @@
 
+
 #include "hd44780.h"
+
 
 static volatile uint8_t _entry_mode_display        = 0b00000100;
 static volatile uint8_t _control_mode_display      = 0b00001000;
 static volatile uint8_t _cursor_display_shift_mode = 0b00010000;
 static volatile uint8_t _function_set_mode_display = 0b00101000;
+
+
 
 static void _HD44780_Send_Half_Byte_4Bit_Mode(uint8_t data)
 {
@@ -180,7 +184,10 @@ void HD44780_Set_Flash_User_Symbol_To_CGRAM(const uint8_t *_8byte_flash_simbol_b
 	_delay_us(40);
 }
 
+
 // ===============================================================================
+
+
 
 void HD44780_Print_Char(char c)
 {
