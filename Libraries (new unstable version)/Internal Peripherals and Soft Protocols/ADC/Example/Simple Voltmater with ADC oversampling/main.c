@@ -6,6 +6,9 @@
 #include <util/delay.h>
 
 
+#define MAX_REF_VOLTAGE 5.0f
+
+
 
 int main(void)
 {
@@ -17,7 +20,7 @@ int main(void)
 	
 	while (1)
 	{
-		float fvalue = ADC_Get_Voltage_Value_From_Measured_Value(ADC_Get_Oversampling_Value(12), 12);
+		float fvalue = ADC_Get_Voltage_Value_From_Measured_Value(ADC_Get_Oversampling_Value(12), 12, MAX_REF_VOLTAGE);
 		
 		UART_StringFmt_Transmit("Voltage = %f\r\n", fvalue);
 		
@@ -25,5 +28,7 @@ int main(void)
 		_delay_ms(100);
 	}
 }
+
+
 
 
