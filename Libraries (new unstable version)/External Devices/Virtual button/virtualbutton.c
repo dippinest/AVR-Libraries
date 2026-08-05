@@ -8,7 +8,7 @@ void VirtualButton_Initialize_Object
 (
 	VirtualButton_t *vbutton,
 
-	uint8_t* virtual_port,
+	uint8_t *virtual_port,
 	uint8_t  virtual_pin,
 
 	bool     pull
@@ -29,7 +29,7 @@ void VirtualButton_Initialize_Object
 
 
 
-bool VirtualButton_Is_Pressed(VirtualButton_t* vbutton)
+bool VirtualButton_Is_Pressed(VirtualButton_t *vbutton)
 {
 	if (vbutton->pull == VIRTUALBUTTON_INPUT_LOGICAL_LEVEL_HIGH)
 	{
@@ -51,7 +51,7 @@ bool VirtualButton_Is_Pressed(VirtualButton_t* vbutton)
 }
 
 
-void VirtualButton_Hold_Polling(VirtualButton_t* vbutton, void (*callback_function)())
+void VirtualButton_Hold_Polling(VirtualButton_t *vbutton, void (*callback_function)())
 {
 	if (callback_function == NULL)
 	{
@@ -65,7 +65,7 @@ void VirtualButton_Hold_Polling(VirtualButton_t* vbutton, void (*callback_functi
 }
 
 
-void VirtualButton_Hold_With_Timeout_Polling(VirtualButton_t* vbutton, uint16_t press_timeout, void (*callback_function)())
+void VirtualButton_Hold_With_Timeout_Polling(VirtualButton_t *vbutton, uint16_t press_timeout, void (*callback_function)())
 {
 	if (callback_function == NULL)
 	{
@@ -108,7 +108,7 @@ void VirtualButton_Hold_With_Timeout_Polling(VirtualButton_t* vbutton, uint16_t 
 }
 
 
-void VirtualButton_Pressed_Polling(VirtualButton_t* vbutton, void (*callback_function)())
+void VirtualButton_Pressed_Polling(VirtualButton_t *vbutton, void (*callback_function)())
 {
 	if (callback_function == NULL)
 	{
@@ -151,7 +151,7 @@ void VirtualButton_Pressed_Polling(VirtualButton_t* vbutton, void (*callback_fun
 }
 
 
-void VirtualButton_Pressed_And_Released_Polling(VirtualButton_t* vbutton, void (*press_callback_function)(), void (*release_callback_function)())
+void VirtualButton_Pressed_And_Released_Polling(VirtualButton_t *vbutton, void (*press_callback_function)(), void (*release_callback_function)())
 {
 	if (vbutton->pull == VIRTUALBUTTON_INPUT_LOGICAL_LEVEL_HIGH)
 	{
@@ -210,7 +210,7 @@ void VirtualButton_Pressed_And_Released_Polling(VirtualButton_t* vbutton, void (
 }
 
 
-void VirtualButton_Long_Pressed_Polling(VirtualButton_t* vbutton, uint16_t press_timeout, void (*callback_function)())
+void VirtualButton_Long_Pressed_Polling(VirtualButton_t *vbutton, uint16_t press_timeout, void (*callback_function)())
 {
 	if (callback_function == NULL)
 	{
