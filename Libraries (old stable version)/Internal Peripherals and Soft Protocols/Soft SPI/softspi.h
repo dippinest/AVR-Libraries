@@ -117,22 +117,24 @@ typedef struct
 // ===============================================================================
 
 
-SOFTSPI_t SOFTSPI_Create_Object(
+void SOFTSPI_Initialize_Object
+(
+	SOFTSPI_t *softspi,
 
-uint8_t *miso_ddr,
-uint8_t *miso_pinx,
-uint8_t  miso_pin,
+	uint8_t *miso_ddr,
+	uint8_t *miso_pinx,
+	uint8_t  miso_pin,
 
-uint8_t *mosi_ddr,
-uint8_t *mosi_port,
-uint8_t  mosi_pin,
+	uint8_t *mosi_ddr,
+	uint8_t *mosi_port,
+	uint8_t  mosi_pin,
 
-uint8_t *clk_ddr,
-uint8_t *clk_port,
-uint8_t  clk_pin,
+	uint8_t *clk_ddr,
+	uint8_t *clk_port,
+	uint8_t  clk_pin,
 
-uint8_t  spi_mode,
-bool     data_order
+	uint8_t  spi_mode,
+	bool     data_order
 );
 
 

@@ -2,6 +2,12 @@
 #include "softspi.h"
 
 
+SOFTSPI_t spi_1;
+SOFTSPI_t spi_2;
+
+
+
+
 inline void SPI1_CS_Set_Active()
 {
 	PORTA &= ~(1 << 3);
@@ -24,6 +30,7 @@ inline void SPI2_CS_Set_Inactive()
 }
 
 
+
 uint8_t spi1_transmitted_data[] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07}; // data to be sent via SPI1
 uint8_t spi2_transmitted_data[] = {0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6, 0xC7}; // data to be sent via SPI2
 
@@ -37,7 +44,7 @@ int main(void)
 	//
 	// SPI mode - MODE0
 	// Data order is highest bit
-	SOFTSPI_t spi_1 = SOFTSPI_Create_Object(T(DDRA), T(PINA), 0, T(DDRA), T(PORTA), 1, T(DDRA), T(PORTA), 2, SOFTSPI_MODE_0, SOFTSPI_DATA_IS_ORDER_HIGHEST_BIT);
+	SOFTSPI_Initialize_Object(&spi_1, T(DDRA), T(PINA), 0, T(DDRA), T(PORTA), 1, T(DDRA), T(PORTA), 2, SOFTSPI_MODE_0, SOFTSPI_DATA_IS_ORDER_HIGHEST_BIT);
 	
 	// SPI2
 	//
@@ -47,7 +54,7 @@ int main(void)
 	//
 	// SPI mode - MODE0
 	// Data order is highest bit
-	SOFTSPI_t spi_2 = SOFTSPI_Create_Object(T(DDRD), T(PIND), 4, T(DDRD), T(PORTD), 5, T(DDRD), T(PORTD), 6, SOFTSPI_MODE_0, SOFTSPI_DATA_IS_ORDER_HIGHEST_BIT);
+	SOFTSPI_Initialize_Object(&spi_2, T(DDRD), T(PIND), 4, T(DDRD), T(PORTD), 5, T(DDRD), T(PORTD), 6, SOFTSPI_MODE_0, SOFTSPI_DATA_IS_ORDER_HIGHEST_BIT);
 	
 	DDRA |= (1 << 3);
 	DDRD |= (1 << 7);
