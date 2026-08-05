@@ -155,6 +155,11 @@ void SOFTI2C_Initialize_Object
 	(*softi2c).clock_delay = clock_delay;
 }
 
+void SOFTI2C_Set_Target_Object(SOFTI2C_t *softi2c)
+{
+	target_softi2c_interface_object = softi2c;
+}
+
 SOFTI2C_t *SOFTI2C_Get_Target_Interface_Object()
 {
 	return target_softi2c_interface_object;
@@ -297,5 +302,7 @@ void SOFTI2C_Read_Byte(uint8_t *data, bool ack)
 }
 
 #endif
+
+
 
 
