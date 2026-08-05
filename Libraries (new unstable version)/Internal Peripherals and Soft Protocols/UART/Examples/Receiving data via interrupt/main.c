@@ -1,9 +1,16 @@
 
+
 #include <avr/interrupt.h>
+
 #include "uart.h"
 
+
+
+
 #define BUF_SIZE 6
+
 static char string_buffer[BUF_SIZE];
+
 
 static void fsm(uint8_t byte)
 {
@@ -36,9 +43,18 @@ int main(void)
 	
 	UART_StringFmt_Transmit("send any %d characters to the microcontroller...\r\n\r\n", BUF_SIZE);
 	
-	UART_Set_End_Of_Reception_Interrupt_Enable(true); sei();
+	UART_Set_End_Of_Reception_Interrupt_Enable(true);
+	
+	
+	sei();
+	
 	
 	while (1)
 	{
 	}
 }
+
+
+
+
+
