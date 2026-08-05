@@ -49,16 +49,20 @@
 
 
 
+
 // ===============================================================================
+
 
 
 #define ADC_GET_FLOAT_VOLTAGE(ADC_VAL, ADC_BITRATE, MAX_REF_VOLTAGE) \
-							(((float)MAX_REF_VOLTAGE / ((1ULL << ADC_BITRATE) - 1)) * ADC_VAL)
-							
+(((float)MAX_REF_VOLTAGE / ((1ULL << ADC_BITRATE) - 1)) * ADC_VAL)
+
 #define ADC_GET_DATA_SIZE_FOR_OVERSAMPLING(BITRATE) (1ULL << (2 * (BITRATE - 10)))
 
 
+
 // ===============================================================================
+
 
 
 
@@ -160,21 +164,21 @@ inline void ADC_Initialize(uint8_t channel, uint8_t prescaler, uint8_t vref_sour
 }
 
 
+
 // ===============================================================================
 
 
-void ADC_Set_Max_Reference_Voltage_Value(float voltage);
-
-float ADC_Get_Max_Reference_Voltage_Value();
 
 uint16_t ADC_Get_Value_10bit();
 
-float ADC_Get_Voltage_Value();
+float ADC_Get_Voltage_Value(const float max_ref_voltage);
 
-float ADC_Get_Voltage_Value_From_Measured_Value(uint16_t adc_value, uint8_t adc_bitrate);
+float ADC_Get_Voltage_Value_From_Measured_Value(uint16_t adc_value, uint8_t adc_bitrate, const float max_ref_voltage);
+
 
 
 // ===============================================================================
+
 
 
 uint32_t ADC_Get_Oversampling_Value(uint8_t required_bitrate);
@@ -187,7 +191,9 @@ uint32_t ADC_Get_Oversampling_Value_From_Set_Of_Dimensions
 );
 
 
+
 // ===============================================================================
+
 
 
 
@@ -225,7 +231,9 @@ uint32_t ADC_Get_Random_Entropy_Value_32bit(uint8_t channel);
 // ===============================================================================
 
 
+
 #ifdef ADC_USE_CALLBACK
+
 
 void ADC_Set_Reception_Buffer_Ptr(const void *buffer);
 
@@ -246,6 +254,14 @@ uint16_t ADC_Get_Current_Reception_Buffer_Fullness();
 
 #endif
 
+
+
+
 #endif
+
+
+
+
+
 
 
