@@ -1,6 +1,9 @@
 
+
 #include <util/delay.h>
+
 #include "spi.h"
+
 
 
 // функция для работы "защёлки" регистра
