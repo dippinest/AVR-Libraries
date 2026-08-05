@@ -77,7 +77,7 @@ typedef struct
 	volatile uint8_t *scl_port;
 
 	uint8_t  scl_pin;
-
+	
 
 	volatile uint8_t *sda_ddr;
 	volatile uint8_t *sda_pinx;
@@ -109,7 +109,7 @@ void SOFTI2C_Initialize_Object
 	uint8_t  sda_pin,
 
 	uint8_t  clock_delay
-)
+);
 
 void SOFTI2C_Set_Target_Object(SOFTI2C_t *softi2c_interface);
 
