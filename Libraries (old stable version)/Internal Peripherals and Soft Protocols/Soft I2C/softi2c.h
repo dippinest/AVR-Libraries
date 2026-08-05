@@ -94,20 +94,22 @@ typedef struct
 // ===============================================================================
 
 
-SOFTI2C_t SOFTI2C_Create_Object(
+void SOFTI2C_Initialize_Object
+(
+	SOFTI2C_t *softi2c,
 
-uint8_t *scl_ddr,
-uint8_t *scl_pinx,
-uint8_t *scl_port,
-uint8_t  scl_pin,
+	uint8_t *scl_ddr,
+	uint8_t *scl_pinx,
+	uint8_t *scl_port,
+	uint8_t  scl_pin,
 
-uint8_t *sda_ddr,
-uint8_t *sda_pinx,
-uint8_t *sda_port,
-uint8_t  sda_pin,
+	uint8_t *sda_ddr,
+	uint8_t *sda_pinx,
+	uint8_t *sda_port,
+	uint8_t  sda_pin,
 
-uint8_t  clock_delay
-);
+	uint8_t  clock_delay
+)
 
 void SOFTI2C_Set_Target_Object(SOFTI2C_t *softi2c_interface);
 
@@ -128,7 +130,6 @@ void SOFTI2C_Read_Byte(uint8_t *data, bool ack);
 
 
 #endif
-
 
 
 
