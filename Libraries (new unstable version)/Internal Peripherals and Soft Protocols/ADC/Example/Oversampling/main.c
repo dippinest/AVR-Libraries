@@ -7,7 +7,9 @@
 int main(void)
 {
 	UART_Initialize(9600, true, false);
+	
 	ADC_Initialize(0, ADC_PRESCALER_128, ADC_VREF_SOURCE_EXTERNAL_AVCC, true);
+	
 	
 	while (1)
 	{
@@ -25,5 +27,7 @@ int main(void)
 		_delay_ms(250);
 	}
 }
+
+
 
 
