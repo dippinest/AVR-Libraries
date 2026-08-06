@@ -13,8 +13,8 @@ TM1637_t tm1637_1;
 TM1637_t tm1637_2;
 
 
-char string_buffer_1[16];
-char string_buffer_2[16];
+char string_buffer_1[8];
+char string_buffer_2[8];
 
 
 int main(void)
