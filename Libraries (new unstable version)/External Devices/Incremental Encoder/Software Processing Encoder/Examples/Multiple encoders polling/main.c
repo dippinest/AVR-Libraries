@@ -97,6 +97,11 @@ void Encoder2_Right()
 
 int main(void)
 {
+	// инициализируем энкодеры и определяем колбек-функции поворота влево и вправо
+	// -------------------------------------------------------------------------------
+	// initialize encoders and define the callback functions
+	// for left and right rotation.
+	//
 	Encoder_Initialize_Object(&encoder1, T(DDRA), T(PINA), 0, T(DDRA), T(PINA), 1, Encoder1_Left, Encoder1_Right);
 	Encoder_Initialize_Object(&encoder2, T(DDRA), T(PINA), 2, T(DDRA), T(PINA), 3, Encoder2_Left, Encoder2_Right);
 	
