@@ -52,6 +52,11 @@ void Right()
 
 int main(void)
 {
+	// инициализируем энкодер и определяем колбек-функции поворота влево и вправо
+	// -------------------------------------------------------------------------------
+	// initialize the encoder and define the callback functions
+	// for left and right rotation.
+	//
 	Encoder_Initialize(Left, Right);
 	
 	
