@@ -6,7 +6,7 @@
 #include "ftoa.h"
 
 
-char string_buf[16];
+char string_buf[8];
 
 
 int main(void)
