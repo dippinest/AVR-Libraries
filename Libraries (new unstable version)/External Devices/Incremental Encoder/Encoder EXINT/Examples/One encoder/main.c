@@ -103,6 +103,11 @@ int main(void)
 	MCUCR |= (1 << ISC01) | (1 << ISC00);
 	
 
+	// инициализируем энкодер и определяем колбек-функции поворота влево и вправо
+	// -------------------------------------------------------------------------------
+	// initialize the encoder and define the callback functions
+	// for left and right rotation.
+	//
 	Encoder_EXINT_Initialize(Left, Right);
 	
 	
