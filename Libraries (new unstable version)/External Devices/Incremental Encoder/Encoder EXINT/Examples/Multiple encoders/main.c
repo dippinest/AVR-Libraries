@@ -152,6 +152,12 @@ int main(void)
 	MCUCR |= ( (1 << ISC01) | (1 << ISC00) )   |   ( (1 << ISC11) | (1 << ISC10) );
 	
 
+
+	// инициализируем энкодеры и определяем колбек-функции поворота влево и вправо
+	// -------------------------------------------------------------------------------
+	// initialize encoders and define the callback functions
+	// for left and right rotation.
+	//
 	Encoder_EXINT_Initialize_Object(&encoder1, T(DDRD), T(PIND), 2, T(DDRA), T(PINA), 2, Encoder1_Left, Encoder1_Right);
 	Encoder_EXINT_Initialize_Object(&encoder2, T(DDRD), T(PIND), 3, T(DDRA), T(PINA), 3, Encoder2_Left, Encoder2_Right);
 	
