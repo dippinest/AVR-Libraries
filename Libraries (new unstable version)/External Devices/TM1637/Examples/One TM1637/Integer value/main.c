@@ -6,7 +6,7 @@
 #include "itoa.h"
 
 
-char string_buffer[16];
+char string_buffer[8];
 
 
 int main(void)
