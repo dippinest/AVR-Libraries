@@ -27,20 +27,6 @@ const uint8_t _hc595sevsegind_digits_symbols_table[] PROGMEM =
 
 
 
-void _HC595SevSegInd_Latching_Data(void (*latch_callback)())
-{
-	if ((latch_callback) != NULL)
-	{
-		latch_callback();
-	}
-}
-
-
-
-// ===============================================================================
-
-
-
 
 #if defined (HC595SEVSEGIND_USE_SOFTSPI)
 
@@ -56,7 +42,10 @@ void HC595SevSegInd_Clear_Display(const int8_t num_of_segments, void (*latch_cal
 		SOFTSPI_Send_Byte(HC595SEVSEGIND_EMPTY);
 	}
 	
-	_HC595SevSegInd_Latching_Data(latch_callback);
+	if ((latch_callback) != NULL)
+	{
+		latch_callback();
+	}
 }
 
 
@@ -69,7 +58,10 @@ void HC595SevSegInd_Put_Symbols(const uint8_t *symbols_arr, int8_t symbols_arr_s
 		SOFTSPI_Send_Byte(symbols_arr[symbol_pointer]);
 	}
 	
-	_HC595SevSegInd_Latching_Data(latch_callback);
+	if ((latch_callback) != NULL)
+	{
+		latch_callback();
+	}
 }
 
 
@@ -80,7 +72,10 @@ void HC595SevSegInd_Put_Symbols_Reverse(const uint8_t *symbols_arr, int8_t symbo
 		SOFTSPI_Send_Byte(symbols_arr[i]);
 	}
 	
-	_HC595SevSegInd_Latching_Data(latch_callback);
+	if ((latch_callback) != NULL)
+	{
+		latch_callback();
+	}
 }
 
 
@@ -186,7 +181,10 @@ void HC595SevSegInd_Put_Num_String(const char *num_string, uint8_t num_string_si
 	}
 	
 	
-	_HC595SevSegInd_Latching_Data(latch_callback);
+	if ((latch_callback) != NULL)
+	{
+		latch_callback();
+	}
 }
 
 
@@ -290,7 +288,10 @@ void HC595SevSegInd_Put_Num_String_Reverse(const char *num_string, uint8_t num_s
 	}
 	
 	
-	_HC595SevSegInd_Latching_Data(latch_callback);
+	if ((latch_callback) != NULL)
+	{
+		latch_callback();
+	}
 }
 
 
@@ -311,7 +312,10 @@ void HC595SevSegInd_Clear_Display(const int8_t num_of_segments, void (*latch_cal
 		SPI_Send_Byte(HC595SEVSEGIND_EMPTY);
 	}
 	
-	_HC595SevSegInd_Latching_Data(latch_callback);
+	if ((latch_callback) != NULL)
+	{
+		latch_callback();
+	}
 }
 
 
@@ -324,7 +328,10 @@ void HC595SevSegInd_Put_Symbols(const uint8_t *symbols_arr, int8_t symbols_arr_s
 		SPI_Send_Byte(symbols_arr[symbol_pointer]);
 	}
 	
-	_HC595SevSegInd_Latching_Data(latch_callback);
+	if ((latch_callback) != NULL)
+	{
+		latch_callback();
+	}
 }
 
 
@@ -335,7 +342,10 @@ void HC595SevSegInd_Put_Symbols_Reverse(const uint8_t *symbols_arr, int8_t symbo
 		SPI_Send_Byte(symbols_arr[i]);
 	}
 	
-	_HC595SevSegInd_Latching_Data(latch_callback);
+	if ((latch_callback) != NULL)
+	{
+		latch_callback();
+	}
 }
 
 
@@ -441,7 +451,10 @@ void HC595SevSegInd_Put_Num_String(const char *num_string, uint8_t num_string_si
 	}
 	
 	
-	_HC595SevSegInd_Latching_Data(latch_callback);
+	if ((latch_callback) != NULL)
+	{
+		latch_callback();
+	}
 }
 
 
@@ -545,7 +558,10 @@ void HC595SevSegInd_Put_Num_String_Reverse(const char *num_string, uint8_t num_s
 	}
 	
 	
-	_HC595SevSegInd_Latching_Data(latch_callback);
+	if ((latch_callback) != NULL)
+	{
+		latch_callback();
+	}
 }
 
 
@@ -654,6 +670,9 @@ char *HC595SevSegInd_Convert_Num_String_To_Symbols_Array(char *num_string, uint8
 	
 	return num_string;
 }
+
+
+
 
 
 
