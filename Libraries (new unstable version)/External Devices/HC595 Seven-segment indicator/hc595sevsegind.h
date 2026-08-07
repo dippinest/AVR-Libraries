@@ -92,6 +92,7 @@
 // ===============================================================================
 
 
+
 void HC595SevSegInd_Clear_Display(const int8_t num_of_segments, void (*latch_callback)());
 
 void HC595SevSegInd_Put_Symbols(const uint8_t *symbols_arr, int8_t symbols_arr_size, void (*latch_callback)());
@@ -107,8 +108,7 @@ void HC595SevSegInd_Put_Num_String_Reverse(const char *num_string, uint8_t num_s
 #endif
 
 
-
-
 char *HC595SevSegInd_Convert_Num_String_To_Symbols_Array(char *num_string, uint8_t num_string_size);
+
 
 
