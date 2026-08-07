@@ -21,6 +21,7 @@ int main(void)
 		++val;
 		
 		TM1637_Put_Num_String(ITOA_Int16_To_String(string_buffer, val, 4), 4);
+
 		
 		_delay_ms(100);
 	}
