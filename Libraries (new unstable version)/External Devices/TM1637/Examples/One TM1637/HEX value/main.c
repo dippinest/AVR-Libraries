@@ -21,6 +21,7 @@ int main(void)
 		++val;
 		
 		TM1637_Put_Num_String(ITOHEXA_16bitNum_To_HexString(string_buffer, val, true), 4);
+
 		
 		_delay_ms(100);
 	}
