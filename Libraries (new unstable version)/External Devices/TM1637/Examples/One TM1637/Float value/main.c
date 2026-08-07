@@ -21,6 +21,7 @@ int main(void)
 		val += 0.1;
 		
 		TM1637_Put_Num_String(FTOA_Float32_To_String(string_buf, val, 3, 1, '.'), 5);
+
 		
 		_delay_ms(100);
 	}
