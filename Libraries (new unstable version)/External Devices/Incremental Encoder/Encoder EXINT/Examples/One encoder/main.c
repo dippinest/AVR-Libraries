@@ -114,6 +114,8 @@ int main(void)
 	
 	UART_Initialize(115200, true, false);
 	
+
+
 	
 	
 	// не забудьте включить глобальные прерывания
