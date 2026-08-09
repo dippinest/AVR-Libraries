@@ -7,6 +7,9 @@
 // микроконтроллера, то его реализация вынесена в отдельный файл
 // конфигурации systimer_configuration.h
 //
+// Вы можете установить длительность такта системного таймера
+// в соответствии со своими потребностями (1 мс, 20 мс, 1 с и т. д.).
+//
 // Его можно использовать в различных приложениях - например, для
 // организации операционной системы, измерения времени работы кода,
 // организации точных задержек и т.д.
@@ -17,6 +20,9 @@
 // Since the system timer can be implemented using any MCU
 // hardware timer, its implementation is placed in a separate
 // configuration file, systimer_configuration.h
+//
+// You can set the system timer tick to any duration
+// based on your needs (1 ms, 20 ms, 1 sec, etc.).
 //
 // It can be used in various applications - for example,
 // to organize the operating system, measure the running time
@@ -57,11 +63,8 @@ typedef uint16_t SYSTIMER_t;
 // ===============================================================================
 
 
+
 SYSTIMER_t SYSTIMER_Get_Value();
-
-
-// ===============================================================================
-
 
 void SYSTIMER_Delay(SYSTIMER_t ticks);
 
