@@ -4,7 +4,6 @@
 
 
 
-
 void Task_Queue_Initialize_Object(Task_Queue_t *task_queue, void (**tasks_buffer)(), uint16_t buffer_size)
 {
 	(*task_queue).tasks_buffer = tasks_buffer;
