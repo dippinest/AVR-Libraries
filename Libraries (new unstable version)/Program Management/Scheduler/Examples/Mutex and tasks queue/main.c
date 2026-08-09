@@ -39,14 +39,14 @@
 // создаём статическую переменную, хранящую очередь задач
 // -------------------------------------------------------------------------------
 // create a static variable that stores the task queue
-static Task_Queue_t uart_queue;
+Task_Queue_t uart_queue;
 
 
 // создаём статическую переменную, хранящую мьютекс для работы с модулем UART
 // -------------------------------------------------------------------------------
 // create a static variable that stores a mutex for working with the UART module
 //
-static Scheduler_Mutex_t uart_mutex;
+Scheduler_Mutex_t uart_mutex;
 
 
 
