@@ -58,18 +58,25 @@
 
 
 
+// ===============================================================================
+
+
 
 enum DS1307_Enum_Days
 {
 	MONDAY = 1, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
 };
 
-
-
 enum DS1307_Enum_Month
 {
 	JANUARY = 1, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
 };
+
+
+
+// ===============================================================================
+
+
 
 
 // structure for storing time data
