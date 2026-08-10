@@ -50,11 +50,18 @@
 
 
 
+// ===============================================================================
+
+
+
 // operating modes of the SQW generator
 #define DS1307_SQWE_FREQUENCY_1_HZ                       0x0
 #define DS1307_SQWE_FREQUENCY_4096_HZ                    0x1
 #define DS1307_SQWE_FREQUENCY_8192_HZ                    0x2
 #define DS1307_SQWE_FREQUENCY_32768_HZ                   0x3
+
+
+#define DS1307_USER_RAM_MAX_ADDRESS                      0x37
 
 
 
@@ -67,15 +74,15 @@ enum DS1307_Enum_Days
 	MONDAY = 1, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
 };
 
+
+
 enum DS1307_Enum_Month
 {
 	JANUARY = 1, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
 };
 
 
-
 // ===============================================================================
-
 
 
 
@@ -151,9 +158,9 @@ void DS1307_Get_Data_To_Struct(DS1307_Data_t *data);
 // these functions are used to write data to the user RAM area (56 bytes are available).
 // Memory addresses range - from 0x00 to 0x37
 
-void DS1307_Write_Byte_To_User_RAM(uint8_t mem_addr, uint8_t byte);
+void DS1307_Write_Byte_To_User_56Byte_RAM(uint8_t mem_addr, uint8_t byte);
 
-uint8_t DS1307_Read_Byte_From_User_RAM(uint8_t mem_addr);
+uint8_t DS1307_Read_Byte_From_User_56Byte_RAM(uint8_t mem_addr);
 
 
 
