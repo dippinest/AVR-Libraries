@@ -4,10 +4,6 @@
 
 
 
-// ===============================================================================
-
-
-
 uint8_t _DS1307_UInt8_To_UInt8BCD(uint8_t num)
 {
 	return ((num / 10) << 4) | (num % 10);
@@ -22,13 +18,13 @@ uint8_t _DS1307_UInt8BCD_To_UInt8(uint8_t bcd_code)
 
 
 
-// ===============================================================================
-
-
 
 #ifdef DS1307_USE_SOFTI2C
 
+
 #include "softi2c.h"
+
+
 
 
 void _DS1307_Set_Memory_Pointer(uint8_t addr_reg)
@@ -153,7 +149,7 @@ void DS1307_Get_Data_To_Struct(DS1307_Data_t *data)
 
 
 
-void DS1307_Write_Data_To_User_RAM(uint8_t mem_addr, void *data, uint8_t data_size)
+void DS1307_Write_Data_To_User_56Byte_RAM(uint8_t mem_addr, void *data, uint8_t data_size)
 {
 	_DS1307_Set_Memory_Pointer(mem_addr + _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER);
 	
@@ -171,7 +167,7 @@ void DS1307_Write_Data_To_User_RAM(uint8_t mem_addr, void *data, uint8_t data_si
 }
 
 
-void *DS1307_Read_Data_From_User_RAM(uint8_t mem_addr, void *data, uint8_t data_size)
+void *DS1307_Read_Data_From_User_56Byte_RAM(uint8_t mem_addr, void *data, uint8_t data_size)
 {
 	_DS1307_Set_Memory_Pointer(mem_addr + _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER);
 	
@@ -196,6 +192,7 @@ void *DS1307_Read_Data_From_User_RAM(uint8_t mem_addr, void *data, uint8_t data_
 
 
 #else // ===============================================================================
+
 
 #include "i2c.h"
 
@@ -561,18 +558,16 @@ void DS1307_Set_SQW_Frequency(uint8_t sqw_frequency)
 // these functions are used to write data to the user RAM area (56 bytes are available).
 // Memory addresses range - from 0x00 to 0x37
 
-void DS1307_Write_Byte_To_User_RAM(uint8_t mem_addr, uint8_t byte)
+void DS1307_Write_Byte_To_User_56Byte_RAM(uint8_t mem_addr, uint8_t byte)
 {
 	_DS1307_Set_Byte((mem_addr + _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER), byte);
 }
 
 
-uint8_t DS1307_Read_Byte_From_User_RAM(uint8_t mem_addr)
+uint8_t DS1307_Read_Byte_From_User_56Byte_RAM(uint8_t mem_addr)
 {
 	return _DS1307_Get_Byte((mem_addr + _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER));
 }
-
-
 
 
 
