@@ -1,5 +1,7 @@
 
 
+#include <util/delay.h>
+
 #include "softi2c.h"
 #include "ds1307.h"
 #include "uart.h"
