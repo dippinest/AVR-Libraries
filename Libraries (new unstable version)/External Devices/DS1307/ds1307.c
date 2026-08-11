@@ -37,7 +37,7 @@ uint8_t _DS1307_UInt8BCD_To_UInt8(uint8_t bcd_code)
 #define _I2C_Read_Byte   SOFTI2C_Read_Byte
 #define _I2C_Stop        SOFTI2C_Stop
 
-#warning "COMPILER MESSAGE: DS1307 USE SOFTWARE I2C!"
+#warning "COMPILER MESSAGE: Library "ds1307.h" use software I2C!"
 
 
 #else
@@ -51,7 +51,7 @@ uint8_t _DS1307_UInt8BCD_To_UInt8(uint8_t bcd_code)
 #define _I2C_Read_Byte   I2C_Read_Byte
 #define _I2C_Stop        I2C_Stop
 
-#warning "COMPILER MESSAGE: DS1307 USE HARDWARE I2C!"
+#warning "COMPILER MESSAGE: Library "ds1307.h" use hardware I2C!"
 
 #endif
 
