@@ -53,6 +53,7 @@ static void _HD44780_Send_Byte(uint8_t c, uint8_t mode)
 static int _HD44780_Send_Char(char c, FILE *stream)
 {
 	_HD44780_Send_Byte(c, _HD44780_DISPLAY_SEND_DATA_MODE);
+	
 	return 0;
 }
 
