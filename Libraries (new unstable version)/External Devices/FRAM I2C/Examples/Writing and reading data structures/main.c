@@ -33,10 +33,10 @@ Data_t data1, data2;
 
 
 
-// объект индикатора FRAMI2C
+// объект внешней микросхемы памяти FRAMI2C
 //
 // ===============================================================================
-// FRAMI2C indicator object
+// the object of the external FRAMI2C memory chip
 //
 FRAMI2C_t frami2c;
 
