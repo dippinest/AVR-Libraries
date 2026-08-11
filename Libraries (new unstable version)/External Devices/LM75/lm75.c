@@ -19,11 +19,7 @@
 #define _I2C_Read_Byte   SOFTI2C_Read_Byte
 #define _I2C_Stop        SOFTI2C_Stop
 
-
-
 #else
-
-
 
 #include "i2c.h"
 
@@ -32,6 +28,7 @@
 #define _I2C_Restart     I2C_Restart
 #define _I2C_Read_Byte   I2C_Read_Byte
 #define _I2C_Stop        I2C_Stop
+
 
 
 #endif
