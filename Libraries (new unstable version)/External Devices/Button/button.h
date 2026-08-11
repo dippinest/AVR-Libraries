@@ -28,7 +28,7 @@
 //
 // The library does not provide for handling contact bounce.
 // The author recommends hardware-based contact bounce suppression
-// (using an external RC circuit or a Schmitt trigger).
+// (using an external RC circuit or a Schmitt trigger)
 //
 // UPD: I advise you to consider using the virtualbutton library,
 // which has more features and is more optimized.
