@@ -25,277 +25,12 @@ const uint8_t _hc595sevsegind_digits_symbols_table[] PROGMEM =
 
 // ===============================================================================
 
-
-
-
-#if defined (HC595SEVSEGIND_USE_SOFTSPI)
+#ifdef TM74HC595_USE_SOFTSPI
 
 
 #include "softspi.h"
 
-
-
-void HC595SevSegInd_Clear_Display(const int8_t num_of_segments, void (*latch_callback)())
-{
-	for (uint8_t i = 0; i < num_of_segments; ++i)
-	{
-		SOFTSPI_Send_Byte(HC595SEVSEGIND_EMPTY);
-	}
-	
-	if ((latch_callback) != NULL)
-	{
-		latch_callback();
-	}
-}
-
-
-void HC595SevSegInd_Put_Symbols(const uint8_t *symbols_arr, int8_t symbols_arr_size, void (*latch_callback)())
-{
-	for (uint8_t i = 0; i < symbols_arr_size; ++i)
-	{
-		uint8_t symbol_pointer = (symbols_arr_size - 1 - i);
-
-		SOFTSPI_Send_Byte(symbols_arr[symbol_pointer]);
-	}
-	
-	if ((latch_callback) != NULL)
-	{
-		latch_callback();
-	}
-}
-
-
-void HC595SevSegInd_Put_Symbols_Reverse(const uint8_t *symbols_arr, int8_t symbols_arr_size, void (*latch_callback)())
-{
-	for (int8_t i = 0; i < symbols_arr_size; ++i)
-	{
-		SOFTSPI_Send_Byte(symbols_arr[i]);
-	}
-	
-	if ((latch_callback) != NULL)
-	{
-		latch_callback();
-	}
-}
-
-
-void HC595SevSegInd_Put_Num_String(const char *num_string, uint8_t num_string_size, void (*latch_callback)())
-{
-	bool point_char_separator_flag = false;
-	
-	
-	for (uint8_t i = 0; i < num_string_size; ++i)
-	{
-		uint8_t symbol_pointer = (num_string_size - i - 1);
-		
-		uint8_t symbol = num_string[symbol_pointer] - 48;
-		
-		
-		if ((symbol >= 0) && (symbol < 10))
-		{
-			symbol = pgm_read_byte(&_hc595sevsegind_digits_symbols_table[symbol]);
-		}
-		else
-		{
-			switch (num_string[symbol_pointer])
-			{
-				case 'a':
-				case 'A':
-				
-				symbol = HC595SEVSEGIND_A;
-				
-				break;
-				
-				
-				case 'b':
-				case 'B':
-				
-				symbol = HC595SEVSEGIND_B;
-				
-				break;
-				
-				
-				case 'c':
-				case 'C':
-				
-				symbol = HC595SEVSEGIND_C;
-				
-				break;
-				
-				
-				case 'd':
-				case 'D':
-				
-				symbol = HC595SEVSEGIND_D;
-				
-				break;
-				
-				
-				case 'e':
-				case 'E':
-				
-				symbol = HC595SEVSEGIND_E;
-				
-				break;
-				
-				
-				case 'f':
-				case 'F':
-				
-				symbol = HC595SEVSEGIND_F;
-				
-				break;
-				
-				
-				case '-':
-				
-				symbol = HC595SEVSEGIND_MINUS;
-				
-				break;
-				
-				
-				case '.':
-				
-				point_char_separator_flag = true; continue;
-				
-				break;
-				
-				
-				default:
-				
-				symbol = HC595SEVSEGIND_EMPTY;
-				
-				break;
-			}
-		}
-		
-		
-		if (point_char_separator_flag)
-		{
-			point_char_separator_flag = false;
-			
-			symbol = HC595SEVSEGIND_SET_POINT(symbol);
-		}
-		
-		SOFTSPI_Send_Byte(symbol);
-	}
-	
-	
-	if ((latch_callback) != NULL)
-	{
-		latch_callback();
-	}
-}
-
-
-void HC595SevSegInd_Put_Num_String_Reverse(const char *num_string, uint8_t num_string_size, void (*latch_callback)())
-{
-	bool point_char_separator_flag = false;
-	
-	
-	for (uint8_t i = 0; i < num_string_size; ++i)
-	{
-		uint8_t symbol = num_string[i] - 48;
-		
-		
-		if ((symbol >= 0) && (symbol < 10))
-		{
-			symbol = pgm_read_byte(&_hc595sevsegind_digits_symbols_table[symbol]);
-		}
-		else
-		{
-			switch (num_string[i])
-			{
-				case 'a':
-				case 'A':
-				
-				symbol = HC595SEVSEGIND_A;
-				
-				break;
-				
-				
-				case 'b':
-				case 'B':
-				
-				symbol = HC595SEVSEGIND_B;
-				
-				break;
-				
-				
-				case 'c':
-				case 'C':
-				
-				symbol = HC595SEVSEGIND_C;
-				
-				break;
-				
-				
-				case 'd':
-				case 'D':
-				
-				symbol = HC595SEVSEGIND_D;
-				
-				break;
-				
-				
-				case 'e':
-				case 'E':
-				
-				symbol = HC595SEVSEGIND_E;
-				
-				break;
-				
-				
-				case 'f':
-				case 'F':
-				
-				symbol = HC595SEVSEGIND_F;
-				
-				break;
-				
-				
-				case '-':
-				
-				symbol = HC595SEVSEGIND_MINUS;
-				
-				break;
-				
-				
-				case '.':
-				
-				point_char_separator_flag = true; continue;
-				
-				break;
-				
-				
-				default:
-				
-				symbol = HC595SEVSEGIND_EMPTY;
-				
-				break;
-			}
-		}
-		
-		
-		if (point_char_separator_flag)
-		{
-			point_char_separator_flag = false;
-			
-			symbol = HC595SEVSEGIND_SET_POINT(symbol);
-		}
-		
-		SOFTSPI_Send_Byte(symbol);
-	}
-	
-	
-	if ((latch_callback) != NULL)
-	{
-		latch_callback();
-	}
-}
-
-
-
+#define _SPI_Send_Byte        SOFTSPI_Send_Byte
 
 
 #else
@@ -303,11 +38,18 @@ void HC595SevSegInd_Put_Num_String_Reverse(const char *num_string, uint8_t num_s
 
 #include "spi.h"
 
+#define _SPI_Send_Byte        SPI_Send_Byte
+
+#endif
+
+// ===============================================================================
+
+
 
 
 void HC595SevSegInd_Clear_Display(const int8_t num_of_segments, void (*latch_callback)())
 {
-	for (uint8_t i = 0; i < target_object->num_of_segments; ++i)
+	for (uint8_t i = 0; i < num_of_segments; ++i)
 	{
 		SPI_Send_Byte(HC595SEVSEGIND_EMPTY);
 	}
@@ -565,7 +307,9 @@ void HC595SevSegInd_Put_Num_String_Reverse(const char *num_string, uint8_t num_s
 }
 
 
-#endif
+
+// ===============================================================================
+
 
 
 char *HC595SevSegInd_Convert_Num_String_To_Symbols_Array(char *num_string, uint8_t num_string_size)
