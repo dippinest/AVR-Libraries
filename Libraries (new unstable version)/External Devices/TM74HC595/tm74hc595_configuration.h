@@ -13,6 +13,21 @@
 #define TM74HC595_USE_SOFTSPI
 
 
+
+
+
+#ifdef TM74HC595_USE_SOFTSPI
+
+#warning "COMPILER MESSAGE: Library "tm74hc595.h" use software SPI!"
+
+#else
+
+#warning "COMPILER MESSAGE: Library "tm74hc595.h" use hardware SPI!"
+
+#endif
+
+
+
 #endif
 
 
