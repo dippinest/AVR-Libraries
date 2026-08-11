@@ -1,7 +1,10 @@
 
+
 #include <avr/interrupt.h>
 
 #include "anacomp.h"
+
+
 
 #define LED_ON  (PORTC &= ~(1 << 5))
 #define LED_OFF (PORTC |=  (1 << 5))
@@ -22,6 +25,7 @@ ISR(ANA_COMP_vect)
 	
 	ANACOMP_Set_Interrupt_Enable(true);
 }
+
 
 int main(void)
 {
