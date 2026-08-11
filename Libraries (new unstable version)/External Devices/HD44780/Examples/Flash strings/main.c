@@ -3,6 +3,8 @@
 #include "deftypes.h"
 #include "ftoa.h"
 
+
+
 AVR_FLASH_DATA(FLASH_STRING, char, "String FLASH");
 
 
