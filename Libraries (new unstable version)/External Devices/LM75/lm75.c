@@ -18,7 +18,7 @@
 #define _I2C_Read_Byte   SOFTI2C_Read_Byte
 #define _I2C_Stop        SOFTI2C_Stop
 
-#warning "LM75 USE SOFTWARE I2C!"
+#warning "COMPILER MESSAGE: LM75 USE SOFTWARE I2C!"
 
 
 #else
@@ -32,7 +32,7 @@
 #define _I2C_Read_Byte   I2C_Read_Byte
 #define _I2C_Stop        I2C_Stop
 
-#warning "LM75 USE HARDWARE I2C!"
+#warning "COMPILER MESSAGE: LM75 USE HARDWARE I2C!"
 
 #endif
 
