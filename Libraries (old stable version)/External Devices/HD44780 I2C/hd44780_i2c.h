@@ -22,6 +22,7 @@
 #ifndef HD44780_I2C_H_
 #define HD44780_I2C_H_
 
+
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 
@@ -34,9 +35,12 @@
 #include "hd44780_i2c_configuration.h"
 
 
+
+
 #ifndef AVR_FLASH_DATA
 #define AVR_FLASH_DATA(VAL, TYPE, DATA) const TYPE VAL[] PROGMEM = DATA
 #endif
+
 
 // macros different I2C addresses for PCF8574 and PCF8574A
 #define HD44780_I2C_PCF8574_DEV_ADDR_A2F_A1F_A0F   0x20
@@ -57,28 +61,36 @@
 #define HD44780_I2C_PCF8574A_DEV_ADDR_A2T_A1T_A0F  0x3E
 #define HD44780_I2C_PCF8574A_DEV_ADDR_A2T_A1T_A0T  0x3F
 
+
 #define HD44780_I2C_SHIFT_TO_RIGHT  true
 #define HD44780_I2C_SHIFT_TO_LEFT   false
 
+
 #define _HD44780_I2C_ENTRY_MODE_DISPLAY_S_DISPLAY_SHIFT_BIT              0
 #define _HD44780_I2C_ENTRY_MODE_DISPLAY_ID_INCDEC_CURSOR_POSITION_BIT    1
+
 
 #define _HD44780_I2C_CONTROL_MODE_DISPLAY_B_CURSOR_BLINK_BIT             0
 #define _HD44780_I2C_CONTROL_MODE_DISPLAY_C_CURSOR_ONOFF_BIT             1
 #define _HD44780_I2C_CONTROL_MODE_DISPLAY_D_DISPLAY_ONOFF_BIT            2
 
+
 #define _HD44780_I2C_CURSOR_DISPLAY_SHIFT_MODE_RL_SHIFT_CURSOR_BIT       2
 #define _HD44780_I2C_CURSOR_DISPLAY_SHIFT_MODE_SC_SHIFT_DISPLAY_BIT      3
+
 
 #define _HD44780_I2C_FUNCTION_SET_MODE_DISPLAY_F_FONT_BIT                2
 #define _HD44780_I2C_FUNCTION_SET_MODE_DISPLAY_N_NUM_LINES_BIT           3
 #define _HD44780_I2C_FUNCTION_SET_MODE_DISPLAY_DL_BITMODE_INTERFACE_BIT  4
 
+
 #define _HD44780_I2C_DISPLAY_SEND_COMMAND_MODE  0
 #define _HD44780_I2C_DISPLAY_SEND_DATA_MODE     1
 
+
 #define _HD44780_I2C_RS  (1 << 0)
 #define _HD44780_I2C_E   (1 << 2)
+
 
 #define _HD44780_I2C_INITIAL_ENTRY_MODE_DISPLAY         0b00000100
 #define _HD44780_I2C_INITIAL_CONTROL_MODE_DISPLAY       0b00001000
@@ -86,7 +98,9 @@
 #define _HD44780_I2C_INITIAL_FUNCTION_SET_MODE_DISPLAY  0b00101000
 
 
+
 // ===============================================================================
+
 
 
 typedef struct
@@ -100,14 +114,21 @@ typedef struct
 } HD44780_I2C_t;
 
 
-HD44780_I2C_t HD44780_I2C_Create_Object(uint8_t dev_addr, bool display_is_enable);
 
-void HD44780_I2C_Set_Target_Object(HD44780_I2C_t *display);
+// ===============================================================================
+
+
+
+void HD44780_I2C_Initialize_Object(HD44780_I2C_t *hd44780_i2c, uint8_t dev_addr, bool display_is_enable);
+
+void HD44780_I2C_Set_Target_Object(HD44780_I2C_t *hd44780_i2c);
 
 HD44780_I2C_t *HD44780_I2C_Get_Target_Object();
 
 
+
 // ===============================================================================
+
 
 
 void HD44780_I2C_Set_Display_Enable(bool display_is_enable);
@@ -123,11 +144,17 @@ void HD44780_I2C_Set_User_Symbol_To_CGRAM(const uint8_t *_8byte_simbol_bitmap_ar
 void HD44780_I2C_Set_Flash_User_Symbol_To_CGRAM(const uint8_t *_8byte_flash_simbol_bitmap_array, uint8_t flash_simbol_number);
 
 
+
 // ===============================================================================
+
+
 
 void HD44780_I2C_Set_PCF8574_Alternative_Function_Pin_Enable(uint8_t pin, bool is_enable);
 
+
+
 // ===============================================================================
+
 
 
 void HD44780_I2C_Print_Char(char c);
@@ -145,7 +172,9 @@ void HD44780_I2C_Print_String_To_Char_Terminator(const char* string, const char 
 void HD44780_I2C_Fill_Char_Pattern(const char char_pattern, uint8_t num_pattern_chars);
 
 
+
 // ===============================================================================
+
 
 
 void HD44780_I2C_Print_Flash_Char(const char *flash_c);
@@ -161,7 +190,9 @@ void HD44780_I2C_Print_Flash_StringFmt(const char *flash_string_fmt, ...);
 void HD44780_I2C_Print_Flash_String_To_Char_Terminator(const char* flash_string, const char terminator);
 
 
+
 // ===============================================================================
+
 
 
 void HD44780_I2C_Display_Shift(bool display_shift_is_right);
@@ -172,5 +203,15 @@ void HD44780_I2C_Clear_String_By_Pos(uint8_t string_pos, uint8_t first_char_pos,
 
 void HD44780_I2C_Clear();
 
+
+
 #endif
+
+
+
+
+
+
+
+
 
