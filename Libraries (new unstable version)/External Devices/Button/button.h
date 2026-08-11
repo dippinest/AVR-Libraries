@@ -14,9 +14,6 @@
 // Автор рекомендует аппаратное подавление дребезга контактов
 // (с помощью внешней RC цепи или с помощью триггера Шмидта)
 //
-// UPD: советую рассмотреть возможность использования библиотеки "virtualbutton",
-// которая имеет больше возможностей и более оптимизированная представленной
-//
 // -------------------------------------------------------------------------------
 //
 // Library for polling buttons connected to the GPIO ports of the microcontroller
@@ -29,9 +26,6 @@
 // The library does not provide for handling contact bounce.
 // The author recommends hardware-based contact bounce suppression
 // (using an external RC circuit or a Schmitt trigger)
-//
-// UPD: I advise you to consider using the virtualbutton library,
-// which has more features and is more optimized.
 //
 // ===============================================================================
 
