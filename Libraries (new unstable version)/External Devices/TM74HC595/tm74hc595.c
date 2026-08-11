@@ -32,7 +32,7 @@ const uint8_t _tm74hc595_digits_symbols_table[] PROGMEM =
 
 #include "softspi.h"
 
-#define _SPI_Send_Byte        SOFTSPI_Send_Byte
+#define _SPI_Send_Byte  SOFTSPI_Send_Byte
 
 
 #else
@@ -40,7 +40,7 @@ const uint8_t _tm74hc595_digits_symbols_table[] PROGMEM =
 
 #include "spi.h"
 
-#define _SPI_Send_Byte        SPI_Send_Byte
+#define _SPI_Send_Byte  SPI_Send_Byte
 
 #endif
 
