@@ -1,4 +1,5 @@
 
+
 #include "hc595sevsegind.h"
 
 
@@ -25,7 +26,7 @@ const uint8_t _hc595sevsegind_digits_symbols_table[] PROGMEM =
 
 // ===============================================================================
 
-#ifdef TM74HC595_USE_SOFTSPI
+#ifdef HC595SEVSEGIND_USE_SOFTSPI
 
 
 #include "softspi.h"
@@ -414,7 +415,6 @@ char *HC595SevSegInd_Convert_Num_String_To_Symbols_Array(char *num_string, uint8
 	
 	return num_string;
 }
-
 
 
 
