@@ -23,10 +23,10 @@ static char data[] = "This is a data from to EEPROM";
 
 
 
-// объект индикатора EEPROMI2C
+// объект внешней микросхемы памяти EEPROMI2C
 //
 // ===============================================================================
-// EEPROMI2C indicator object
+// the object of the external EEPROMI2C memory chip
 //
 EEPROMI2C_t eepromi2c;
 
