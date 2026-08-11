@@ -9,6 +9,10 @@
 // Чтобы активировать эту аозможность, раскомментируйте соответствующий дефайн
 // в файле конфигурации encoder_exint_configuration.h
 //
+// Библиотека не предусматривает обработку дребезга контактов.
+// Автор рекомендует аппаратное подавление дребезга контактов
+// (с помощью внешней RC цепи или с помощью триггера Шмидта)
+//
 // -------------------------------------------------------------------------------
 //
 // Library for working with an incremental encoder
@@ -17,6 +21,10 @@
 // The library allows you to poll multiple encoders independently.
 // To activate this feature, uncomment the corresponding define
 // in the encoder_exint_configuration.h configuration file
+//
+// The library does not provide for handling contact bounce.
+// The author recommends hardware-based contact bounce suppression
+// (using an external RC circuit or a Schmitt trigger).
 //
 // ===============================================================================
 
