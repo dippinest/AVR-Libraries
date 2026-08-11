@@ -7,7 +7,13 @@
 
 
 
+// объект виртуальной кнопки VirtualButton
+//
+// ===============================================================================
+// VirtualButton virtual button object
+//
 VirtualButton_t vbutton;
+
 
 volatile uint8_t button_status = 0;
 
