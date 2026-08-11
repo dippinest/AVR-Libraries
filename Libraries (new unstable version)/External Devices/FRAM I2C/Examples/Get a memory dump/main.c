@@ -1,15 +1,27 @@
 
+
 #include "softi2c.h"
 #include "frami2c.h"
 
 #include "uart.h"
 
 
+
 #define BUFFER_SIZE 128
 
+// приёмный буфер размером 128 байт
+// -------------------------------------------------------------------------------
+// 128 bytes receiving buffer
+//
 uint8_t buffer[BUFFER_SIZE];
 
 
+
+// объект индикатора FRAMI2C
+//
+// ===============================================================================
+// FRAMI2C indicator object
+//
 FRAMI2C_t frami2c;
 
 
@@ -43,5 +55,8 @@ int main(void)
 	{
 	}
 }
+
+
+
 
 
