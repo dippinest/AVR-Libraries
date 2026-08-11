@@ -53,6 +53,7 @@ static void _HD44780_Send_Byte(uint8_t c, uint8_t mode)
 static int _HD44780_Send_Char(char c, FILE *stream)
 {
 	_HD44780_Send_Byte(c, _HD44780_DISPLAY_SEND_DATA_MODE);
+	
 	return 0;
 }
 
@@ -106,6 +107,7 @@ void HD44780_Set_Display_Enable(bool display_is_enable)
 	}
 	
 	_HD44780_Send_Byte(_control_mode_display, _HD44780_DISPLAY_SEND_COMMAND_MODE);
+	
 	_delay_us(40);
 
 }
@@ -174,12 +176,14 @@ void HD44780_Set_User_Symbol_To_CGRAM(const uint8_t *_8byte_simbol_bitmap_array,
 	_HD44780_Send_Byte((0b01000000 | (simbol_number * 8)), _HD44780_DISPLAY_SEND_COMMAND_MODE);
 	
 	_delay_us(40);
+
 	
 	for (uint8_t i = 0; i < 8; i++)
 	{
 		_HD44780_Send_Byte(_8byte_simbol_bitmap_array[i], _HD44780_DISPLAY_SEND_DATA_MODE);
 		_delay_us(40);
 	}
+
 	
 	_HD44780_Send_Byte(0b10000000, _HD44780_DISPLAY_SEND_COMMAND_MODE);
 	
@@ -307,12 +311,16 @@ void HD44780_Print_Flash_Data(const void *flash_data, uint8_t flash_data_size)
 void HD44780_Print_Flash_String(const char *flash_string)
 {
 	char c = pgm_read_byte(&((uint8_t*)flash_string)[0]);
+	
 	uint16_t i = 0;
+
 	
 	while (c != '\0')
 	{
 		++i;
+		
 		HD44780_Print_Char(c);
+		
 		c = pgm_read_byte(&((uint8_t*)flash_string)[i]);
 	}
 }
@@ -321,12 +329,16 @@ void HD44780_Print_Flash_String(const char *flash_string)
 void HD44780_Safe_Print_Flash_String(const char *flash_string, uint16_t max_flash_string_len)
 {
 	char c = pgm_read_byte(&((uint8_t*)flash_string)[0]);
+	
 	uint16_t i = 0;
+
 	
 	while (c != '\0' && i < max_flash_string_len)
 	{
 		++i;
+		
 		HD44780_Print_Char(c);
+		
 		c = pgm_read_byte(&((uint8_t*)flash_string)[i]);
 	}
 }
@@ -339,12 +351,20 @@ void HD44780_Print_Flash_StringFmt(const char *flash_string_fmt, ...)
 	char string_buffer[flash_string_size];
 	
 	strcpy_P(string_buffer, flash_string_fmt);
+
 	
 	va_list argptr;
+	
 	va_start(argptr, flash_string_fmt);
+
+	
 	static FILE uartstdout = FDEV_SETUP_STREAM(_HD44780_Send_Char, NULL, _FDEV_SETUP_WRITE);
+	
 	stdout = &uartstdout;
+
+	
 	vfprintf(stdout, string_buffer, argptr);
+	
 	va_end(argptr);
 }
 
@@ -352,12 +372,16 @@ void HD44780_Print_Flash_StringFmt(const char *flash_string_fmt, ...)
 void HD44780_Print_Flash_String_To_Char_Terminator(const char* flash_string, const char terminator)
 {
 	char c = pgm_read_byte(&((uint8_t*)flash_string)[0]);
+	
 	uint16_t i = 0;
+	
 	
 	while (c != terminator)
 	{
 		++i;
+		
 		HD44780_Print_Char(c);
+		
 		c = pgm_read_byte(&((uint8_t*)flash_string)[i]);
 	}
 }
@@ -388,6 +412,7 @@ void HD44780_Display_Shift(bool display_shift_is_right)
 void HD44780_Set_Cursor_Home()
 {
 	_HD44780_Send_Byte(0b00000010, 0);
+	
 	_delay_us(1650);
 }
 
@@ -395,6 +420,7 @@ void HD44780_Set_Cursor_Home()
 void HD44780_Clear_String_By_Pos(uint8_t string_pos, uint8_t first_char_pos, uint8_t end_char_pos)
 {
 	HD44780_Set_Cursor_Pos(string_pos, first_char_pos);
+	
 	HD44780_Fill_Char_Pattern(' ', (end_char_pos - first_char_pos + 1));
 }
 
@@ -402,6 +428,7 @@ void HD44780_Clear_String_By_Pos(uint8_t string_pos, uint8_t first_char_pos, uin
 void HD44780_Clear()
 {
 	_HD44780_Send_Byte(0b00000001, 0);
+	
 	_delay_us(1650);
 }
 
