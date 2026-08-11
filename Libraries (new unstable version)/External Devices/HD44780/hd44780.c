@@ -10,6 +10,10 @@ static volatile uint8_t _function_set_mode_display = 0b00101000;
 
 
 
+// ===============================================================================
+
+
+
 static void _HD44780_Send_Half_Byte_4Bit_Mode(uint8_t data)
 {
 	_HD44780_SET_E_HIGH;
@@ -29,6 +33,7 @@ static void _HD44780_Send_Half_Byte_4Bit_Mode(uint8_t data)
 	_HD44780_SET_E_LOW;
 }
 
+
 static void _HD44780_Send_Byte(uint8_t c, uint8_t mode)
 {
 	if (!mode)
@@ -44,11 +49,18 @@ static void _HD44780_Send_Byte(uint8_t c, uint8_t mode)
 	_HD44780_Send_Half_Byte_4Bit_Mode(c);
 }
 
+
 static int _HD44780_Send_Char(char c, FILE *stream)
 {
 	_HD44780_Send_Byte(c, _HD44780_DISPLAY_SEND_DATA_MODE);
 	return 0;
 }
+
+
+
+// ===============================================================================
+
+
 
 void HD44780_Initialize(bool display_is_enable)
 {
@@ -77,6 +89,7 @@ void HD44780_Initialize(bool display_is_enable)
 	HD44780_Clear();
 }
 
+
 void HD44780_Set_Display_Enable(bool display_is_enable)
 {
 	
@@ -93,6 +106,7 @@ void HD44780_Set_Display_Enable(bool display_is_enable)
 	_delay_us(40);
 
 }
+
 
 void HD44780_Set_Cursor_Enable(bool cursor_is_enable)
 {
@@ -112,6 +126,7 @@ void HD44780_Set_Cursor_Enable(bool cursor_is_enable)
 
 }
 
+
 void HD44780_Set_Cursor_Blink(bool cursor_is_blink)
 {
 	
@@ -129,6 +144,7 @@ void HD44780_Set_Cursor_Blink(bool cursor_is_blink)
 	_delay_us(40);
 
 }
+
 
 void HD44780_Set_Cursor_Pos(uint8_t string_pos, uint8_t first_char_pos)
 {
@@ -148,6 +164,7 @@ void HD44780_Set_Cursor_Pos(uint8_t string_pos, uint8_t first_char_pos)
 	_HD44780_Send_Byte(addr, _HD44780_DISPLAY_SEND_COMMAND_MODE);
 }
 
+
 void HD44780_Set_User_Symbol_To_CGRAM(const uint8_t *_8byte_simbol_bitmap_array, uint8_t simbol_number)
 {
 	
@@ -165,6 +182,7 @@ void HD44780_Set_User_Symbol_To_CGRAM(const uint8_t *_8byte_simbol_bitmap_array,
 	
 	_delay_us(40);
 }
+
 
 void HD44780_Set_Flash_User_Symbol_To_CGRAM(const uint8_t *_8byte_flash_simbol_bitmap_array, uint8_t flash_simbol_number)
 {
@@ -185,6 +203,7 @@ void HD44780_Set_Flash_User_Symbol_To_CGRAM(const uint8_t *_8byte_flash_simbol_b
 }
 
 
+
 // ===============================================================================
 
 
@@ -194,6 +213,7 @@ void HD44780_Print_Char(char c)
 	_HD44780_Send_Byte(c, _HD44780_DISPLAY_SEND_DATA_MODE);
 }
 
+
 void HD44780_Print_Data(const void *data, uint8_t data_size)
 {
 	for (uint8_t i = 0; i < data_size; i++)
@@ -201,6 +221,7 @@ void HD44780_Print_Data(const void *data, uint8_t data_size)
 		HD44780_Print_Char(((char*)data)[i]);
 	}
 }
+
 
 void HD44780_Print_String(const char *string_array)
 {
@@ -210,6 +231,7 @@ void HD44780_Print_String(const char *string_array)
 	}
 }
 
+
 void HD44780_Safe_Print_String(const char *string_array, uint16_t max_string_len)
 {
 	for (uint8_t i = 0; string_array[i] != '\0' && i < max_string_len; ++i)
@@ -217,6 +239,7 @@ void HD44780_Safe_Print_String(const char *string_array, uint16_t max_string_len
 		HD44780_Print_Char(string_array[i]);
 	}
 }
+
 
 void HD44780_Print_StringFmt(const char *string_fmt, ...)
 {
@@ -228,6 +251,7 @@ void HD44780_Print_StringFmt(const char *string_fmt, ...)
 	va_end(argptr);
 }
 
+
 void HD44780_Set_Print_To_Char_Terminator(const char* string_array, const char terminator)
 {
 	for (uint8_t i = 0; string_array[i] != terminator; i++)
@@ -235,6 +259,7 @@ void HD44780_Set_Print_To_Char_Terminator(const char* string_array, const char t
 		HD44780_Print_Char(string_array[i]);
 	}
 }
+
 
 void HD44780_Fill_Char_Pattern(const char char_pattern, uint8_t num_pattern_chars)
 {
@@ -244,12 +269,17 @@ void HD44780_Fill_Char_Pattern(const char char_pattern, uint8_t num_pattern_char
 	}
 }
 
+
+
 // ===============================================================================
+
+
 
 void HD44780_Print_Flash_Char(const char *flash_c)
 {
 	HD44780_Print_Char(pgm_read_byte(flash_c));
 }
+
 
 void HD44780_Print_Flash_Data(const void *flash_data, uint8_t flash_data_size)
 {
@@ -258,6 +288,7 @@ void HD44780_Print_Flash_Data(const void *flash_data, uint8_t flash_data_size)
 		HD44780_Print_Char(pgm_read_byte(&((uint8_t*)flash_data)[i]) );
 	}
 }
+
 
 void HD44780_Print_Flash_String(const char *flash_string)
 {
@@ -272,6 +303,7 @@ void HD44780_Print_Flash_String(const char *flash_string)
 	}
 }
 
+
 void HD44780_Safe_Print_Flash_String(const char *flash_string, uint16_t max_flash_string_len)
 {
 	char c = pgm_read_byte(&((uint8_t*)flash_string)[0]);
@@ -284,6 +316,7 @@ void HD44780_Safe_Print_Flash_String(const char *flash_string, uint16_t max_flas
 		c = pgm_read_byte(&((uint8_t*)flash_string)[i]);
 	}
 }
+
 
 void HD44780_Print_Flash_StringFmt(const char *flash_string_fmt, ...)
 {
@@ -301,6 +334,7 @@ void HD44780_Print_Flash_StringFmt(const char *flash_string_fmt, ...)
 	va_end(argptr);
 }
 
+
 void HD44780_Print_Flash_String_To_Char_Terminator(const char* flash_string, const char terminator)
 {
 	char c = pgm_read_byte(&((uint8_t*)flash_string)[0]);
@@ -314,7 +348,11 @@ void HD44780_Print_Flash_String_To_Char_Terminator(const char* flash_string, con
 	}
 }
 
+
+
 // ===============================================================================
+
+
 
 void HD44780_Display_Shift(bool display_shift_is_right)
 {
@@ -332,11 +370,13 @@ void HD44780_Display_Shift(bool display_shift_is_right)
 	_HD44780_Send_Byte(_cursor_display_shift_mode, _HD44780_DISPLAY_SEND_COMMAND_MODE); _delay_us(40);
 }
 
+
 void HD44780_Set_Cursor_Home()
 {
 	_HD44780_Send_Byte(0b00000010, 0);
 	_delay_us(1650);
 }
+
 
 void HD44780_Clear_String_By_Pos(uint8_t string_pos, uint8_t first_char_pos, uint8_t end_char_pos)
 {
@@ -344,8 +384,18 @@ void HD44780_Clear_String_By_Pos(uint8_t string_pos, uint8_t first_char_pos, uin
 	HD44780_Fill_Char_Pattern(' ', (end_char_pos - first_char_pos + 1));
 }
 
+
 void HD44780_Clear()
 {
 	_HD44780_Send_Byte(0b00000001, 0);
 	_delay_us(1650);
 }
+
+
+
+
+
+
+
+
+
