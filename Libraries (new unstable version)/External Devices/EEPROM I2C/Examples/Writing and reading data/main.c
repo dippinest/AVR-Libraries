@@ -21,10 +21,10 @@ char str[STR_SIZE] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, s
 
 
 
-// объект индикатора EEPROMI2C
+// объект внешней микросхемы памяти EEPROMI2C
 //
 // ===============================================================================
-// EEPROMI2C indicator object
+// the object of the external EEPROMI2C memory chip
 //
 EEPROMI2C_t eepromi2c;
 
