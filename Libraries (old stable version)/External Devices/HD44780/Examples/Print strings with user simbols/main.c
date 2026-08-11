@@ -1,42 +1,83 @@
 
+
 #include "hd44780.h"
+
+
+
+// битовые массивы с пользовательскими символами (5x8 бит)
+//
+// ===============================================================================
+// bit arrays with custom symbols (5x8 bits)
+//
+const uint8_t customChar_CyrillicP[8] =
+{
+	0b11111,
+	0b10001,
+	0b10001,
+	0b10001,
+	0b10001,
+	0b10001,
+	0b10001,
+	0b00000
+};
+
+const uint8_t customChar_CyrillicI[8] =
+{
+	0b10001,
+	0b10001,
+	0b10011,
+	0b10101,
+	0b11001,
+	0b10001,
+	0b10001,
+	0b00000
+};
+
+const uint8_t customChar_SignoDeExclamacion[8] =
+{
+	0b00100,
+	0b00000,
+	0b00000,
+	0b00100,
+	0b00100,
+	0b00100,
+	0b00100,
+	0b00000
+};
+
 
 int main(void)
 {
-	const uint8_t customChar_CyrillicP[8] =
-	{
-		0b11111,
-		0b10001,
-		0b10001,
-		0b10001,
-		0b10001,
-		0b10001,
-		0b10001,
-		0b00000
-	};
-
-	const uint8_t customChar_CyrillicI[8] =
-	{
-		0b10001,
-		0b10001,
-		0b10011,
-		0b10101,
-		0b11001,
-		0b10001,
-		0b10001,
-		0b00000
-	};
-	
 	HD44780_Initialize(true);
+
+
 	
 	HD44780_Set_User_Symbol_To_CGRAM(customChar_CyrillicP, 0x01);
 	HD44780_Set_User_Symbol_To_CGRAM(customChar_CyrillicI, 0x02);
+	HD44780_Set_User_Symbol_To_CGRAM(customChar_SignoDeExclamacion, 0x03);
 	
-	char helloWorld_Russian[] = { 0x01, 'P', 0x02, 'B', 'E', 'T', ',', ' ', 'M', 0x02, 'P', '!', '\0' };
-	HD44780_Set_Cursor_Pos(0, 0); HD44780_Print_String(helloWorld_Russian);
 	
-	char helloWorld_Ukrainian[] = { 0x01, 'P', 0x02, 'B', 'I', 'T', ',', ' ', 'C', 'B', 'I', 'T', 'E', '!', '\0' };
-	HD44780_Set_Cursor_Pos(1, 0); HD44780_Print_String(helloWorld_Ukrainian);
+	HD44780_Set_Cursor_Pos(0, 0); HD44780_Print_String(" HELLO, WORLD!  EN");
+	
+	
+	
+	char helloWorld_Spanish[] = { 0x03, 'H', 'O', 'L', 'A', ' ', 'M', 'U', 'N', 'D', 'O', '!', ' ', ' ', ' ', ' ', 'E', 'S', '\0' };
+	
+	HD44780_Set_Cursor_Pos(1, 0); HD44780_Print_String(helloWorld_Spanish);
+	
+	
+	
+	char helloWorld_Russian[] = { ' ', 0x01, 'P', 0x02, 'B', 'E', 'T', ',', ' ', 'M', 0x02, 'P', '!', ' ', ' ', ' ', 'R', 'U', '\0' };
+	
+	HD44780_Set_Cursor_Pos(2, 0); HD44780_Print_String(helloWorld_Russian);
+	
+	
+	
+	char helloWorld_Ukrainian[] = { ' ', 0x01, 'P', 0x02, 'B', 'I', 'T', ',', ' ', 'C', 'B', 'I', 'T', 'E', '!', ' ', 'U', 'A', '\0' };
+	
+	HD44780_Set_Cursor_Pos(3, 0); HD44780_Print_String(helloWorld_Ukrainian);
+	
+	
 	
 	while (1)
 	{
@@ -44,15 +85,27 @@ int main(void)
 }
 
 
+
+
 /*
+
 // this code is an example of writing user characters to the CGRAM
 // of the display from the flash memory (program memory) of the MCU
 
-#define F_CPU 16000000UL
 
 #include <avr/pgmspace.h>
+
 #include "hd44780.h"
 
+
+
+// битовые массивы с пользовательскими символами (5x8 бит),
+// хранящиеся во внутренней Flash памяти микроконтроллера
+//
+// ===============================================================================
+// bit arrays with custom characters (5x8 bits)
+// stored in the microcontroller’s internal Flash memory
+//
 const PROGMEM uint8_t customChar_CyrillicP[8] =
 {
 	0b11111,
@@ -64,6 +117,7 @@ const PROGMEM uint8_t customChar_CyrillicP[8] =
 	0b10001,
 	0b00000
 };
+
 const PROGMEM uint8_t customChar_CyrillicI[8] =
 {
 	0b10001,
@@ -76,21 +130,61 @@ const PROGMEM uint8_t customChar_CyrillicI[8] =
 	0b00000
 };
 
+const PROGMEM uint8_t customChar_SignoDeExclamacion[8] =
+{
+	0b00100,
+	0b00000,
+	0b00000,
+	0b00100,
+	0b00100,
+	0b00100,
+	0b00100,
+	0b00000
+};
+
+
 int main(void)
 {
 	HD44780_Initialize(true);
+
 	
 	HD44780_Set_Flash_User_Symbol_To_CGRAM(customChar_CyrillicP, 0x01);
 	HD44780_Set_Flash_User_Symbol_To_CGRAM(customChar_CyrillicI, 0x02);
+	HD44780_Set_Flash_User_Symbol_To_CGRAM(customChar_SignoDeExclamacion, 0x03);
 	
-	char helloWorld_Russian[] = { 0x01, 'P', 0x02, 'B', 'E', 'T', ',', ' ', 'M', 0x02, 'P', '!', '\0' };
-	HD44780_Set_Cursor_Pos(0, 0); HD44780_Print_String(helloWorld_Russian);
 	
-	char helloWorld_Ukrainian[] = { 0x01, 'P', 0x02, 'B', 'I', 'T', ',', ' ', 'C', 'B', 'I', 'T', 'E', '!', '\0' };
-	HD44780_Set_Cursor_Pos(1, 0); HD44780_Print_String(helloWorld_Ukrainian);
+	HD44780_Set_Cursor_Pos(0, 0); HD44780_Print_String(" HELLO, WORLD!  EN");
+	
+	
+	
+	char helloWorld_Spanish[] = { 0x03, 'H', 'O', 'L', 'A', ' ', 'M', 'U', 'N', 'D', 'O', '!', ' ', ' ', ' ', ' ', 'E', 'S', '\0' };
+	
+	HD44780_Set_Cursor_Pos(1, 0); HD44780_Print_String(helloWorld_Spanish);
+	
+	
+	
+	char helloWorld_Russian[] = { ' ', 0x01, 'P', 0x02, 'B', 'E', 'T', ',', ' ', 'M', 0x02, 'P', '!', ' ', ' ', ' ', 'R', 'U', '\0' };
+	
+	HD44780_Set_Cursor_Pos(2, 0); HD44780_Print_String(helloWorld_Russian);
+	
+	
+	
+	char helloWorld_Ukrainian[] = { ' ', 0x01, 'P', 0x02, 'B', 'I', 'T', ',', ' ', 'C', 'B', 'I', 'T', 'E', '!', ' ', 'U', 'A', '\0' };
+	
+	HD44780_Set_Cursor_Pos(3, 0); HD44780_Print_String(helloWorld_Ukrainian);
+	
+	
 	
 	while (1)
 	{
 	}
 }
+
 */
+
+
+
+
+
+
+
