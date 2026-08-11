@@ -14,7 +14,24 @@
 #define HC595SEVSEGIND_USE_SOFTSPI
 
 
+
+
+
+#ifdef HC595SEVSEGIND_USE_SOFTSPI
+
+#warning "COMPILER MESSAGE: Library "hc595sevsegind.h" use software SPI!"
+
+#else
+
+#warning "COMPILER MESSAGE: Library "hc595sevsegind.h" use hardware SPI!"
+
 #endif
+
+
+
+#endif
+
+
 
 
 
