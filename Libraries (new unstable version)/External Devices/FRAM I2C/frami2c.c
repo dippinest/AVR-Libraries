@@ -6,6 +6,37 @@
 
 // ===============================================================================
 
+#ifdef FRAMI2C_USE_SOFTI2C
+
+
+#include "softi2c.h"
+
+#define _I2C_Start       SOFTI2C_Start
+#define _I2C_Send_Byte   SOFTI2C_Send_Byte
+#define _I2C_Restart     SOFTI2C_Restart
+#define _I2C_Read_Byte   SOFTI2C_Read_Byte
+#define _I2C_Stop        SOFTI2C_Stop
+
+#warning "COMPILER MESSAGE: Library "frami2c.h" use software I2C!"
+
+
+#else
+
+
+#include "i2c.h"
+
+#define _I2C_Start       I2C_Start
+#define _I2C_Send_Byte   I2C_Send_Byte
+#define _I2C_Restart     I2C_Restart
+#define _I2C_Read_Byte   I2C_Read_Byte
+#define _I2C_Stop        I2C_Stop
+
+#warning "COMPILER MESSAGE: Library "frami2c.h" use hardware I2C!"
+
+#endif
+
+// ===============================================================================
+
 
 
 void FRAMI2C_Initialize_Object(FRAMI2C_t *frami2c, uint8_t dev_addr, uint16_t max_mem_addr)
@@ -20,49 +51,43 @@ void FRAMI2C_Initialize_Object(FRAMI2C_t *frami2c, uint8_t dev_addr, uint16_t ma
 
 
 
-#ifdef FRAMI2C_USE_SOFTI2C
-
-#include "softi2c.h"
-
-
-
 void FRAMI2C_Write_Byte(FRAMI2C_t *frami2c, uint16_t memory_addr, const uint8_t byte)
 {
-	SOFTI2C_Start();
+	_I2C_Start();
 	
-	SOFTI2C_Send_Byte(frami2c->dev_addr << 1);
+	_I2C_Send_Byte(frami2c->dev_addr << 1);
 	
-	SOFTI2C_Send_Byte(memory_addr >> 8);
+	_I2C_Send_Byte(memory_addr >> 8);
 	
-	SOFTI2C_Send_Byte((uint8_t)memory_addr);
+	_I2C_Send_Byte((uint8_t)memory_addr);
 	
-	SOFTI2C_Send_Byte(byte);
+	_I2C_Send_Byte(byte);
 	
-	SOFTI2C_Stop();
+	_I2C_Stop();
 }
 
 
 uint8_t FRAMI2C_Read_Byte(FRAMI2C_t *frami2c, uint16_t memory_addr)
 {
-	SOFTI2C_Start();
+	_I2C_Start();
 	
-	SOFTI2C_Send_Byte(frami2c->dev_addr << 1);
+	_I2C_Send_Byte(frami2c->dev_addr << 1);
 	
-	SOFTI2C_Send_Byte(memory_addr >> 8);
+	_I2C_Send_Byte(memory_addr >> 8);
 	
-	SOFTI2C_Send_Byte((uint8_t)memory_addr);
+	_I2C_Send_Byte((uint8_t)memory_addr);
 	
-	SOFTI2C_Restart();
+	_I2C_Restart();
 	
-	SOFTI2C_Send_Byte((frami2c->dev_addr << 1) | 1);
+	_I2C_Send_Byte((frami2c->dev_addr << 1) | 1);
 	
 	
 	uint8_t byte;
 	
 	
-	SOFTI2C_Read_Byte(&byte, NACK);
+	_I2C_Read_Byte(&byte, NACK);
 	
-	SOFTI2C_Stop();
+	_I2C_Stop();
 	
 	
 	return byte;
@@ -71,13 +96,13 @@ uint8_t FRAMI2C_Read_Byte(FRAMI2C_t *frami2c, uint16_t memory_addr)
 
 uint16_t FRAMI2C_Write_Data(FRAMI2C_t *frami2c, uint16_t memory_addr, const void *data, uint16_t data_size)
 {
-	SOFTI2C_Start();
+	_I2C_Start();
 	
-	SOFTI2C_Send_Byte(frami2c->dev_addr << 1);
+	_I2C_Send_Byte(frami2c->dev_addr << 1);
 	
-	SOFTI2C_Send_Byte(memory_addr >> 8);
+	_I2C_Send_Byte(memory_addr >> 8);
 	
-	SOFTI2C_Send_Byte((uint8_t)memory_addr);
+	_I2C_Send_Byte((uint8_t)memory_addr);
 	
 	
 	uint16_t i = 0;
@@ -85,13 +110,13 @@ uint16_t FRAMI2C_Write_Data(FRAMI2C_t *frami2c, uint16_t memory_addr, const void
 	
 	while(i < data_size)
 	{
-		SOFTI2C_Send_Byte(((uint8_t*)data)[i]);
+		_I2C_Send_Byte(((uint8_t*)data)[i]);
 		
 		++i;
 	}
 	
 	
-	SOFTI2C_Stop();
+	_I2C_Stop();
 	
 	
 	return i;
@@ -106,17 +131,17 @@ uint16_t FRAMI2C_Read_Data(FRAMI2C_t *frami2c, uint16_t memory_addr, void *data,
 	}
 	
 	
-	SOFTI2C_Start();
+	_I2C_Start();
 	
-	SOFTI2C_Send_Byte(frami2c->dev_addr << 1);
+	_I2C_Send_Byte(frami2c->dev_addr << 1);
 	
-	SOFTI2C_Send_Byte(memory_addr >> 8);
+	_I2C_Send_Byte(memory_addr >> 8);
 	
-	SOFTI2C_Send_Byte((uint8_t)memory_addr);
+	_I2C_Send_Byte((uint8_t)memory_addr);
 	
-	SOFTI2C_Restart();
+	_I2C_Restart();
 	
-	SOFTI2C_Send_Byte((frami2c->dev_addr << 1) | 1);
+	_I2C_Send_Byte((frami2c->dev_addr << 1) | 1);
 	
 	
 	uint16_t i = 0;
@@ -124,18 +149,18 @@ uint16_t FRAMI2C_Read_Data(FRAMI2C_t *frami2c, uint16_t memory_addr, void *data,
 	
 	while (i < (data_size - 1))
 	{
-		SOFTI2C_Read_Byte(&((uint8_t*)data)[i], ACK);
+		_I2C_Read_Byte(&((uint8_t*)data)[i], ACK);
 		
 		++i;
 	}
 	
 	
-	SOFTI2C_Read_Byte(&((uint8_t*)data)[i], NACK);
+	_I2C_Read_Byte(&((uint8_t*)data)[i], NACK);
 	
 	++i;
 	
 	
-	SOFTI2C_Stop();
+	_I2C_Stop();
 	
 	
 	return i;
@@ -144,163 +169,13 @@ uint16_t FRAMI2C_Read_Data(FRAMI2C_t *frami2c, uint16_t memory_addr, void *data,
 
 uint32_t FRAMI2C_Fill_Memory(FRAMI2C_t *frami2c, uint16_t memory_addr, const uint8_t val, uint32_t num)
 {
-	SOFTI2C_Start();
+	_I2C_Start();
 	
-	SOFTI2C_Send_Byte(frami2c->dev_addr << 1);
+	_I2C_Send_Byte(frami2c->dev_addr << 1);
 	
-	SOFTI2C_Send_Byte(memory_addr >> 8);
+	_I2C_Send_Byte(memory_addr >> 8);
 	
-	SOFTI2C_Send_Byte((uint8_t)memory_addr);
-	
-	
-	uint32_t i = 0;
-	
-	
-	while(i < num)
-	{
-		SOFTI2C_Send_Byte(val);
-		
-		++i;
-	}
-	
-	
-	SOFTI2C_Stop();
-	
-	
-	return i;
-}
-
-
-#else
-
-#include "i2c.h"
-
-
-void FRAMI2C_Write_Byte(FRAMI2C_t *frami2c, uint16_t memory_addr, const uint8_t byte)
-{
-	I2C_Start();
-	
-	I2C_Send_Byte(frami2c->dev_addr << 1);
-	
-	I2C_Send_Byte(memory_addr >> 8);
-	
-	I2C_Send_Byte((uint8_t)memory_addr);
-	
-	I2C_Send_Byte(byte);
-	
-	I2C_Stop();
-}
-
-
-uint8_t FRAMI2C_Read_Byte(FRAMI2C_t *frami2c, uint16_t memory_addr)
-{
-	I2C_Start();
-	
-	I2C_Send_Byte(frami2c->dev_addr << 1);
-	
-	I2C_Send_Byte(memory_addr >> 8);
-	
-	I2C_Send_Byte((uint8_t)memory_addr);
-	
-	I2C_Restart();
-	
-	I2C_Send_Byte((frami2c->dev_addr << 1) | 1);
-	
-	
-	uint8_t byte;
-	
-	
-	I2C_Read_Byte(&byte, NACK);
-	
-	I2C_Stop();
-	
-	
-	return byte;
-}
-
-
-uint16_t FRAMI2C_Write_Data(FRAMI2C_t *frami2c, uint16_t memory_addr, const void *data, uint16_t data_size)
-{
-	I2C_Start();
-	
-	I2C_Send_Byte(frami2c->dev_addr << 1);
-	
-	I2C_Send_Byte(memory_addr >> 8);
-	
-	I2C_Send_Byte((uint8_t)memory_addr);
-	
-	
-	uint16_t i = 0;
-	
-	
-	while(i < data_size)
-	{
-		I2C_Send_Byte(((uint8_t*)data)[i]);
-		
-		++i;
-	}
-	
-	
-	I2C_Stop();
-	
-	
-	return i;
-}
-
-
-uint16_t FRAMI2C_Read_Data(FRAMI2C_t *frami2c, uint16_t memory_addr, void *data, uint16_t data_size)
-{
-	if (data_size == 0)
-	{
-		return 0;
-	}
-	
-	
-	I2C_Start();
-	
-	I2C_Send_Byte(frami2c->dev_addr << 1);
-	
-	I2C_Send_Byte(memory_addr >> 8);
-	
-	I2C_Send_Byte((uint8_t)memory_addr);
-	
-	I2C_Restart();
-	
-	I2C_Send_Byte((frami2c->dev_addr << 1) | 1);
-	
-	
-	uint16_t i = 0;
-	
-	
-	while (i < (data_size - 1))
-	{
-		I2C_Read_Byte(&((uint8_t*)data)[i], ACK);
-		
-		++i;
-	}
-	
-	
-	I2C_Read_Byte(&((uint8_t*)data)[i], NACK);
-	
-	++i;
-	
-	
-	I2C_Stop();
-	
-	
-	return i;
-}
-
-
-uint32_t FRAMI2C_Fill_Memory(FRAMI2C_t *frami2c, uint16_t memory_addr, const uint8_t val, uint32_t num)
-{
-	I2C_Start();
-	
-	I2C_Send_Byte(frami2c->dev_addr << 1);
-	
-	I2C_Send_Byte(memory_addr >> 8);
-	
-	I2C_Send_Byte((uint8_t)memory_addr);
+	_I2C_Send_Byte((uint8_t)memory_addr);
 	
 	
 	uint32_t i = 0;
@@ -308,20 +183,17 @@ uint32_t FRAMI2C_Fill_Memory(FRAMI2C_t *frami2c, uint16_t memory_addr, const uin
 	
 	while(i < num)
 	{
-		I2C_Send_Byte(val);
+		_I2C_Send_Byte(val);
 		
 		++i;
 	}
 	
 	
-	I2C_Stop();
+	_I2C_Stop();
 	
 	
 	return i;
 }
-
-
-#endif
 
 
 
