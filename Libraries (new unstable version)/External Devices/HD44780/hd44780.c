@@ -18,17 +18,21 @@ static void _HD44780_Send_Half_Byte_4Bit_Mode(uint8_t data)
 {
 	_HD44780_SET_E_HIGH;
 	
+	
 	HD44780_D4_PORT &= ~(1 << HD44780_D4_PIN);
 	HD44780_D5_PORT &= ~(1 << HD44780_D5_PIN);
 	HD44780_D6_PORT &= ~(1 << HD44780_D6_PIN);
 	HD44780_D7_PORT &= ~(1 << HD44780_D7_PIN);
+
 	
 	_delay_us(40);
+	
 	
 	HD44780_D4_PORT |= ( (data & 0x01)       << HD44780_D4_PIN);
 	HD44780_D5_PORT |= (((data & 0x02) >> 1) << HD44780_D5_PIN);
 	HD44780_D6_PORT |= (((data & 0x04) >> 2) << HD44780_D6_PIN);
 	HD44780_D7_PORT |= (((data & 0x08) >> 3) << HD44780_D7_PIN);
+
 	
 	_HD44780_SET_E_LOW;
 }
@@ -44,8 +48,10 @@ static void _HD44780_Send_Byte(uint8_t c, uint8_t mode)
 	{
 		_HD44780_SET_RS_HIGH;
 	}
+
 	
 	_HD44780_Send_Half_Byte_4Bit_Mode(c >> 4);
+	
 	_HD44780_Send_Half_Byte_4Bit_Mode(c);
 }
 
@@ -71,6 +77,7 @@ void HD44780_Initialize(bool display_is_enable)
 	HD44780_D5_DDR |= (1 << HD44780_D5_PIN);
 	HD44780_D6_DDR |= (1 << HD44780_D6_PIN);
 	HD44780_D7_DDR |= (1 << HD44780_D7_PIN);
+
 	
 	_HD44780_Send_Half_Byte_4Bit_Mode(0b00000011); _delay_ms(5);
 	
@@ -79,9 +86,9 @@ void HD44780_Initialize(bool display_is_enable)
 	_HD44780_Send_Half_Byte_4Bit_Mode(0b00000011); _delay_us(120);
 
 	_HD44780_Send_Half_Byte_4Bit_Mode(0b00000010); _delay_us(120);
+
 	
 	_HD44780_Send_Byte(_control_mode_display, _HD44780_DISPLAY_SEND_COMMAND_MODE); _delay_us(40);
-
 
 	
 	HD44780_Set_Cursor_Home();
@@ -105,6 +112,7 @@ void HD44780_Set_Display_Enable(bool display_is_enable)
 	{
 		_control_mode_display &= ~(1 << _HD44780_CONTROL_MODE_DISPLAY_D_DISPLAY_ONOFF_BIT);
 	}
+
 	
 	_HD44780_Send_Byte(_control_mode_display, _HD44780_DISPLAY_SEND_COMMAND_MODE);
 	
@@ -124,6 +132,7 @@ void HD44780_Set_Cursor_Enable(bool cursor_is_enable)
 	{
 		_control_mode_display &= ~(1 << _HD44780_CONTROL_MODE_DISPLAY_C_CURSOR_ONOFF_BIT);
 	}
+
 	
 	_HD44780_Send_Byte(_control_mode_display, _HD44780_DISPLAY_SEND_COMMAND_MODE);
 	
@@ -143,6 +152,7 @@ void HD44780_Set_Cursor_Blink(bool cursor_is_blink)
 	{
 		_control_mode_display &= ~(1 << _HD44780_CONTROL_MODE_DISPLAY_B_CURSOR_BLINK_BIT);
 	}
+
 	
 	_HD44780_Send_Byte(_control_mode_display, _HD44780_DISPLAY_SEND_COMMAND_MODE);
 	
@@ -163,8 +173,10 @@ void HD44780_Set_Cursor_Pos(uint8_t string_pos, uint8_t first_char_pos)
 		string_pos = 1;
 		first_char_pos += 20;
 	}
+
 	
 	uint8_t addr = ((0x40 * string_pos) + first_char_pos) | 0b10000000;
+
 	
 	_HD44780_Send_Byte(addr, _HD44780_DISPLAY_SEND_COMMAND_MODE);
 }
@@ -199,11 +211,13 @@ void HD44780_Set_Flash_User_Symbol_To_CGRAM(const uint8_t *_8byte_flash_simbol_b
 
 	
 	uint8_t c;
-	
+
 	for (uint8_t i = 0; i < 8; ++i)
 	{
 		c = pgm_read_byte(&_8byte_flash_simbol_bitmap_array[i]);
+		
 		_HD44780_Send_Byte(c, _HD44780_DISPLAY_SEND_DATA_MODE);
+		
 		_delay_us(40);
 	}
 
