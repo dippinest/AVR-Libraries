@@ -4,6 +4,11 @@
 
 
 
+
+// ===============================================================================
+
+
+
 uint8_t _DS1307_UInt8_To_UInt8BCD(uint8_t num)
 {
 	return ((num / 10) << 4) | (num % 10);
@@ -12,11 +17,15 @@ uint8_t _DS1307_UInt8_To_UInt8BCD(uint8_t num)
 uint8_t _DS1307_UInt8BCD_To_UInt8(uint8_t bcd_code)
 {
 	uint8_t num = (bcd_code >> 4) * 10;
+	
 	num += (bcd_code & 0x0F);
+	
 	return num;
 }
 
 
+
+// ===============================================================================
 
 
 #ifdef DS1307_USE_SOFTI2C
@@ -24,200 +33,55 @@ uint8_t _DS1307_UInt8BCD_To_UInt8(uint8_t bcd_code)
 
 #include "softi2c.h"
 
+#define _I2C_Start       SOFTI2C_Start
+#define _I2C_Send_Byte   SOFTI2C_Send_Byte
+#define _I2C_Restart     SOFTI2C_Restart
+#define _I2C_Read_Byte   SOFTI2C_Read_Byte
+#define _I2C_Stop        SOFTI2C_Stop
+
+#warning "COMPILER MESSAGE: DS1307 USE SOFTWARE I2C!"
 
 
-
-void _DS1307_Set_Memory_Pointer(uint8_t addr_reg)
-{
-	SOFTI2C_Start();
-	
-	SOFTI2C_Send_Byte(_DS1307_ADDRESS_DEVICE << 1);
-	SOFTI2C_Send_Byte(addr_reg);
-	
-	SOFTI2C_Stop();
-}
-
-
-void _DS1307_Set_Byte(uint8_t addr_reg, uint8_t byte)
-{
-	SOFTI2C_Start();
-	
-	SOFTI2C_Send_Byte(_DS1307_ADDRESS_DEVICE << 1);
-	SOFTI2C_Send_Byte(addr_reg);
-	SOFTI2C_Send_Byte(byte);
-	
-	SOFTI2C_Stop();
-}
-
-
-uint8_t _DS1307_Get_Byte(uint8_t addr_reg)
-{
-	uint8_t byte;
-	
-	_DS1307_Set_Memory_Pointer(addr_reg);
-	
-	SOFTI2C_Start();
-	
-	SOFTI2C_Send_Byte((_DS1307_ADDRESS_DEVICE << 1) | 1);
-	
-	SOFTI2C_Read_Byte(&byte, NACK);
-	
-	SOFTI2C_Stop();
-	
-	return byte;
-}
-
-
-
-// ===============================================================================
-
-
-
-void DS1307_Set_Data_From_Struct(DS1307_Data_t *data)
-{
-	_DS1307_Set_Memory_Pointer(_DS1307_ADDR_REGISTER_SECOND);
-	
-	
-	SOFTI2C_Start();
-	
-	
-	
-	SOFTI2C_Send_Byte(_DS1307_ADDRESS_DEVICE << 1);
-	SOFTI2C_Send_Byte(_DS1307_ADDR_REGISTER_SECOND);
-	
-	
-	SOFTI2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->seconds));
-	SOFTI2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->minutes));
-	SOFTI2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->hours));
-	SOFTI2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->weekday));
-	SOFTI2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->day_of_month));
-	SOFTI2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->month));
-	SOFTI2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->year));
-	
-	
-	SOFTI2C_Stop();
-}
-
-
-void DS1307_Get_Data_To_Struct(DS1307_Data_t *data)
-{
-	uint8_t val;
-	
-	
-	_DS1307_Set_Memory_Pointer(_DS1307_ADDR_REGISTER_SECOND);
-	
-	
-	
-	SOFTI2C_Start();
-	
-	
-	
-	SOFTI2C_Send_Byte((_DS1307_ADDRESS_DEVICE << 1) | 1);
-	
-	
-	SOFTI2C_Read_Byte(&val, ACK);
-	
-	val &= ~(1 << _DS1307_WORK_PERMISSION_BIT_CH);
-	data->seconds = _DS1307_UInt8BCD_To_UInt8(val);
-	
-	
-	SOFTI2C_Read_Byte(&val, ACK);
-	data->minutes = _DS1307_UInt8BCD_To_UInt8(val);
-	
-	SOFTI2C_Read_Byte(&val, ACK);
-	data->hours = _DS1307_UInt8BCD_To_UInt8(val);
-	
-	SOFTI2C_Read_Byte(&val, ACK);
-	data->weekday = _DS1307_UInt8BCD_To_UInt8(val);
-	
-	SOFTI2C_Read_Byte(&val, ACK);
-	data->day_of_month = _DS1307_UInt8BCD_To_UInt8(val);
-	
-	SOFTI2C_Read_Byte(&val, ACK);
-	data->month = _DS1307_UInt8BCD_To_UInt8(val);
-	
-	SOFTI2C_Read_Byte(&val, NACK);
-	data->year = _DS1307_UInt8BCD_To_UInt8(val);
-	
-	
-	SOFTI2C_Stop();
-}
-
-
-
-// ===============================================================================
-
-
-
-void DS1307_Write_Data_To_User_56Byte_RAM(uint8_t mem_addr, void *data, uint8_t data_size)
-{
-	_DS1307_Set_Memory_Pointer(mem_addr + _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER);
-	
-	SOFTI2C_Start();
-	
-	SOFTI2C_Send_Byte(_DS1307_ADDRESS_DEVICE << 1);
-	SOFTI2C_Send_Byte(mem_addr + _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER);
-	
-	for (uint8_t i = 0; i < data_size; i++)
-	{
-		SOFTI2C_Send_Byte(((uint8_t*)data)[i]);
-	}
-	
-	SOFTI2C_Stop();
-}
-
-
-void *DS1307_Read_Data_From_User_56Byte_RAM(uint8_t mem_addr, void *data, uint8_t data_size)
-{
-	_DS1307_Set_Memory_Pointer(mem_addr + _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER);
-	
-	SOFTI2C_Start();
-	
-	SOFTI2C_Send_Byte((_DS1307_ADDRESS_DEVICE << 1) | 1);
-	
-	for (uint8_t i = 0; i < data_size - 1; i++)
-	{
-		SOFTI2C_Read_Byte(&((uint8_t*)data)[i], ACK);
-	}
-	
-	SOFTI2C_Read_Byte(&((uint8_t*)data)[data_size - 1], NACK);
-	
-	SOFTI2C_Stop();
-	
-	return data;
-}
-
-
-
-
-
-#else // ===============================================================================
+#else
 
 
 #include "i2c.h"
 
+#define _I2C_Start       I2C_Start
+#define _I2C_Send_Byte   I2C_Send_Byte
+#define _I2C_Restart     I2C_Restart
+#define _I2C_Read_Byte   I2C_Read_Byte
+#define _I2C_Stop        I2C_Stop
+
+#warning "COMPILER MESSAGE: DS1307 USE HARDWARE I2C!"
+
+#endif
+
+
+// ===============================================================================
+
 
 
 void _DS1307_Set_Memory_Pointer(uint8_t addr_reg)
 {
-	I2C_Start();
+	_I2C_Start();
 	
-	I2C_Send_Byte(_DS1307_ADDRESS_DEVICE << 1);
-	I2C_Send_Byte(addr_reg);
+	_I2C_Send_Byte(_DS1307_ADDRESS_DEVICE << 1);
+	_I2C_Send_Byte(addr_reg);
 	
-	I2C_Stop();
+	_I2C_Stop();
 }
 
 
 void _DS1307_Set_Byte(uint8_t addr_reg, uint8_t byte)
 {
-	I2C_Start();
+	_I2C_Start();
 	
-	I2C_Send_Byte(_DS1307_ADDRESS_DEVICE << 1);
-	I2C_Send_Byte(addr_reg);
-	I2C_Send_Byte(byte);
+	_I2C_Send_Byte(_DS1307_ADDRESS_DEVICE << 1);
+	_I2C_Send_Byte(addr_reg);
+	_I2C_Send_Byte(byte);
 	
-	I2C_Stop();
+	_I2C_Stop();
 }
 
 
@@ -227,13 +91,13 @@ uint8_t _DS1307_Get_Byte(uint8_t addr_reg)
 	
 	_DS1307_Set_Memory_Pointer(addr_reg);
 	
-	I2C_Start();
+	_I2C_Start();
 	
-	I2C_Send_Byte((_DS1307_ADDRESS_DEVICE << 1) | 1);
+	_I2C_Send_Byte((_DS1307_ADDRESS_DEVICE << 1) | 1);
 	
-	I2C_Read_Byte(&byte, NACK);
+	_I2C_Read_Byte(&byte, NACK);
 	
-	I2C_Stop();
+	_I2C_Stop();
 	
 	return byte;
 }
@@ -249,24 +113,24 @@ void DS1307_Set_Data_From_Struct(DS1307_Data_t *data)
 	_DS1307_Set_Memory_Pointer(_DS1307_ADDR_REGISTER_SECOND);
 	
 	
-	I2C_Start();
+	_I2C_Start();
 	
 	
 	
-	I2C_Send_Byte(_DS1307_ADDRESS_DEVICE << 1);
-	I2C_Send_Byte(_DS1307_ADDR_REGISTER_SECOND);
+	_I2C_Send_Byte(_DS1307_ADDRESS_DEVICE << 1);
+	_I2C_Send_Byte(_DS1307_ADDR_REGISTER_SECOND);
 	
 	
-	I2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->seconds));
-	I2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->minutes));
-	I2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->hours));
-	I2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->weekday));
-	I2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->day_of_month));
-	I2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->month));
-	I2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->year));
+	_I2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->seconds));
+	_I2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->minutes));
+	_I2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->hours));
+	_I2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->weekday));
+	_I2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->day_of_month));
+	_I2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->month));
+	_I2C_Send_Byte(_DS1307_UInt8_To_UInt8BCD(data->year));
 	
 	
-	I2C_Stop();
+	_I2C_Stop();
 }
 
 
@@ -279,39 +143,39 @@ void DS1307_Get_Data_To_Struct(DS1307_Data_t *data)
 	
 	
 	
-	I2C_Start();
+	_I2C_Start();
 	
 	
 	
-	I2C_Send_Byte((_DS1307_ADDRESS_DEVICE << 1) | 1);
+	_I2C_Send_Byte((_DS1307_ADDRESS_DEVICE << 1) | 1);
 	
 	
-	I2C_Read_Byte(&val, ACK);
+	_I2C_Read_Byte(&val, ACK);
 	
 	val &= ~(1 << _DS1307_WORK_PERMISSION_BIT_CH);
 	data->seconds = _DS1307_UInt8BCD_To_UInt8(val);
 	
 	
-	I2C_Read_Byte(&val, ACK);
+	_I2C_Read_Byte(&val, ACK);
 	data->minutes = _DS1307_UInt8BCD_To_UInt8(val);
 	
-	I2C_Read_Byte(&val, ACK);
+	_I2C_Read_Byte(&val, ACK);
 	data->hours = _DS1307_UInt8BCD_To_UInt8(val);
 	
-	I2C_Read_Byte(&val, ACK);
+	_I2C_Read_Byte(&val, ACK);
 	data->weekday = _DS1307_UInt8BCD_To_UInt8(val);
 	
-	I2C_Read_Byte(&val, ACK);
+	_I2C_Read_Byte(&val, ACK);
 	data->day_of_month = _DS1307_UInt8BCD_To_UInt8(val);
 	
-	I2C_Read_Byte(&val, ACK);
+	_I2C_Read_Byte(&val, ACK);
 	data->month = _DS1307_UInt8BCD_To_UInt8(val);
 	
-	I2C_Read_Byte(&val, NACK);
+	_I2C_Read_Byte(&val, NACK);
 	data->year = _DS1307_UInt8BCD_To_UInt8(val);
 	
 	
-	I2C_Stop();
+	_I2C_Stop();
 }
 
 
@@ -324,17 +188,17 @@ void DS1307_Write_Data_To_User_RAM(uint8_t mem_addr, void *data, uint8_t data_si
 {
 	_DS1307_Set_Memory_Pointer(mem_addr + _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER);
 	
-	I2C_Start();
+	_I2C_Start();
 	
-	I2C_Send_Byte(_DS1307_ADDRESS_DEVICE << 1);
-	I2C_Send_Byte(mem_addr + _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER);
+	_I2C_Send_Byte(_DS1307_ADDRESS_DEVICE << 1);
+	_I2C_Send_Byte(mem_addr + _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER);
 	
 	for (uint8_t i = 0; i < data_size; i++)
 	{
-		I2C_Send_Byte(((uint8_t*)data)[i]);
+		_I2C_Send_Byte(((uint8_t*)data)[i]);
 	}
 	
-	I2C_Stop();
+	_I2C_Stop();
 }
 
 
@@ -342,18 +206,18 @@ void *DS1307_Read_Data_From_User_RAM(uint8_t mem_addr, void *data, uint8_t data_
 {
 	_DS1307_Set_Memory_Pointer(mem_addr + _DS1307_ADDR_VERTEX_OF_USER_RAM_REGISTER);
 	
-	I2C_Start();
+	_I2C_Start();
 	
-	I2C_Send_Byte((_DS1307_ADDRESS_DEVICE << 1) | 1);
+	_I2C_Send_Byte((_DS1307_ADDRESS_DEVICE << 1) | 1);
 	
 	for (uint8_t i = 0; i < data_size - 1; i++)
 	{
-		I2C_Read_Byte(&((uint8_t*)data)[i], ACK);
+		_I2C_Read_Byte(&((uint8_t*)data)[i], ACK);
 	}
 	
-	I2C_Read_Byte(&((uint8_t*)data)[data_size - 1], NACK);
+	_I2C_Read_Byte(&((uint8_t*)data)[data_size - 1], NACK);
 	
-	I2C_Stop();
+	_I2C_Stop();
 	
 	return data;
 }
@@ -361,7 +225,13 @@ void *DS1307_Read_Data_From_User_RAM(uint8_t mem_addr, void *data, uint8_t data_
 
 
 
-#endif
+
+
+// ===============================================================================
+
+
+
+
 
 
 void DS1307_Set_Seconds(uint8_t seconds)
