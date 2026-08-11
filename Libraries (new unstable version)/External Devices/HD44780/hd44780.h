@@ -65,6 +65,11 @@
 #define HD44780_SHIFT_TO_LEFT   false
 
 
+
+// ===============================================================================
+
+
+
 void HD44780_Initialize(bool display_is_enable);
 
 void HD44780_Set_Display_Enable(bool display_is_enable);
@@ -80,7 +85,9 @@ void HD44780_Set_User_Symbol_To_CGRAM(const uint8_t *_8byte_simbol_bitmap_array,
 void HD44780_Set_Flash_User_Symbol_To_CGRAM(const uint8_t *_8byte_flash_simbol_bitmap_array, uint8_t flash_simbol_number);
 
 
+
 // ===============================================================================
+
 
 
 void HD44780_Print_Char(char c);
@@ -98,7 +105,9 @@ void HD44780_Set_Print_To_Char_Terminator(const char* string_array, const char t
 void HD44780_Fill_Char_Pattern(const char char_pattern, uint8_t num_pattern_chars);
 
 
+
 // ===============================================================================
+
 
 
 void HD44780_Print_Flash_Char(const char *flash_c);
@@ -114,7 +123,9 @@ void HD44780_Print_Flash_StringFmt(const char *flash_string_fmt, ...);
 void HD44780_Print_Flash_String_To_Char_Terminator(const char* flash_string, const char terminator);
 
 
+
 // ===============================================================================
+
 
 
 void HD44780_Display_Shift(bool display_shift_is_right);
@@ -127,5 +138,11 @@ void HD44780_Clear();
 
 
 #endif
+
+
+
+
+
+
 
 
