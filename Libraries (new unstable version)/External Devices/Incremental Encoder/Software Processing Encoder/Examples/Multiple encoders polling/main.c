@@ -9,8 +9,15 @@
 
 
 
+// объекты энкодеров Encoder
+//
+// ===============================================================================
+// Encoder objects
+//
 Encoder_t encoder1;
 Encoder_t encoder2;
+
+
 
 volatile uint8_t i1 = 0;
 volatile uint8_t i2 = 0;
