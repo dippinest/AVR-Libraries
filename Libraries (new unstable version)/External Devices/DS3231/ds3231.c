@@ -4,6 +4,11 @@
 
 
 
+
+// ===============================================================================
+
+
+
 uint8_t _DS3231_UInt8_To_UInt8BCD(uint8_t num)
 {
 	return ((num / 10) << 4) | (num % 10);
@@ -12,11 +17,15 @@ uint8_t _DS3231_UInt8_To_UInt8BCD(uint8_t num)
 uint8_t _DS3231_UInt8BCD_To_UInt8(uint8_t bcd_code)
 {
 	uint8_t num = (bcd_code >> 4) * 10;
+	
 	num += (bcd_code & 0x0F);
+	
 	return num;
 }
 
 
+
+// ===============================================================================
 
 
 #ifdef DS3231_USE_SOFTI2C
@@ -24,130 +33,13 @@ uint8_t _DS3231_UInt8BCD_To_UInt8(uint8_t bcd_code)
 
 #include "softi2c.h"
 
+#define _I2C_Start       SOFTI2C_Start
+#define _I2C_Send_Byte   SOFTI2C_Send_Byte
+#define _I2C_Restart     SOFTI2C_Restart
+#define _I2C_Read_Byte   SOFTI2C_Read_Byte
+#define _I2C_Stop        SOFTI2C_Stop
 
-void _DS3231_Set_Memory_Pointer(uint8_t addr_reg)
-{
-	SOFTI2C_Start();
-	
-	SOFTI2C_Send_Byte(_DS3231_ADDRESS_DEVICE << 1);
-	SOFTI2C_Send_Byte(addr_reg);
-	
-	SOFTI2C_Stop();
-}
-
-
-void _DS3231_Set_Byte(uint8_t addr_reg, uint8_t byte)
-{
-	SOFTI2C_Start();
-	
-	SOFTI2C_Send_Byte(_DS3231_ADDRESS_DEVICE << 1);
-	SOFTI2C_Send_Byte(addr_reg);
-	SOFTI2C_Send_Byte(byte);
-	
-	SOFTI2C_Stop();
-}
-
-
-uint8_t _DS3231_Get_Byte(uint8_t addr_reg)
-{
-	uint8_t byte;
-	
-	_DS3231_Set_Memory_Pointer(addr_reg);
-	
-	SOFTI2C_Start();
-	
-	SOFTI2C_Send_Byte((_DS3231_ADDRESS_DEVICE << 1) | 1);
-	
-	SOFTI2C_Read_Byte(&byte, NACK);
-	
-	SOFTI2C_Stop();
-	
-	return byte;
-}
-
-
-void DS3231_Set_Data_From_Struct(DS3231_Data_t *data)
-{
-	SOFTI2C_Start();
-	
-	SOFTI2C_Send_Byte(_DS3231_ADDRESS_DEVICE << 1);
-	SOFTI2C_Send_Byte(_DS3231_ADDR_REGISTER_SECOND);
-	
-	SOFTI2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->seconds));
-	SOFTI2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->minutes));
-	SOFTI2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->hours));
-	SOFTI2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->weekday));
-	SOFTI2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->day_of_month));
-	SOFTI2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->month));
-	SOFTI2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->year));
-	
-	SOFTI2C_Stop();
-}
-
-
-void DS3231_Get_Data_To_Struct(DS3231_Data_t *data)
-{
-	uint8_t val;
-	
-	
-	_DS3231_Set_Memory_Pointer(_DS3231_ADDR_REGISTER_SECOND);
-	
-	SOFTI2C_Start();
-	
-	
-	SOFTI2C_Send_Byte((_DS3231_ADDRESS_DEVICE << 1) | 1);
-	
-	
-	SOFTI2C_Read_Byte(&val, ACK);
-	
-	
-	data->seconds = _DS3231_UInt8BCD_To_UInt8(val);
-	
-	SOFTI2C_Read_Byte(&val, ACK);
-	
-	data->minutes = _DS3231_UInt8BCD_To_UInt8(val);
-	
-	
-	
-	SOFTI2C_Read_Byte(&val, ACK);
-	
-	val &= 0b00111111;
-	
-	data->hours = _DS3231_UInt8BCD_To_UInt8(val);
-	
-	
-	
-	SOFTI2C_Read_Byte(&val, ACK);
-	
-	data->weekday = _DS3231_UInt8BCD_To_UInt8(val);
-	
-	
-	
-	SOFTI2C_Read_Byte(&val, ACK);
-	
-	data->day_of_month = _DS3231_UInt8BCD_To_UInt8(val);
-	
-	
-	
-	SOFTI2C_Read_Byte(&val, ACK);
-	
-	val &= 0b00011111;
-	
-	data->month = _DS3231_UInt8BCD_To_UInt8(val);
-	
-	
-	
-	SOFTI2C_Read_Byte(&val, NACK);
-	
-	data->year = _DS3231_UInt8BCD_To_UInt8(val);
-	
-	
-	
-	SOFTI2C_Stop();
-}
-
-
-
+#warning "COMPILER MESSAGE: Library "ds3231.h" use software I2C!"
 
 
 #else
@@ -155,28 +47,42 @@ void DS3231_Get_Data_To_Struct(DS3231_Data_t *data)
 
 #include "i2c.h"
 
+#define _I2C_Start       I2C_Start
+#define _I2C_Send_Byte   I2C_Send_Byte
+#define _I2C_Restart     I2C_Restart
+#define _I2C_Read_Byte   I2C_Read_Byte
+#define _I2C_Stop        I2C_Stop
+
+#warning "COMPILER MESSAGE: Library "ds3231.h" use hardware I2C!"
+
+#endif
+
+
+// ===============================================================================
+
+
 
 
 void _DS3231_Set_Memory_Pointer(uint8_t addr_reg)
 {
-	I2C_Start();
+	_I2C_Start();
 	
-	I2C_Send_Byte(_DS3231_ADDRESS_DEVICE << 1);
-	I2C_Send_Byte(addr_reg);
+	_I2C_Send_Byte(_DS3231_ADDRESS_DEVICE << 1);
+	_I2C_Send_Byte(addr_reg);
 	
-	I2C_Stop();
+	_I2C_Stop();
 }
 
 
 void _DS3231_Set_Byte(uint8_t addr_reg, uint8_t byte)
 {
-	I2C_Start();
+	_I2C_Start();
 	
-	I2C_Send_Byte(_DS3231_ADDRESS_DEVICE << 1);
-	I2C_Send_Byte(addr_reg);
-	I2C_Send_Byte(byte);
+	_I2C_Send_Byte(_DS3231_ADDRESS_DEVICE << 1);
+	_I2C_Send_Byte(addr_reg);
+	_I2C_Send_Byte(byte);
 	
-	I2C_Stop();
+	_I2C_Stop();
 }
 
 
@@ -186,13 +92,13 @@ uint8_t _DS3231_Get_Byte(uint8_t addr_reg)
 	
 	_DS3231_Set_Memory_Pointer(addr_reg);
 	
-	I2C_Start();
+	_I2C_Start();
 	
-	I2C_Send_Byte((_DS3231_ADDRESS_DEVICE << 1) | 1);
+	_I2C_Send_Byte((_DS3231_ADDRESS_DEVICE << 1) | 1);
 	
-	I2C_Read_Byte(&byte, NACK);
+	_I2C_Read_Byte(&byte, NACK);
 	
-	I2C_Stop();
+	_I2C_Stop();
 	
 	return byte;
 }
@@ -200,20 +106,20 @@ uint8_t _DS3231_Get_Byte(uint8_t addr_reg)
 
 void DS3231_Set_Data_From_Struct(DS3231_Data_t *data)
 {
-	I2C_Start();
+	_I2C_Start();
 	
-	I2C_Send_Byte(_DS3231_ADDRESS_DEVICE << 1);
-	I2C_Send_Byte(_DS3231_ADDR_REGISTER_SECOND);
+	_I2C_Send_Byte(_DS3231_ADDRESS_DEVICE << 1);
+	_I2C_Send_Byte(_DS3231_ADDR_REGISTER_SECOND);
 	
-	I2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->seconds));
-	I2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->minutes));
-	I2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->hours));
-	I2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->weekday));
-	I2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->day_of_month));
-	I2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->month));
-	I2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->year));
+	_I2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->seconds));
+	_I2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->minutes));
+	_I2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->hours));
+	_I2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->weekday));
+	_I2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->day_of_month));
+	_I2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->month));
+	_I2C_Send_Byte(_DS3231_UInt8_To_UInt8BCD(data->year));
 	
-	I2C_Stop();
+	_I2C_Stop();
 }
 
 
@@ -224,24 +130,24 @@ void DS3231_Get_Data_To_Struct(DS3231_Data_t *data)
 	
 	_DS3231_Set_Memory_Pointer(_DS3231_ADDR_REGISTER_SECOND);
 	
-	I2C_Start();
+	_I2C_Start();
 	
 	
-	I2C_Send_Byte((_DS3231_ADDRESS_DEVICE << 1) | 1);
+	_I2C_Send_Byte((_DS3231_ADDRESS_DEVICE << 1) | 1);
 	
 	
-	I2C_Read_Byte(&val, ACK);
+	_I2C_Read_Byte(&val, ACK);
 	
 	
 	data->seconds = _DS3231_UInt8BCD_To_UInt8(val);
 	
-	I2C_Read_Byte(&val, ACK);
+	_I2C_Read_Byte(&val, ACK);
 	
 	data->minutes = _DS3231_UInt8BCD_To_UInt8(val);
 	
 	
 	
-	I2C_Read_Byte(&val, ACK);
+	_I2C_Read_Byte(&val, ACK);
 	
 	val &= 0b00111111;
 	
@@ -249,19 +155,19 @@ void DS3231_Get_Data_To_Struct(DS3231_Data_t *data)
 	
 	
 	
-	I2C_Read_Byte(&val, ACK);
+	_I2C_Read_Byte(&val, ACK);
 	
 	data->weekday = _DS3231_UInt8BCD_To_UInt8(val);
 	
 	
 	
-	I2C_Read_Byte(&val, ACK);
+	_I2C_Read_Byte(&val, ACK);
 	
 	data->day_of_month = _DS3231_UInt8BCD_To_UInt8(val);
 	
 	
 	
-	I2C_Read_Byte(&val, ACK);
+	_I2C_Read_Byte(&val, ACK);
 	
 	val &= 0b00011111;
 	
@@ -269,20 +175,19 @@ void DS3231_Get_Data_To_Struct(DS3231_Data_t *data)
 	
 	
 	
-	I2C_Read_Byte(&val, NACK);
+	_I2C_Read_Byte(&val, NACK);
 	
 	data->year = _DS3231_UInt8BCD_To_UInt8(val);
 	
 	
 	
-	I2C_Stop();
+	_I2C_Stop();
 }
 
 
 
+// ===============================================================================
 
-
-#endif
 
 
 void DS3231_Set_Seconds(uint8_t seconds)
@@ -455,7 +360,7 @@ int8_t DS3231_Get_Integer_Temperature()
 float DS3231_Get_Float_Temperature()
 {
 	int8_t  temperature_high_reg_val = _DS3231_Get_Byte(_DS3231_ADDR_TEMPERATURE_HIGH_REGISTER);
-	uint8_t temperature_low_reg_val = _DS3231_Get_Byte(_DS3231_ADDR_TEMPERATURE_LOW_REGISTER);
+	uint8_t temperature_low_reg_val =  _DS3231_Get_Byte(_DS3231_ADDR_TEMPERATURE_LOW_REGISTER);
 
 	float temperature;
 
@@ -477,7 +382,7 @@ float DS3231_Get_Float_Temperature()
 int16_t DS3231_Get_FIXPoint_2_Fractional_Digits_Temperature()
 {
 	int8_t  temperature_high_reg_val = _DS3231_Get_Byte(_DS3231_ADDR_TEMPERATURE_HIGH_REGISTER);
-	uint8_t temperature_low_reg_val = _DS3231_Get_Byte(_DS3231_ADDR_TEMPERATURE_LOW_REGISTER);
+	uint8_t temperature_low_reg_val =  _DS3231_Get_Byte(_DS3231_ADDR_TEMPERATURE_LOW_REGISTER);
 
 	int16_t temperature = temperature_high_reg_val;
 
