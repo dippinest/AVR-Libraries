@@ -1,4 +1,5 @@
 
+
 #ifndef ANACOMP_CALLBACK_CONFIGURATION_H_
 #define ANACOMP_CALLBACK_CONFIGURATION_H_
 
@@ -10,4 +11,9 @@
 
 //#define ANACOMP_USE_CALLBACK
 
+
 #endif
+
+
+
+
