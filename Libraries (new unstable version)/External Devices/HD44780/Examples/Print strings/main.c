@@ -2,6 +2,7 @@
 
 #include "hd44780.h"
 
+
 int main(void)
 {
 	HD44780_Initialize(true);
