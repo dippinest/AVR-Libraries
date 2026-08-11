@@ -17,10 +17,10 @@ uint8_t buffer[BUFFER_SIZE];
 
 
 
-// объект индикатора FRAMI2C
+// объект внешней микросхемы памяти FRAMI2C
 //
 // ===============================================================================
-// FRAMI2C indicator object
+// the object of the external FRAMI2C memory chip
 //
 FRAMI2C_t frami2c;
 
