@@ -17,11 +17,11 @@
 
 #ifdef DS1307_USE_SOFTI2C
 
-#warning "COMPILER MESSAGE: Library "ds1307.h" use software SPI!"
+#warning "COMPILER MESSAGE: Library "ds1307.h" use software I2C!"
 
 #else
 
-#warning "COMPILER MESSAGE: Library "ds1307.h" use hardware SPI!"
+#warning "COMPILER MESSAGE: Library "ds1307.h" use hardware I2C!"
 
 #endif
 
