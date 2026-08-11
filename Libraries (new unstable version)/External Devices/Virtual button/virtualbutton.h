@@ -12,6 +12,11 @@
 // Имеется возможность постоянного опроса кнопки, однократного нажатия,
 // отпускания кнопки, а также длительного нажатия
 //
+// Если данная библиотека будет использована с реальными датчиками
+// (аппаратные кнопки, реле, концевые выключатели и т.д.),
+// обязательно используйте аппаратные методы подавления дребезга контактов
+// (с помощью внешней RC цепи или с помощью триггера Шмидта)
+//
 // -------------------------------------------------------------------------------
 //
 // Library for polling real or virtual buttons
@@ -23,6 +28,11 @@
 //
 // It's possible to continuously poll the button, press once,
 // release the button, as well as long-term pressing
+//
+// If this library is used with real sensors
+// (hardware buttons, relays, limit switches, etc.),
+// be sure to use hardware methods to suppress contact bounce
+// (using an external RC circuit or a Schmitt trigger).
 //
 // ===============================================================================
 
