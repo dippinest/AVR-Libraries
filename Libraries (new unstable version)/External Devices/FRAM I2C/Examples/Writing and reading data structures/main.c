@@ -4,6 +4,14 @@
 
 #include "uart.h"
 
+
+
+
+// пример струкуры (объекта), которую необходисо сохранить и прочитать из FRAM
+//
+// ===============================================================================
+// an example of a structure (object) that needs to be saved and read from FRAM
+//
 typedef struct
 {
 	int8_t   i8_1;
@@ -15,9 +23,21 @@ typedef struct
 } Data_t;
 
 
+
+// объекты структуры Data
+//
+// ===============================================================================
+// Data structure object
+//
 Data_t data1, data2;
 
 
+
+// объект индикатора FRAMI2C
+//
+// ===============================================================================
+// FRAMI2C indicator object
+//
 FRAMI2C_t frami2c;
 
 
