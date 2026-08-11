@@ -1,18 +1,33 @@
 
+
 #include "softi2c.h"
 #include "frami2c.h"
 
 #include "uart.h"
 
 
+
+
 #define STR_SIZE 445
 
-static char str[STR_SIZE] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-
-static char buffer[STR_SIZE];
+char str[STR_SIZE] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
 
+
+
+// объект внешней микросхемы памяти FRAMI2C
+//
+// ===============================================================================
+// the object of the external FRAMI2C memory chip
+//
 FRAMI2C_t frami2c;
+
+
+// приёмный буфер
+// -------------------------------------------------------------------------------
+// receiving buffer
+//
+char buffer[STR_SIZE];
 
 
 
@@ -46,6 +61,8 @@ int main(void)
 	{
 	}
 }
+
+
 
 
 
