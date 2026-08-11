@@ -9,6 +9,11 @@
 
 
 
+// объекты виртуальных кнопок VirtualButton
+//
+// ===============================================================================
+// VirtualButton virtual button objects
+//
 VirtualButton_t vbutton1;
 VirtualButton_t vbutton2;
 VirtualButton_t vbutton3;
