@@ -80,13 +80,16 @@ void HD44780_Initialize(bool display_is_enable)
 	_HD44780_Send_Half_Byte_4Bit_Mode(0b00000010); _delay_us(120);
 	
 	_HD44780_Send_Byte(_control_mode_display, _HD44780_DISPLAY_SEND_COMMAND_MODE); _delay_us(40);
+
+
 	
 	HD44780_Set_Cursor_Home();
+	
 	HD44780_Set_Cursor_Enable(false);
-	HD44780_Clear();
-	HD44780_Set_Display_Enable(display_is_enable);
 	
 	HD44780_Clear();
+	
+	HD44780_Set_Display_Enable(display_is_enable);
 }
 
 
@@ -187,7 +190,9 @@ void HD44780_Set_User_Symbol_To_CGRAM(const uint8_t *_8byte_simbol_bitmap_array,
 void HD44780_Set_Flash_User_Symbol_To_CGRAM(const uint8_t *_8byte_flash_simbol_bitmap_array, uint8_t flash_simbol_number)
 {
 	_HD44780_Send_Byte((0b01000000 | (flash_simbol_number * 8)), _HD44780_DISPLAY_SEND_COMMAND_MODE);
+	
 	_delay_us(40);
+
 	
 	uint8_t c;
 	
@@ -197,8 +202,10 @@ void HD44780_Set_Flash_User_Symbol_To_CGRAM(const uint8_t *_8byte_flash_simbol_b
 		_HD44780_Send_Byte(c, _HD44780_DISPLAY_SEND_DATA_MODE);
 		_delay_us(40);
 	}
+
 	
 	_HD44780_Send_Byte(0b10000000, _HD44780_DISPLAY_SEND_COMMAND_MODE);
+	
 	_delay_us(40);
 }
 
@@ -244,10 +251,17 @@ void HD44780_Safe_Print_String(const char *string_array, uint16_t max_string_len
 void HD44780_Print_StringFmt(const char *string_fmt, ...)
 {
 	va_list argptr;
+	
 	va_start(argptr, string_fmt);
+
+	
 	static FILE hd44780_stdout = FDEV_SETUP_STREAM(_HD44780_Send_Char, NULL, _FDEV_SETUP_WRITE);
+
 	stdout = &hd44780_stdout;
+
+	
 	vfprintf(stdout, string_fmt, argptr);
+	
 	va_end(argptr);
 }
 
