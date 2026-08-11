@@ -1,7 +1,9 @@
 
+
 #include <avr/interrupt.h>
 
 #include "anacomp.h"
+
 
 #define LED_ON  (PORTC &= ~(1 << 5))
 #define LED_OFF (PORTC |=  (1 << 5))
@@ -23,19 +25,29 @@ void Analog_Comparator_Callback()
 	ANACOMP_Set_Interrupt_Enable(true);
 }
 
+
 int main(void)
 {
 	ANACOMP_Set_Enable(true);
 	ANACOMP_Set_Interrupt_Enable(true);
 	ANACOMP_Direct_Input_Set_Connect(ANACOMP_DIRECT_INPUT_IS_CONNECTED_TO_INTERNAL_VOLTAGE_SOURCE);
 	ANACOMP_Set_Interrupt_Type(ANACOMP_INTERRUPT_TYPE_ANY_CHANGE);
+
 	
 	DDRC |= (1 << 5);
+
 	
 	ANACOMP_Set_Callback_Function(Analog_Comparator_Callback);
+
+
 	
-	
+
+	// не забудьте включить глобальные прерывания
+	// -------------------------------------------------------------------------------
+	// don't forget to enable global interrupts
+	//
 	sei();
+	
 	
 	while (1)
 	{
