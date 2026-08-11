@@ -53,6 +53,7 @@
 #define ANACOMP_STATE_IS_LOW   false
 
 
+
 // ===============================================================================
 
 
@@ -68,6 +69,7 @@ inline void ANACOMP_Set_Enable(bool is_enable)
 	}
 }
 
+
 inline void ANACOMP_Direct_Input_Set_Connect(bool direct_input_is_connect)
 {
 	if (direct_input_is_connect)
@@ -80,6 +82,7 @@ inline void ANACOMP_Direct_Input_Set_Connect(bool direct_input_is_connect)
 	}
 }
 
+
 inline void ANACOMP_Set_Interrupt_Enable(bool is_enable)
 {
 	if (is_enable)
@@ -91,6 +94,7 @@ inline void ANACOMP_Set_Interrupt_Enable(bool is_enable)
 		ACSR &= ~(1 << ACIE);
 	}
 }
+
 
 inline void ANACOMP_Set_Interrupt_Type(uint8_t interrupt_type)
 {
@@ -113,6 +117,7 @@ inline void ANACOMP_Set_Interrupt_Type(uint8_t interrupt_type)
 	}
 }
 
+
 inline bool ANACOMP_Is_Enable()
 {
 	if (!(ACSR & (1 << ACD)))
@@ -122,6 +127,7 @@ inline bool ANACOMP_Is_Enable()
 	
 	return false;
 }
+
 
 inline bool ANACOMP_Direct_Input_Is_Connect()
 {
@@ -142,6 +148,7 @@ inline bool ANACOMP_Interrupt_Is_Enable()
 	
 	return false;
 }
+
 
 inline uint8_t ANACOMP_Get_Interrupt_Type()
 {
@@ -169,7 +176,9 @@ inline bool ANACOMP_Get_State()
 }
 
 
+
 // ===============================================================================
+
 
 
 #ifdef ANACOMP_USE_CALLBACK
@@ -182,6 +191,11 @@ void *ANACOMP_Get_Callback_Function();
 
 
 #endif
+
+
+
+
+
 
 
 
