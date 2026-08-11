@@ -33,10 +33,6 @@ const uint8_t _tm74hc595_digits_symbols_table[] PROGMEM =
 #include "softspi.h"
 
 #define _SPI_Send_Byte        SOFTSPI_Send_Byte
-#define _SPI_CS_Set_Inactive  SOFTSPI_CS_Set_Inactive
-#define _SPI_CS_Set_Active    SOFTSPI_CS_Set_Active
-
-#warning "COMPILER MESSAGE: Library "tm74hc595.h" use software SPI!"
 
 
 #else
@@ -45,10 +41,6 @@ const uint8_t _tm74hc595_digits_symbols_table[] PROGMEM =
 #include "spi.h"
 
 #define _SPI_Send_Byte        SPI_Send_Byte
-#define _SPI_CS_Set_Inactive  SPI_CS_Set_Inactive
-#define _SPI_CS_Set_Active    SPI_CS_Set_Active
-
-#warning "COMPILER MESSAGE: Library "tm74hc595.h" use hardware SPI!"
 
 #endif
 
@@ -77,8 +69,10 @@ void TM74HC595_Clear(TM74HC595_t *tm74hc595)
 	_SPI_Send_Byte(TM74HC595_EMPTY);
 	_SPI_Send_Byte(TM74HC595_EMPTY);
 	
-	_SPI_CS_Set_Inactive();
-	_SPI_CS_Set_Active();
+	if ((tm74hc595->latch_callback) != NULL)
+	{
+		tm74hc595->latch_callback();
+	}
 }
 
 
