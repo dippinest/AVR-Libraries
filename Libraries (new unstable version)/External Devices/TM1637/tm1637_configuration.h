@@ -38,12 +38,13 @@
 // if you want to work with multiple TM1637 indicators, uncomment this define
 // (otherwise comment it out)
 
-#define TM1637_USE_MULTIPLE_INTERFACE
+#ifdef TM1637_USE_MULTIPLE_INTERFACE
 
 
 
+#warning "COMPILER MESSAGE: Library "tm1637.h" do not use multiple interface!"
 
-#ifndef TM1637_USE_MULTIPLE_INTERFACE
+#else
 
 
 // определения GPIO для CLK TM1637
@@ -66,14 +67,10 @@
 #define TM1637_DIO_PIN   1
 
 
-
 #warning "COMPILER MESSAGE: Library "tm1637.h" use multiple interface!"
 
-#else
-
-#warning "COMPILER MESSAGE: Library "tm1637.h" do not use multiple interface!"
-
 #endif
+
 
 
 #endif
