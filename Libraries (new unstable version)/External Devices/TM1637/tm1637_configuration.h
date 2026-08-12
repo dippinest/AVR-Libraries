@@ -45,6 +45,7 @@
 
 #ifndef TM1637_USE_MULTIPLE_INTERFACE
 
+
 // определения GPIO для CLK TM1637
 // -------------------------------------------------------------------------------
 // GPIO definitions for CLK TM1637
@@ -52,6 +53,7 @@
 #define TM1637_CLK_DDR	 DDRB
 #define TM1637_CLK_PORT  PORTB
 #define TM1637_CLK_PIN   0
+
 
 
 // определения GPIO для DIO TM1637
@@ -62,6 +64,14 @@
 #define TM1637_DIO_PINX  PINB
 #define TM1637_DIO_PORT  PORTB
 #define TM1637_DIO_PIN   1
+
+
+
+#warning "COMPILER MESSAGE: Library "tm1637.h" use multiple interface!"
+
+#else
+
+#warning "COMPILER MESSAGE: Library "tm1637.h" do not use multiple interface!"
 
 #endif
 
