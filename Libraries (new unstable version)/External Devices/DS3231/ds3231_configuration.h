@@ -13,9 +13,22 @@
 #define DS3231_USE_SOFTI2C
 
 
+
+
+
+#ifdef DS3231_USE_SOFTI2C
+
+#warning "COMPILER MESSAGE: Library "ds3231.h" use software I2C!"
+
+#else
+
+#warning "COMPILER MESSAGE: Library "ds3231.h" use hardware I2C!"
+
 #endif
 
 
+
+#endif
 
 
 
