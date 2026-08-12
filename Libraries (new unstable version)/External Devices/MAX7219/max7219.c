@@ -27,51 +27,33 @@ const uint8_t _max7219_digits_symbols_table[] PROGMEM =
 
 // ===============================================================================
 
-
-
-
-#if defined (MAX7219_USE_SOFTSPI) && defined (MAX7219_USE_CS_CALLBACKS)
+#ifdef TM74HC595_USE_SOFTSPI
 
 
 #include "softspi.h"
 
+#define _SPI_Send_Byte        SOFTSPI_Send_Byte
+#define _SPI_CS_Set_Active    SOFTSPI_CS_Set_Active
+#define _SPI_CS_Set_Inactive  SOFTSPI_CS_Set_Inactive
 
 
-static void _MAX7219_Send_Command(uint8_t reg, uint8_t data)
-{
-	SOFTSPI_CS_Set_Active();
-	
-	SOFTSPI_Send_Byte(reg);
-	SOFTSPI_Send_Byte(data);
-	
-	SOFTSPI_CS_Set_Inactive();
-}
-
-
-
-
-
-#elif defined (MAX7219_USE_SOFTSPI) && !defined (MAX7219_USE_CS_CALLBACKS)
-
-
-#include "softspi.h"
-
-
-
-static void _MAX7219_Send_Command(uint8_t reg, uint8_t data)
-{
-	SOFTSPI_Send_Byte(reg);
-	SOFTSPI_Send_Byte(data);
-}
-
-
-#elif !defined (MAX7219_USE_SOFTSPI) && defined (MAX7219_USE_CS_CALLBACKS)
-
-
+#else
 
 
 #include "spi.h"
 
+#define _SPI_Send_Byte        SPI_Send_Byte
+#define _SPI_CS_Set_Active    SPI_CS_Set_Active
+#define _SPI_CS_Set_Inactive  SPI_CS_Set_Inactive
+
+#endif
+
+// ===============================================================================
+
+
+
+
+#ifdef MAX7219_USE_CS_CALLBACKS
 
 
 static void _MAX7219_Send_Command(uint8_t reg, uint8_t data)
@@ -85,13 +67,8 @@ static void _MAX7219_Send_Command(uint8_t reg, uint8_t data)
 }
 
 
-#elif !defined (MAX7219_USE_SOFTSPI) && !defined (MAX7219_USE_CS_CALLBACKS)
 
-
-
-
-#include "spi.h"
-
+#else
 
 
 static void _MAX7219_Send_Command(uint8_t reg, uint8_t data)
@@ -103,6 +80,9 @@ static void _MAX7219_Send_Command(uint8_t reg, uint8_t data)
 #endif
 
 
+
+
+// ===============================================================================
 
 
 
