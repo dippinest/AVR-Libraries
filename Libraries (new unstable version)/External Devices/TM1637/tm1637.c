@@ -164,7 +164,9 @@ void TM1637_Initialize_Object
 	
 	(*tm1637).configuration_register_buffer |= (brightness_coef & 0b111);
 	
-	
+
+
+	TM1637_t *temp_target_tm1637_object = target_tm1637_object;
 	
 	target_tm1637_object = tm1637;
 	
@@ -175,6 +177,9 @@ void TM1637_Initialize_Object
 	_TM1637_Send_Byte((*tm1637).configuration_register_buffer);
 	
 	_TM1637_Stop();
+
+
+	target_tm1637_object = temp_target_tm1637_object;
 }
 
 
