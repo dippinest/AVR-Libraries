@@ -17,8 +17,6 @@
 #define _I2C_Read_Byte   SOFTI2C_Read_Byte
 #define _I2C_Stop        SOFTI2C_Stop
 
-#warning "COMPILER MESSAGE: Library "frami2c.h" use software I2C!"
-
 
 #else
 
@@ -30,8 +28,6 @@
 #define _I2C_Restart     I2C_Restart
 #define _I2C_Read_Byte   I2C_Read_Byte
 #define _I2C_Stop        I2C_Stop
-
-#warning "COMPILER MESSAGE: Library "frami2c.h" use hardware I2C!"
 
 #endif
 
