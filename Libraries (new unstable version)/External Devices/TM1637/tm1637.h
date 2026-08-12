@@ -114,17 +114,7 @@
 
 
 
-#ifndef TM1637_USE_MULTIPLE_INTERFACE
-
-
-void TM1637_Initialize(bool is_enable, uint8_t brightness_coef);
-
-void TM1637_Set_Enable(bool is_enable);
-
-void TM1637_Set_Brightness(uint8_t brightness_coef);
-
-
-#else // ===============================================================================
+#ifdef TM1637_USE_MULTIPLE_INTERFACE
 
 
 #ifndef T
@@ -171,7 +161,7 @@ void TM1637_Initialize_Object
 	uint8_t  dio_pin,
 
 	bool is_enable,
-	
+
 	uint8_t brightness_coef
 );
 
@@ -185,6 +175,19 @@ TM1637_t *TM1637_Get_Target_Object();
 // ===============================================================================
 
 
+
+void TM1637_Set_Enable(bool is_enable);
+
+void TM1637_Set_Brightness(uint8_t brightness_coef);
+
+
+
+
+#else // ===============================================================================
+
+
+
+void TM1637_Initialize(bool is_enable, uint8_t brightness_coef);
 
 void TM1637_Set_Enable(bool is_enable);
 
@@ -220,7 +223,6 @@ char *TM1637_Convert_Num_String_To_Symbols_Array(char *num_string, uint8_t num_s
 
 
 #endif
-
 
 
 
