@@ -12,8 +12,21 @@
 #define LM75_USE_SOFTI2C
 
 
+
+
+
+#ifdef LM75_USE_SOFTI2C
+
+#warning "COMPILER MESSAGE: Library "lm75.h" use software I2C!"
+
+#else
+
+#warning "COMPILER MESSAGE: Library "lm75.h" use hardware I2C!"
+
 #endif
 
 
+
+#endif
 
 
