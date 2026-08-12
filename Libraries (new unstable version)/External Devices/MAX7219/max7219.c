@@ -58,12 +58,12 @@ const uint8_t _max7219_digits_symbols_table[] PROGMEM =
 
 static void _MAX7219_Send_Command(uint8_t reg, uint8_t data)
 {
-	SPI_CS_Set_Active();
+	_SPI_CS_Set_Active();
 	
-	SPI_Send_Byte(reg);
-	SPI_Send_Byte(data);
+	_SPI_Send_Byte(reg);
+	_SPI_Send_Byte(data);
 	
-	SPI_CS_Set_Inactive();
+	_SPI_CS_Set_Inactive();
 }
 
 
@@ -73,8 +73,8 @@ static void _MAX7219_Send_Command(uint8_t reg, uint8_t data)
 
 static void _MAX7219_Send_Command(uint8_t reg, uint8_t data)
 {
-	SPI_Send_Byte(reg);
-	SPI_Send_Byte(data);
+	_SPI_Send_Byte(reg);
+	_SPI_Send_Byte(data);
 }
 
 #endif
