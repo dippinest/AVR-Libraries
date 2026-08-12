@@ -27,158 +27,15 @@ const uint8_t _tm1637_digits_symbols_table[] PROGMEM =
 // ===============================================================================
 
 
-
 #define TM1637_DELAY_1  _delay_us(TM1637_MIN_PULSE_DURATION_DELAY_US)
 #define TM1637_DELAY_2  _delay_us(TM1637_MIN_PULSE_DURATION_DELAY_US * 2)
 
 
-#ifndef TM1637_USE_MULTIPLE_INTERFACE
-
-
-#define TM1637_DIO_SET_LOW	  TM1637_DIO_DDR |=  (1 << TM1637_DIO_PIN)
-#define TM1637_DIO_SET_HIGH   TM1637_DIO_DDR &= ~(1 << TM1637_DIO_PIN)
-
-#define TM1637_DIO_GET_VALUE (TM1637_DIO_PINX & (1 << TM1637_DIO_PIN))
-
-#define TM1637_SCL_SET_LOW	  TM1637_CLK_DDR |=  (1 << TM1637_CLK_PIN)
-#define TM1637_SCL_SET_HIGH   TM1637_CLK_DDR &= ~(1 << TM1637_CLK_PIN)
-
-
-static uint8_t _tm1637_configuration_register_buffer = 0b10000000;
-
-
-
 // ===============================================================================
 
 
 
-static void _TM1637_Start()
-{
-	TM1637_DIO_SET_LOW;
-	TM1637_DELAY_2;
-}
-
-static void _TM1637_Stop()
-{
-	TM1637_SCL_SET_LOW;
-	TM1637_DELAY_1;
-	
-	TM1637_DIO_SET_LOW;
-	TM1637_DELAY_1;
-	
-	TM1637_SCL_SET_HIGH;
-	TM1637_DELAY_2;
-	
-	TM1637_DIO_SET_HIGH;
-	TM1637_DELAY_2;
-}
-
-
-uint8_t _TM1637_Send_Byte(uint8_t byte)
-{
-	for (uint8_t i = 0; i < 8; ++i)
-	{
-		TM1637_SCL_SET_LOW;
-		TM1637_DELAY_1;
-		
-		if (byte & 0b1)
-		{
-			TM1637_DIO_SET_HIGH;
-		}
-		else
-		{
-			TM1637_DIO_SET_LOW;
-		}
-		
-		TM1637_DELAY_1;
-		
-		TM1637_SCL_SET_HIGH;
-		TM1637_DELAY_2;
-		
-		byte >>= 1;
-	}
-	
-	TM1637_SCL_SET_LOW;
-	TM1637_DIO_SET_HIGH;
-	TM1637_DELAY_2;
-	
-	TM1637_SCL_SET_HIGH;
-	TM1637_DELAY_1;
-
-	uint8_t ack = TM1637_DIO_GET_VALUE;
-	
-	if (ack == _TM1637_NACK)
-	{
-		TM1637_DIO_SET_LOW;
-	}
-	
-	TM1637_DELAY_1;
-
-	return ack;
-}
-
-
-
-// ===============================================================================
-
-
-
-void TM1637_Initialize(bool is_enable, uint8_t brightness_coef)
-{
-	TM1637_DIO_PORT &= ~(1 << TM1637_DIO_PIN);
-	TM1637_CLK_PORT &= ~(1 << TM1637_CLK_PIN);
-	
-	if (is_enable == true)
-	{
-		_tm1637_configuration_register_buffer |= (1 << 3);
-	}
-	
-	_tm1637_configuration_register_buffer |= (brightness_coef & 0b111);
-	
-	
-	_TM1637_Start();
-	
-	_TM1637_Send_Byte(_tm1637_configuration_register_buffer);
-	
-	_TM1637_Stop();
-}
-
-void TM1637_Set_Enable(bool is_enable)
-{
-	if (is_enable == true)
-	{
-		_tm1637_configuration_register_buffer |= (1 << 3);
-	}
-	else
-	{
-		_tm1637_configuration_register_buffer &= ~(1 << 3);
-	}
-	
-	
-	_TM1637_Start();
-	
-	_TM1637_Send_Byte(_tm1637_configuration_register_buffer);
-	
-	_TM1637_Stop();
-}
-
-void TM1637_Set_Brightness(uint8_t brightness_coef)
-{
-	_tm1637_configuration_register_buffer &= 0b11111000;
-	
-	_tm1637_configuration_register_buffer |= (brightness_coef & 0b111);
-	
-	
-	_TM1637_Start();
-	
-	_TM1637_Send_Byte(_tm1637_configuration_register_buffer);
-	
-	_TM1637_Stop();
-}
-
-
-
-#else // ===============================================================================
+#ifdef TM1637_USE_MULTIPLE_INTERFACE
 
 
 
@@ -309,6 +166,10 @@ void TM1637_Initialize_Object
 	
 	
 	
+	target_tm1637_object = tm1637;
+	
+	
+	
 	_TM1637_Start();
 	
 	_TM1637_Send_Byte((*tm1637).configuration_register_buffer);
@@ -377,7 +238,163 @@ void TM1637_Set_Brightness(uint8_t brightness_coef)
 }
 
 
+
+
+#else // ===============================================================================
+
+
+
+
+
+#define TM1637_DIO_SET_LOW	  TM1637_DIO_DDR |=  (1 << TM1637_DIO_PIN)
+#define TM1637_DIO_SET_HIGH   TM1637_DIO_DDR &= ~(1 << TM1637_DIO_PIN)
+
+#define TM1637_DIO_GET_VALUE (TM1637_DIO_PINX & (1 << TM1637_DIO_PIN))
+
+#define TM1637_SCL_SET_LOW	  TM1637_CLK_DDR |=  (1 << TM1637_CLK_PIN)
+#define TM1637_SCL_SET_HIGH   TM1637_CLK_DDR &= ~(1 << TM1637_CLK_PIN)
+
+
+static uint8_t _tm1637_configuration_register_buffer = 0b10000000;
+
+
+
+// ===============================================================================
+
+
+
+static void _TM1637_Start()
+{
+	TM1637_DIO_SET_LOW;
+	TM1637_DELAY_2;
+}
+
+
+static void _TM1637_Stop()
+{
+	TM1637_SCL_SET_LOW;
+	TM1637_DELAY_1;
+	
+	TM1637_DIO_SET_LOW;
+	TM1637_DELAY_1;
+	
+	TM1637_SCL_SET_HIGH;
+	TM1637_DELAY_2;
+	
+	TM1637_DIO_SET_HIGH;
+	TM1637_DELAY_2;
+}
+
+
+uint8_t _TM1637_Send_Byte(uint8_t byte)
+{
+	for (uint8_t i = 0; i < 8; ++i)
+	{
+		TM1637_SCL_SET_LOW;
+		TM1637_DELAY_1;
+		
+		if (byte & 0b1)
+		{
+			TM1637_DIO_SET_HIGH;
+		}
+		else
+		{
+			TM1637_DIO_SET_LOW;
+		}
+		
+		TM1637_DELAY_1;
+		
+		TM1637_SCL_SET_HIGH;
+		TM1637_DELAY_2;
+		
+		byte >>= 1;
+	}
+	
+	TM1637_SCL_SET_LOW;
+	TM1637_DIO_SET_HIGH;
+	TM1637_DELAY_2;
+	
+	TM1637_SCL_SET_HIGH;
+	TM1637_DELAY_1;
+
+	uint8_t ack = TM1637_DIO_GET_VALUE;
+	
+	if (ack == _TM1637_NACK)
+	{
+		TM1637_DIO_SET_LOW;
+	}
+	
+	TM1637_DELAY_1;
+
+	return ack;
+}
+
+
+
+// ===============================================================================
+
+
+
+void TM1637_Initialize(bool is_enable, uint8_t brightness_coef)
+{
+	TM1637_DIO_PORT &= ~(1 << TM1637_DIO_PIN);
+	TM1637_CLK_PORT &= ~(1 << TM1637_CLK_PIN);
+	
+	if (is_enable == true)
+	{
+		_tm1637_configuration_register_buffer |= (1 << 3);
+	}
+	
+	_tm1637_configuration_register_buffer |= (brightness_coef & 0b111);
+	
+	
+	_TM1637_Start();
+	
+	_TM1637_Send_Byte(_tm1637_configuration_register_buffer);
+	
+	_TM1637_Stop();
+}
+
+
+void TM1637_Set_Enable(bool is_enable)
+{
+	if (is_enable == true)
+	{
+		_tm1637_configuration_register_buffer |= (1 << 3);
+	}
+	else
+	{
+		_tm1637_configuration_register_buffer &= ~(1 << 3);
+	}
+	
+	
+	_TM1637_Start();
+	
+	_TM1637_Send_Byte(_tm1637_configuration_register_buffer);
+	
+	_TM1637_Stop();
+}
+
+
+void TM1637_Set_Brightness(uint8_t brightness_coef)
+{
+	_tm1637_configuration_register_buffer &= 0b11111000;
+	
+	_tm1637_configuration_register_buffer |= (brightness_coef & 0b111);
+	
+	
+	_TM1637_Start();
+	
+	_TM1637_Send_Byte(_tm1637_configuration_register_buffer);
+	
+	_TM1637_Stop();
+}
+
+
+
 #endif
+
+
 
 
 
