@@ -171,12 +171,8 @@ void MAX7219_Display_Test();
 
 void MAX7219_Initialize(bool is_enable, uint8_t decode_mode, uint8_t num_of_involved_digits, uint8_t brightness_coef);
 
-
-
 void MAX7219_Put_Symbols(const uint8_t *symbols_arr, uint8_t symbols_arr_size, bool output_direction);
 
-
-// use this function only with data decoding mode!
 void MAX7219_Put_Num_String_With_Using_Decode_Mode(const char *data, uint8_t data_size, const uint8_t max_num_digits);
 
 
@@ -185,8 +181,6 @@ void MAX7219_Put_Num_String_With_Using_Decode_Mode(const char *data, uint8_t dat
 
 
 
-
-// use this function only without data decoding mode (MAX7219_DECODE_MODE_NO_DECODE)!
 void MAX7219_Put_Num_String_With_Using_Program_Decoder(const char *data, uint8_t data_size);
 
 void MAX7219_Put_Num_String_Reverse_With_Using_Program_Decoder(const char *data, uint8_t data_size);
@@ -196,11 +190,15 @@ void MAX7219_Put_Num_String_Reverse_With_Using_Program_Decoder(const char *data,
 #endif
 
 
+
+
+
 char *MAX7219_Convert_Num_String_To_Symbols_Array(char *num_string, uint8_t num_string_size);
 
 
 
 #endif
+
 
 
 
