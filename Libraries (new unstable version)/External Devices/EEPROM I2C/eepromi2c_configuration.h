@@ -13,5 +13,21 @@
 #define EEPROMI2C_USE_SOFTI2C
 
 
+
+
+
+#ifdef EEPROMI2C_USE_SOFTI2C
+
+#warning "COMPILER MESSAGE: Library "eepromi2c.h" use software I2C!"
+
+#else
+
+#warning "COMPILER MESSAGE: Library "eepromi2c.h" use hardware I2C!"
+
 #endif
+
+
+
+#endif
+
 
