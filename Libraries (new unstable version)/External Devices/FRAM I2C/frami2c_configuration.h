@@ -11,7 +11,22 @@
 
 #define FRAMI2C_USE_SOFTI2C
 
+
+
+
+
+#ifdef FRAMI2C_USE_SOFTI2C
+
+#warning "COMPILER MESSAGE: Library "frami2c.h" use software I2C!"
+
+#else
+
+#warning "COMPILER MESSAGE: Library "frami2c.h" use hardware I2C!"
+
 #endif
 
+
+
+#endif
 
 
