@@ -119,8 +119,11 @@ void HD44780_I2C_Initialize_Object(HD44780_I2C_t *hd44780_i2c, uint8_t dev_addr,
 	(*hd44780_i2c).cursor_display_shift_mode   = _HD44780_I2C_INITIAL_CURSOR_DISPLAY_SHIFT_MODE;
 	(*hd44780_i2c).function_set_mode_display   = _HD44780_I2C_INITIAL_FUNCTION_SET_MODE_DISPLAY;
 	
+
+	HD44780_I2C_t *temp_target_hd44780_i2c_object = target_hd44780_i2c_object;
 	
 	target_hd44780_i2c_object = hd44780_i2c;
+	
 	
 	
 	uint8_t data_buffer = 0b00000011 | _HD44780_I2C_E; _HD44780_I2C_Write(data_buffer); _delay_us(5);
@@ -144,6 +147,9 @@ void HD44780_I2C_Initialize_Object(HD44780_I2C_t *hd44780_i2c, uint8_t dev_addr,
 	HD44780_I2C_Clear();
 	
 	HD44780_I2C_Set_Display_Enable(display_is_enable);
+
+
+	target_hd44780_i2c_object = temp_target_hd44780_i2c_object;
 }
 
 
