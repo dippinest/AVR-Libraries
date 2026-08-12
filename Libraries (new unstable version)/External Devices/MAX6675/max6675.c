@@ -4,61 +4,36 @@
 
 
 
-#if defined (MAX6675_USE_SOFTSPI) && defined (MAX6675_USE_CS_CALLBACKS)
+// ===============================================================================
+
+#ifdef MAX7219_USE_SOFTSPI
 
 
 #include "softspi.h"
 
+#define _SPI_Get_Byte         SOFTSPI_Get_Byte
+#define _SPI_CS_Set_Active    SOFTSPI_CS_Set_Active
+#define _SPI_CS_Set_Inactive  SOFTSPI_CS_Set_Inactive
 
 
-static uint16_t _MAX6675_Get_Data()
-{
-	uint16_t data = 0;
-	
-	
-	SOFTSPI_CS_Set_Active();
-	
-	data = SOFTSPI_Get_Byte();
-	
-	data <<= 8;
-	
-	data |= SOFTSPI_Get_Byte();
-	
-	SOFTSPI_CS_Set_Inactive();
-	
-	
-	return data;
-}
-
-
-#elif defined (MAX6675_USE_SOFTSPI) && !defined (MAX6675_USE_CS_CALLBACKS)
-
-
-#include "softspi.h"
-
-
-
-static uint16_t _MAX6675_Get_Data()
-{
-	uint16_t data = 0;
-
-
-	data = SOFTSPI_Get_Byte();
-	
-	data <<= 8;
-	
-	data |= SOFTSPI_Get_Byte();
-	
-	
-	return data;
-}
-
-
-#elif !defined (MAX6675_USE_SOFTSPI) && defined (MAX6675_USE_CS_CALLBACKS)
+#else
 
 
 #include "spi.h"
 
+#define _SPI_Get_Byte         SPI_Get_Byte
+#define _SPI_CS_Set_Active    SPI_CS_Set_Active
+#define _SPI_CS_Set_Inactive  SPI_CS_Set_Inactive
+
+#endif
+
+// ===============================================================================
+
+
+
+
+#ifdef MAX6675_USE_CS_CALLBACKS
+
 
 
 static uint16_t _MAX6675_Get_Data()
@@ -66,26 +41,23 @@ static uint16_t _MAX6675_Get_Data()
 	uint16_t data = 0;
 	
 	
-	SPI_CS_Set_Active();
+	_SPI_CS_Set_Active();
 	
-	data = SPI_Get_Byte(0x00);
+	data = _SPI_Get_Byte(0x00);
 	
 	data <<= 8;
 	
-	data |= SPI_Get_Byte(0x00);
+	data |= _SPI_Get_Byte(0x00);
 	
-	SPI_CS_Set_Inactive();
+	_SPI_CS_Set_Inactive();
 	
 	
 	return data;
 }
 
 
-#elif !defined (MAX6675_USE_SOFTSPI) && !defined (MAX6675_USE_CS_CALLBACKS)
 
-
-#include "spi.h"
-
+#else
 
 
 static uint16_t _MAX6675_Get_Data()
@@ -93,11 +65,11 @@ static uint16_t _MAX6675_Get_Data()
 	uint16_t data = 0;
 	
 	
-	data = SPI_Get_Byte(0x00);
+	data = _SPI_Get_Byte(0x00);
 	
 	data <<= 8;
 	
-	data |= SPI_Get_Byte(0x00);
+	data |= _SPI_Get_Byte(0x00);
 	
 	
 	return data;
@@ -105,6 +77,9 @@ static uint16_t _MAX6675_Get_Data()
 
 
 #endif
+
+
+
 
 
 bool MAX6675_Get_Temperature_In_Celsius_Float(float *temperature)
@@ -127,6 +102,7 @@ bool MAX6675_Get_Temperature_In_Celsius_Float(float *temperature)
 	return is_working_properly;
 }
 
+
 bool MAX6675_Get_Temperature_In_Celsius_Integer(uint16_t *temperature)
 {
 	bool is_working_properly = true;
@@ -146,6 +122,7 @@ bool MAX6675_Get_Temperature_In_Celsius_Integer(uint16_t *temperature)
 	
 	return is_working_properly;
 }
+
 
 bool MAX6675_Get_Temperature_In_Celsius_Fixpoint_2Bit(uint16_t *temperature)
 {
