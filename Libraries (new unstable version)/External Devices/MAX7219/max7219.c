@@ -27,7 +27,7 @@ const uint8_t _max7219_digits_symbols_table[] PROGMEM =
 
 // ===============================================================================
 
-#ifdef TM74HC595_USE_SOFTSPI
+#ifdef MAX7219_USE_SOFTSPI
 
 
 #include "softspi.h"
