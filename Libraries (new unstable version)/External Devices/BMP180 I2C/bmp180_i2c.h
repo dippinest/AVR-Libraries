@@ -68,11 +68,17 @@
 
 // ===============================================================================
 
+
 // pressure measurement accuracy modes
-#define BMP180_I2C_PRESSURE_OSS_ACCURACY_MODE0  0b00 // measurement accuracy 0.6 hPa, 4.5 ms max
-#define BMP180_I2C_PRESSURE_OSS_ACCURACY_MODE1  0b01 // measurement accuracy 0.5 hPa, 7.5 ms max
-#define BMP180_I2C_PRESSURE_OSS_ACCURACY_MODE2  0b10 // measurement accuracy 0.4 hPa, 13.5 ms max
-#define BMP180_I2C_PRESSURE_OSS_ACCURACY_MODE3  0b11 // measurement accuracy 0.3 hPa, 25.5 ms max
+typedef enum
+{
+	BMP180_I2C_PRESSURE_OSS_ACCURACY_MODE0, // measurement accuracy 0.6 hPa, 4.5 ms max
+	BMP180_I2C_PRESSURE_OSS_ACCURACY_MODE1, // measurement accuracy 0.5 hPa, 7.5 ms max
+	BMP180_I2C_PRESSURE_OSS_ACCURACY_MODE2, // measurement accuracy 0.4 hPa, 13.5 ms max
+	BMP180_I2C_PRESSURE_OSS_ACCURACY_MODE3  // measurement accuracy 0.3 hPa, 25.5 ms max
+
+} BMP180_I2C_PRESSURE_OSS_ACCURACY;
+
 
 // structure with BM180 calibration data
 typedef struct
@@ -121,9 +127,9 @@ void BMP180_I2C_Soft_Reset();
 
 int16_t BMP180_I2C_Get_Temperature(BMP180_I2C_t *bmp180_i2c);
 
-int32_t BMP180_I2C_Get_Pressure(BMP180_I2C_t *bmp180_i2c, uint8_t pressure_oss_accuracy_mode);
+int32_t BMP180_I2C_Get_Pressure(BMP180_I2C_t *bmp180_i2c, BMP180_I2C_PRESSURE_OSS_ACCURACY pressure_oss_accuracy_mode);
 
-void BMP180_I2C_Get_Temperature_And_Pressure(BMP180_I2C_t *bmp180_i2c, int16_t *temperature, int32_t *pressure, uint8_t pressure_oss_accuracy_mode);
+void BMP180_I2C_Get_Temperature_And_Pressure(BMP180_I2C_t *bmp180_i2c, int16_t *temperature, int32_t *pressure, BMP180_I2C_PRESSURE_OSS_ACCURACY pressure_oss_accuracy_mode);
 
 
 
