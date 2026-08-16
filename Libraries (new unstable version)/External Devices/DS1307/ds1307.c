@@ -405,7 +405,7 @@ void DS1307_Set_SQW_Enable(bool sqw_is_enable)
 }
 
 
-void DS1307_Set_SQW_Frequency(uint8_t sqw_frequency)
+void DS1307_Set_SQW_Frequency(DS1307_SQWE_FREQUENCY sqw_frequency)
 {
 	uint8_t current_control_reg_val = _DS1307_Get_Byte(_DS1307_ADDR_CONTROL_REGISTER);
 	
