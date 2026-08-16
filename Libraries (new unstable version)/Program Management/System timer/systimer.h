@@ -39,6 +39,7 @@
 #include <avr/interrupt.h>
 
 #include <stdint.h>
+#include <stddef.h>
 
 
 #include "systimer_configuration.h"
