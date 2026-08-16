@@ -127,9 +127,9 @@ void BMP180_I2C_Soft_Reset();
 
 int16_t BMP180_I2C_Get_Temperature(BMP180_I2C_t *bmp180_i2c);
 
-int32_t BMP180_I2C_Get_Pressure(BMP180_I2C_t *bmp180_i2c, BMP180_I2C_PRESSURE_OSS_ACCURACY pressure_oss_accuracy_mode);
+int32_t BMP180_I2C_Get_Pressure(BMP180_I2C_t *bmp180_i2c, const BMP180_I2C_PRESSURE_OSS_ACCURACY pressure_oss_accuracy_mode);
 
-void BMP180_I2C_Get_Temperature_And_Pressure(BMP180_I2C_t *bmp180_i2c, int16_t *temperature, int32_t *pressure, BMP180_I2C_PRESSURE_OSS_ACCURACY pressure_oss_accuracy_mode);
+void BMP180_I2C_Get_Temperature_And_Pressure(BMP180_I2C_t *bmp180_i2c, int16_t *temperature, int32_t *pressure, const BMP180_I2C_PRESSURE_OSS_ACCURACY pressure_oss_accuracy_mode);
 
 
 
