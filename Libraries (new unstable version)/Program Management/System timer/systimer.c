@@ -31,9 +31,9 @@ SYSTIMER_t SYSTIMER_Get_Value()
 
 void SYSTIMER_Delay(SYSTIMER_t ticks)
 {
-	const SYSTIMER_t target_time = __SYSTIMER;
+	const SYSTIMER_t target_time = SYSTIMER_Get_Value();
 	
-	while((__SYSTIMER - target_time) < ticks)
+	while((target_time - target_time) < ticks)
 	{
 		asm("nop");
 	}
@@ -47,7 +47,7 @@ void SYSTIMER_Delay(SYSTIMER_t ticks)
 
 void SYSTIMER_Initialize_Task_Params(SYSTIMER_Task_Params_t *task_params, SYSTIMER_t interval)
 {
-	(*task_params).timer    = __SYSTIMER;
+	(*task_params).timer    = SYSTIMER_Get_Value();
 	(*task_params).interval = interval;
 }
 
@@ -55,10 +55,16 @@ void SYSTIMER_Initialize_Task_Params(SYSTIMER_Task_Params_t *task_params, SYSTIM
 
 void SYSTIMER_Run_Task(SYSTIMER_Task_Params_t *task_params, void (*task)())
 {
-	if ((__SYSTIMER - task_params->timer) > task_params->interval)
+	const SYSTIMER_t target_time = SYSTIMER_Get_Value();
+	
+	if ((target_time - task_params->timer) > task_params->interval)
 	{
-		task_params->timer = __SYSTIMER;
-		task();
+		task_params->timer = SYSTIMER_Get_Value();
+
+		if (task != NULL)
+		{
+			task();
+		}
 	}
 }
 
@@ -73,11 +79,7 @@ void SYSTIMER_Run_Task(SYSTIMER_Task_Params_t *task_params, void (*task)())
 //
 ISR(SYSTIMER_VECTOR_INTERRUPT)
 {
-	cli();
-	
 	++__SYSTIMER;
-	
-	sei();
 }
 
 
