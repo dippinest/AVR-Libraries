@@ -7,9 +7,6 @@
 // микроконтроллера, то его реализация вынесена в отдельный файл
 // конфигурации systimer_configuration.h
 //
-// Вы можете установить длительность такта системного таймера
-// в соответствии со своими потребностями (1 мс, 20 мс, 1 с и т. д.).
-//
 // Его можно использовать в различных приложениях - например, для
 // организации операционной системы, измерения времени работы кода,
 // организации точных задержек и т.д.
@@ -20,9 +17,6 @@
 // Since the system timer can be implemented using any MCU
 // hardware timer, its implementation is placed in a separate
 // configuration file, systimer_configuration.h
-//
-// You can set the system timer tick to any duration
-// based on your needs (1 ms, 20 ms, 1 sec, etc.).
 //
 // It can be used in various applications - for example,
 // to organize the operating system, measure the running time
@@ -47,15 +41,30 @@
 
 
 
-#ifdef SYSTIMER_WIDE_32BIT
+// ===============================================================================
 
-typedef uint32_t SYSTIMER_t;
+#ifdef SYSTIMER_WIDE_8BIT
 
-#else
+typedef uint8_t SYSTIMER_t;
+
+#endif
+
+
+#ifdef SYSTIMER_WIDE_16BIT
 
 typedef uint16_t SYSTIMER_t;
 
 #endif
+
+
+#ifdef SYSTIMER_WIDE_32BIT
+
+typedef uint32_t SYSTIMER_t;
+
+#endif
+
+// ===============================================================================
+
 
 
 
@@ -64,8 +73,11 @@ typedef uint16_t SYSTIMER_t;
 // ===============================================================================
 
 
-
 SYSTIMER_t SYSTIMER_Get_Value();
+
+
+// ===============================================================================
+
 
 void SYSTIMER_Delay(SYSTIMER_t ticks);
 
@@ -88,6 +100,19 @@ void SYSTIMER_Initialize_Task_Params(SYSTIMER_Task_Params_t *task_params, SYSTIM
 
 
 void SYSTIMER_Run_Task(SYSTIMER_Task_Params_t *task_params, void (*task)());
+
+
+
+
+// ===============================================================================
+
+#ifndef SYSTIMER_USE_INTERNAL_AVR_TIMER_INTERRUPT_FOR_UPDATE
+
+void SYSTIMER_Increment_Timer();
+
+#endif
+
+// ===============================================================================
 
 
 
