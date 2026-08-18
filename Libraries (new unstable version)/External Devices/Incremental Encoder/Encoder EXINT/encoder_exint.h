@@ -41,6 +41,7 @@
 #include "encoder_exint_configuration.h"
 
 
+
 #ifndef ENCODER_EXINT_USE_MULTIPLE_DEVICES
 
 
@@ -50,6 +51,7 @@ void Encoder_EXINT_Processing();
 
 
 // ===============================================================================
+
 
 
 void Encoder_EXINT_Set_Left_Turn_CallBack_Function(void (*callback_function)());
