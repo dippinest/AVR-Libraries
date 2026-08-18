@@ -42,11 +42,14 @@
 #define FRAMI2C_DEV_ADDR_A2T_A1T_A0F 0x56 // A2T+ A1T+ A0F-
 #define FRAMI2C_DEV_ADDR_A2T_A1T_A0T 0x57 // A2T+ A1T+ A0T+
 
-// --------------------------------------------
+
 #define FM24C64_MAX_MEM_ADDR         8191UL
 #define FM24C128_MAX_MEM_ADDR        16383UL
 #define FM24C256_MAX_MEM_ADDR        32767UL
 #define FM24C512_MAX_MEM_ADDR        65535UL
+
+
+// ===============================================================================
 
 
 
