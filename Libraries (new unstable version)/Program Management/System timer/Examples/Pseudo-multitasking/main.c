@@ -95,6 +95,11 @@ int main(void)
 	
 	while (1)
 	{
+		// псевдопараллельная обработка задач системным таймером
+		//
+		// ===============================================================================
+		// pseudo‑parallel task processing by the system timer
+		//
 		SYSTIMER_Run_Task(&tparams0, Task0);  // run every 100  ticks
 		SYSTIMER_Run_Task(&tparams1, Task1);  // run every 200  ticks
 		SYSTIMER_Run_Task(&tparams2, Task2);  // run every 500  ticks
