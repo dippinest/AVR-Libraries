@@ -63,18 +63,10 @@ int main(void)
 {
 	DDRB  = (1 << 0) | (1 << 1) | (1 << 2) | (1 << 3);
 	
+
+
 	
 	SYSTIMER_Initialize();
-	
-	
-	
-	
-	// обязательно включите глобальные прерывания
-	// -------------------------------------------------------------------------------
-	// be sure to enable global interrupts
-	//
-	sei();
-	
 	
 	
 	// переменные для хранения параметров выполнения каждой задачи
@@ -86,6 +78,14 @@ int main(void)
 	SYSTIMER_Initialize_Task_Params(&tparams1, 200);
 	SYSTIMER_Initialize_Task_Params(&tparams2, 500);
 	SYSTIMER_Initialize_Task_Params(&tparams3, 1000);
+
+
+
+	// обязательно включите глобальные прерывания
+	// -------------------------------------------------------------------------------
+	// be sure to enable global interrupts
+	//
+	sei();
 	
 	while (1)
 	{
