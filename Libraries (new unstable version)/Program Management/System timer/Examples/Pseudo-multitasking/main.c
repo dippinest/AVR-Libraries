@@ -21,10 +21,10 @@
 
 
 
-// объекты индикатора SYSTIMER_Task_Params
+// объекты SYSTIMER_Task_Params
 //
 // ===============================================================================
-// SYSTIMER_Task_Params indicators objects
+// SYSTIMER_Task_Params objects
 //
 SYSTIMER_Task_Params_t tparams0;
 SYSTIMER_Task_Params_t tparams1;
