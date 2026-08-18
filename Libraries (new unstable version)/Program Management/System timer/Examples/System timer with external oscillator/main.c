@@ -95,6 +95,9 @@ ISR(INT0_vect)
 	//
 	// N = F_ref / F_systimer (4096 Гц / 128 Гц = 32)
 	//
+	// При необходимости можно тактировать системный таймер напрямую в прерывании
+	// (системный таймер будет работать напрямую на опорной частоте)
+	//
 	// ===============================================================================
 	// A software counter for frequency correction.
 	// It is incremented with each INT0 interrupt.
@@ -110,6 +113,9 @@ ISR(INT0_vect)
 	// the following formula:
 	//
 	// N = F_ref / F_systimer (4096 Hz / 128 Hz = 32)
+	//
+	// If necessary, you can directly clock the system timer in an interrupt
+	// (the system timer will operate directly at the reference frequency).
 	//
 	static volatile uint16_t counter = 1;
 	
