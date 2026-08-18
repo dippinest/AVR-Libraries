@@ -14,6 +14,20 @@
 #define DELAY_MS_USE_YIELD
 
 
+
+
+// ===============================================================================
+
+#ifdef DELAY_MS_USE_YIELD
+
+#warning "COMPILER MESSAGE: the pseudo‑parallel task execution functionality is used in the delay function!"
+
+#endif
+
+// ===============================================================================
+
+
+
 #endif
 
 
