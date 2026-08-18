@@ -55,17 +55,13 @@
 
 
 // operating modes of the SQW generator
-typedef enum
-{
-	DS1307_SQWE_FREQUENCY_1_HZ     = 0x0,
-	DS1307_SQWE_FREQUENCY_4096_HZ  = 0x1,
-	DS1307_SQWE_FREQUENCY_8192_HZ  = 0x2,
-	DS1307_SQWE_FREQUENCY_32768_HZ = 0x4
-	
-} DS1307_SQWE_FREQUENCY;
+#define DS1307_SQWE_FREQUENCY_1_HZ      0x0
+#define DS1307_SQWE_FREQUENCY_4096_HZ   0x1
+#define DS1307_SQWE_FREQUENCY_8192_HZ   0x2
+#define DS1307_SQWE_FREQUENCY_32768_HZ  0x3
 
 
-#define DS1307_USER_RAM_MAX_ADDRESS  0x37
+#define DS1307_USER_RAM_MAX_ADDRESS     0x37
 
 
 
@@ -158,7 +154,7 @@ void DS1307_Set_Clock_Enable(bool clock_is_enable);
 
 void DS1307_Set_SQW_Enable(bool sqw_is_enable);
 
-void DS1307_Set_SQW_Frequency(DS1307_SQWE_FREQUENCY sqw_frequency);
+void DS1307_Set_SQW_Frequency(uint8_t sqw_frequency);
 
 
 
