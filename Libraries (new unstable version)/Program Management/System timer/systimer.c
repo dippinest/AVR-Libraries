@@ -31,9 +31,9 @@ SYSTIMER_t SYSTIMER_Get_Value()
 
 void SYSTIMER_Delay(SYSTIMER_t ticks)
 {
-	const SYSTIMER_t target_time = SYSTIMER_Get_Value();
+	const SYSTIMER_t target_time = __SYSTIMER;
 	
-	while((target_time - target_time) < ticks)
+	while((SYSTIMER_Get_Value() - target_time) < ticks)
 	{
 		asm("nop");
 	}
@@ -72,16 +72,31 @@ void SYSTIMER_Run_Task(SYSTIMER_Task_Params_t *task_params, void (*task)())
 
 
 
-// обработчик прерывания системного таймера
-//
-// -------------------------------------------------------------------------------
-// system timer interrupt handler
-//
+// ===============================================================================
+
+#ifdef SYSTIMER_USE_INTERNAL_AVR_TIMER_INTERRUPT_FOR_UPDATE
+
 ISR(SYSTIMER_VECTOR_INTERRUPT)
 {
 	++__SYSTIMER;
 }
 
+
+#else
+
+
+void SYSTIMER_Increment_Timer()
+{
+	cli();
+	
+	++__SYSTIMER;
+	
+	sei();
+}
+
+#endif
+
+// ===============================================================================
 
 
 
