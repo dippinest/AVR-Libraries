@@ -39,7 +39,7 @@ void TM74HC595_Latches()
 
 
 
-float val = -20;
+volatile float val = -20;
 
 char string_buf[8];
 
