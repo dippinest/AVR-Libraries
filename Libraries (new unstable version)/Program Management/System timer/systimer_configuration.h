@@ -1,15 +1,43 @@
 
+
 #ifndef SYSTIMER_CONFIGURATION_H_
 #define SYSTIMER_CONFIGURATION_H_
 
 
-// если вы хотите, чтобы размер системного таймера был равен 32 бит,
-// раскомментируйте этот дефайн (иначе закомментируйте его для размера 16 бит)
-// -------------------------------------------------------------------------------
-// if you want the size of the system timer to be 32 bits, uncomment
-// this define (otherwise comment it out for the size of 16 bits)
 
+// выбор разрядности системного таймера (8, 16 или 32 бита)
+// -------------------------------------------------------------------------------
+// selecting the bit width of the system timer (8, 16, or 32 bits)
+
+//#define SYSTIMER_WIDE_8BIT
+//#define SYSTIMER_WIDE_16BIT
 #define SYSTIMER_WIDE_32BIT
+
+
+
+
+// если вы хотите, чтобы обновление системного таймера
+// происходило автоматически в прерывании назначенного аппаратного таймера,
+// (иначе закомментируйте его, если необходимо обновлять системный таймер вручную
+// (например, извне с помощью аппаратного прерывания GPIO))
+// -------------------------------------------------------------------------------
+// if you want the system timer to be updated automatically in the interrupt
+// of the designated hardware timer, (otherwise, comment it out if you need
+// to update the system timer manually
+// (for example, from outside using a GPIO hardware interrupt))
+
+//#define SYSTIMER_USE_INTERNAL_AVR_TIMER_INTERRUPT_FOR_UPDATE
+
+
+
+
+
+
+
+// ===============================================================================
+
+#ifdef SYSTIMER_USE_INTERNAL_AVR_TIMER_INTERRUPT_FOR_UPDATE
+
 
 
 // определение вектора прерывания системного таймера
@@ -18,6 +46,7 @@
 // determining the interrupt vector of the system timer
 
 #define SYSTIMER_VECTOR_INTERRUPT TIMER0_COMP_vect
+
 
 
 // инлайн-функция инициализация системного таймера. По дефолту
@@ -46,6 +75,11 @@ inline void SYSTIMER_Initialize()
 	TCNT0 = 6;
 	OCR0  = 249;
 }
+
+#endif
+
+// ===============================================================================
+
 
 
 #endif
