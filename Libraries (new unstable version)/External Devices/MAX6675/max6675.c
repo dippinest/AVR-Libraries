@@ -124,7 +124,7 @@ bool MAX6675_Get_Temperature_In_Celsius_Integer(uint16_t *temperature)
 }
 
 
-bool MAX6675_Get_Temperature_In_Celsius_Fixpoint_2Bit(uint16_t *temperature)
+bool MAX6675_Get_FDPN_Int32Base_2_Fract_Digit_Value_Temperature_In_Celsius(uint16_t *temperature)
 {
 	bool is_working_properly = true;
 	
