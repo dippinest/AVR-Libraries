@@ -3,8 +3,8 @@
 #include "lm75.h"
 
 
-
 // ===============================================================================
+
 
 #ifdef LM75_USE_SOFTI2C
 
@@ -16,6 +16,8 @@
 #define _I2C_Restart     SOFTI2C_Restart
 #define _I2C_Read_Byte   SOFTI2C_Read_Byte
 #define _I2C_Stop        SOFTI2C_Stop
+
+#warning "COMPILER MESSAGE: LM75 USE SOFTWARE I2C!"
 
 
 #else
@@ -29,7 +31,10 @@
 #define _I2C_Read_Byte   I2C_Read_Byte
 #define _I2C_Stop        I2C_Stop
 
+#warning "COMPILER MESSAGE: LM75 USE HARDWARE I2C!"
+
 #endif
+
 
 // ===============================================================================
 
@@ -228,60 +233,68 @@ float LM75_Get_Float_Temperature(LM75_t *lm75)
 
 
 
-int32_t LM75_Get_FIXPoint_2_Fractional_Digits_Temperature(LM75_t *lm75)
+int32_t LM75_Get_FDPN_Int32Base_2_Fract_Digit_Value_Temperature(LM75_t *lm75)
 {
-	int8_t int_part, fract_part_3bit;
+	int8_t  int_part, fract_part_3bit;
 	int16_t raw_temperature_data = _LM75_Read_UINT16_Register(lm75, _LM75_DATA_TEMP_REGISTER_ADDR);
 	
-	int32_t pfixp_temp;
+	int32_t fdpn_int32base_temp;
 	
 	if (raw_temperature_data & 0x8000)
 	{
 		raw_temperature_data  *= -1;
-		raw_temperature_data >>= 6;
+		raw_temperature_data  >>= 6;
+		
 		fract_part_3bit = raw_temperature_data & 0b11;
 		int_part = (int8_t)(raw_temperature_data >> 2);
-		pfixp_temp = ((int32_t)int_part * 100) - ((int32_t)fract_part_3bit * 25);
+		
+		fdpn_int32base_temp = ((int32_t)int_part * 100) - ((int32_t)fract_part_3bit * 25);
 	}
 	else
 	{
 		raw_temperature_data >>= 6;
+		
 		fract_part_3bit = raw_temperature_data & 0b11;
 		int_part = raw_temperature_data >> 2;
-		pfixp_temp = (int_part * 100) + (fract_part_3bit * 25);
+		
+		fdpn_int32base_temp = (int_part * 100) + (fract_part_3bit * 25);
 	}
 	
 	
-	return pfixp_temp;
+	return fdpn_int32base_temp;
 }
 
 
 
-int32_t LM75_Get_FIXPoint_3_Fractional_Digits_Temperature(LM75_t *lm75)
+int32_t LM75_Get_FDPN_Int32Base_3_Fract_Digit_Value_Temperature(LM75_t *lm75)
 {
-	int8_t int_part, fract_part_3bit;
+	int8_t  int_part, fract_part_3bit;
 	int16_t raw_temperature_data = _LM75_Read_UINT16_Register(lm75, _LM75_DATA_TEMP_REGISTER_ADDR);
 	
-	int32_t pfixp_temp;
+	int32_t fdpn_int32base_temp;
 	
 	if (raw_temperature_data & 0x8000)
 	{
 		raw_temperature_data  *= -1;
-		raw_temperature_data >>= 5;
+		raw_temperature_data  >>= 5;
+		
 		fract_part_3bit = raw_temperature_data & 0b111;
 		int_part = (int8_t)(raw_temperature_data >> 3);
-		pfixp_temp = ((int32_t)int_part * 1000) - ((int32_t)fract_part_3bit * 125);
+		
+		fdpn_int32base_temp = ((int32_t)int_part * 1000) - ((int32_t)fract_part_3bit * 125);
 	}
 	else
 	{
 		raw_temperature_data >>= 5;
+		
 		fract_part_3bit = raw_temperature_data & 0b111;
 		int_part = raw_temperature_data >> 3;
-		pfixp_temp = (int_part * 1000) + (fract_part_3bit * 125);
+		
+		fdpn_int32base_temp = (int_part * 1000) + (fract_part_3bit * 125);
 	}
 	
 	
-	return pfixp_temp;
+	return fdpn_int32base_temp;
 }
 
 
