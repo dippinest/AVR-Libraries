@@ -34,28 +34,28 @@ float ADC_Get_Voltage_Value_From_Measured_Value(uint16_t adc_value, uint8_t adc_
 	return (max_ref_voltage / ((1ULL << adc_bitrate) - 1)) * adc_value;
 }
 
-int32_t ADC_Get_Voltage_FDP_Int32Base_1_Fract_Digit_Value
+int32_t ADC_Get_Voltage_FDPN_Int32Base_1_Fract_Digit_Value
 (
-	const uint32_t fdp_int32base_1_fract_digit_max_ref_voltage
+	const uint32_t fdpn_int32base_1_fract_digit_max_ref_voltage
 )
 {
-	int32_t fdp_int32base_voltage =
-		(((fdp_int32base_1_fract_digit_max_ref_voltage * 1000) / 1023) * ADC_Get_Value_10bit()) / 1000;
+	int32_t fdpn_int32base_voltage =
+		(((fdpn_int32base_1_fract_digit_max_ref_voltage * 1000) / 1023) * ADC_Get_Value_10bit()) / 1000;
 	
-	return fdp_int32base_voltage;
+	return fdpn_int32base_voltage;
 }
 
-int32_t ADC_Get_Voltage_FDP_Int32Base_1_Fract_Digit_Value_From_Measured_Value
+int32_t ADC_Get_Voltage_FDPN_Int32Base_1_Fract_Digit_Value_From_Measured_Value
 (
 	uint16_t adc_value,
-	uint8_t adc_bitrate,
-	const uint32_t fdp_int32base_1_fract_digit_max_ref_voltage
+	uint8_t  adc_bitrate,
+	const    uint32_t fdpn_int32base_1_fract_digit_max_ref_voltage
 )
 {
-	int32_t fdp_int32base_voltage =
-		(((fdp_int32base_1_fract_digit_max_ref_voltage * 1000) / ((1ULL << adc_bitrate) - 1)) * adc_value) / 1000;
+	int32_t fdpn_int32base_voltage =
+		(((fdpn_int32base_1_fract_digit_max_ref_voltage * 1000) / ((1ULL << adc_bitrate) - 1)) * adc_value) / 1000;
 	
-	return fdp_int32base_voltage;
+	return fdpn_int32base_voltage;
 }
 
 
