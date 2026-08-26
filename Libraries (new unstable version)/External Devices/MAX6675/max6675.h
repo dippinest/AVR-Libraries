@@ -35,16 +35,30 @@
 #include "max6675_configuration.h"
 
 
+
 // ===============================================================================
+
 
 
 bool MAX6675_Get_Temperature_In_Celsius_Float(float *temperature);
 
 bool MAX6675_Get_Temperature_In_Celsius_Integer(uint16_t *temperature);
 
-bool MAX6675_Get_Temperature_In_Celsius_Fixpoint_2Bit(uint16_t *temperature);
+
+
+// эта функция вычисляет значение температуры
+// в формате FDPN (Fixed Decimal Point Number)
+// с двумя знаком после десятичного разделителя
+// -------------------------------------------------------------------------------
+// this function calculate the temperature value
+// in the FDPN (Fixed Decimal Point Number) format
+// with two digits after the decimal point
+//
+bool MAX6675_Get_FDPN_Int32Base_2_Fract_Digit_Value_Temperature_In_Celsius(uint16_t *temperature);
+
 
 #endif
+
 
 
 
