@@ -83,9 +83,9 @@ uint32_t ADC_Get_Oversampling_Value(uint8_t bitrate)
 
 uint32_t ADC_Get_Oversampling_Value_From_Set_Of_Dimensions
 (
-uint8_t   bitrate,
-uint16_t *set_of_dimensions,
-uint8_t   set_of_dimensions_size
+	uint8_t   bitrate,
+	uint16_t *set_of_dimensions,
+	uint8_t   set_of_dimensions_size
 )
 {
 	uint32_t oversampling_value = 0;
