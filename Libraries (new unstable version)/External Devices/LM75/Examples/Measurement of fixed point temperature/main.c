@@ -5,7 +5,8 @@
 #include "softi2c.h"
 #include "lm75.h"
 #include "uart.h"
-#include "fixpoint.h"
+
+#include "fdpn.h"
 
 
 
@@ -36,10 +37,10 @@ int main(void)
 		UART_StringFmt_Transmit
 		(
 			"Temp = %s *C\r\n",
-			
-			FIXPoint_Int32FP_To_String
+		
+			FDPN_Int32Base_Convert_Number_To_String
 			(
-				string_buffer, 2, LM75_Get_FIXPoint_2_Fractional_Digits_Temperature(&lm75), 3, 2, ' ', '.'
+				string_buffer, LM75_Get_FDPN_Int32Base_2_Fract_Digit_Value_Temperature(&lm75), 3, 2, '.'
 			)
 		);
 		
@@ -47,7 +48,6 @@ int main(void)
 		_delay_ms(1000);
 	}
 }
-
 
 
 
