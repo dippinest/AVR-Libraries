@@ -184,16 +184,16 @@ float ADC_Get_Voltage_Value(const float max_ref_voltage);
 
 float ADC_Get_Voltage_Value_From_Measured_Value(uint16_t adc_value, uint8_t adc_bitrate, const float max_ref_voltage);
 
-int32_t ADC_Get_Voltage_FDP_Int32Base_1_Fract_Digit_Value
+int32_t ADC_Get_Voltage_FDPN_Int32Base_1_Fract_Digit_Value
 (
-	const uint32_t fdp_int32base_1_fract_digit_max_ref_voltage
+	const uint32_t fdpn_int32base_1_fract_digit_max_ref_voltage
 );
 
-int32_t ADC_Get_Voltage_FDP_Int32Base_1_Fract_Digit_Value_From_Measured_Value
+int32_t ADC_Get_Voltage_FDPN_Int32Base_1_Fract_Digit_Value_From_Measured_Value
 (
 	uint16_t adc_value,
-	uint8_t adc_bitrate,
-	const uint32_t fdp_int32base_1_fract_digit_max_ref_voltage
+	uint8_t  adc_bitrate,
+	const    uint32_t fdpn_int32base_1_fract_digit_max_ref_voltage
 );
 
 
