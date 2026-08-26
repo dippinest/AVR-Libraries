@@ -64,7 +64,7 @@ int main(void)
 #include "adc.h"
 #include "uart.h"
 
-#include "fdp.h"
+#include "fdpn.h"
 
 
 // желаемая разрядность значения после оверсемплинга (12 бит)
@@ -101,17 +101,17 @@ int main(void)
 	{
 		uint16_t adc_ovs_val = ADC_Get_Oversampling_Value(12);
 		
-		uint32_t fdp_int32base_voltage =
-			ADC_Get_Voltage_FDP_Int32Base_1_Fract_Digit_Value_From_Measured_Value(adc_ovs_val, 12, ADC_MAX_REF_VOLTAGE);
+		uint32_t fdpn_int32base_voltage =
+		ADC_Get_Voltage_FDPN_Int32Base_1_Fract_Digit_Value_From_Measured_Value(adc_ovs_val, 12, ADC_MAX_REF_VOLTAGE);
 		
 		
-		// преобразование FDP с 1 знаком
+		// преобразование FDPN с 1 знаком
 		// после десятичного разделителя значения в ASCII строку
 		//
 		// -------------------------------------------------------------------------------
-		// converting FDP with 1 digit after the decimal point into an ASCII string
+		// converting FDPN with 1 digit after the decimal point into an ASCII string
 		//
-		FDP_Int32Base_Convert_Number_To_String(string_buffer, fdp_int32base_voltage, 2, 1, '.');
+		FDPN_Int32Base_Convert_Number_To_String(string_buffer, fdpn_int32base_voltage, 2, 1, '.');
 		
 		
 		UART_StringFmt_Transmit("Voltage = %s\r\n", string_buffer);
@@ -120,7 +120,13 @@ int main(void)
 		_delay_ms(100);
 	}
 }
+
+
+
 */
+
+
+
 
 
 
