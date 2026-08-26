@@ -34,6 +34,8 @@ float ADC_Get_Voltage_Value_From_Measured_Value(uint16_t adc_value, uint8_t adc_
 	return (max_ref_voltage / ((1ULL << adc_bitrate) - 1)) * adc_value;
 }
 
+
+
 int32_t ADC_Get_Voltage_FDPN_Int32Base_1_Fract_Digit_Value
 (
 	const uint32_t fdpn_int32base_1_fract_digit_max_ref_voltage
