@@ -196,7 +196,17 @@ int8_t DS3231_Get_Integer_Temperature();
 
 float DS3231_Get_Float_Temperature();
 
-int16_t DS3231_Get_FIXPoint_2_Fractional_Digits_Temperature();
+
+
+// эта функция возвращает значение температуры
+// в формате FDPN (Fixed Decimal Point Number)
+// с двумя знаком после десятичного разделителя
+// -------------------------------------------------------------------------------
+// this function returns the temperature value
+// in the FDPN (Fixed Decimal Point Number) format
+// with two digits after the decimal point
+//
+int16_t DS3231_FDPN_Int32Base_2_Fract_Digit_Value_Temperature();
 
 
 
@@ -212,13 +222,13 @@ void DS3231_Set_SQW_Enable(bool sqw_is_enable);
 
 
 
-// Эта функция НЕ РАБОТАЕТ с чипами DS3231M, только с DS3231 !
+// Внимание!!! Эта функция НЕ РАБОТАЕТ с чипами DS3231M, только с DS3231 !
 //
 // В DS3231M нет функции изменении частоты: она всегда равна 1 Гц!
 //
 // -------------------------------------------------------------------------------
 //
-// This function DOES NOT WORK with DS3231M chips, only with DS3231!
+// Attention!!! This function DOES NOT WORK with DS3231M chips, only with DS3231!
 //
 // The DS3231M does not have a frequency change function: it is always 1 Hz!
 //
