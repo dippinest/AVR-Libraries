@@ -115,20 +115,30 @@ float LM75_Get_Float_Temperature(LM75_t *lm75);
 
 
 
-// the return value is a signed int32_t number with a pseudo-fixed point
-// with 2 decimal places
-int32_t LM75_Get_FIXPoint_2_Fractional_Digits_Temperature(LM75_t *lm75);
+// эта функция возвращает значение температуры
+// в формате FDPN (Fixed Decimal Point Number)
+// с двумя знаком после десятичного разделителя
+// -------------------------------------------------------------------------------
+// this function returns the temperature value
+// in the FDPN (Fixed Decimal Point Number) format
+// with two digits after the decimal point
+//
+int32_t LM75_Get_FDPN_Int32Base_2_Fract_Digit_Value_Temperature(LM75_t *lm75);
 
 
-
-// the return value is a signed int32_t number with a pseudo-fixed point
-// with 3 decimal places
-int32_t LM75_Get_FIXPoint_3_Fractional_Digits_Temperature(LM75_t *lm75);
+// эта функция возвращает значение температуры
+// в формате FDPN (Fixed Decimal Point Number)
+// с тремя знаком после десятичного разделителя
+// -------------------------------------------------------------------------------
+// this function returns the temperature value
+// in the FDPN (Fixed Decimal Point Number) format
+// with three digits after the decimal point
+//
+int32_t LM75_Get_FDPN_Int32Base_3_Fract_Digit_Value_Temperature(LM75_t *lm75);
 
 
 
 #endif
-
 
 
 
