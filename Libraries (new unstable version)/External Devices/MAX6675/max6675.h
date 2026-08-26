@@ -54,7 +54,7 @@ bool MAX6675_Get_Temperature_In_Celsius_Integer(uint16_t *temperature);
 // in the FDPN (Fixed Decimal Point Number) format
 // with two digits after the decimal point
 //
-bool MAX6675_Get_FDPN_Int32Base_2_Fract_Digit_Value_Temperature_In_Celsius(uint16_t *temperature);
+bool MAX6675_Get_FDPN_Int16Base_2_Fract_Digit_Value_Temperature_In_Celsius(uint16_t *temperature);
 
 
 #endif
