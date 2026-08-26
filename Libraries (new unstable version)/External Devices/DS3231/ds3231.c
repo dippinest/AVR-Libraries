@@ -39,6 +39,8 @@ uint8_t _DS3231_UInt8BCD_To_UInt8(uint8_t bcd_code)
 #define _I2C_Read_Byte   SOFTI2C_Read_Byte
 #define _I2C_Stop        SOFTI2C_Stop
 
+#warning "COMPILER MESSAGE: Library "ds3231.h" use software I2C!"
+
 
 #else
 
@@ -50,6 +52,8 @@ uint8_t _DS3231_UInt8BCD_To_UInt8(uint8_t bcd_code)
 #define _I2C_Restart     I2C_Restart
 #define _I2C_Read_Byte   I2C_Read_Byte
 #define _I2C_Stop        I2C_Stop
+
+#warning "COMPILER MESSAGE: Library "ds3231.h" use hardware I2C!"
 
 #endif
 
@@ -375,7 +379,7 @@ float DS3231_Get_Float_Temperature()
 }
 
 
-int16_t DS3231_Get_FIXPoint_2_Fractional_Digits_Temperature()
+int16_t DS3231_Get_FDPN_Int32Base_2_Fract_Digit_Value_Temperature()
 {
 	int8_t  temperature_high_reg_val = _DS3231_Get_Byte(_DS3231_ADDR_TEMPERATURE_HIGH_REGISTER);
 	uint8_t temperature_low_reg_val =  _DS3231_Get_Byte(_DS3231_ADDR_TEMPERATURE_LOW_REGISTER);
