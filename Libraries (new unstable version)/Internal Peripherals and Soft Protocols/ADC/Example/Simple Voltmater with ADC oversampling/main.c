@@ -102,7 +102,7 @@ int main(void)
 		uint16_t adc_ovs_val = ADC_Get_Oversampling_Value(12);
 		
 		uint32_t fdpn_int32base_voltage =
-		ADC_Get_Voltage_FDPN_Int32Base_1_Fract_Digit_Value_From_Measured_Value(adc_ovs_val, 12, ADC_MAX_REF_VOLTAGE);
+			ADC_Get_Voltage_FDPN_Int32Base_1_Fract_Digit_Value_From_Measured_Value(adc_ovs_val, 12, ADC_MAX_REF_VOLTAGE);
 		
 		
 		// преобразование FDPN с 1 знаком
