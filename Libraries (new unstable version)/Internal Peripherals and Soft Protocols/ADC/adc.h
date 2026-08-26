@@ -171,9 +171,27 @@ inline void ADC_Initialize(uint8_t channel, uint8_t prescaler, uint8_t vref_sour
 
 uint16_t ADC_Get_Value_10bit();
 
+
+
+// ===============================================================================
+
+
+
 float ADC_Get_Voltage_Value(const float max_ref_voltage);
 
 float ADC_Get_Voltage_Value_From_Measured_Value(uint16_t adc_value, uint8_t adc_bitrate, const float max_ref_voltage);
+
+int32_t ADC_Get_Voltage_FDP_Int32Base_1_Fract_Digit_Value
+(
+	const uint32_t fdp_int32base_1_fract_digit_max_ref_voltage
+);
+
+int32_t ADC_Get_Voltage_FDP_Int32Base_1_Fract_Digit_Value_From_Measured_Value
+(
+	uint16_t adc_value,
+	uint8_t adc_bitrate,
+	const uint32_t fdp_int32base_1_fract_digit_max_ref_voltage
+);
 
 
 
@@ -258,7 +276,6 @@ uint16_t ADC_Get_Current_Reception_Buffer_Fullness();
 
 
 #endif
-
 
 
 
