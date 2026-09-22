@@ -154,10 +154,17 @@ void Scheduler_Run()
 			if ((__SYSTIMER - _target_task->task_initial_time) >= _target_task->task_interval)
 			{
 				_target_task->task_initial_time = __SYSTIMER;
+
+				
 				
 				_target_task->task_status = SCHEDULER_TASK_STATUS_RUN;
+				
 				_target_task->task_callback();
-				_target_task->task_status = SCHEDULER_TASK_STATUS_WAIT;
+				
+				if (_target_task->task_status != SCHEDULER_TASK_STATUS_STOP)
+				{
+					_target_task->task_status = SCHEDULER_TASK_STATUS_WAIT;
+				}
 			}
 		}
 	}
