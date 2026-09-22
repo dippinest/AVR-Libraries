@@ -21,7 +21,7 @@
 
 
 // инлайн-функция инициализация системного таймера. По дефолту
-// используется 8-ми битный Timer1 и при частоте тактирования
+// используется 8-ми битный Timer0 и при частоте тактирования
 // микроконтроллера в 16 МГц таймер настроен на прерывания
 // по совпадению каждую 1 мс.
 //
@@ -30,7 +30,7 @@
 //
 // -------------------------------------------------------------------------------
 // inline function initialization of the system timer. By default,
-// an 8-bit Timer1 is used and with a clock frequency of the
+// an 8-bit Timer0 is used and with a clock frequency of the
 // microcontroller at 16 MHz, the timer is configured to interrupt
 // coincidentally every 1 ms.
 //
