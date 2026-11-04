@@ -172,6 +172,8 @@ inline void ADC_Initialize(uint8_t channel, uint8_t prescaler, uint8_t vref_sour
 
 
 
+uint8_t ADC_Get_Value_8bit();
+
 uint16_t ADC_Get_Value_10bit();
 
 
