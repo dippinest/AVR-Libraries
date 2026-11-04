@@ -8,6 +8,22 @@
 
 
 
+uint8_t ADC_Get_Value_8bit()
+{
+	ADMUX |= (1 << ADLAR);
+	
+	ADC_Start_Conversion();
+	
+	while (ADCSRA & (1 << ADSC));
+	
+	uint8_t adc_val = ADCH;
+	
+	ADMUX &= ~(1 << ADLAR);
+	
+	
+	return adc_val;
+}
+
 uint16_t ADC_Get_Value_10bit()
 {
 	ADC_Start_Conversion();
